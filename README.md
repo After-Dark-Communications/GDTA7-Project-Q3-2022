@@ -1,5 +1,8 @@
 # GDTA7-Project-Q32022
 
+![Open Pull  Requests](https://img.shields.io/github/issues-pr-raw/After-Dark-Communications/GDTA7-Project-Q3-2022?style=plastic)
+![Closed Pull Requests](https://img.shields.io/github/issues-pr-closed-raw/After-Dark-Communications/GDTA7-Project-Q3-2022?style=plastic)
+
 ## Unity Version
 This project uses Unity version [2021.3.9f1 (LTS)](unityhub://2022.1.15f1/42973686a05c)
 
