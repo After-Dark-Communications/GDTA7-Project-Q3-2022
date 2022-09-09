@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Selectionbar : MonoBehaviour
 {
-    //[SerializeField]
-    //private PlayerNumber playerNumber;
+    [SerializeField]
+    private PlayerNumber playerNumber;
 
     private List<Selectable> selectionOptions = new List<Selectable>();
 
@@ -18,46 +19,32 @@ public class Selectionbar : MonoBehaviour
             selectionOptions.Add(selectable);
         }
 
-        //TODO: Add subscribtion to event
+        //TODO: Add subscribtion to events
     }
 
-    //public void SelectNext(InputEventArgs args)
-    //{
-    //    if (IsMyInput(inputTarget))
-    //        return;
+    private void SelectNext()
+    {
+        currentSelectedIndex++;
 
-    //    currentSelectedIndex++;
-       
-    //    if (currentSelectedIndex >= selectionOptions.Count)
-    //    {
-    //        currentSelectedIndex = 0;
-    //    }
+        if (currentSelectedIndex >= selectionOptions.Count)
+        {
+            currentSelectedIndex = 0;
+        }
 
-    //    UpdateCurrentSelectionGraphic();
-    //}
+        UpdateCurrentSelectionGraphic();
+    }
 
-    //public void SelectPrevious(InputEventArgs args)
-    //{
-    //    if (IsMyInput(inputTarget))
-    //        return;
+    private void SelectPrevious()
+    {
+        currentSelectedIndex--;
 
-    //    currentSelectedIndex--;
+        if (currentSelectedIndex < 0)
+        {
+            currentSelectedIndex = selectionOptions.Count - 1;
+        }
 
-    //    if (currentSelectedIndex < 0)
-    //    {
-    //        currentSelectedIndex = selectionOptions.Count - 1;
-    //    }
-
-    //    UpdateCurrentSelectionGraphic();
-    //}
-
-    //private bool IsMyInput(PlayerNumber inputTarget)
-    //{
-    //    if (playerNumber != inputTarget)
-    //        return false;
-
-    //    return true;
-    //}
+        UpdateCurrentSelectionGraphic();
+    }
 
     private void UpdateCurrentSelectionGraphic()
     {
