@@ -67,6 +67,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DEBUG_Console_Toggle",
+                    "type": "Button",
+                    "id": "26186ad3-6584-4130-82e5-9629e9399da1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DEBUG_Console_Process",
+                    "type": "Button",
+                    "id": "28ee0519-41db-4716-bada-c55c0acfc1e7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -364,6 +382,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "MoveDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c231e51e-8ce5-4ef5-adf1-4679fb9d2856",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "DEBUG_Console_Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d22824ae-41ec-408d-8dbb-c271ec41bc3a",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "DEBUG_Console_Process",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
