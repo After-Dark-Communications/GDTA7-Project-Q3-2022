@@ -1,67 +1,68 @@
+using Assets.Scripts.Helper;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Selectionbar : MonoBehaviour
+namespace Assets.Scripts.ShipSelection
 {
-    [SerializeField]
-    private PlayerNumber playerNumber;
-
-    private List<Selectable> selectionOptions = new List<Selectable>();
-
-    private int currentSelectedIndex;
-
-    private void Start()
+    public class Selectionbar : MonoBehaviour
     {
-        //foreach (Selectable selectable in transform)
-        //{
-        //    selectionOptions.Add(selectable);
-        //}
+        [SerializeField]
+        private PlayerNumber playerNumber;
 
-        //TODO: Add subscribtion to events
-    }
+        private List<SelectableCollection> selectionCollections = new List<SelectableCollection>();
 
-    public void OnNavigate()
-    {
+        private int currentSelectedCollectionIndex = 0;
 
-    }
-
-    private void SelectNext()
-    {
-        currentSelectedIndex++;
-
-        if (currentSelectedIndex >= selectionOptions.Count)
+        private void Start()
         {
-            currentSelectedIndex = 0;
+            //TODO:
         }
 
-        UpdateCurrentSelectionGraphic();
-    }
-
-    private void SelectPrevious()
-    {
-        currentSelectedIndex--;
-
-        if (currentSelectedIndex < 0)
+        public void OnNavigate(InputAction.CallbackContext callbackContext)
         {
-            currentSelectedIndex = selectionOptions.Count - 1;
+            Vector2 moveVector = callbackContext.ReadValue<Vector2>();
+
+            if (moveVector == Vector2.up)
+            {
+                SelectPreviousCollection();
+            }
+            else if (moveVector == Vector2.down)
+            {
+                SelectNextCollection();
+            }
+            else if (moveVector == Vector2.left)
+            {
+                SelectPreviousSelectable();
+            }
+            else if (moveVector == Vector2.right)
+            {
+                SelectNextSelectable();
+            }
         }
 
-        UpdateCurrentSelectionGraphic();
-    }
-
-    private void UpdateCurrentSelectionGraphic()
-    {
-        DeselectAllSelectables();
-        selectionOptions[currentSelectedIndex].SelectObject();
-    }
-
-    private void DeselectAllSelectables()
-    {
-        foreach(Selectable selectable in selectionOptions)
+        private void SelectNextCollection()
         {
-            selectable.DeSelectObject();
+            currentSelectedCollectionIndex = ListLooper.SelectNext(selectionCollections, currentSelectedCollectionIndex);
         }
+
+        private void SelectPreviousCollection()
+        {
+            currentSelectedCollectionIndex = ListLooper.SelectPrevious(selectionCollections, currentSelectedCollectionIndex);
+        }
+
+        private void SelectNextSelectable()
+        {
+            selectionCollections[currentSelectedCollectionIndex].SelectNextSelectable();
+        }
+
+        private void SelectPreviousSelectable()
+        {
+            selectionCollections[currentSelectedCollectionIndex].SelectPreviousSelectable();
+        }
+
+        public SelectableCollection CurrentSelectedCollection => selectionCollections[currentSelectedCollectionIndex];
+        public Selectable CurrentSelectable => selectionCollections[currentSelectedCollectionIndex].CurrentSelectedOption;
     }
 }
