@@ -8,23 +8,31 @@ namespace Assets.Scripts.ShipSelection
 {
     public class Selectionbar : MonoBehaviour
     {
-        [SerializeField]
         private PartsCollectionManager collectionManager;
+
         private List<SelectableCollection> selectionCollections = new List<SelectableCollection>();
 
         private int currentSelectedCollectionIndex = 0;
 
         private void Awake()
         {
-            collectionManager = ManagerRedirector.Instance.PartsCollectionManager;
+            Channels.OnManagerInitialized.AddListener(OnManagerInitialize);
         }
+
         private void Start()
         {
-            SelectableCollection engines = new SelectableCollection();
-            foreach (Engine engine in collectionManager.EngineList)
-            {
-                engines.Selectables.Add(new Selectable() { Part = engine });
-            }
+            selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(collectionManager.EngineList));
+            selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(collectionManager.WeaponList));
+            selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(collectionManager.SpecialList));
+            selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(collectionManager.CoreList));
+        }
+
+        private void OnManagerInitialize(Manager manager)
+        {
+            if (manager.GetType() != typeof(PartsCollectionManager))
+                return;
+
+            collectionManager = manager as PartsCollectionManager;
         }
 
         public void OnNavigate(InputAction.CallbackContext callbackContext)
