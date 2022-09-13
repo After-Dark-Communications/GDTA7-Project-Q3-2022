@@ -170,6 +170,7 @@ MonoBehaviour:
   EngineSpeed: 10
   RotationSpeed: 250
   HullIntegrity: 1
+  ShowOffValue: normal string
 --- !u!1001 &8083041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -682,6 +683,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ee925833-a250-45eb-a947-9121648b04c8
     m_ActionName: Player/MoveDown[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1845348973}
+        m_TargetAssemblyTypeName: DEBUG.Console.DevConsoleBehavior, Assembly-CSharp
+        m_MethodName: ToggleConsole
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 26186ad3-6584-4130-82e5-9629e9399da1
+    m_ActionName: Player/DEBUG_Console[/Keyboard/backquote]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1845348973}
+        m_TargetAssemblyTypeName: DEBUG.Console.DevConsoleBehavior, Assembly-CSharp
+        m_MethodName: ProcessCommand
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 28ee0519-41db-4716-bada-c55c0acfc1e7
+    m_ActionName: Player/DEBUG_Console_Process
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -812,9 +845,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1845348972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b05f2a534579ad141b9b55e6d1503b07, type: 3}
+  m_Script: {fileID: 11500000, guid: bdb8a73c504e18b47a8310ff1c817589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  commands:
+  - {fileID: 11400000, guid: 32f237f9362cd0945aadcbe80cb5dc45, type: 2}
+  - {fileID: 11400000, guid: 684928c3986e2a244bbb6acfe3be8982, type: 2}
 --- !u!4 &1845348974
 Transform:
   m_ObjectHideFlags: 0

@@ -61,6 +61,7 @@ public class DEBUG_ShipMovement : MonoBehaviour
         }
     }
 
+    //TODO: Make forward and turning based on camera forward instead of ship forward
     public void DEBUG_Engine_Forward(float throttle)
     {
         Vector3 forward = _Parent.transform.forward;

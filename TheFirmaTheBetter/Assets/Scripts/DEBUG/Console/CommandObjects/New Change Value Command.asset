@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc237202983dbb4aa0bc6be31ba2982, type: 3}
   m_Name: New Change Value Command
   m_EditorClassIdentifier: 
-  commandWord: 
+  commandWord: ChangeValue
