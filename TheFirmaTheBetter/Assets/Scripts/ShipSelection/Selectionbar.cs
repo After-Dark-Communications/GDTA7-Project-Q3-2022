@@ -8,9 +8,6 @@ namespace Assets.Scripts.ShipSelection
 {
     public class Selectionbar : MonoBehaviour
     {
-        [SerializeField]
-        private PlayerNumber playerNumber;
-
         private List<SelectableCollection> selectionCollections = new List<SelectableCollection>();
 
         private int currentSelectedCollectionIndex = 0;
