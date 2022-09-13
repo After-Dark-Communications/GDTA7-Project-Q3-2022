@@ -14,12 +14,17 @@ public class Selectionbar : MonoBehaviour
 
     private void Start()
     {
-        foreach (Selectable selectable in transform)
-        {
-            selectionOptions.Add(selectable);
-        }
+        //foreach (Selectable selectable in transform)
+        //{
+        //    selectionOptions.Add(selectable);
+        //}
 
         //TODO: Add subscribtion to events
+    }
+
+    public void OnNavigate()
+    {
+
     }
 
     private void SelectNext()
