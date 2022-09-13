@@ -16,7 +16,12 @@ namespace Assets.Scripts.ShipSelection
 
         private void Awake()
         {
-            Channels.OnManagerInitialized.AddListener(OnManagerInitialize);
+            Channels.OnManagerInitialized += OnManagerInitialize;
+
+            Channels.Movement.OnNavigateUI_Up += OnNavigate_Up;
+            Channels.Movement.OnNavigateUI_Down += OnNavigate_Down;
+            Channels.Movement.OnNavigateUI_Right += OnNavigate_Right;
+            Channels.Movement.OnNavigateUI_Left += OnNavigate_Left;
         }
 
         private void Start()
@@ -27,7 +32,7 @@ namespace Assets.Scripts.ShipSelection
             selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(collectionManager.CoreList));
         }
 
-        private void OnManagerInitialize(Manager manager)
+        private void OnManagerInitialize(object sender, Manager manager)
         {
             if (manager.GetType() != typeof(PartsCollectionManager))
                 return;
@@ -35,46 +40,24 @@ namespace Assets.Scripts.ShipSelection
             collectionManager = manager as PartsCollectionManager;
         }
 
-        public void OnNavigate(InputAction.CallbackContext callbackContext)
-        {
-            Vector2 moveVector = callbackContext.ReadValue<Vector2>();
-
-            if (moveVector == Vector2.up)
-            {
-                SelectPreviousCollection();
-            }
-            else if (moveVector == Vector2.down)
-            {
-                SelectNextCollection();
-            }
-            else if (moveVector == Vector2.left)
-            {
-                SelectPreviousSelectable();
-            }
-            else if (moveVector == Vector2.right)
-            {
-                SelectNextSelectable();
-            }
-        }
-
-        private void SelectNextCollection()
-        {
-            currentSelectedCollectionIndex = ListLooper.SelectNext(selectionCollections, currentSelectedCollectionIndex);
-        }
-
-        private void SelectPreviousCollection()
+        public void OnNavigate_Up(object sender, Vector2 movementVector)
         {
             currentSelectedCollectionIndex = ListLooper.SelectPrevious(selectionCollections, currentSelectedCollectionIndex);
         }
 
-        private void SelectNextSelectable()
+        public void OnNavigate_Down(object sender, Vector2 movementVector)
         {
-            selectionCollections[currentSelectedCollectionIndex].SelectNextSelectable();
+            currentSelectedCollectionIndex = ListLooper.SelectNext(selectionCollections, currentSelectedCollectionIndex);
         }
 
-        private void SelectPreviousSelectable()
+        public void OnNavigate_Left(object sender, Vector2 movementVector)
         {
             selectionCollections[currentSelectedCollectionIndex].SelectPreviousSelectable();
+        }
+
+        public void OnNavigate_Right(object sender, Vector2 movementVector)
+        {
+            selectionCollections[currentSelectedCollectionIndex].SelectNextSelectable();
         }
 
         public SelectableCollection CurrentSelectedCollection => selectionCollections[currentSelectedCollectionIndex];
