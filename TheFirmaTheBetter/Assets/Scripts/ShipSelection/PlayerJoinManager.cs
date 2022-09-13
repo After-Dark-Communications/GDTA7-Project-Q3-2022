@@ -1,3 +1,4 @@
+using Assets.Scripts.ShipSelection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,49 +13,38 @@ public class PlayerJoinManager : MonoBehaviour
     private Transform playerShipSelectionParent;
     [SerializeField]
     private PlayerInputManager playerInputManager;
+    [SerializeField]
+    private Transform joinPlayerScreensParent;
 
-    private Vector2 player1Position = Vector2.left + Vector2.up;
-    private Vector2 player2Position = Vector2.right + Vector2.up;
-    private Vector2 player3Position = Vector2.right + Vector2.down;
-    private Vector2 player4Position = Vector2.left + Vector2.down;
+    List<Transform> joinPlayerScreens = new List<Transform>();
+
+    private void Awake()
+    {
+        foreach (Transform transform in joinPlayerScreensParent)
+        {
+            joinPlayerScreens.Add(transform);
+            transform.gameObject.SetActive(false);
+        }
+
+        joinPlayerScreens[0].gameObject.SetActive(true);
+    }
 
     public void OnPlayerJoin(PlayerInput playerInput)
     {
         playerInput.gameObject.transform.SetParent(playerShipSelectionParent);
 
-        SetAnchorPoint(playerInput);
+        playerInput.gameObject.transform.localScale = Vector3.one;
+        
+        ShowAndHideJoinPlayerButton(playerInput);
     }
 
-    private void SetAnchorPoint(PlayerInput playerInput)
+    private void ShowAndHideJoinPlayerButton(PlayerInput playerInput)
     {
-        RectTransform rectTransform = playerInput.transform.GetComponent<RectTransform>();
+        joinPlayerScreens[playerInput.playerIndex].gameObject.SetActive(false);
 
-        switch (playerInput.playerIndex)
-        {
-            case 1:
-                rectTransform.anchorMax = player1Position;
-                rectTransform.anchorMin = player1Position;
-                rectTransform.pivot = player1Position;
-                break;
-            case 2:
-                rectTransform.anchorMax = player2Position;
-                rectTransform.anchorMin = player2Position;
-                rectTransform.pivot = player2Position;
-                break;
-            case 3:
-                rectTransform.anchorMax = player3Position;
-                rectTransform.anchorMin = player3Position;
-                rectTransform.pivot = player3Position;
-                break;
-            case 4:
-                rectTransform.anchorMax = player4Position;
-                rectTransform.anchorMin = player4Position;
-                rectTransform.pivot = player4Position;
-                break;
-            default:
-                break;
-        }
+        if (playerInput.playerIndex + 1 >= joinPlayerScreens.Count)
+            return;
 
-        rectTransform.ForceUpdateRectTransforms();
+        joinPlayerScreens[playerInput.playerIndex + 1].gameObject.SetActive(true);
     }
 }
