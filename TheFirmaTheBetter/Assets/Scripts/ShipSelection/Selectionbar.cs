@@ -17,7 +17,7 @@ namespace Assets.Scripts.ShipSelection
         private void Start()
         {
             SelectableCollection engines = new SelectableCollection();
-            foreach (var engine in collectionManager.EngineList)
+            foreach (Engine engine in collectionManager.EngineList)
             {
                 engines.Selectables.Add(new Selectable() { Part = engine });
             }
