@@ -10,8 +10,7 @@ namespace Assets.Scripts.ShipSelection
 {
     public class SelectableCollection : MonoBehaviour
     {
-        [SerializeField]
-        private List<Selectable> selectables;
+        private List<Selectable> selectables = new List<Selectable>();
 
         private int currentSelectedSelectableIndex = 0;
 

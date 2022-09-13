@@ -14,6 +14,10 @@ namespace Assets.Scripts.ShipSelection
 
         private int currentSelectedCollectionIndex = 0;
 
+        private void Awake()
+        {
+            collectionManager = ManagerRedirector.Instance.PartsCollectionManager;
+        }
         private void Start()
         {
             SelectableCollection engines = new SelectableCollection();
