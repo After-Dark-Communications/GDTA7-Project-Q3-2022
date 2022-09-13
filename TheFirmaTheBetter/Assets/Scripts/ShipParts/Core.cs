@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : Part
+public class Core : Part
 {
     public override string PartName => "Core";
     [SerializeField]

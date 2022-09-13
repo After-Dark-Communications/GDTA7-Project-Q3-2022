@@ -25,5 +25,7 @@ namespace Assets.Scripts.ShipSelection
         }
 
         public Selectable CurrentSelectedOption => selectables[currentSelectedSelectableIndex];
+
+        public List<Selectable> Selectables { get => selectables; }
     }
 }

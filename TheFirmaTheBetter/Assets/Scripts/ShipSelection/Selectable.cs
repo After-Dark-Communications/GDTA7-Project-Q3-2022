@@ -7,19 +7,8 @@ namespace Assets.Scripts.ShipSelection
     public class Selectable : MonoBehaviour
     {
         [SerializeField]
-        private GameObject selectedObject;
-        [SerializeField]
-        private GameObject notSelectedObject;
+        private Part part;
 
-        public void SelectObject()
-        {
-            selectedObject.SetActive(true);
-            notSelectedObject.SetActive(false);
-        }
-        public void DeSelectObject()
-        {
-            notSelectedObject.SetActive(true);
-            selectedObject.SetActive(false);
-        }
+        public Part Part { get => part; set => part = value; }
     }
 }

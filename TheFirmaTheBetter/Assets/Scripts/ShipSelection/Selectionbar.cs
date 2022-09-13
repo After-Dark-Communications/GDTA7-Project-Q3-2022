@@ -8,13 +8,19 @@ namespace Assets.Scripts.ShipSelection
 {
     public class Selectionbar : MonoBehaviour
     {
+        [SerializeField]
+        private PartsCollectionManager collectionManager;
         private List<SelectableCollection> selectionCollections = new List<SelectableCollection>();
 
         private int currentSelectedCollectionIndex = 0;
 
         private void Start()
         {
-            //TODO:
+            SelectableCollection engines = new SelectableCollection();
+            foreach (var engine in collectionManager.EngineList)
+            {
+                engines.Selectables.Add(new Selectable() { Part = engine });
+            }
         }
 
         public void OnNavigate(InputAction.CallbackContext callbackContext)
