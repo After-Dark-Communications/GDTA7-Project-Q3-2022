@@ -6,6 +6,5 @@ using UnityEngine.Events;
 
 public static class Channels
 {
-    public static MovementChannel Movement = new MovementChannel();
     public static EventHandler<Manager> OnManagerInitialized;
 }

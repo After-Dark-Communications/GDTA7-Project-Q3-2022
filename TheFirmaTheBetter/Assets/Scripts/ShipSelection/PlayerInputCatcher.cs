@@ -2,28 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Assets.Scripts.ShipSelection;
 
 public class PlayerInputCatcher : MonoBehaviour
 {
-    public void OnNavigate(InputAction.CallbackContext callbackContext)
+    [SerializeField]
+    private Selectionbar selectionBar;
+
+    public void OnNavigate(InputAction.CallbackContext callbackContext, PlayerInput playerInput)
     {
         Vector2 moveVector = callbackContext.ReadValue<Vector2>();
 
         if (moveVector == Vector2.up)
         {
-            Channels.Movement.OnNavigateUI_Up.Invoke(gameObject, moveVector);
+            selectionBar.OnNavigate_Up();
         }
         else if (moveVector == Vector2.down)
         {
-            Channels.Movement.OnNavigateUI_Down.Invoke(gameObject, moveVector);
+            selectionBar.OnNavigate_Down();
         }
         else if (moveVector == Vector2.left)
         {
-            Channels.Movement.OnNavigateUI_Left.Invoke(gameObject, moveVector);
+            selectionBar.OnNavigate_Left();
         }
         else if (moveVector == Vector2.right)
         {
-            Channels.Movement.OnNavigateUI_Right.Invoke(gameObject, moveVector);
+            selectionBar.OnNavigate_Right();
         }
     }
 }

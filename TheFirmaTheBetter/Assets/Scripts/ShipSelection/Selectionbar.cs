@@ -17,11 +17,6 @@ namespace Assets.Scripts.ShipSelection
         private void Awake()
         {
             Channels.OnManagerInitialized += OnManagerInitialize;
-
-            Channels.Movement.OnNavigateUI_Up += OnNavigate_Up;
-            Channels.Movement.OnNavigateUI_Down += OnNavigate_Down;
-            Channels.Movement.OnNavigateUI_Right += OnNavigate_Right;
-            Channels.Movement.OnNavigateUI_Left += OnNavigate_Left;
         }
 
         private void Start()
@@ -32,32 +27,32 @@ namespace Assets.Scripts.ShipSelection
             selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(collectionManager.CoreList));
         }
 
+        public void OnNavigate_Up()
+        {
+            currentSelectedCollectionIndex = ListLooper.SelectPrevious(selectionCollections, currentSelectedCollectionIndex);
+        }
+
+        public void OnNavigate_Down()
+        {
+            currentSelectedCollectionIndex = ListLooper.SelectNext(selectionCollections, currentSelectedCollectionIndex);
+        }
+
+        public void OnNavigate_Left()
+        {
+            selectionCollections[currentSelectedCollectionIndex].SelectPreviousSelectable();
+        }
+
+        public void OnNavigate_Right()
+        {
+            selectionCollections[currentSelectedCollectionIndex].SelectNextSelectable();
+        }
+
         private void OnManagerInitialize(object sender, Manager manager)
         {
             if (manager.GetType() != typeof(PartsCollectionManager))
                 return;
 
             collectionManager = manager as PartsCollectionManager;
-        }
-
-        public void OnNavigate_Up(object sender, Vector2 movementVector)
-        {
-            currentSelectedCollectionIndex = ListLooper.SelectPrevious(selectionCollections, currentSelectedCollectionIndex);
-        }
-
-        public void OnNavigate_Down(object sender, Vector2 movementVector)
-        {
-            currentSelectedCollectionIndex = ListLooper.SelectNext(selectionCollections, currentSelectedCollectionIndex);
-        }
-
-        public void OnNavigate_Left(object sender, Vector2 movementVector)
-        {
-            selectionCollections[currentSelectedCollectionIndex].SelectPreviousSelectable();
-        }
-
-        public void OnNavigate_Right(object sender, Vector2 movementVector)
-        {
-            selectionCollections[currentSelectedCollectionIndex].SelectNextSelectable();
         }
 
         public SelectableCollection CurrentSelectedCollection => selectionCollections[currentSelectedCollectionIndex];
