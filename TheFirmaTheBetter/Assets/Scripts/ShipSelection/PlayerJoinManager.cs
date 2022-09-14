@@ -36,12 +36,9 @@ public class PlayerJoinManager : MonoBehaviour
 
     private void OnManagerInitialized(object sender, Manager manager)
     {
-        Debug.Log($"Try to init manager");
-
         if (manager.GetType() != typeof(CamPreviewManager))
             return;
 
-        Debug.Log($"Manager initialized");
         previewManager = manager as CamPreviewManager;
     }
 
