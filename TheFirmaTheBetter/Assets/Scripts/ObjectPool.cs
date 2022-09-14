@@ -67,6 +67,7 @@ public class ObjectPool
             GameObject instance = GameObject.Instantiate(prefab);
 
             ResetGameObject(instance);
+            instance.SetActive(false);
 
             availableObjectsInPool.Add(instance);
         }
@@ -76,7 +77,6 @@ public class ObjectPool
     {
         toReset.transform.position = Vector3.zero;
         toReset.transform.rotation = Quaternion.identity;
-        toReset.transform.localScale = Vector3.one;
         toReset.transform.SetParent(poolParent, false);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Weapon : Part
@@ -10,13 +11,13 @@ public class Weapon : Part
     [SerializeField]
     private Transform[] projectileStartingPoints;
 
+    private ObjectPool projectilesPool;
     private float lastShootTime;
 
-    // TEMPORARY
-    [SerializeField]
-    private int bulletSpeed = 10;
-    [SerializeField]
-    private float bulletRange = 2;
+    private void Start()
+    {
+        projectilesPool = new ObjectPool(weaponData.ProjectilePrefab, 10);
+    }
 
     private void Update()
     {
@@ -32,16 +33,18 @@ public class Weapon : Part
         {
             foreach (Transform point in projectileStartingPoints)
             {
-                // Spawn projectile
-                GameObject projectile = Instantiate(weaponData.ProjectilePrefab, point.position, point.rotation);
+                // Get projectile from pool
+                GameObject projectile = projectilesPool.RentFromPool();
+                projectile.transform.SetPositionAndRotation(point.position, point.rotation);
 
                 Vector3 direction = GetShootDirection(point, weaponData.SideSpreadAngle);
 
                 // Fire projectile
-                projectile.GetComponent<Rigidbody>().AddForce(direction * bulletSpeed, ForceMode.Impulse);
+                projectile.GetComponent<Rigidbody>().AddForce(direction * weaponData.ProjectileSpeed, ForceMode.Impulse);
 
-                // Destroy projectile after time
-                Destroy(projectile, bulletRange);
+                // Return projectile after time
+                float projectileLifetime = weaponData.Range / weaponData.ProjectileSpeed;
+                StartCoroutine(ReturnProjectile(projectile, projectileLifetime));
             }
 
             lastShootTime = Time.time;
@@ -58,5 +61,11 @@ public class Weapon : Part
         direction.Normalize();
 
         return direction;
+    }
+
+    IEnumerator ReturnProjectile(GameObject projectile, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        projectilesPool.ReturnToPool(projectile);
     }
 }

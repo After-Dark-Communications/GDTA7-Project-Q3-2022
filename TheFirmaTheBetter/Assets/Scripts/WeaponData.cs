@@ -25,12 +25,17 @@ public class WeaponData : ScriptableObject
 
     [SerializeField]
     [Range(0, 100)]
-    private float weaponRange;
+    private float range;
+
+    [SerializeField]
+    private float projectileSpeed;
 
     public string WeaponName { get { return weaponName; } }
     public GameObject ProjectilePrefab { get { return projectilePrefab; } }
     public float Damage { get { return damage; } }
     public float FireRate { get { return fireRate; } }
     public float SideSpreadAngle { get { return sideSpreadAngle; } }
+    public float Range { get { return range; } }
+    public float ProjectileSpeed { get { return projectileSpeed; } }
 
 }
