@@ -1,40 +1,57 @@
 using Assets.Scripts.Helper;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.ShipSelection
 {
     public class Selectionbar : MonoBehaviour
     {
-        private PartsCollectionManager collectionManager;
+        private PlayerSelectionScreensData selectionScreensData;
 
         private List<SelectableCollection> selectionCollections = new List<SelectableCollection>();
 
-        private int currentSelectedCollectionIndex = 0;
+        private List<TMP_Text> buttonLabels = new List<TMP_Text>();
 
-        private void Awake()
-        {
-            Channels.OnManagerInitialized += OnManagerInitialize;
-        }
+        private int currentSelectedCollectionIndex = 0;
 
         private void Start()
         {
-            selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(collectionManager.EngineList));
-            selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(collectionManager.WeaponList));
-            selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(collectionManager.SpecialList));
-            selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(collectionManager.CoreList));
+            foreach (Button button in gameObject.GetComponentsInChildren<Button>())
+            {
+                buttonLabels.Add(button.GetComponentInChildren<TMP_Text>());
+            }
+
+            selectionScreensData = GetComponentInParent<PlayerSelectionScreensData>();
+            selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(selectionScreensData.CollectionManager.EngineList));
+            selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(selectionScreensData.CollectionManager.WeaponList));
+            selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(selectionScreensData.CollectionManager.SpecialList));
+            selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(selectionScreensData.CollectionManager.CoreList));
+            UpdateLabelTexts();
         }
 
         public void OnNavigate_Up()
         {
             currentSelectedCollectionIndex = ListLooper.SelectPrevious(selectionCollections, currentSelectedCollectionIndex);
+            UpdateLabelTexts();
         }
 
         public void OnNavigate_Down()
         {
             currentSelectedCollectionIndex = ListLooper.SelectNext(selectionCollections, currentSelectedCollectionIndex);
+
+            UpdateLabelTexts();
+        }
+
+        private void UpdateLabelTexts()
+        {
+            for (int i = 0; i <= selectionCollections.Count; i++)
+            {
+                buttonLabels[i].SetText(selectionCollections[currentSelectedCollectionIndex].Selectables[i].Part.ToString());
+            }
         }
 
         public void OnNavigate_Left()
@@ -45,14 +62,6 @@ namespace Assets.Scripts.ShipSelection
         public void OnNavigate_Right()
         {
             selectionCollections[currentSelectedCollectionIndex].SelectNextSelectable();
-        }
-
-        private void OnManagerInitialize(object sender, Manager manager)
-        {
-            if (manager.GetType() != typeof(PartsCollectionManager))
-                return;
-
-            collectionManager = manager as PartsCollectionManager;
         }
 
         public SelectableCollection CurrentSelectedCollection => selectionCollections[currentSelectedCollectionIndex];

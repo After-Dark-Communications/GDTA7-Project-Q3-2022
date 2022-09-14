@@ -1,4 +1,5 @@
 using Assets.Scripts.ShipSelection;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,10 +17,14 @@ public class PlayerJoinManager : MonoBehaviour
     [SerializeField]
     private Transform joinPlayerScreensParent;
 
-    List<Transform> joinPlayerScreens = new List<Transform>();
+    private CamPreviewManager previewManager;
+
+    private List<Transform> joinPlayerScreens = new List<Transform>();
 
     private void Awake()
     {
+        Channels.OnManagerInitialized += OnManagerInitialized;
+
         foreach (Transform transform in joinPlayerScreensParent)
         {
             joinPlayerScreens.Add(transform);
@@ -29,13 +34,33 @@ public class PlayerJoinManager : MonoBehaviour
         joinPlayerScreens[0].gameObject.SetActive(true);
     }
 
+    private void OnManagerInitialized(object sender, Manager manager)
+    {
+        Debug.Log($"Try to init manager");
+
+        if (manager.GetType() != typeof(CamPreviewManager))
+            return;
+
+        Debug.Log($"Manager initialized");
+        previewManager = manager as CamPreviewManager;
+    }
+
     public void OnPlayerJoin(PlayerInput playerInput)
     {
         playerInput.gameObject.transform.SetParent(playerShipSelectionParent);
 
         playerInput.gameObject.transform.localScale = Vector3.one;
-        
+
         ShowAndHideJoinPlayerButton(playerInput);
+
+        SetCamPreview(playerInput);
+    }
+
+    private void SetCamPreview(PlayerInput playerInput)
+    {
+        previewManager.SetCamOutputToPlayerRenderingTexture(playerInput.playerIndex);
+        CamPreviewSetter setter = playerInput.gameObject.GetComponentInChildren<CamPreviewSetter>();
+        setter.RawImage.texture = previewManager.GetRenderTextureByPlayerIndex(playerInput.playerIndex);
     }
 
     private void ShowAndHideJoinPlayerButton(PlayerInput playerInput)

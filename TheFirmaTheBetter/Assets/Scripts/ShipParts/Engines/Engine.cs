@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public abstract class Part : MonoBehaviour
+public class Engine : Part
 {
     [SerializeField]
-    private Image partIcon;
+    private EngineData engineData;
 }

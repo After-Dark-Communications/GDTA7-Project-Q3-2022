@@ -9,7 +9,7 @@ public class PlayerInputCatcher : MonoBehaviour
     [SerializeField]
     private Selectionbar selectionBar;
 
-    public void OnNavigate(InputAction.CallbackContext callbackContext, PlayerInput playerInput)
+    public void OnNavigate(InputAction.CallbackContext callbackContext)
     {
         Vector2 moveVector = callbackContext.ReadValue<Vector2>();
 
@@ -29,5 +29,10 @@ public class PlayerInputCatcher : MonoBehaviour
         {
             selectionBar.OnNavigate_Right();
         }
+    }
+
+    public void OnSelect()
+    {
+        
     }
 }
