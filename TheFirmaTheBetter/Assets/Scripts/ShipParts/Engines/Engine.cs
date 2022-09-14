@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Engine : Part
 {
-    public override string PartName => "Engine";
+    [SerializeField]
+    private EngineData engineData;
 }

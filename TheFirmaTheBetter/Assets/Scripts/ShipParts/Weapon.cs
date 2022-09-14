@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class Weapon : Part
 {
-    public override string PartName => "Weapon";
+    [SerializeField]
+    private WeaponData weaponData;
+
 }
