@@ -12,6 +12,7 @@ public class ShipInputHandler : MonoBehaviour
     [SerializeField]
     private Part SpecialPart, ChasisPart, EnginePart, WeaponPart;
 
+    public UnityVector2Event OnPlayerMove = new UnityVector2Event();
     public UnityFloatEvent OnPlayerForwardBackward = new UnityFloatEvent();
     public UnityFloatEvent OnPlayerLeftRight = new UnityFloatEvent();
     public UnityFloatEvent OnPlayerAim = new UnityFloatEvent();
@@ -27,8 +28,9 @@ public class ShipInputHandler : MonoBehaviour
     {
         if (_MoveActive)
         {
-            OnPlayerForwardBackward.Invoke(_MoveValues.y);
-            OnPlayerLeftRight.Invoke(_MoveValues.x);
+            //OnPlayerForwardBackward.Invoke(_MoveValues.y);
+            //OnPlayerLeftRight.Invoke(_MoveValues.x);
+            OnPlayerMove.Invoke(_MoveValues);
         }
     }
     public void OnMove(InputAction.CallbackContext ctx)

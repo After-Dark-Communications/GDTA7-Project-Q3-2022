@@ -12,4 +12,6 @@ public class UnityBoolEvent : UnityEvent<bool> { }
 /// <para>If this event is used with shipInputHandler, it will contain three bools:started,performed,canceled. in that order.</para>
 /// </summary>
 public class UnityBoolsEvent : UnityEvent<bool[]> { }
+///<summary>unity event with a Vector2 value parameter</summary>
+public class UnityVector2Event : UnityEvent<Vector2> { }
 

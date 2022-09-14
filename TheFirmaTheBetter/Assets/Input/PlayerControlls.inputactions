@@ -15,6 +15,24 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Console_Toggle",
+                    "type": "Button",
+                    "id": "319fc53f-5520-44f4-bb5b-50c9472c4953",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Console_Process",
+                    "type": "Button",
+                    "id": "d2b19413-89af-47f5-b873-740daba96384",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Aim",
                     "type": "Value",
                     "id": "7675821f-909c-4021-b4e6-5c0f9c91ec41",
@@ -66,24 +84,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "DEBUG_Console_Toggle",
-                    "type": "Button",
-                    "id": "26186ad3-6584-4130-82e5-9629e9399da1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "DEBUG_Console_Process",
-                    "type": "Button",
-                    "id": "28ee0519-41db-4716-bada-c55c0acfc1e7",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
@@ -387,23 +387,23 @@
                 },
                 {
                     "name": "",
-                    "id": "c231e51e-8ce5-4ef5-adf1-4679fb9d2856",
-                    "path": "<Keyboard>/backquote",
+                    "id": "7dff6771-9081-45ba-8e5f-bb6198de863a",
+                    "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "DEBUG_Console_Toggle",
+                    "action": "Console_Process",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "d22824ae-41ec-408d-8dbb-c271ec41bc3a",
-                    "path": "<Keyboard>/enter",
+                    "id": "e0beb8b1-d817-4115-a6f0-1f9dea7898e4",
+                    "path": "<Keyboard>/backquote",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "DEBUG_Console_Process",
+                    "action": "Console_Toggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -807,6 +807,12 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Console",
+            "id": "83cd1afa-e1d9-480e-803f-83420d770c21",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": [
