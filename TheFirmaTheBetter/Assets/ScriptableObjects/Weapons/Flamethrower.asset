@@ -17,5 +17,5 @@ MonoBehaviour:
     type: 3}
   damage: 5
   fireRate: 1.87
-  sideSpreadAngle: 2.6
+  sideSpreadAngle: 5
   weaponRange: 35.8

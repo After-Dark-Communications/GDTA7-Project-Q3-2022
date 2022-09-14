@@ -52,10 +52,9 @@ public class Weapon : Part
     {
         Vector3 direction = shootingPoint.forward;
 
-        // Angle is devided by 45 becausue 1 unit is 45 degrees
-        float sideSpeard = sideSpreadAngle / 45;
+        Quaternion rotatiton = Quaternion.AngleAxis(Random.Range(-sideSpreadAngle, sideSpreadAngle), Vector3.up);
+        direction = rotatiton * direction;
 
-        direction += new Vector3(0, 0, Random.Range(-sideSpeard, sideSpeard));
         direction.Normalize();
 
         return direction;
