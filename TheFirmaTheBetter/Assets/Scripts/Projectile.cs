@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour, IObjectPoolItem
 
     public void SpawnObjectOnImpact()
     {
-        Debug.Log("Object has spawned");
+        
     }
 
     private void OnTriggerEnter(Collider other)
