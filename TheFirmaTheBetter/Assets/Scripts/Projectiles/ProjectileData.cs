@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ProjectileData", menuName = "ProjectileData")]
+[CreateAssetMenu(fileName = "ProjectileData", menuName = "Projectiles/Create new ProjectileData")]
 public class ProjectileData : ScriptableObject
 {
     [SerializeField]
