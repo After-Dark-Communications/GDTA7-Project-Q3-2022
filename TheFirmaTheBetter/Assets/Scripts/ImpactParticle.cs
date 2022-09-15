@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(ParticleSystem))]
-public class ImpactParticle : MonoBehaviour, IObjectPoolItem
+public class ImpactParticle : MonoBehaviour
 {
-    private ObjectPool particlesPool;
     private ParticleSystem particleSystem;
     // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-
+        particleSystem = GetComponent<ParticleSystem>();
+        particleSystem.Play();
     }
 
     public void ResetPoolItem()

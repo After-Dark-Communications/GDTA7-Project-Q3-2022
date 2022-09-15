@@ -20,8 +20,6 @@ public class Projectile : MonoBehaviour, IObjectPoolItem
 
     public void ResetPoolItem()
     {
-        // Called whenever the item is returned to the object pool
-
         Rigidbody projectileRigidbody = GetComponent<Rigidbody>();
         projectileRigidbody.velocity = Vector3.zero;
         projectileRigidbody.angularVelocity = Vector3.zero;
@@ -29,7 +27,16 @@ public class Projectile : MonoBehaviour, IObjectPoolItem
 
     public void SpawnObjectOnImpact()
     {
-        
+        GameObject impactParticleObject = Instantiate(projectileData.SpawnedObjectOnImpact, transform.position, transform.rotation);
+
+        ParticleSystem impactParticleSystem = impactParticleObject.GetComponent<ParticleSystem>();
+        float impactTime = 0;
+        if (impactParticleSystem != null)
+        {
+            impactTime = impactParticleSystem.main.duration;
+        }
+
+        Destroy(impactParticleObject, impactTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,6 +48,7 @@ public class Projectile : MonoBehaviour, IObjectPoolItem
             {
                 SpawnObjectOnImpact();
             }
+            ResetPoolItem();
             // ship.TakeDamage;
             //Debug.Log("A ship was hit");
         }

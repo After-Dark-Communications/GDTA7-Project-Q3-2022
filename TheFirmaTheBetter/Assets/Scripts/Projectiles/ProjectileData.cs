@@ -15,7 +15,7 @@ public class ProjectileData : ScriptableObject
     private bool isDoT;
     [Header("On Impact")]
     [SerializeField]
-    private Transform spawnedObjectOnImpact;
+    private GameObject spawnedObjectOnImpact;
     [SerializeField]
     private int amountToSpawn;
 
@@ -23,6 +23,6 @@ public class ProjectileData : ScriptableObject
     public float ProjectileSpeed { get { return projectileSpeed; } }
     public float ArmingTime { get { return armingTime; } }
     public bool IsDoT { get { return isDoT; } }
-    public Transform SpawnedObjectOnImpact { get { return spawnedObjectOnImpact; } }
+    public GameObject SpawnedObjectOnImpact { get { return spawnedObjectOnImpact; } }
     public int AmountToSpawn { get { return amountToSpawn; } }
 }
