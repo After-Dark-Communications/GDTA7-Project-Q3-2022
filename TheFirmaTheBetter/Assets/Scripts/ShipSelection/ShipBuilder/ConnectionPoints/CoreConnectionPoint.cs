@@ -8,5 +8,9 @@ namespace Assets.Scripts.ShipSelection.ShipBuilder.ConnectionPoints
 {
     public class CoreConnectionPoint : ConnectionPoint
     {
+        public override void ConnectPart(Core toConnect)
+        {
+            ConnectPart(toConnect as Part);
+        }
     }
 }

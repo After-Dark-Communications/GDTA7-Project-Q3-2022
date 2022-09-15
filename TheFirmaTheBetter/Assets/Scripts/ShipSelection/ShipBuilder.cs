@@ -60,7 +60,7 @@ public class ShipBuilder : MonoBehaviour
                 if (part.GetType() == currentSelectedPart.GetType())
                 {
                     part.gameObject.SetActive(true);
-                    
+                    part.ConnectionPointCollection.ConnectPartToCorrectPoint(part);
                     break;
                 }
             }

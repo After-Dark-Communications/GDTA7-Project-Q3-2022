@@ -9,11 +9,41 @@ public class ConnectionPointsCollection : MonoBehaviour
 
     private void Awake()
     {
-        foreach(ConnectionPoint connectionPoint in gameObject.GetComponentsInChildren<ConnectionPoint>())
+        foreach (ConnectionPoint connectionPoint in gameObject.GetComponentsInChildren<ConnectionPoint>())
         {
             connectionPoints.Add(connectionPoint);
-        }    
+        }
     }
 
-    //TODO: Create function to get connection point so that we can acctually connect the correct type to that point
+    public ConnectionPoint ConnectPartToCorrectPoint(Part part)
+    {
+        foreach (ConnectionPoint connection in connectionPoints)
+        {
+            if (part is Core)
+            {
+                connection.ConnectPart(part as Core);
+                return connection;
+            }
+
+            if (part is Weapon)
+            {
+                connection.ConnectPart(part as Weapon);
+                return connection;
+            }
+
+            if (part is Special)
+            {
+                connection.ConnectPart(part as Special);
+                return connection;
+            }
+
+            if (part is Engine)
+            {
+                connection.ConnectPart(part as Engine);
+                return connection;
+            }
+        }
+
+        return null;
+    }
 }

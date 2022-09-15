@@ -8,29 +8,27 @@ namespace Assets.Scripts.ShipSelection.ShipBuilder.ConnectionPoints
     {
         private List<Part> connectedParts = new List<Part>();
 
-        public void ConnectPart(Part toConnect)
+        protected void ConnectPart(Part toConnect)
         {
+            DisconnectPartFromCategory(toConnect);
+
             connectedParts.Add(toConnect);
             MovePartToConnect();
 
             void MovePartToConnect()
             {
-                Vector3 newPos = Vector3.zero;
-                Vector3 currentPartParentPosition = toConnect.transform.parent.position;
-                Vector3 coreParentPosition = transform.parent.position;
-                Vector3 partConnectionPointInParent = toConnect.transform.localPosition;
-                Vector3 coreConnectionPointInParent = transform.localPosition;
+                Vector3 targetPosition = transform.position;
+                Vector3 currentChildPosition = toConnect.transform.position;
 
-                newPos = coreParentPosition + coreConnectionPointInParent;
-                newPos = newPos + partConnectionPointInParent;
+                Vector3 childToTargetDistance = targetPosition - currentChildPosition;
 
-                toConnect.transform.parent.position = newPos;
+                toConnect.transform.parent.position += childToTargetDistance;
             }
         }
 
-        public void DisconnectPart(Part part)
+        public void DisconnectPartFromCategory(Part part)
         {
-            int index = connectedParts.FindIndex(c => c.GetType() == part.GetType());
+            int index = connectedParts.FindIndex(c => c.partCategoryName == part.partCategoryName);
 
             connectedParts.RemoveAt(index);
         }
@@ -39,5 +37,10 @@ namespace Assets.Scripts.ShipSelection.ShipBuilder.ConnectionPoints
         {
             connectedParts.Clear();
         }
+
+        public virtual void ConnectPart(Engine toConnect) { }
+        public virtual void ConnectPart(Core toConnect) { }
+        public virtual void ConnectPart(Special toConnect) { }
+        public virtual void ConnectPart(Weapon toConnect) { }
     }
 }
