@@ -2,8 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Core : Part
+namespace Parts
 {
-    [SerializeField]
-    private CoreData coreData;
+    [AddComponentMenu("Parts/Core")]
+    public class Core : Part
+    {
+        [SerializeField]
+        private CoreData coreData;
+
+        public override string PartName => "Core";
+
+        public override void Setup() { }
+    }
 }

@@ -5,9 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class VeryFastEngine : Engine
+namespace Parts
 {
-    private float minimumTimeToFallOut;
-    private float maximumTimeToFallOut;
+    [AddComponentMenu("Parts/Very Fast Engine")]
+    public class VeryFastEngine : Engine
+    {
+        private float minimumTimeToFallOut;
+        private float maximumTimeToFallOut;
+    }
 }
-

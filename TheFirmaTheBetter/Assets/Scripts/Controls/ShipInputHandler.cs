@@ -1,7 +1,9 @@
+using Parts;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using Util;
 
 /*
  * Steef is right :)
@@ -9,29 +11,37 @@ using UnityEngine.InputSystem;
  */
 public class ShipInputHandler : MonoBehaviour
 {
-    [SerializeField]
-    private Part SpecialPart, ChasisPart, EnginePart, WeaponPart;
-
     public UnityVector2Event OnPlayerMove = new UnityVector2Event();
-    public UnityFloatEvent OnPlayerForwardBackward = new UnityFloatEvent();
-    public UnityFloatEvent OnPlayerLeftRight = new UnityFloatEvent();
     public UnityFloatEvent OnPlayerAim = new UnityFloatEvent();
-    public UnityBoolsEvent OnPlayerShoot = new UnityBoolsEvent();
-    public UnityBoolsEvent OnPlayerPause = new UnityBoolsEvent();
-    public UnityBoolsEvent OnPlayerSpecial = new UnityBoolsEvent();
-    public UnityBoolsEvent OnPlayerMoveUp = new UnityBoolsEvent();
-    public UnityBoolsEvent OnPlayerMoveDown = new UnityBoolsEvent();
+    public UnityButtonStateEvent OnPlayerShoot = new UnityButtonStateEvent();
+    public UnityButtonStateEvent OnPlayerPause = new UnityButtonStateEvent();
+    public UnityButtonStateEvent OnPlayerSpecial = new UnityButtonStateEvent();
+    public UnityButtonStateEvent OnPlayerMoveUp = new UnityButtonStateEvent();
+    public UnityButtonStateEvent OnPlayerMoveDown = new UnityButtonStateEvent();
 
     private Vector2 _MoveValues;
     private bool _MoveActive;
+
+    private void Start()
+    {
+        //TODO: change this if the inputhandler knows what parts it has already
+        Part[] parts = GetComponentsInChildren<Part>();
+        if (parts.Length > 0)
+        {
+            for (int i = 0; i < parts.Length; i++)
+            {
+                parts[i].Setup();
+                Debug.Log($"set events for {parts[i].name}");
+            }
+        }
+    }
+
+
     private void Update()
     {
-        if (_MoveActive)
-        {
-            //OnPlayerForwardBackward.Invoke(_MoveValues.y);
-            //OnPlayerLeftRight.Invoke(_MoveValues.x);
-            OnPlayerMove.Invoke(_MoveValues);
-        }
+        //OnPlayerForwardBackward.Invoke(_MoveValues.y);
+        //OnPlayerLeftRight.Invoke(_MoveValues.x);
+        OnPlayerMove.Invoke(_MoveValues);
     }
     public void OnMove(InputAction.CallbackContext ctx)
     {
@@ -51,28 +61,31 @@ public class ShipInputHandler : MonoBehaviour
 
     public void OnFire(InputAction.CallbackContext ctx)
     {
-        OnPlayerShoot.Invoke(new bool[] { ctx.started, ctx.performed, ctx.canceled });
+
+        OnPlayerShoot.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
     }
 
     public void OnPause(InputAction.CallbackContext ctx)
     {
-        OnPlayerPause.Invoke(new bool[] { ctx.started, ctx.performed, ctx.canceled });
+        OnPlayerPause.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
     }
 
     public void OnSpecial(InputAction.CallbackContext ctx)
     {
-        OnPlayerSpecial.Invoke(new bool[] { ctx.started, ctx.performed, ctx.canceled });
+        OnPlayerSpecial.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
     }
 
     public void OnMoveUp(InputAction.CallbackContext ctx)
     {
-        OnPlayerMoveUp.Invoke(new bool[] { ctx.started, ctx.performed, ctx.canceled });
+        OnPlayerMoveUp.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
     }
 
     public void OnMoveDown(InputAction.CallbackContext ctx)
     {
-        OnPlayerMoveDown.Invoke(new bool[] { ctx.started, ctx.performed, ctx.canceled });
+        OnPlayerMoveDown.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
     }
+
+
 }
 
 

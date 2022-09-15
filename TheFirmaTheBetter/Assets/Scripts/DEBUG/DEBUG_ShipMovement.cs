@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 public class DEBUG_ShipMovement : MonoBehaviour
 {
@@ -89,19 +90,19 @@ public class DEBUG_ShipMovement : MonoBehaviour
         _Parent.transform.Rotate(0, direction * RotationSpeed * Time.deltaTime, 0, Space.World);
     }
 
-    public void DEBUG_Engine_Up(bool[] values)
+    public void DEBUG_Engine_Up(ButtonStates state)
     {
-        DEBUG_InputBools(values);
-        if (values[0] == true)//started
+        DEBUG_InputBools(state);
+        if (state.HasFlag(ButtonStates.STARTED))//started
         {
             Debug.Log("Go UP");
         }
     }
 
-    public void DEBUG_Engine_Down(bool[] values)
+    public void DEBUG_Engine_Down(ButtonStates state)
     {
-        DEBUG_InputBools(values);
-        if (values[0] == true)//started
+        DEBUG_InputBools(state);
+        if (state.HasFlag(ButtonStates.STARTED))//started
         {
             Debug.Log("Go DOWN");
         }
@@ -112,22 +113,18 @@ public class DEBUG_ShipMovement : MonoBehaviour
 
     }
 
-    public void DEBUG_Weapon(bool[] values)
+    public void DEBUG_Weapon(ButtonStates state)
     {
-        DEBUG_InputBools(values);
-        if (values[0] == true)//started
-        {
-            Debug.Log("Shoot on start");
-        }
+        DEBUG_InputBools(state);
     }
 
-    public void DEBUG_Special(bool[] values)
+    public void DEBUG_Special(ButtonStates state)
     {
-        DEBUG_InputBools(values);
+        DEBUG_InputBools(state);
     }
 
-    private void DEBUG_InputBools(bool[] values)
+    private void DEBUG_InputBools(ButtonStates state)
     {
-        Debug.Log($"started:{values[0]}, performed:{values[1]}, canceled:{values[2]}");
+        Debug.Log($"started:{state.HasFlag(ButtonStates.STARTED)}, performed:{state.HasFlag(ButtonStates.PERFORMED)}, canceled:{state.HasFlag(ButtonStates.CANCELED)}");
     }
 }

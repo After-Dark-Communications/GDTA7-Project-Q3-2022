@@ -3,44 +3,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Engine : Part
+
+namespace Parts
 {
-    [SerializeField]
-    private EngineData engineData;
-    public override string PartName => "Engine";
-
-    //IF YOU OVERRIDE PART'S AWAKE, BE SURE TO USE BASE.AWAKE() SO THAT IT HAS KNOWLEDGE OF ITS ROOT
-
-    private void Start()
+    [AddComponentMenu("Parts/Engine")]
+    public class Engine : Part
     {
-        if (RootInputHanlder != null)
+        [SerializeField]
+        private EngineData engineData;
+
+        private Rigidbody rb;
+        private float throttle;
+        private Vector2 MoveValue;
+
+        //IF YOU OVERRIDE PART'S AWAKE, BE SURE TO USE BASE.AWAKE() SO THAT IT HAS KNOWLEDGE OF ITS ROOT
+
+        public override void Setup()
         {
-            RootInputHanlder.OnPlayerMove.AddListener(MoveShip);
+            //set the evenets
+            if (RootInputHanlder != null)
+            {
+                RootInputHanlder.OnPlayerMove.AddListener(MoveShip);
+            }
+            //get components from root
+            rb = ShipRoot.GetComponent<Rigidbody>();
         }
-    }
 
-    private void MoveShip(Vector2 move)
-    {//when starting to move, increase T and lerp towards top speed
-     //when stopping, decrease T and lerp towards 0 speed
-
-        if (move != Vector2.zero)
+        private void Update()
         {
-            Quaternion toRotation = Quaternion.LookRotation(new Vector3(move.x, 0, move.y), GlobalUp.UP.up);
-            ShipRoot.rotation = Quaternion.RotateTowards(ShipRoot.rotation, toRotation, engineData.Handling * Time.deltaTime);
+            if (MoveValue != Vector2.zero)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(new Vector3(MoveValue.x, 0, MoveValue.y), GlobalUp.UP.up);
+                ShipRoot.rotation = Quaternion.RotateTowards(ShipRoot.rotation, toRotation, engineData.Handling * Time.deltaTime);
+            }
         }
-        DEBUG_Engine_Forward(new Vector3(move.x, 0, move.y).magnitude);
-    }
 
-    //TODO: Make forward and turning based on camera forward instead of ship forward
-    public void DEBUG_Engine_Forward(float throttle)
-    {
-        Vector3 forward = ShipRoot.transform.forward;
-        forward.y = 0;
-        ShipRoot.transform.position += forward.normalized * throttle * (engineData.Speed * Time.deltaTime);
-    }
+        private void FixedUpdate()
+        {
+            Vector3 forward = ShipRoot.transform.forward;
+            forward.y = 0;
+            //rb.velocity = forward.normalized * throttle * (engineData.Speed * Time.fixedDeltaTime);
+            rb.AddForce(forward.normalized * throttle * (engineData.Speed * Time.fixedDeltaTime), ForceMode.Impulse);
+        }
 
-    public void DEBUG_Engine_Turn(float direction)
-    {
-        ShipRoot.transform.Rotate(0, direction * engineData.Handling * Time.deltaTime, 0, Space.World);
+        private void MoveShip(Vector2 move)
+        {//when starting to move, increase T and lerp towards top speed
+         //when stopping, decrease T and lerp towards 0 speed
+            throttle = new Vector3(move.x, 0, move.y).magnitude;
+            MoveValue = move;
+            //ShipRoot.transform.position += forward.normalized * throttle * (engineData.Speed * Time.deltaTime);
+
+        }
+
+        public override string PartName => "Engine";
     }
 }
