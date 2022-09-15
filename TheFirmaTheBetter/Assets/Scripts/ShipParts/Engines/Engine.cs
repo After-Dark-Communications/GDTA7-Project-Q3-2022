@@ -6,4 +6,5 @@ public class Engine : Part
 {
     [SerializeField]
     private EngineData engineData;
+    public override string partCategoryName => "Engine";
 }

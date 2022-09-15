@@ -73,5 +73,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeatOMeter
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5971906038613741430, guid: fe99f3be1e3e6dd49beede9d2044b8bf, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fe99f3be1e3e6dd49beede9d2044b8bf, type: 3}
+--- !u!1 &1658882368991106781 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3406744170307420712, guid: fe99f3be1e3e6dd49beede9d2044b8bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 4053986767082165493}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8600067637536703467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658882368991106781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf1e98e30326ba4684b100f79e1be66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partIcon: {fileID: 0}
+  connectionPointCollection: {fileID: 0}
+  engineData: {fileID: 11400000, guid: 2b1fb5ed81d7abd42adc02e2a2dc7247, type: 2}

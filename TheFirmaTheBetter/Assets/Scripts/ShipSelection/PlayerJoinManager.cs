@@ -34,7 +34,7 @@ public class PlayerJoinManager : MonoBehaviour
         joinPlayerScreens[0].gameObject.SetActive(true);
     }
 
-    private void OnManagerInitialized(object sender, Manager manager)
+    private void OnManagerInitialized(Manager manager)
     {
         if (manager.GetType() != typeof(CamPreviewManager))
             return;
@@ -47,6 +47,9 @@ public class PlayerJoinManager : MonoBehaviour
         playerInput.gameObject.transform.SetParent(playerShipSelectionParent);
 
         playerInput.gameObject.transform.localScale = Vector3.one;
+
+        PlayerSelectionScreen playerSelectionScreen = playerInput.gameObject.GetComponent<PlayerSelectionScreen>();
+        playerSelectionScreen.PlayerNumber = playerInput.playerIndex;
 
         ShowAndHideJoinPlayerButton(playerInput);
 

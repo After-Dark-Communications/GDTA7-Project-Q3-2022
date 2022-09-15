@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 200863039357339481}
-  - component: {fileID: -2339656529368251211}
+  - component: {fileID: 2767887573982163329}
   m_Layer: 0
   m_Name: Mines
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-2339656529368251211
+--- !u!114 &2767887573982163329
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7637314625727188403}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b024cc24c5de9604d93d8a4335e339b4, type: 3}
+  m_Script: {fileID: 11500000, guid: f90f529c60d49fc4eb422f0393ad8290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  partIcon: {fileID: 0}
+  connectionPointCollection: {fileID: 0}
   specialData: {fileID: 11400000, guid: 8ce54c5461959264f915ac758bfaf197, type: 2}

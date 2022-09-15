@@ -73,5 +73,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretDrone
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2767887573982163329, guid: 0bbb866e23ccea84eb218df3fad703b9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0bbb866e23ccea84eb218df3fad703b9, type: 3}
+--- !u!1 &8700169086653066392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7637314625727188403, guid: 0bbb866e23ccea84eb218df3fad703b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1242998446291886379}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5451612683815692267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8700169086653066392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a118afb52e04984281f46400b2dc074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partIcon: {fileID: 0}
+  connectionPointCollection: {fileID: 0}
+  specialData: {fileID: 11400000, guid: d3e9d927155066346acfb9d2f7c7ac17, type: 2}

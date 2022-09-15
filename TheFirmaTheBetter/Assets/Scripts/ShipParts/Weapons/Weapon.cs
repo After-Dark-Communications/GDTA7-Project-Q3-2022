@@ -7,4 +7,5 @@ public class Weapon : Part
     [SerializeField]
     private WeaponData weaponData;
 
+    public override string partCategoryName => "Weapon";
 }

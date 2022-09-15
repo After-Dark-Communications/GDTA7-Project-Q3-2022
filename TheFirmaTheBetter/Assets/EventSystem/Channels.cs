@@ -6,5 +6,6 @@ using UnityEngine.Events;
 
 public static class Channels
 {
-    public static EventHandler<Manager> OnManagerInitialized;
+    public static Action<Manager> OnManagerInitialized;
+    public static Action<Part,int> OnShipPartSelected;
 }
