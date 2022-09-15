@@ -34,17 +34,19 @@ public class Weapon : Part
             foreach (Transform point in projectileStartingPoints)
             {
                 // Get projectile from pool
-                GameObject projectile = projectilesPool.RentFromPool();
-                projectile.transform.SetPositionAndRotation(point.position, point.rotation);
+                GameObject projectileObject = projectilesPool.RentFromPool();
+                projectileObject.transform.SetPositionAndRotation(point.position, point.rotation);
 
                 Vector3 direction = GetShootDirection(point, weaponData.SideSpreadAngle);
 
+                Projectile projectile = projectileObject.GetComponent<Projectile>();
+
                 // Fire projectile
-                projectile.GetComponent<Rigidbody>().AddForce(direction * weaponData.ProjectileSpeed, ForceMode.Impulse);
+                projectileObject.GetComponent<Rigidbody>().AddForce(direction * projectile.ProjectileSpeed, ForceMode.Impulse);
 
                 // Return projectile after time
-                float projectileLifetime = weaponData.Range / weaponData.ProjectileSpeed;
-                StartCoroutine(ReturnProjectile(projectile, projectileLifetime));
+                float projectileLifetime = weaponData.Range / projectile.ProjectileSpeed;
+                StartCoroutine(ReturnProjectile(projectileObject, projectileLifetime));
             }
 
             lastShootTime = Time.time;

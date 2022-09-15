@@ -10,10 +10,6 @@ public class WeaponData : ScriptableObject
     private GameObject projectilePrefab;
 
     [Header("Weapon stats")]
-
-    [SerializeField]
-    private int damage;
-
     [SerializeField]
     [Range(0, 10)]
     [Tooltip("Bullets per second")]
@@ -27,15 +23,10 @@ public class WeaponData : ScriptableObject
     [Range(0, 100)]
     private float range;
 
-    [SerializeField]
-    private float projectileSpeed;
-
     public string WeaponName { get { return weaponName; } }
     public GameObject ProjectilePrefab { get { return projectilePrefab; } }
-    public float Damage { get { return damage; } }
     public float FireRate { get { return fireRate; } }
     public float SideSpreadAngle { get { return sideSpreadAngle; } }
     public float Range { get { return range; } }
-    public float ProjectileSpeed { get { return projectileSpeed; } }
 
 }

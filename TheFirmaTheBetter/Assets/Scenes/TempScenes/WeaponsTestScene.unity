@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &76584901
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -213,7 +213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 76584900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.28, y: -0.07149577, z: 5.28}
+  m_LocalPosition: {x: 0.56, y: -0.07149577, z: 5.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -270,7 +270,6 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: 48a25cb8633f5d342a8868dc443491ae, type: 2}
   projectileStartingPoints:
   - {fileID: 1202291799}
-  point: {fileID: 291545894047713786, guid: a3f5569d6eba2c74295442ce7e37b2db, type: 3}
 --- !u!1 &438331423
 GameObject:
   m_ObjectHideFlags: 0
