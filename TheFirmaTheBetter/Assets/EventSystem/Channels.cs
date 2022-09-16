@@ -7,4 +7,6 @@ using UnityEngine.Events;
 public static class Channels
 {
     public static EventHandler<Manager> OnManagerInitialized;
+
+    public static Action<GameObject> OnZoneEntered;
 }

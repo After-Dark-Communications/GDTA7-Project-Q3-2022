@@ -10,6 +10,7 @@ public abstract class Zone : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             TriggerEffect(other.gameObject);
+            Channels.OnZoneEntered?.Invoke(other.gameObject);
         }
     }
 

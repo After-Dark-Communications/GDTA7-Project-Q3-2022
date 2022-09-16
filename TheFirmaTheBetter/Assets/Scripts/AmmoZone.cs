@@ -11,6 +11,5 @@ public class AmmoZone : Zone
     public override void TriggerEffect(GameObject obj)
     {
         Debug.Log("In trigger");
-        // Todo: refill ship ammo
     }
 }
