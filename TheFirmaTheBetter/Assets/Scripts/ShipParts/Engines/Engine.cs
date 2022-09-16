@@ -1,5 +1,4 @@
 using System;
-using Assets.Scripts.ShipSelection.ShipBuilder.ConnectionPoints;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +11,7 @@ namespace Parts
     {
         [SerializeField]
         private EngineData engineData;
-        public override string PartCategoryName => "Engine";
+
         private Rigidbody rb;
         private float throttle;
         private Vector2 MoveValue;
@@ -56,20 +55,6 @@ namespace Parts
 
         }
 
-        public override bool IsMyConnectionType(ConnectionPoint connectionPoint)
-        {
-            if (connectionPoint is EngineConnectionPoint)
-                return true;
-
-            return false;
-        }
-
-        public override bool IsMyType(Part part)
-        {
-            if (part is Engine)
-                return true;
-
-            return false;
-        }
+        public override string PartName => "Engine";
     }
 }

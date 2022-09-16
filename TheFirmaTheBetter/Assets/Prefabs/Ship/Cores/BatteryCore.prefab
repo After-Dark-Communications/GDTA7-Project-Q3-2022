@@ -78,39 +78,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: BatteryCore
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3723246605526620374, guid: 2eb1c8875f351f14aaba4d6f4bf748bd, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2eb1c8875f351f14aaba4d6f4bf748bd, type: 3}
---- !u!1 &5819402550278869973 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7602503678260995921, guid: 2eb1c8875f351f14aaba4d6f4bf748bd,
-    type: 3}
-  m_PrefabInstance: {fileID: 4126193471176782980}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2647674759421631129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5819402550278869973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d0b8920555001f45b9fa14d290b3ec8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  partIcon: {fileID: 0}
-  connectionPointCollection: {fileID: 8755802607308576700}
-  coreData: {fileID: 11400000, guid: e805001b7bbf77b44a077a9c1d1c1a7b, type: 2}
---- !u!114 &8755802607308576700 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4666277928107385656, guid: 2eb1c8875f351f14aaba4d6f4bf748bd,
-    type: 3}
-  m_PrefabInstance: {fileID: 4126193471176782980}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb72110387e96d41b30f78f2a1883cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

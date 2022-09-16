@@ -18,7 +18,7 @@ namespace Assets.Scripts.ShipSelection
 
         private int currentSelectedCollectionIndex = 0;
 
-        private void Awake()
+        private void Start()
         {
             foreach (Button button in gameObject.GetComponentsInChildren<Button>())
             {
@@ -54,16 +54,17 @@ namespace Assets.Scripts.ShipSelection
             }
         }
 
-        public void SetSelectedOptionIndex(int index)
+        public void OnNavigate_Left()
         {
-            CurrentSelectedCollection.CurrentSelectedIndex = index;
+            selectionCollections[currentSelectedCollectionIndex].SelectPreviousSelectable();
         }
 
-        public Part GetCurrentSelectedPart()
+        public void OnNavigate_Right()
         {
-            return CurrentSelectedCollection.Selectables[CurrentSelectedCollection.CurrentSelectedIndex].Part;
+            selectionCollections[currentSelectedCollectionIndex].SelectNextSelectable();
         }
 
         public SelectableCollection CurrentSelectedCollection => selectionCollections[currentSelectedCollectionIndex];
+        public Selectable CurrentSelectable => selectionCollections[currentSelectedCollectionIndex].CurrentSelectedOption;
     }
 }

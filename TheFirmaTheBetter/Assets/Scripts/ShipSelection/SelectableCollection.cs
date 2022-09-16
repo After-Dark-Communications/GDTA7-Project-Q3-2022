@@ -12,9 +12,19 @@ namespace Assets.Scripts.ShipSelection
     {
         private List<Selectable> selectables = new List<Selectable>();
 
-        private int currentSelectedIndex = 0;
+        private int currentSelectedSelectableIndex = 0;
+
+        public void SelectNextSelectable()
+        {
+            currentSelectedSelectableIndex = ListLooper.SelectNext(selectables, currentSelectedSelectableIndex);
+        }
+        public void SelectPreviousSelectable()
+        {
+            currentSelectedSelectableIndex = ListLooper.SelectPrevious(selectables, currentSelectedSelectableIndex);
+        }
+
+        public Selectable CurrentSelectedOption => selectables[currentSelectedSelectableIndex];
 
         public List<Selectable> Selectables { get => selectables; }
-        public int CurrentSelectedIndex { get => currentSelectedIndex; set => currentSelectedIndex = value; }
     }
 }
