@@ -1,3 +1,4 @@
+using Assets.Scripts.ShipSelection.ShipBuilder.ConnectionPoints;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,10 +13,20 @@ namespace Parts
         [SerializeField]
         private Vector3 connectionPoint;
 
+        [SerializeField]
+        private Image partIcon;
+
+        [SerializeField]
+        private ConnectionPointsCollection connectionPointCollection;
+
+        public virtual string PartCategoryName => "part";
+
+        public abstract bool IsMyType(Part part);
+        public abstract bool IsMyConnectionType(ConnectionPoint connectionPoint);
+
+        public ConnectionPointsCollection ConnectionPointCollection => connectionPointCollection;
         protected Transform ShipRoot { get; private set; }
         protected ShipInputHandler RootInputHanlder { get; private set; }
-
-        public abstract string PartName { get; }
 
         protected virtual void Awake()
         {
