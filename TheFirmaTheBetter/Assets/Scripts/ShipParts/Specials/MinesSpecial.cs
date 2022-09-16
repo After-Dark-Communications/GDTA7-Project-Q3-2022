@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.ShipParts.Specials
 {
-    internal class MinesSpecial : Special
+    internal class MinesSpecial : SpecialAbility
     {
     }
 }

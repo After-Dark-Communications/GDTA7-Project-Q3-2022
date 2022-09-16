@@ -8,9 +8,12 @@ namespace Assets.Scripts.ShipSelection.ShipBuilder.ConnectionPoints
 {
     public class EngineConnectionPoint : ConnectionPoint
     {
-        public override void ConnectPart(Engine toConnect)
+        public override void ConnectPart(Part toConnect)
         {
-            ConnectPart(toConnect as Part);
+            if (toConnect is not Engine)
+                return;
+
+            base.ConnectPart(toConnect);
         }
     }
 }

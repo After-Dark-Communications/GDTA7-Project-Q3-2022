@@ -1,4 +1,5 @@
 using Assets.Scripts.ShipSelection.ShipBuilder.ConnectionPoints;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,31 +20,30 @@ public class ConnectionPointsCollection : MonoBehaviour
     {
         foreach (ConnectionPoint connection in connectionPoints)
         {
-            if (part is Core)
-            {
-                connection.ConnectPart(part as Core);
-                return connection;
-            }
+            if (!part.IsMyConnectionType(connection))
+                continue;
 
-            if (part is Weapon)
-            {
-                connection.ConnectPart(part as Weapon);
-                return connection;
-            }
-
-            if (part is Special)
-            {
-                connection.ConnectPart(part as Special);
-                return connection;
-            }
-
-            if (part is Engine)
-            {
-                connection.ConnectPart(part as Engine);
-                return connection;
-            }
+            connection.ConnectPart(part);
         }
 
         return null;
+    }
+
+    public void RepositionAllParts()
+    {
+        foreach (ConnectionPoint connectionPoint in connectionPoints)
+        {
+            connectionPoint.ConnectPart(connectionPoint.ConnectedPart);
+        }
+    }
+
+    public ConnectionPoint GetConnectionPoint(Part part)
+    {
+        int index = connectionPoints.FindIndex(cp => part.IsMyConnectionType(cp));
+        
+        if (index < 0)
+            index = 0;
+
+        return connectionPoints[index];
     }
 }

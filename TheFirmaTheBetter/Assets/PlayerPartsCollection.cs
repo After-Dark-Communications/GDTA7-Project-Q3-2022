@@ -13,12 +13,9 @@ namespace Assets.Scripts.ShipSelection
         [SerializeField]
         private PlayerSelectionScreen selectionScreen;
 
-        public void OnSelectPart(InputAction.CallbackContext callbackContext)
+        public void OnSelectPart()
         {
-            if (callbackContext.phase != InputActionPhase.Started)
-                return;
-            
-            Part currentSelectedPart = selectionBar.CurrentSelectable.Part;
+            Part currentSelectedPart = selectionBar.GetCurrentSelectedPart();
 
             Channels.OnShipPartSelected.Invoke(currentSelectedPart, selectionScreen.PlayerNumber);
         }

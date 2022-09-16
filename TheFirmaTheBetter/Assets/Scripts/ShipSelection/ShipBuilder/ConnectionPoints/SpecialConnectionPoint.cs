@@ -8,9 +8,12 @@ namespace Assets.Scripts.ShipSelection.ShipBuilder.ConnectionPoints
 {
     public class SpecialConnectionPoint : ConnectionPoint
     {
-        public override void ConnectPart(Special toConnect)
+        public override void ConnectPart(Part toConnect)
         {
-            ConnectPart(toConnect as Part);
+            if (toConnect is not SpecialAbility)
+                return;
+
+            base.ConnectPart(toConnect);
         }
     }
 }

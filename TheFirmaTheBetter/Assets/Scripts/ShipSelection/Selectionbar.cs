@@ -46,16 +46,6 @@ namespace Assets.Scripts.ShipSelection
             UpdateLabelTexts();
         }
 
-        public void OnNavigate_Left()
-        {
-            selectionCollections[currentSelectedCollectionIndex].SelectPreviousSelectable();
-        }
-
-        public void OnNavigate_Right()
-        {
-            selectionCollections[currentSelectedCollectionIndex].SelectNextSelectable();
-        }
-
         private void UpdateLabelTexts()
         {
             for (int i = 0; i <= selectionCollections.Count; i++)
@@ -64,7 +54,16 @@ namespace Assets.Scripts.ShipSelection
             }
         }
 
+        public void SetSelectedOptionIndex(int index)
+        {
+            CurrentSelectedCollection.CurrentSelectedIndex = index;
+        }
+
+        public Part GetCurrentSelectedPart()
+        {
+            return CurrentSelectedCollection.Selectables[CurrentSelectedCollection.CurrentSelectedIndex].Part;
+        }
+
         public SelectableCollection CurrentSelectedCollection => selectionCollections[currentSelectedCollectionIndex];
-        public Selectable CurrentSelectable => selectionCollections[currentSelectedCollectionIndex].CurrentSelectedOption;
     }
 }

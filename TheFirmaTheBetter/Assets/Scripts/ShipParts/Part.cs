@@ -1,3 +1,4 @@
+using Assets.Scripts.ShipSelection.ShipBuilder.ConnectionPoints;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,11 @@ public abstract class Part : MonoBehaviour
     [SerializeField]
     private ConnectionPointsCollection connectionPointCollection;
 
-    public virtual string partCategoryName => "part";
+    public virtual string PartCategoryName => "part";
+
+    public abstract bool IsMyType(Part part);
+    public abstract bool IsMyConnectionType(ConnectionPoint connectionPoint);
+
     public ConnectionPointsCollection ConnectionPointCollection => connectionPointCollection;
 
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.ShipParts.Specials
 {
-    internal class BlinkSpecial : Special
+    internal class BlinkSpecial : SpecialAbility
     {
     }
 }

@@ -6,41 +6,47 @@ namespace Assets.Scripts.ShipSelection.ShipBuilder.ConnectionPoints
 {
     public abstract class ConnectionPoint : MonoBehaviour
     {
-        private List<Part> connectedParts = new List<Part>();
+        private Part connectedPart;
 
-        protected void ConnectPart(Part toConnect)
+        public Part ConnectedPart => connectedPart;
+
+        protected void PositionPart(Part toConnect)
         {
-            DisconnectPartFromCategory(toConnect);
+            connectedPart = toConnect;
 
-            connectedParts.Add(toConnect);
             MovePartToConnect();
 
             void MovePartToConnect()
             {
                 Vector3 targetPosition = transform.position;
-                Vector3 currentChildPosition = toConnect.transform.position;
+                Vector3 currentChildPosition = toConnect.ConnectionPointCollection.GetConnectionPoint(toConnect).transform.localPosition;
 
                 Vector3 childToTargetDistance = targetPosition - currentChildPosition;
 
-                toConnect.transform.parent.position += childToTargetDistance;
+                toConnect.transform.position = Vector3.zero;
+                toConnect.transform.position += childToTargetDistance;
             }
         }
 
         public void DisconnectPartFromCategory(Part part)
         {
-            int index = connectedParts.FindIndex(c => c.partCategoryName == part.partCategoryName);
+            if (connectedPart == null)
+                return;
 
-            connectedParts.RemoveAt(index);
+            if (part.PartCategoryName != connectedPart.PartCategoryName)
+                return;
+
+            connectedPart = null;
         }
 
-        public void DisconnectAllParts()
+        public virtual void ConnectPart(Part toConnect)
         {
-            connectedParts.Clear();
-        }
+            if (toConnect == null)
+                return;
 
-        public virtual void ConnectPart(Engine toConnect) { }
-        public virtual void ConnectPart(Core toConnect) { }
-        public virtual void ConnectPart(Special toConnect) { }
-        public virtual void ConnectPart(Weapon toConnect) { }
+           // DisconnectPartFromCategory(toConnect);
+
+            PositionPart(toConnect);
+        }
     }
 }

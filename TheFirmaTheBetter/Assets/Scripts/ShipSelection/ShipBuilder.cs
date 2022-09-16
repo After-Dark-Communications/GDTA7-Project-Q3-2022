@@ -13,6 +13,13 @@ public class ShipBuilder : MonoBehaviour
 
     private List<Part> availablePlayerParts = new List<Part>();
 
+    private Core selectedCore;
+    private Engine selectedEngine;
+    private SpecialAbility selectedSpecial;
+    private Weapon selectedWeapon;
+
+    private List<Part> selectedParts = new List<Part>();
+
     private void Awake()
     {
         Channels.OnShipPartSelected += OnShipPartSelected;
@@ -27,7 +34,11 @@ public class ShipBuilder : MonoBehaviour
             Part instancePart = instance.GetComponent<Part>();
             availablePlayerParts.Add(instancePart);
 
+
             instance.transform.SetParent(transform);
+
+            instance.transform.position = new Vector3(0,0,0);
+            instance.transform.localPosition = Vector3.zero;
             instance.gameObject.SetActive(false);
         }
     }
@@ -46,7 +57,7 @@ public class ShipBuilder : MonoBehaviour
         {
             foreach (Part part in availablePlayerParts)
             {
-                if (part.partCategoryName != currentSelectedPart.partCategoryName)
+                if (part.PartCategoryName != currentSelectedPart.PartCategoryName)
                     continue;
 
                 part.gameObject.SetActive(false);
@@ -59,11 +70,44 @@ public class ShipBuilder : MonoBehaviour
             {
                 if (part.GetType() == currentSelectedPart.GetType())
                 {
+                    if (part is Core)
+                    {
+                        HandleSelectedCore(part);
+                        part.gameObject.SetActive(true);
+                        return;
+                    }
+
+                    if (selectedCore == null)
+                        return;
+
                     part.gameObject.SetActive(true);
-                    part.ConnectionPointCollection.ConnectPartToCorrectPoint(part);
+                    
+                    ConnectSelectedPart(part);
                     break;
                 }
             }
+        }
+    }
+
+    private void ConnectSelectedPart(Part part)
+    {
+        int index = selectedParts.FindIndex(p => p.IsMyType(part));
+        
+        if (index >= 0)
+            selectedParts.RemoveAt(index);
+
+        selectedParts.Add(part);
+
+        selectedCore.ConnectionPointCollection.ConnectPartToCorrectPoint(part);
+    }
+
+    private void HandleSelectedCore(Part part)
+    {
+        selectedCore = part as Core;
+
+        foreach (Part selectedPart in selectedParts)
+        {
+            selectedCore.ConnectionPointCollection.ConnectPartToCorrectPoint(selectedPart);
         }
     }
 }
