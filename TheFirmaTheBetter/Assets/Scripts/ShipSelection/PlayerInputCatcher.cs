@@ -21,18 +21,5 @@ public class PlayerInputCatcher : MonoBehaviour
         {
             selectionBar.OnNavigate_Down();
         }
-        else if (moveVector == Vector2.left)
-        {
-            selectionBar.OnNavigate_Left();
-        }
-        else if (moveVector == Vector2.right)
-        {
-            selectionBar.OnNavigate_Right();
-        }
-    }
-
-    public void OnSelect()
-    {
-        
     }
 }

@@ -1,3 +1,4 @@
+using Assets.Scripts.ShipSelection.ShipBuilder.ConnectionPoints;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Parts
         [SerializeField]
         private WeaponData weaponData;
 
-        public override string PartName => throw new System.NotImplementedException();
+        public override string PartCategoryName => "Weapon";
 
         public override void Setup()
         {
@@ -32,6 +33,22 @@ namespace Parts
         {
             //rotation is for left/right
             Debug.LogError("AimWeapon is not implemented!");
+        }
+
+        public override bool IsMyConnectionType(ConnectionPoint connectionPoint)
+        {
+            if (connectionPoint is WeaponConnectionPoint)
+                return true;
+
+            return false;
+        }
+
+        public override bool IsMyType(Part part)
+        {
+            if (part is Weapon)
+                return true;
+
+            return false;
         }
     }
 }

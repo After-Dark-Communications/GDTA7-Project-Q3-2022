@@ -1,4 +1,5 @@
 using Assets.Scripts.Helper;
+using Parts;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,7 +19,7 @@ namespace Assets.Scripts.ShipSelection
 
         private int currentSelectedCollectionIndex = 0;
 
-        private void Start()
+        private void Awake()
         {
             foreach (Button button in gameObject.GetComponentsInChildren<Button>())
             {
@@ -54,17 +55,16 @@ namespace Assets.Scripts.ShipSelection
             }
         }
 
-        public void OnNavigate_Left()
+        public void SetSelectedOptionIndex(int index)
         {
-            selectionCollections[currentSelectedCollectionIndex].SelectPreviousSelectable();
+            CurrentSelectedCollection.CurrentSelectedIndex = index;
         }
 
-        public void OnNavigate_Right()
+        public Part GetCurrentSelectedPart()
         {
-            selectionCollections[currentSelectedCollectionIndex].SelectNextSelectable();
+            return CurrentSelectedCollection.Selectables[CurrentSelectedCollection.CurrentSelectedIndex].Part;
         }
 
         public SelectableCollection CurrentSelectedCollection => selectionCollections[currentSelectedCollectionIndex];
-        public Selectable CurrentSelectable => selectionCollections[currentSelectedCollectionIndex].CurrentSelectedOption;
     }
 }
