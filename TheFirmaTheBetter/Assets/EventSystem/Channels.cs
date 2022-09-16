@@ -8,5 +8,5 @@ public static class Channels
 {
     public static EventHandler<Manager> OnManagerInitialized;
 
-    public static ZoneChannel ZoneChannel = new ZoneChannel();
+    public static Action<GameObject> OnZoneEntered;
 }
