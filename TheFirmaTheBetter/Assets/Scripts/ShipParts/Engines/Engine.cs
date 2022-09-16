@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Util;
 
 namespace Parts
 {
@@ -11,10 +11,15 @@ namespace Parts
     {
         [SerializeField]
         private EngineData engineData;
+        [SerializeField]
+        private float VibrateTime = 1f;
+        [SerializeField]
+        private float HeightTime = 0.125f, HeightDifference = 5f, HeightSpeed = 7f;
 
         private Rigidbody rb;
         private float throttle;
         private Vector2 MoveValue;
+        private bool ChangingHeight;
 
         //IF YOU OVERRIDE PART'S AWAKE, BE SURE TO USE BASE.AWAKE() SO THAT IT HAS KNOWLEDGE OF ITS ROOT
 
@@ -24,10 +29,15 @@ namespace Parts
             if (RootInputHanlder != null)
             {
                 RootInputHanlder.OnPlayerMove.AddListener(MoveShip);
+                RootInputHanlder.OnPlayerCrash.AddListener(CrashShip);
+                RootInputHanlder.OnPlayerMoveUp.AddListener(MoveUp);
+                RootInputHanlder.OnPlayerMoveDown.AddListener(MoveDown);
             }
             //get components from root
             rb = ShipRoot.GetComponent<Rigidbody>();
         }
+
+
 
         private void Update()
         {
@@ -53,6 +63,66 @@ namespace Parts
             MoveValue = move;
             //ShipRoot.transform.position += forward.normalized * throttle * (engineData.Speed * Time.deltaTime);
 
+        }
+
+        private void MoveUp(ButtonStates arg0)
+        {
+            if (!ChangingHeight)
+            {
+                StartCoroutine(ChangeYForTime(HeightTime, HeightDifference, HeightSpeed));
+            }
+        }
+
+        private void MoveDown(ButtonStates arg0)
+        {
+            if (!ChangingHeight)
+            {
+                StartCoroutine(ChangeYForTime(HeightTime, -HeightDifference, HeightSpeed));
+            }
+        }
+
+
+        private void CrashShip(float velocity)
+        {
+            //Rigidbody rb = ShipRoot.GetComponent<Rigidbody>();
+            //float velocity = Mathf.Abs(Vector3.Dot(rb.velocity, ShipRoot.forward));
+            //float velocity = rb.velocity.sqrMagnitude;
+            Debug.Log($"{ShipRoot.name} velocity: {velocity} Remapped to {velocity.Remap(0, engineData.Speed, 0, 1)}");
+            //UnityEngine.InputSystem.Gamepad.current.SetMotorSpeeds(0, velocity.Remap(0, engineData.Speed, 0, 1));
+            StartCoroutine(VibrateForTime(VibrateTime, 0, velocity.Remap(0, engineData.Speed, 0, 1)));
+        }
+
+        private IEnumerator VibrateForTime(float time, float low, float high)
+        {
+            UnityEngine.InputSystem.Gamepad.current.SetMotorSpeeds(low, high);
+            yield return new WaitForSecondsRealtime(time);
+            UnityEngine.InputSystem.Gamepad.current.SetMotorSpeeds(0, 0);
+        }
+
+        private IEnumerator ChangeYForTime(float time, float height, float speed)
+        {
+            ChangingHeight = true;
+            Vector3 origin = ShipRoot.transform.position;
+            float posy = origin.y;
+            float t = 0;
+            while (t < 1)
+            {
+                posy = Mathf.Lerp(origin.y, origin.y + height, t);
+                ShipRoot.transform.position = new Vector3(ShipRoot.transform.position.x, posy, ShipRoot.transform.position.z);
+                t += Time.deltaTime * speed;
+                yield return new WaitForEndOfFrame();
+            }
+            yield return new WaitForSeconds(time);
+            t = 1;
+            while (t > 0)
+            {
+                posy = Mathf.Lerp(origin.y, origin.y + height, t);
+                ShipRoot.transform.position = new Vector3(ShipRoot.transform.position.x, posy, ShipRoot.transform.position.z);
+                t -= Time.deltaTime * speed;
+                yield return new WaitForEndOfFrame();
+            }
+            ShipRoot.transform.position = new Vector3(ShipRoot.transform.position.x, origin.y, ShipRoot.transform.position.z);
+            ChangingHeight = false;
         }
 
         public override string PartName => "Engine";

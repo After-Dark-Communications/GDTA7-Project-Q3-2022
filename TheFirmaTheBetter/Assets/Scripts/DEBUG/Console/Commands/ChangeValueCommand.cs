@@ -26,7 +26,7 @@ namespace DEBUG.Console.Commands
                 }
                 catch (Exception e)
                 {
-                    Debug.LogError("Caught Exception whilst trying to change value: " + e.Message);
+                    //Debug.LogError("Caught Exception whilst trying to change value: " + e.Message);
                 }
             }
             return false;
