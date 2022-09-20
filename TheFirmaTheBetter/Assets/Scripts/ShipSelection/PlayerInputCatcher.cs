@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Assets.Scripts.ShipSelection;
+using System;
 
 public class PlayerInputCatcher : MonoBehaviour
 {
     [SerializeField]
     private Selectionbar selectionBar;
+
+    [SerializeField]
+    private PlayerSelectionScreen playerSelectionScreen;
 
     public void OnNavigate(InputAction.CallbackContext callbackContext)
     {
@@ -21,5 +25,12 @@ public class PlayerInputCatcher : MonoBehaviour
         {
             selectionBar.OnNavigate_Down();
         }
+    }
+
+    public void OnInputConfirmShip(InputAction.CallbackContext callbackContext)
+    {
+        int playerNumber = playerSelectionScreen.PlayerNumber;
+
+        Channels.Input.OnShipCompletedInput.Invoke(playerNumber);
     }
 }

@@ -15,15 +15,21 @@ public class ShipBuilder : MonoBehaviour
     private List<Part> availablePlayerParts = new List<Part>();
 
     private Core selectedCore;
-    private Engine selectedEngine;
-    private SpecialAbility selectedSpecial;
-    private Weapon selectedWeapon;
 
     private List<Part> selectedParts = new List<Part>();
 
     private void Awake()
     {
         Channels.OnShipPartSelected += OnShipPartSelected;
+        Channels.Input.OnShipCompletedInput += OnShipCompletedInput;
+    }
+
+    private void OnShipCompletedInput(int playerNumber)
+    {
+        if (playerNumber != this.playerNumber)
+            return;
+
+        Channels.OnShipCompleted.Invoke(this);
     }
 
     private void Start()
@@ -34,7 +40,6 @@ public class ShipBuilder : MonoBehaviour
 
             Part instancePart = instance.GetComponent<Part>();
             availablePlayerParts.Add(instancePart);
-
 
             instance.transform.SetParent(transform);
 
@@ -111,4 +116,7 @@ public class ShipBuilder : MonoBehaviour
             selectedCore.ConnectionPointCollection.ConnectPartToCorrectPoint(selectedPart);
         }
     }
+
+    public int PlayerNumber => playerNumber;
+    public List<Part> SelectedParts => selectedParts;
 }

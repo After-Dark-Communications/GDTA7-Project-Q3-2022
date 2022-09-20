@@ -54,6 +54,8 @@ public class PlayerJoinManager : MonoBehaviour
         ShowAndHideJoinPlayerButton(playerInput);
 
         SetCamPreview(playerInput);
+
+        Channels.OnPlayerJoined.Invoke(playerSelectionScreen.PlayerNumber);
     }
 
     private void SetCamPreview(PlayerInput playerInput)
