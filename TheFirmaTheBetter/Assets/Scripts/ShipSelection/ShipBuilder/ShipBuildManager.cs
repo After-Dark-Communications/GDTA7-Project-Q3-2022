@@ -65,4 +65,6 @@ public class ShipBuildManager : Manager
     }
 
     public List<ShipBuilder> ShipBuilders => shipBuilders;
+
+    public int AmountOfPlayersJoined => amountOfPlayersJoined; 
 }

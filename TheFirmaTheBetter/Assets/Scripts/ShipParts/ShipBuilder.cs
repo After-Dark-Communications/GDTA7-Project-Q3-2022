@@ -29,6 +29,9 @@ public class ShipBuilder : MonoBehaviour
         if (playerNumber != this.playerNumber)
             return;
 
+        transform.parent = null;
+        DontDestroyOnLoad(transform);
+
         Channels.OnShipCompleted.Invoke(this);
     }
 
