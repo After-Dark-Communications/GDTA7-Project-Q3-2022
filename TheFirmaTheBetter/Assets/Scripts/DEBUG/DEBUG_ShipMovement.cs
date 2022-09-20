@@ -45,7 +45,7 @@ public class DEBUG_ShipMovement : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"_Parent({_Parent.name}) does not have a ShipInputHanlder component! disabling...");
+            //Debug.LogError($"_Parent({_Parent.name}) does not have a ShipInputHanlder component! disabling...");
             this.enabled = false;
         }
     }
@@ -95,7 +95,7 @@ public class DEBUG_ShipMovement : MonoBehaviour
         DEBUG_InputBools(state);
         if (state.HasFlag(ButtonStates.STARTED))//started
         {
-            Debug.Log("Go UP");
+            //Debug.Log("Go UP");
         }
     }
 
@@ -104,7 +104,7 @@ public class DEBUG_ShipMovement : MonoBehaviour
         DEBUG_InputBools(state);
         if (state.HasFlag(ButtonStates.STARTED))//started
         {
-            Debug.Log("Go DOWN");
+            //Debug.Log("Go DOWN");
         }
     }
 
@@ -125,6 +125,6 @@ public class DEBUG_ShipMovement : MonoBehaviour
 
     private void DEBUG_InputBools(ButtonStates state)
     {
-        Debug.Log($"started:{state.HasFlag(ButtonStates.STARTED)}, performed:{state.HasFlag(ButtonStates.PERFORMED)}, canceled:{state.HasFlag(ButtonStates.CANCELED)}");
+       // Debug.Log($"started:{state.HasFlag(ButtonStates.STARTED)}, performed:{state.HasFlag(ButtonStates.PERFORMED)}, canceled:{state.HasFlag(ButtonStates.CANCELED)}");
     }
 }

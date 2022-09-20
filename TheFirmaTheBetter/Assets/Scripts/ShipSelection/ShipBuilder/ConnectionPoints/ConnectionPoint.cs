@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.ShipSelection.ShipBuilder.ConnectionPoints
+namespace ShipSelection.ShipBuilder.ConnectionPoints
 {
     public abstract class ConnectionPoint : MonoBehaviour
     {

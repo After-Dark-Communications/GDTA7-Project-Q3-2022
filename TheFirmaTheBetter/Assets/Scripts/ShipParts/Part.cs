@@ -1,4 +1,4 @@
-using Assets.Scripts.ShipSelection.ShipBuilder.ConnectionPoints;
+using  ShipSelection.ShipBuilder.ConnectionPoints;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

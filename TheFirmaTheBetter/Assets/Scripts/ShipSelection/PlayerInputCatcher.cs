@@ -1,9 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Assets.Scripts.ShipSelection;
-using System;
+using  ShipSelection;
 
 public class PlayerInputCatcher : MonoBehaviour
 {

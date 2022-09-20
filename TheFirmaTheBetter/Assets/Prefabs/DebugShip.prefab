@@ -399,6 +399,11 @@ MonoBehaviour:
   partIcon: {fileID: 0}
   connectionPoint: {x: 0, y: 0, z: 0}
   engineData: {fileID: 11400000, guid: adbb79bb685e7f6439e6c009db646737, type: 2}
+  VibrateTime: 0.1
+  VibrationIntensity: 3
+  HeightChangeTime: 0.2
+  HeightChangeDifference: 8
+  HeightChangeSpeed: 7.5
 --- !u!1 &6108729807418670932
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,6 +451,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrust: {fileID: 6343312057024256969}
+  LowStrength: 1
+  HighStrength: 1
 --- !u!1001 &6108729806356372599
 PrefabInstance:
   m_ObjectHideFlags: 0
