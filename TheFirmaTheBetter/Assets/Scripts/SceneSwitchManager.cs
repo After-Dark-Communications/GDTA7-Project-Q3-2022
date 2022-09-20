@@ -38,6 +38,6 @@ public class SceneSwitchManager : Manager
         if (currentLoadedSceneIndex == totalAmountOfScenes - 1)
             return;
         
-        SceneManager.LoadScene(currentLoadedSceneIndex++);
+        SceneManager.LoadScene(currentLoadedSceneIndex+1);
     }
 }

@@ -829,7 +829,7 @@
                 {
                     "name": "",
                     "id": "dcf8bcda-e116-437f-bc8f-6e4c750fc6b0",
-                    "path": "<Keyboard>/enter",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",

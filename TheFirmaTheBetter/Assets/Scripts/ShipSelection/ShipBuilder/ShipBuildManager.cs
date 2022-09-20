@@ -41,7 +41,6 @@ public class ShipBuildManager : Manager
 
     private void OnShipCompleted(ShipBuilder shipBuilder)
     {
-        Debug.Log("completed");
         int index = GetIndexOfShipBuilderInList(shipBuilder);
 
         if (index != -1)
@@ -62,7 +61,7 @@ public class ShipBuildManager : Manager
 
     private void OnPlayerJoined(int playerNumber)
     {
-        amountOfPlayersJoined = playerNumber++;
+        amountOfPlayersJoined = playerNumber + 1;
     }
 
     public List<ShipBuilder> ShipBuilders => shipBuilders;
