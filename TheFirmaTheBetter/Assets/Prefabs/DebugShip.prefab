@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7779102120231513350}
   - component: {fileID: 2577823686284417506}
   - component: {fileID: 7170731171012555699}
+  - component: {fileID: 6183063424678591165}
   m_Layer: 0
   m_Name: DebugShip
   m_TagString: Player
@@ -304,6 +305,24 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2432090755550338912, guid: ff80ae3345f7cd746a35fa3ba704a3db, type: 3}
+--- !u!114 &6183063424678591165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6108729805540391518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 4
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &6108729806354825383
 GameObject:
   m_ObjectHideFlags: 0
