@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.Helper
+namespace  Helper
 {
     public static class ListLooper
     {

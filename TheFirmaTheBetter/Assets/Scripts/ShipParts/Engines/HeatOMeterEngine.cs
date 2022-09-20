@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.ShipParts.Engines
+namespace  ShipParts.Engines
 {
     internal class HeatOMeterEngine : Engine
     {

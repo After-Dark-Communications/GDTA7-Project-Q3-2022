@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Assets.Scripts.ShipSelection
+namespace  ShipSelection
 {
     public class PlayerPartsCollection : MonoBehaviour
     {

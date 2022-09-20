@@ -1,6 +1,7 @@
+using  ShipSelection.ShipBuilder.ConnectionPoints;
 using Parts;
 using System;
-using Assets.Scripts.ShipSelection.ShipBuilder.ConnectionPoints;
+//using  ShipSelection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -102,6 +103,9 @@ namespace Parts
 
         private IEnumerator VibrateForTime(float time, float low, float high)
         {
+            //UnityEngine.InputSystem.PlayerInput playerInput = new UnityEngine.InputSystem.PlayerInput();
+            //(playerInput.devices[1] as UnityEngine.InputSystem.Gamepad).SetMotorSpeeds(low, high);
+            //TODO: change Gamepad.current to the bit above
             UnityEngine.InputSystem.Gamepad.current.SetMotorSpeeds(low, high);
             yield return new WaitForSecondsRealtime(time);
             UnityEngine.InputSystem.Gamepad.current.SetMotorSpeeds(0, 0);
@@ -149,6 +153,6 @@ namespace Parts
             return false;
         }
         
-        public override string PartName => "Engine";
+        public override string PartCategoryName => "Engine";
     }
 }
