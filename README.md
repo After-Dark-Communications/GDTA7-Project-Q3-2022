@@ -20,3 +20,4 @@ The following checklist should be checked off completely before getting your fea
 - [ ] Pull request created and labeled
 - [ ] All git conflicts are resolved
 - [ ] Comment/remove all console/debug logs
+- [ ] Update Devlog/Portfolio with information relating to feature
