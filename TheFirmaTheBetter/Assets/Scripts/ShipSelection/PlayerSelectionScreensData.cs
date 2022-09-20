@@ -15,7 +15,7 @@ public class PlayerSelectionScreensData : MonoBehaviour
         Channels.OnManagerInitialized += OnManagerInitialize;
     }
 
-    private void OnManagerInitialize(object sender, Manager manager)
+    private void OnManagerInitialize(Manager manager)
     {
         if (manager.GetType() == typeof(PartsCollectionManager))
         {

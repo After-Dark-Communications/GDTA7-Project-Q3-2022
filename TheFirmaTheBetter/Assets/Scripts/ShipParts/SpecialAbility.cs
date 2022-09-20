@@ -1,16 +1,33 @@
-﻿using System;
+﻿using Assets.Scripts.ShipSelection.ShipBuilder.ConnectionPoints;
+using System;
 using UnityEngine;
 using Util;
 
 namespace Parts
 {
     [AddComponentMenu("Parts/Special")]
-    public class Special : Part
+    public class SpecialAbility : Part
     {
         [SerializeField]
         private SpecialData specialData;
 
-        public override string PartName => "Special";
+        public override string PartCategoryName => "Special";
+
+        public override bool IsMyType(Part part)
+        {
+            if (part is SpecialAbility)
+                return true;
+
+            return false;
+        }
+
+        public override bool IsMyConnectionType(ConnectionPoint connectionPoint)
+        {
+            if (connectionPoint is SpecialConnectionPoint)
+                return true;
+
+            return false;
+        }
 
         public override void Setup()
         {

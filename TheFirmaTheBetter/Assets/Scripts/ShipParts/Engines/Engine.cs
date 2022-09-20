@@ -1,4 +1,6 @@
+using Parts;
 using System;
+using Assets.Scripts.ShipSelection.ShipBuilder.ConnectionPoints;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,6 +43,9 @@ namespace Parts
 
         private void Update()
         {
+            if (RootInputHanlder == null)
+                return;
+
             if (MoveValue != Vector2.zero)
             {
                 Quaternion toRotation = Quaternion.LookRotation(new Vector3(MoveValue.x, 0, MoveValue.y), GlobalUp.UP.up);
@@ -50,6 +55,9 @@ namespace Parts
 
         private void FixedUpdate()
         {
+            if (RootInputHanlder == null)
+                return;
+
             Vector3 forward = ShipRoot.transform.forward;
             forward.y = 0;
             //rb.velocity = forward.normalized * throttle * (engineData.Speed * Time.fixedDeltaTime);
@@ -125,6 +133,22 @@ namespace Parts
             ChangingHeight = false;
         }
 
+        public override bool IsMyConnectionType(ConnectionPoint connectionPoint)
+        {
+            if (connectionPoint is EngineConnectionPoint)
+                return true;
+
+            return false;
+        }
+
+        public override bool IsMyType(Part part)
+        {
+            if (part is Engine)
+                return true;
+
+            return false;
+        }
+        
         public override string PartName => "Engine";
     }
 }
