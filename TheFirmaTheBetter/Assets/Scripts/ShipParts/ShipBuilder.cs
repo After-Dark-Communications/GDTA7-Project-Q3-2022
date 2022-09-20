@@ -94,7 +94,6 @@ public class ShipBuilder : MonoBehaviour
             }
         }
     }
-
     private void ConnectSelectedPart(Part part)
     {
         int index = selectedParts.FindIndex(p => p.IsMyType(part));

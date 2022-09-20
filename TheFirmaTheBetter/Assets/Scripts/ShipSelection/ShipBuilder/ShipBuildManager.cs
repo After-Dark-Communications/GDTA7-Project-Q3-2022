@@ -41,6 +41,7 @@ public class ShipBuildManager : Manager
 
     private void OnShipCompleted(ShipBuilder shipBuilder)
     {
+        Debug.Log("completed");
         int index = GetIndexOfShipBuilderInList(shipBuilder);
 
         if (index != -1)
