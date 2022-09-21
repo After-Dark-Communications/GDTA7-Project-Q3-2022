@@ -807,12 +807,6 @@
                     "isPartOfComposite": false
                 }
             ]
-        },
-        {
-            "name": "Console",
-            "id": "83cd1afa-e1d9-480e-803f-83420d770c21",
-            "actions": [],
-            "bindings": []
         }
     ],
     "controlSchemes": [

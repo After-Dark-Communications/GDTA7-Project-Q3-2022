@@ -11,17 +11,29 @@ using Util;
  */
 public class ShipInputHandler : MonoBehaviour
 {
+    [SerializeField]
+    private Part SpecialPart, ChasisPart, EnginePart, WeaponPart;
+
     public UnityVector2Event OnPlayerMove = new UnityVector2Event();
+    public UnityFloatEvent OnPlayerForwardBackward = new UnityFloatEvent();
+    public UnityFloatEvent OnPlayerLeftRight = new UnityFloatEvent();
     public UnityFloatEvent OnPlayerAim = new UnityFloatEvent();
     public UnityButtonStateEvent OnPlayerShoot = new UnityButtonStateEvent();
     public UnityButtonStateEvent OnPlayerPause = new UnityButtonStateEvent();
     public UnityButtonStateEvent OnPlayerSpecial = new UnityButtonStateEvent();
     public UnityButtonStateEvent OnPlayerMoveUp = new UnityButtonStateEvent();
     public UnityButtonStateEvent OnPlayerMoveDown = new UnityButtonStateEvent();
+    public UnityFloatEvent OnPlayerCrash = new UnityFloatEvent();
 
     private Vector2 _MoveValues;
     private bool _MoveActive;
+    private Rigidbody _Rb;
+    private float _PrevVelocity;
 
+    private void Awake()
+    {
+        _Rb = GetComponent<Rigidbody>();
+    }
     private void Start()
     {
         //TODO: change this if the inputhandler knows what parts it has already
@@ -36,6 +48,10 @@ public class ShipInputHandler : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        _PrevVelocity = Mathf.Abs(Vector3.Dot(_Rb.velocity, transform.forward)); ;
+    }
 
     private void Update()
     {
@@ -85,7 +101,10 @@ public class ShipInputHandler : MonoBehaviour
         OnPlayerMoveDown.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
     }
 
-
+    public void OnCollisionEnter(Collision collision)
+    {
+        OnPlayerCrash.Invoke(_PrevVelocity);
+    }
 }
 
 

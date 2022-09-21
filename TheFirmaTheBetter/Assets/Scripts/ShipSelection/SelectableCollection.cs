@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Helper;
+﻿using  Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,25 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts.ShipSelection
+namespace  ShipSelection
 {
     public class SelectableCollection : MonoBehaviour
     {
         private List<Selectable> selectables = new List<Selectable>();
 
-        private int currentSelectedSelectableIndex = 0;
-
-        public void SelectNextSelectable()
-        {
-            currentSelectedSelectableIndex = ListLooper.SelectNext(selectables, currentSelectedSelectableIndex);
-        }
-        public void SelectPreviousSelectable()
-        {
-            currentSelectedSelectableIndex = ListLooper.SelectPrevious(selectables, currentSelectedSelectableIndex);
-        }
-
-        public Selectable CurrentSelectedOption => selectables[currentSelectedSelectableIndex];
+        private int currentSelectedIndex = 0;
 
         public List<Selectable> Selectables { get => selectables; }
+        public int CurrentSelectedIndex { get => currentSelectedIndex; set => currentSelectedIndex = value; }
     }
 }

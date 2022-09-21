@@ -9,9 +9,12 @@ public class UnityFloatEvent : UnityEvent<float> { }
 public class UnityBoolEvent : UnityEvent<bool> { }
 /// <summary>unity event with a boolean array parameter.</summary>
 public class UnityBoolsEvent : UnityEvent<bool[]> { }
-///<summary>unity event with a Vector2 value parameter</summary>
+///<summary>unity event with a <see cref="Vector2"/> value parameter</summary>
 public class UnityVector2Event : UnityEvent<Vector2> { }
-///<summary>unity event for the buttonstates flags</summary>
+///<summary>unity event with a <see cref="Vector3"/> value parameter</summary>
+public class UnityVector3Event : UnityEvent<Vector3> { }
+///<summary>unity event for the <see cref="ButtonStates"/> flags</summary>
 public class UnityButtonStateEvent : UnityEvent<ButtonStates> { }
-
+///<summary>unity event with a <see cref="GameObject"/> parameter</summary>
+public class UnityGameObjectEvent : UnityEvent<GameObject> { }
 

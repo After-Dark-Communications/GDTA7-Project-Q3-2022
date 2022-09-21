@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Assets.Scripts.ShipSelection
+namespace  ShipSelection
 {
     public static class AnchorPointsSetter
     {

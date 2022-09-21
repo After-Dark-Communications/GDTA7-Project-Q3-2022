@@ -1,32 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewWeaponData", menuName = "Part/Create new WeaponData")]
-public class WeaponData : PartData
+[CreateAssetMenu(fileName = "Weapon", menuName = "Ship Parts/Weapon")]
+public class WeaponData : ScriptableObject
 {
     [SerializeField]
-    private  int weaponDamage;
+    private string weaponName;
 
     [SerializeField]
-    private  float weaponSpread;
+    private GameObject projectilePrefab;
+
+    [Header("Weapon stats")]
+    [SerializeField]
+    [Range(0, 10)]
+    [Tooltip("Bullets per second")]
+    private float fireRate;
 
     [SerializeField]
-    private  float weaponRange;
+    [Range(0, 45)]
+    private float sideSpreadAngle;
 
     [SerializeField]
-    private  float rateOfFire;
+    [Range(0, 100)]
+    private float range;
 
-    [SerializeField]
-    private  float projectileSpeed;
+    public string WeaponName { get { return weaponName; } }
+    public GameObject ProjectilePrefab { get { return projectilePrefab; } }
+    public float FireRate { get { return fireRate; } }
+    public float SideSpreadAngle { get { return sideSpreadAngle; } }
+    public float Range { get { return range; } }
 
-    public int WeaponDamage => weaponDamage;
-
-    public float WeaponSpread => weaponSpread;
-
-    public float WeaponRange => weaponRange;
-
-    public float RateOfFire => rateOfFire;
-
-    public float ProjectileSpeed => projectileSpeed;
 }

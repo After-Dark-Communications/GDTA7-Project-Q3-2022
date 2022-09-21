@@ -1,13 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Assets.Scripts.ShipSelection;
+using  ShipSelection;
 
 public class PlayerInputCatcher : MonoBehaviour
 {
     [SerializeField]
     private Selectionbar selectionBar;
+
+    [SerializeField]
+    private PlayerSelectionScreen playerSelectionScreen;
 
     public void OnNavigate(InputAction.CallbackContext callbackContext)
     {
@@ -21,18 +25,12 @@ public class PlayerInputCatcher : MonoBehaviour
         {
             selectionBar.OnNavigate_Down();
         }
-        else if (moveVector == Vector2.left)
-        {
-            selectionBar.OnNavigate_Left();
-        }
-        else if (moveVector == Vector2.right)
-        {
-            selectionBar.OnNavigate_Right();
-        }
     }
 
-    public void OnSelect()
+    public void OnInputConfirmShip(InputAction.CallbackContext callbackContext)
     {
-        
+        int playerNumber = playerSelectionScreen.PlayerNumber;
+
+        Channels.Input.OnShipCompletedInput.Invoke(playerNumber);
     }
 }
