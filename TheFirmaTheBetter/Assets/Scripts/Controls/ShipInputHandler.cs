@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 using Util;
 
 /*
@@ -11,9 +12,6 @@ using Util;
  */
 public class ShipInputHandler : MonoBehaviour
 {
-    [SerializeField]
-    private Part SpecialPart, ChasisPart, EnginePart, WeaponPart;
-
     public UnityVector2Event OnPlayerMove = new UnityVector2Event();
     public UnityFloatEvent OnPlayerForwardBackward = new UnityFloatEvent();
     public UnityFloatEvent OnPlayerLeftRight = new UnityFloatEvent();
@@ -25,29 +23,34 @@ public class ShipInputHandler : MonoBehaviour
     public UnityButtonStateEvent OnPlayerMoveDown = new UnityButtonStateEvent();
     public UnityFloatEvent OnPlayerCrash = new UnityFloatEvent();
 
-    private Vector2 _MoveValues;
-    private bool _MoveActive;
     private Rigidbody _Rb;
     private float _PrevVelocity;
-
-    private void Awake()
+    private InputAction _Move;
+    private InputAction _Aim;
+    private void OnEnable()
     {
+        //Enable input events
+        SetupInputEvents();
+        //ensure rigidbody exists
         _Rb = GetComponent<Rigidbody>();
-    }
-    private void Start()
-    {
-        //TODO: change this if the inputhandler knows what parts it has already
+        if (_Rb == null)
+        {
+            _Rb = gameObject.AddComponent<Rigidbody>();
+            _Rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+            _Rb.drag = 7;
+        }
+
+        //setup children parts
         Part[] parts = GetComponentsInChildren<Part>();
         if (parts.Length > 0)
         {
             for (int i = 0; i < parts.Length; i++)
             {
-                parts[i].Setup();
+                parts[i].SetupPart(transform.parent);
                 Debug.Log($"set events for {parts[i].name}");
             }
         }
     }
-
     private void FixedUpdate()
     {
         _PrevVelocity = Mathf.Abs(Vector3.Dot(_Rb.velocity, transform.forward)); ;
@@ -55,29 +58,37 @@ public class ShipInputHandler : MonoBehaviour
 
     private void Update()
     {
-        //OnPlayerForwardBackward.Invoke(_MoveValues.y);
-        //OnPlayerLeftRight.Invoke(_MoveValues.x);
-        OnPlayerMove.Invoke(_MoveValues);
-    }
-    public void OnMove(InputAction.CallbackContext ctx)
-    {
-        _MoveValues = ctx.ReadValue<Vector2>();
-        _MoveActive = ctx.started || ctx.performed;
-        if (ctx.canceled == true)
-        {
-            _MoveActive = false;
-        }
+        Debug.Log(_Move.ReadValue<Vector2>());
+        OnPlayerMove.Invoke(_Move.ReadValue<Vector2>());
+        OnPlayerAim.Invoke(_Aim.ReadValue<Vector2>().x);
     }
 
-    public void OnAim(InputAction.CallbackContext ctx)
+    private void SetupInputEvents()
     {
-        OnPlayerAim.Invoke(ctx.ReadValue<Vector2>().x);
+        PlayerControlls.PlayerActions actions = new PlayerControlls().Player;
+        InputActionMap controls = GetInputActions();
+        _Move = controls.FindAction(actions.Move.name);
+        _Aim = controls.FindAction(actions.Aim.name);
 
+        _Move.Enable();
+        _Aim.Enable();
+
+        controls.FindAction(actions.MoveUp.name).started += OnMoveUp;
+        controls.FindAction(actions.MoveDown.name).started += OnMoveDown;
+        controls.FindAction(actions.Pause.name).started += OnPause;
+        controls.FindAction(actions.Special.name).started += OnSpecial;
+
+        controls.FindAction(actions.Fire.name).performed += OnFire;
+    }
+
+    private InputActionMap GetInputActions()
+    {
+        PlayerInput input = GetComponent<PlayerInput>();
+        return input.actions.FindActionMap("Player");
     }
 
     public void OnFire(InputAction.CallbackContext ctx)
     {
-
         OnPlayerShoot.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
     }
 

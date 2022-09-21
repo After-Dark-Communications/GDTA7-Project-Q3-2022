@@ -26,7 +26,7 @@ namespace Parts
 
         //IF YOU OVERRIDE PART'S AWAKE, BE SURE TO USE BASE.AWAKE() SO THAT IT HAS KNOWLEDGE OF ITS ROOT
 
-        public override void Setup()
+        protected override void Setup()
         {
             //set the evenets
             if (RootInputHanlder != null)
@@ -39,8 +39,6 @@ namespace Parts
             //get components from root
             rb = ShipRoot.GetComponent<Rigidbody>();
         }
-
-
 
         private void Update()
         {

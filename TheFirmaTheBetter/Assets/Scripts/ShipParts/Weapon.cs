@@ -1,4 +1,4 @@
-using  ShipSelection.ShipBuilder.ConnectionPoints;
+using ShipSelection.ShipBuilder.ConnectionPoints;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,10 +23,13 @@ namespace Parts
 
         private void Start()
         {
-            projectilesPool = new ObjectPool(weaponData.ProjectilePrefab, 10);
+            if (weaponData != null)
+            {
+                projectilesPool = new ObjectPool(weaponData.ProjectilePrefab, 10);
+            }
         }
 
-        public override void Setup()
+        protected override void Setup()
         {
             if (RootInputHanlder != null)
             {
@@ -43,7 +46,7 @@ namespace Parts
         private void AimWeapon(float rotation)
         {
             //rotation is for left/right
-            Debug.LogError("AimWeapon is not implemented!");
+            //Debug.LogError("AimWeapon is not implemented!");
         }
 
         public override bool IsMyConnectionType(ConnectionPoint connectionPoint)

@@ -29,7 +29,7 @@ namespace Parts
             return false;
         }
 
-        public override void Setup()
+        protected override void Setup()
         {
             if (RootInputHanlder != null)
             {
