@@ -1,33 +1,41 @@
-using System;
 using UnityEngine;
 
-public class Healthbar : Fillbar
+public class HealthBar : ShipStatBar
 {
     [SerializeField]
-    private int playerIndex;
+    private Color lowColor;
 
-    protected Action<int, float> onValueUpdated;
+    [SerializeField]
+    private Color mediumColor;
 
-    private void Awake()
+    [SerializeField]
+    private Color highColor;
+
+    private void OnEnable()
     {
-        onValueUpdated += UpdateHealthbar;
+        Channels.OnHealthChanged += UpdateStatbar;
     }
 
-    private void Start()
+    private void OnDisable()
     {
-        Channels.OnHealthChanged?.Invoke(1, 0.2f);
+        Channels.OnHealthChanged -= UpdateStatbar;
     }
 
-    private void OnDestroy()
+    protected override void UpdateFill(float fillAmount)
     {
-        onValueUpdated -= UpdateHealthbar;
-    }
-
-    public void UpdateHealthbar(int playerIndex, float healthPrecentage)
-    {
-        if (playerIndex == this.playerIndex)
+        if (fillAmount < 0.33f)
         {
-            base.UpdateFill(healthPrecentage);
+            fillImage.color = lowColor;
         }
+        else if (fillAmount > 0.66f)
+        {
+            fillImage.color = highColor;
+        }
+        else
+        {
+            fillImage.color = mediumColor;
+        }
+
+        base.UpdateFill(fillAmount);
     }
 }

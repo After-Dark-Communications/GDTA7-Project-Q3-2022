@@ -8,8 +8,10 @@ public static class Channels
 {
     public static EventHandler<Manager> OnManagerInitialized;
 
+    public static Action<GameObject, int> OnPlayerSpawned;
+
     public static Action<int, float> OnHealthChanged;
     public static Action<int, float> OnFuelChanged;
-    public static Action<int, int> OnAmmoChanged;
+    public static Action<int, float> OnAmmoChanged;
 
 }

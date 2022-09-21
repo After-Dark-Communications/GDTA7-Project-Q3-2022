@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Fillbar : MonoBehaviour
+public class FillBar : MonoBehaviour
 {
     [SerializeField]
     protected Image fillImage;
