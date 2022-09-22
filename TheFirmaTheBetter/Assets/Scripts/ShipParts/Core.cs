@@ -28,7 +28,7 @@ namespace Parts
 
             return false;
         }
-
-        public override void Setup() { }
+        //TODO: determine drag based on weight
+        protected override void Setup() { }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using  ShipSelection;
+using ShipSelection;
 
 public class PlayerInputCatcher : MonoBehaviour
 {
@@ -29,8 +29,10 @@ public class PlayerInputCatcher : MonoBehaviour
 
     public void OnInputConfirmShip(InputAction.CallbackContext callbackContext)
     {
-        int playerNumber = playerSelectionScreen.PlayerNumber;
-
-        Channels.Input.OnShipCompletedInput.Invoke(playerNumber);
+        if (callbackContext.started)
+        {
+            int playerNumber = playerSelectionScreen.PlayerNumber;
+            Channels.Input.OnShipCompletedInput.Invoke(playerNumber);
+        }
     }
 }

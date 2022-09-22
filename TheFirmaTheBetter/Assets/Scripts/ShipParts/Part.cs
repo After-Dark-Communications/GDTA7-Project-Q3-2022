@@ -1,4 +1,4 @@
-using  ShipSelection.ShipBuilder.ConnectionPoints;
+using ShipSelection.ShipBuilder.ConnectionPoints;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,15 +23,17 @@ namespace Parts
 
         public ConnectionPointsCollection ConnectionPointCollection => connectionPointCollection;
         protected Transform ShipRoot { get; private set; }
-        protected ShipInputHandler RootInputHanlder { get; private set; }
-
-        protected virtual void Awake()
-        {
-            ShipRoot = transform.root;
-            RootInputHanlder = ShipRoot.GetComponent<ShipInputHandler>();
-        }
+        protected ShipInputHandler RootInputHandler { get; private set; }
 
         /// <summary>Sets the events and any other things that the part needs</summary>
-        public abstract void Setup();
+        protected abstract void Setup();
+
+        public void SetupPart(Transform root, ShipInputHandler shipInputHandler)
+        {
+            //not virtual because ShipRoot and RootInputHanlder MUST be set before regular setup is called
+            ShipRoot = root;//TODO: fix
+            RootInputHandler = shipInputHandler;
+            Setup();
+        }
     }
 }

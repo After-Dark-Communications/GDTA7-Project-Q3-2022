@@ -29,6 +29,9 @@ public class ShipBuilder : MonoBehaviour
         if (playerNumber != this.playerNumber)
             return;
 
+        transform.parent = null;
+        DontDestroyOnLoad(transform);
+
         Channels.OnShipCompleted.Invoke(this);
     }
 
@@ -43,7 +46,7 @@ public class ShipBuilder : MonoBehaviour
 
             instance.transform.SetParent(transform);
 
-            instance.transform.position = new Vector3(0,0,0);
+            instance.transform.position = new Vector3(0, 0, 0);
             instance.transform.localPosition = Vector3.zero;
             instance.gameObject.SetActive(false);
         }
@@ -87,18 +90,17 @@ public class ShipBuilder : MonoBehaviour
                         return;
 
                     part.gameObject.SetActive(true);
-                    
+
                     ConnectSelectedPart(part);
                     break;
                 }
             }
         }
     }
-
     private void ConnectSelectedPart(Part part)
     {
         int index = selectedParts.FindIndex(p => p.IsMyType(part));
-        
+
         if (index >= 0)
             selectedParts.RemoveAt(index);
 

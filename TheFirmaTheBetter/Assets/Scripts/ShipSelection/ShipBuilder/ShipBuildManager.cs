@@ -61,8 +61,10 @@ public class ShipBuildManager : Manager
 
     private void OnPlayerJoined(int playerNumber)
     {
-        amountOfPlayersJoined = playerNumber++;
+        amountOfPlayersJoined = playerNumber + 1;
     }
 
     public List<ShipBuilder> ShipBuilders => shipBuilders;
+
+    public int AmountOfPlayersJoined => amountOfPlayersJoined; 
 }
