@@ -23,10 +23,7 @@ namespace Parts
 
         private void Start()
         {
-            if (weaponData != null)
-            {
-                projectilesPool = new ObjectPool(weaponData.ProjectilePrefab, 10);
-            }
+
         }
 
         protected override void Setup()
@@ -35,6 +32,11 @@ namespace Parts
             {
                 RootInputHandler.OnPlayerAim.AddListener(AimWeapon);
                 RootInputHandler.OnPlayerShoot.AddListener(ShootWeapon);
+            }
+
+            if (weaponData != null)
+            {
+                projectilesPool = new ObjectPool(weaponData.ProjectilePrefab, 10);
             }
         }
 
