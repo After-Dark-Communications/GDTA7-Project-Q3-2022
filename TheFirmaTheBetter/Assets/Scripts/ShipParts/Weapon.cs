@@ -31,10 +31,10 @@ namespace Parts
 
         protected override void Setup()
         {
-            if (RootInputHanlder != null)
+            if (RootInputHandler != null)
             {
-                RootInputHanlder.OnPlayerAim.AddListener(AimWeapon);
-                RootInputHanlder.OnPlayerShoot.AddListener(ShootWeapon);
+                RootInputHandler.OnPlayerAim.AddListener(AimWeapon);
+                RootInputHandler.OnPlayerShoot.AddListener(ShootWeapon);
             }
         }
 

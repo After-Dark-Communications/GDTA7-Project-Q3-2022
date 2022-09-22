@@ -29,12 +29,12 @@ namespace Parts
         protected override void Setup()
         {
             //set the evenets
-            if (RootInputHanlder != null)
+            if (RootInputHandler != null)
             {
-                RootInputHanlder.OnPlayerMove.AddListener(MoveShip);
-                RootInputHanlder.OnPlayerCrash.AddListener(CrashShip);
-                RootInputHanlder.OnPlayerMoveUp.AddListener(MoveUp);
-                RootInputHanlder.OnPlayerMoveDown.AddListener(MoveDown);
+                RootInputHandler.OnPlayerMove.AddListener(MoveShip);
+                RootInputHandler.OnPlayerCrash.AddListener(CrashShip);
+                RootInputHandler.OnPlayerMoveUp.AddListener(MoveUp);
+                RootInputHandler.OnPlayerMoveDown.AddListener(MoveDown);
             }
             //get components from root
             rb = ShipRoot.GetComponent<Rigidbody>();
@@ -42,7 +42,7 @@ namespace Parts
 
         private void Update()
         {
-            if (RootInputHanlder == null)
+            if (RootInputHandler == null)
                 return;
 
             if (MoveValue != Vector2.zero)
@@ -54,7 +54,7 @@ namespace Parts
 
         private void FixedUpdate()
         {
-            if (RootInputHanlder == null)
+            if (RootInputHandler == null)
                 return;
 
             Vector3 forward = ShipRoot.transform.forward;
@@ -67,6 +67,7 @@ namespace Parts
         {//when starting to move, increase T and lerp towards top speed
          //when stopping, decrease T and lerp towards 0 speed
             throttle = new Vector3(move.x, 0, move.y).magnitude;
+            Debug.Log($"move:{move}");
             MoveValue = move;
             //ShipRoot.transform.position += forward.normalized * throttle * (engineData.Speed * Time.deltaTime);
 

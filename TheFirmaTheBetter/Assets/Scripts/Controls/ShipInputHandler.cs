@@ -27,6 +27,9 @@ public class ShipInputHandler : MonoBehaviour
     private float _PrevVelocity;
     private InputAction _Move;
     private InputAction _Aim;
+
+    private ShipInfo _ShipInfo;
+
     private void OnEnable()
     {
         //Enable input events
@@ -40,17 +43,43 @@ public class ShipInputHandler : MonoBehaviour
             _Rb.drag = 7;
         }
 
-        //setup children parts
-        Part[] parts = GetComponentsInChildren<Part>();
-        if (parts.Length > 0)
+        SetupParts();
+    }
+
+    private void OnDisable()
+    {
+        PlayerControlls.PlayerActions actions = new PlayerControlls().Player;
+        InputActionMap controls = GetInputActions();
+        _Move = controls.FindAction(actions.Move.name);
+        _Aim = controls.FindAction(actions.Aim.name);
+
+        _Move.Disable();
+        _Aim.Disable();
+
+        controls.FindAction(actions.MoveUp.name).started -= OnMoveUp;
+        controls.FindAction(actions.MoveDown.name).started -= OnMoveDown;
+        controls.FindAction(actions.Pause.name).started -= OnPause;
+        controls.FindAction(actions.Special.name).started -= OnSpecial;
+
+        controls.FindAction(actions.Fire.name).performed -= OnFire;
+    }
+
+    private void SetupParts()
+    {
+        _ShipInfo = GetComponentInParent<ShipInfo>();
+
+        foreach (ShipBuilder shipBuilder in ShipBuildManager.Instance.ShipBuilders)
         {
-            for (int i = 0; i < parts.Length; i++)
+            if (shipBuilder.PlayerNumber != shipBuilder.GetComponentInParent<ShipInfo>().PlayerNumber)
+                continue;
+
+            foreach (Part part in shipBuilder.SelectedParts)
             {
-                parts[i].SetupPart(transform.parent);
-                Debug.Log($"set events for {parts[i].name}");
+                part.SetupPart(shipBuilder.transform.parent.transform, this);
             }
         }
     }
+
     private void FixedUpdate()
     {
         _PrevVelocity = Mathf.Abs(Vector3.Dot(_Rb.velocity, transform.forward)); ;
@@ -58,8 +87,8 @@ public class ShipInputHandler : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_Move.ReadValue<Vector2>());
         OnPlayerMove.Invoke(_Move.ReadValue<Vector2>());
+        Debug.Log($"Movement in inputhandler:{_Move.ReadValue<Vector2>()}");
         OnPlayerAim.Invoke(_Aim.ReadValue<Vector2>().x);
     }
 

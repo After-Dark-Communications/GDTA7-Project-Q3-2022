@@ -23,16 +23,16 @@ namespace Parts
 
         public ConnectionPointsCollection ConnectionPointCollection => connectionPointCollection;
         protected Transform ShipRoot { get; private set; }
-        protected ShipInputHandler RootInputHanlder { get; private set; }
+        protected ShipInputHandler RootInputHandler { get; private set; }
 
         /// <summary>Sets the events and any other things that the part needs</summary>
         protected abstract void Setup();
 
-        public void SetupPart(Transform root)
+        public void SetupPart(Transform root, ShipInputHandler shipInputHandler)
         {
             //not virtual because ShipRoot and RootInputHanlder MUST be set before regular setup is called
             ShipRoot = root;//TODO: fix
-            RootInputHanlder = ShipRoot.GetComponent<ShipInputHandler>();
+            RootInputHandler = shipInputHandler;
             Setup();
         }
     }

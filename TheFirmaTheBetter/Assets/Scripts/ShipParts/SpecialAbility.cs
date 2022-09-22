@@ -31,9 +31,9 @@ namespace Parts
 
         protected override void Setup()
         {
-            if (RootInputHanlder != null)
+            if (RootInputHandler != null)
             {
-                RootInputHanlder.OnPlayerSpecial.AddListener(PerformSpecial);
+                RootInputHandler.OnPlayerSpecial.AddListener(PerformSpecial);
             }
         }
 
