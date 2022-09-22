@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ShipBuilder : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class ShipBuilder : MonoBehaviour
     [SerializeField]
     private PartsCollectionManager collectionManager;
 
+    private InputDevice playerDevice;
+
     private List<Part> availablePlayerParts = new List<Part>();
 
     private Core selectedCore;
@@ -20,8 +23,17 @@ public class ShipBuilder : MonoBehaviour
 
     private void Awake()
     {
+        Channels.OnPlayerJoined += OnPlayerJoined;
         Channels.OnShipPartSelected += OnShipPartSelected;
         Channels.Input.OnShipCompletedInput += OnShipCompletedInput;
+    }
+
+    private void OnPlayerJoined(int playerNumber, InputDevice playerDevice)
+    {
+        if (this.playerNumber != playerNumber)
+            return;
+
+        this.playerDevice = playerDevice;
     }
 
     private void OnShipCompletedInput(int playerNumber)
@@ -79,10 +91,13 @@ public class ShipBuilder : MonoBehaviour
             {
                 if (part.GetType() == currentSelectedPart.GetType())
                 {
+                    RemovePartFromListIfAble(part);
+
                     if (part is Core)
                     {
                         HandleSelectedCore(part);
                         part.gameObject.SetActive(true);
+                        selectedParts.Add(part);
                         return;
                     }
 
@@ -95,18 +110,22 @@ public class ShipBuilder : MonoBehaviour
                     break;
                 }
             }
+
+            void ConnectSelectedPart(Part part)
+            {
+                selectedParts.Add(part);
+
+                selectedCore.ConnectionPointCollection.ConnectPartToCorrectPoint(part);
+            }
+
+            void RemovePartFromListIfAble(Part part)
+            {
+                int index = selectedParts.FindIndex(p => p.IsMyType(part));
+
+                if (index >= 0)
+                    selectedParts.RemoveAt(index);
+            }
         }
-    }
-    private void ConnectSelectedPart(Part part)
-    {
-        int index = selectedParts.FindIndex(p => p.IsMyType(part));
-
-        if (index >= 0)
-            selectedParts.RemoveAt(index);
-
-        selectedParts.Add(part);
-
-        selectedCore.ConnectionPointCollection.ConnectPartToCorrectPoint(part);
     }
 
     private void HandleSelectedCore(Part part)
@@ -121,4 +140,5 @@ public class ShipBuilder : MonoBehaviour
 
     public int PlayerNumber => playerNumber;
     public List<Part> SelectedParts => selectedParts;
+    public InputDevice PlayerDevice => playerDevice;
 }

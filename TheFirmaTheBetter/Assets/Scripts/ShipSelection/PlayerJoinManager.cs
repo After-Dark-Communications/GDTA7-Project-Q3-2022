@@ -44,6 +44,8 @@ public class PlayerJoinManager : MonoBehaviour
 
     public void OnPlayerJoin(PlayerInput playerInput)
     {
+        InputDevice playerGamepad = playerInput.GetDevice<InputDevice>();
+
         playerInput.gameObject.transform.SetParent(playerShipSelectionParent);
 
         playerInput.gameObject.transform.localScale = Vector3.one;
@@ -55,7 +57,7 @@ public class PlayerJoinManager : MonoBehaviour
 
         SetCamPreview(playerInput);
 
-        Channels.OnPlayerJoined.Invoke(playerSelectionScreen.PlayerNumber);
+        Channels.OnPlayerJoined.Invoke(playerSelectionScreen.PlayerNumber, playerGamepad);
     }
 
     private void SetCamPreview(PlayerInput playerInput)

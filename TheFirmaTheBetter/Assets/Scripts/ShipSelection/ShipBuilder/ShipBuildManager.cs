@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class ShipBuildManager : Manager
@@ -59,7 +60,7 @@ public class ShipBuildManager : Manager
         return shipBuilders.FindIndex(sb => sb.PlayerNumber == shipBuilder.PlayerNumber);
     }
 
-    private void OnPlayerJoined(int playerNumber)
+    private void OnPlayerJoined(int playerNumber, InputDevice inputDevice)
     {
         amountOfPlayersJoined = playerNumber + 1;
     }

@@ -38,19 +38,19 @@ public class ShipSpawner : MonoBehaviour
         {
             int playerIndex = shipBuilder.PlayerNumber;
 
-            playerSpawnPoints[playerIndex].gameObject.SetActive(true);
+            Transform spawnPointTransform = playerSpawnPoints[playerIndex];
 
-            shipBuilder.transform.position = playerSpawnPoints[playerIndex].position;
+            spawnPointTransform.gameObject.SetActive(true);
+
+            shipBuilder.transform.position = spawnPointTransform.position;
             shipBuilder.transform.rotation = Quaternion.Euler(0, -90, 0);
-            shipBuilder.transform.parent = playerSpawnPoints[playerIndex];
+            shipBuilder.transform.parent = spawnPointTransform;
 
             //shipBuilder.transform.parent.gameObject.AddComponent<ShipInputHandler>();
             PlayerInputManager.instance.playerPrefab = joinprefab;
-            PlayerInput inp = PlayerInputManager.instance.JoinPlayer(playerIndex);
+            PlayerInput inp = PlayerInputManager.instance.JoinPlayer(playerIndex, -1, null, shipBuilder.PlayerDevice);
             //inp.GetComponent<ShipInputHandler>().MyDevice = inp.devices[0];
-            inp.transform.parent = playerSpawnPoints[playerIndex];
+            inp.transform.parent = spawnPointTransform;
         }
     }
-
-
 }

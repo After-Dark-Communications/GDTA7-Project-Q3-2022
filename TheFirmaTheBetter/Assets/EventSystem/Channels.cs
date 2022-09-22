@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public static class Channels
 {
@@ -14,7 +15,7 @@ public static class Channels
     public static Action<Manager> OnManagerInitialized;
     public static Action<Part,int> OnShipPartSelected;
     public static Action<ShipBuilder> OnShipCompleted;
-    public static Action<int> OnPlayerJoined;
+    public static Action<int, InputDevice> OnPlayerJoined;
 
     public static Action OnEveryPlayerReady;
 
