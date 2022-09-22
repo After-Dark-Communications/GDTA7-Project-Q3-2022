@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 30
-  speed: 50
-  handling: 50
+  speed: 100
+  handling: 600
   fuelUsage: 50
