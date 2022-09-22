@@ -15,8 +15,6 @@ MonoBehaviour:
   weaponName: Flamethrower
   projectilePrefab: {fileID: 8795236707980728124, guid: cffc0c60e9c1c5c4282f1e1ce8ad4a65,
     type: 3}
-  damage: 5
   fireRate: 6
   sideSpreadAngle: 5
-  range: 15
-  projectileSpeed: 10
+  range: 29
