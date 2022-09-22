@@ -19,12 +19,9 @@ namespace Parts
         [SerializeField]
         private float HeightTime = 0.125f, HeightDifference = 5f, HeightSpeed = 7f;
 
-        private Rigidbody rb;
         private float throttle;
         private Vector2 MoveValue;
         private bool ChangingHeight;
-
-        //IF YOU OVERRIDE PART'S AWAKE, BE SURE TO USE BASE.AWAKE() SO THAT IT HAS KNOWLEDGE OF ITS ROOT
 
         protected override void Setup()
         {
@@ -37,7 +34,6 @@ namespace Parts
                 RootInputHandler.OnPlayerMoveDown.AddListener(MoveDown);
             }
             //get components from root
-            rb = ShipRoot.GetComponent<Rigidbody>();
         }
 
         private void Update()
@@ -59,8 +55,7 @@ namespace Parts
 
             Vector3 forward = ShipRoot.transform.forward;
             forward.y = 0;
-            //rb.velocity = forward.normalized * throttle * (engineData.Speed * Time.fixedDeltaTime);
-            rb.AddForce(forward.normalized * throttle * (engineData.Speed * Time.fixedDeltaTime), ForceMode.Impulse);
+            ShipRigidBody.AddForce(forward.normalized * throttle * (engineData.Speed * Time.fixedDeltaTime), ForceMode.Impulse);
         }
 
         private void MoveShip(Vector2 move)
@@ -69,7 +64,6 @@ namespace Parts
             throttle = new Vector3(move.x, 0, move.y).magnitude;
             Debug.Log($"move:{move}");
             MoveValue = move;
-            //ShipRoot.transform.position += forward.normalized * throttle * (engineData.Speed * Time.deltaTime);
 
         }
 

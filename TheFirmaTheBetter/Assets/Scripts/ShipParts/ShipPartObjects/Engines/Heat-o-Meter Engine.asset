@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4868702006e477a49a667467b553e1f3, type: 3}
-  m_Name: HetoMeter Engine
+  m_Name: Heat-o-Meter Engine
   m_EditorClassIdentifier: 
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 30
-  speed: 50
-  handling: 30
+  speed: 100
+  handling: 550
   fuelUsage: 0

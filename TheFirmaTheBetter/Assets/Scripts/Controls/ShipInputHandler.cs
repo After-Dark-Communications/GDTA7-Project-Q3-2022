@@ -80,7 +80,7 @@ public class ShipInputHandler : MonoBehaviour
 
                 foreach (Part part in shipBuilder.SelectedParts)
                 {
-                    part.SetupPart(shipBuilder.transform.parent.transform, this);
+                    part.SetupPart(shipBuilder.transform.parent.transform, this, _Rb);
                 }
             }
         }
@@ -94,7 +94,6 @@ public class ShipInputHandler : MonoBehaviour
     private void Update()
     {
         OnPlayerMove.Invoke(_Move.ReadValue<Vector2>());
-        Debug.Log($"Movement in inputhandler:{_Move.ReadValue<Vector2>()}");
         OnPlayerAim.Invoke(_Aim.ReadValue<Vector2>().x);
     }
 

@@ -1,3 +1,4 @@
+using ShipParts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,13 @@ public class PartData : ScriptableObject
     [SerializeField]
     private int partWeight;
 
+    [Header("Modifiers")]
+    [SerializeField]
+    private DataModifier dragModifier;
+
     public Vector3 ConnectionPoint => connectionPoint;
 
     public int PartWeight => partWeight;
+    
+    public DataModifier DragModifier => dragModifier;
 }
