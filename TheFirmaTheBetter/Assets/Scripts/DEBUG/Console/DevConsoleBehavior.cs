@@ -5,10 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-namespace DEBUG.Console
-{
-    public class DevConsoleBehavior : MonoBehaviour
+public class DevConsoleBehavior : MonoBehaviour
     {
         [SerializeField]
         private ConsoleCommand[] commands = new ConsoleCommand[0];
@@ -77,4 +74,3 @@ namespace DEBUG.Console
         }
 
     }
-}

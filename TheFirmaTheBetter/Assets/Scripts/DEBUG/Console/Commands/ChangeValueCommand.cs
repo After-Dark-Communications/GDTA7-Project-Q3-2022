@@ -5,10 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-
-namespace DEBUG.Console.Commands
-{
-    [CreateAssetMenu(fileName = "New Change Value Command", menuName = "Console Commands/Change Value Command")]
+[CreateAssetMenu(fileName = "New Change Value Command", menuName = "Console Commands/Change Value Command")]
     public class ChangeValueCommand : ConsoleCommand
     {
         public override bool Process(string[] args)
@@ -32,4 +29,3 @@ namespace DEBUG.Console.Commands
             return false;
         }
     }
-}

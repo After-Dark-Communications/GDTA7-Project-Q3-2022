@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-
-namespace DEBUG.Console.Commands
-{
-    [CreateAssetMenu(fileName = "New Log Command", menuName = "Console Commands/Log Command")]
+[CreateAssetMenu(fileName = "New Log Command", menuName = "Console Commands/Log Command")]
     public class LogCommand : ConsoleCommand
     {
         public override bool Process(string[] args)
@@ -17,4 +14,3 @@ namespace DEBUG.Console.Commands
             return true;
         }
     }
-}

@@ -55,6 +55,7 @@ namespace Parts
 
             Vector3 forward = ShipRoot.transform.forward;
             forward.y = 0;
+            Debug.Log(ShipRigidBody + "from" + ShipRigidBody.gameObject.name);
             ShipRigidBody.AddForce(forward.normalized * throttle * (engineData.Speed * Time.fixedDeltaTime), ForceMode.Impulse);
         }
 
@@ -62,7 +63,7 @@ namespace Parts
         {//when starting to move, increase T and lerp towards top speed
          //when stopping, decrease T and lerp towards 0 speed
             throttle = new Vector3(move.x, 0, move.y).magnitude;
-            Debug.Log($"move:{move}");
+            Debug.Log($"move:{move} with {engineData.Speed} speed");
             MoveValue = move;
 
         }
