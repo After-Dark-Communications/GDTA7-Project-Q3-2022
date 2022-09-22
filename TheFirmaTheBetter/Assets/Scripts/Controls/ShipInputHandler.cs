@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
+using UnityEngine.SceneManagement;
 using Util;
 
 /*
@@ -30,8 +31,9 @@ public class ShipInputHandler : MonoBehaviour
 
     private ShipInfo _ShipInfo;
 
-    private void OnEnable()
+    private void Start()
     {
+        Debug.Log("called by " + transform.name);
         //Enable input events
         SetupInputEvents();
         //ensure rigidbody exists
@@ -44,6 +46,7 @@ public class ShipInputHandler : MonoBehaviour
         }
 
         SetupParts();
+
     }
 
     private void OnDisable()
@@ -68,14 +71,17 @@ public class ShipInputHandler : MonoBehaviour
     {
         _ShipInfo = GetComponentInParent<ShipInfo>();
 
-        foreach (ShipBuilder shipBuilder in ShipBuildManager.Instance.ShipBuilders)
+        if (_ShipInfo != null)
         {
-            if (shipBuilder.PlayerNumber != shipBuilder.GetComponentInParent<ShipInfo>().PlayerNumber)
-                continue;
-
-            foreach (Part part in shipBuilder.SelectedParts)
+            foreach (ShipBuilder shipBuilder in ShipBuildManager.Instance.ShipBuilders)
             {
-                part.SetupPart(shipBuilder.transform.parent.transform, this);
+                if (shipBuilder.PlayerNumber != _ShipInfo.PlayerNumber)
+                    continue;
+
+                foreach (Part part in shipBuilder.SelectedParts)
+                {
+                    part.SetupPart(shipBuilder.transform.parent.transform, this);
+                }
             }
         }
     }
