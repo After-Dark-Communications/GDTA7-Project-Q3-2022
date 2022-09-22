@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-
-namespace DEBUG.Console
-{
-    public abstract class ConsoleCommand : ScriptableObject, IConsoleCommand
+public abstract class ConsoleCommand : ScriptableObject, IConsoleCommand
     {
         [SerializeField]
         private string commandWord = string.Empty;
@@ -16,4 +13,3 @@ namespace DEBUG.Console
 
         public abstract bool Process(string[] args);
     }
-}

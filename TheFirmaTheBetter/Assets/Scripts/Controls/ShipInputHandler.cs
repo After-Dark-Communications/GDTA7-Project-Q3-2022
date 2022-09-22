@@ -37,13 +37,13 @@ public class ShipInputHandler : MonoBehaviour
         //Enable input events
         SetupInputEvents();
         //ensure rigidbody exists
-        _Rb = GetComponent<Rigidbody>();
-        if (_Rb == null)
-        {
-            _Rb = gameObject.AddComponent<Rigidbody>();
-            _Rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
-            _Rb.drag = 7;
-        }
+       //_Rb = GetComponent<Rigidbody>();
+       //if (_Rb == null)
+       //{
+       //    //_Rb = gameObject.AddComponent<Rigidbody>();
+       //    _Rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+       //    _Rb.drag = 7;
+       //}
 
         SetupParts();
 
@@ -77,7 +77,8 @@ public class ShipInputHandler : MonoBehaviour
             {
                 if (shipBuilder.PlayerNumber != _ShipInfo.PlayerNumber)
                     continue;
-
+                _Rb = shipBuilder.transform.parent.GetComponent<Rigidbody>();
+                _Rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
                 foreach (Part part in shipBuilder.SelectedParts)
                 {
                     part.SetupPart(shipBuilder.transform.parent.transform, this, _Rb);

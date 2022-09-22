@@ -3,10 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
-namespace DEBUG.Console
-{
-    public class DevConsole
+ public class DevConsole
     {
         private readonly IEnumerable<IConsoleCommand> commands;
         public DevConsole(IEnumerable<IConsoleCommand> commands)
@@ -43,5 +40,3 @@ namespace DEBUG.Console
             }
         }
     }
-
-}
