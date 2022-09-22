@@ -17,4 +17,11 @@ public static class Channels
     public static Action<int> OnPlayerJoined;
 
     public static Action OnEveryPlayerReady;
+
+    public static Action<GameObject, int> OnPlayerSpawned;
+
+    public static Action<int, float> OnHealthChanged;
+    public static Action<int, float> OnFuelChanged;
+    public static Action<int, float> OnAmmoChanged;
+
 }
