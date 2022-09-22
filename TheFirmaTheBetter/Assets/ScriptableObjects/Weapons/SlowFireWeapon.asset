@@ -15,7 +15,6 @@ MonoBehaviour:
   weaponName: Slow fire rate
   projectilePrefab: {fileID: 8795236707980728124, guid: cffc0c60e9c1c5c4282f1e1ce8ad4a65,
     type: 3}
-  damage: 8
-  fireRate: 0
-  sideSpreadAngle: 0
-  weaponRange: 0
+  fireRate: 1
+  sideSpreadAngle: 5.4
+  range: 53.5

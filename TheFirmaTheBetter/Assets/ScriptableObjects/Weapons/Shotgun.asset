@@ -15,7 +15,6 @@ MonoBehaviour:
   weaponName: Shotgun
   projectilePrefab: {fileID: 8795236707980728124, guid: cffc0c60e9c1c5c4282f1e1ce8ad4a65,
     type: 3}
-  damage: 0
-  fireRate: 0
-  sideSpreadAngle: 0
-  weaponRange: 0
+  fireRate: 4.71
+  sideSpreadAngle: 4.9
+  range: 20.2
