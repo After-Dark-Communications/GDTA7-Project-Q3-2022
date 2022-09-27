@@ -192,8 +192,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partIcon: {fileID: 0}
+  connectionPoint: {x: 0, y: 0, z: 0}
   connectionPointCollection: {fileID: 8615636323137123940}
+  ShipRoot: {fileID: 0}
   engineData: {fileID: 11400000, guid: 6843d54e0bdc3bb488f7aa7118fd4cf7, type: 2}
+  VibrateTime: 0.2
+  HeightTime: 0.125
+  HeightDifference: 5
+  HeightSpeed: 7
 --- !u!4 &4821019645156392579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8837492587056654966, guid: fe99f3be1e3e6dd49beede9d2044b8bf,

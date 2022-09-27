@@ -15,24 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Console_Toggle",
-                    "type": "Button",
-                    "id": "319fc53f-5520-44f4-bb5b-50c9472c4953",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Console_Process",
-                    "type": "Button",
-                    "id": "d2b19413-89af-47f5-b873-740daba96384",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Aim",
                     "type": "Value",
                     "id": "7675821f-909c-4021-b4e6-5c0f9c91ec41",
@@ -382,28 +364,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "MoveDown",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7dff6771-9081-45ba-8e5f-bb6198de863a",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Console_Process",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e0beb8b1-d817-4115-a6f0-1f9dea7898e4",
-                    "path": "<Keyboard>/backquote",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Console_Toggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

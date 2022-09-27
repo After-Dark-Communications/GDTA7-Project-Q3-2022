@@ -1,4 +1,4 @@
-using  Helper;
+using Helper;
 using Parts;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace  ShipSelection
+namespace ShipSelection
 {
     public class Selectionbar : MonoBehaviour
     {
@@ -27,10 +27,10 @@ namespace  ShipSelection
             }
 
             selectionScreensData = GetComponentInParent<PlayerSelectionScreensData>();
+            selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(selectionScreensData.CollectionManager.CoreList));
             selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(selectionScreensData.CollectionManager.EngineList));
             selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(selectionScreensData.CollectionManager.WeaponList));
             selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(selectionScreensData.CollectionManager.SpecialList));
-            selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(selectionScreensData.CollectionManager.CoreList));
             UpdateLabelTexts();
         }
 

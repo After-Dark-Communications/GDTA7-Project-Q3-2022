@@ -13,17 +13,17 @@ namespace Parts
     [AddComponentMenu("Parts/Engine")]
     public class Engine : Part
     {
-        private const float _minVibrateAmount = 0.01f, _maxVibrateAmount = 1f;
+        private const float _minVibrateAmount = 0.01f, _maxVibrateAmount = 1f, _rumbleThreshold = 0.05f, _rumbleMultiplier = 0.875f;
+        private const float _vibrateTime = 0.125f, _lowRumbleFreq = 0.5f, _highRumbleFreq = 0.5f;
         [SerializeField]
         private EngineData engineData;
         [SerializeField]
-        private float VibrateTime = 0.1f;
-        [SerializeField]
         private float HeightTime = 0.125f, HeightDifference = 5f, HeightSpeed = 7f;
 
-        private float throttle;
-        private Vector2 MoveValue;
-        private bool ChangingHeight;
+        private float _throttle;
+        private Vector2 _moveValue;
+        private bool _changingHeight;
+        private float _maxSpeed = 1f;
 
         protected override void Setup()
         {
@@ -35,17 +35,20 @@ namespace Parts
                 RootInputHandler.OnPlayerMoveUp.AddListener(MoveUp);
                 RootInputHandler.OnPlayerMoveDown.AddListener(MoveDown);
             }
-            //get components from root
+            //determine unaltered max speed
+            _maxSpeed = engineData.Speed / ShipRigidBody.drag;
         }
+
+
 
         private void Update()
         {
             if (RootInputHandler == null)
                 return;
 
-            if (MoveValue != Vector2.zero)
+            if (_moveValue != Vector2.zero)
             {
-                Quaternion toRotation = Quaternion.LookRotation(new Vector3(MoveValue.x, 0, MoveValue.y), GlobalUp.UP.up);
+                Quaternion toRotation = Quaternion.LookRotation(new Vector3(_moveValue.x, 0, _moveValue.y), GlobalUp.UP.up);
                 ShipRoot.rotation = Quaternion.RotateTowards(ShipRoot.rotation, toRotation, engineData.Handling * Time.deltaTime);
             }
         }
@@ -57,20 +60,20 @@ namespace Parts
 
             Vector3 forward = ShipRoot.transform.forward;
             forward.y = 0;
-            ShipRigidBody.AddForce(forward.normalized * throttle * (engineData.Speed * Time.fixedDeltaTime), ForceMode.Impulse);
+            ShipRigidBody.AddForce(forward.normalized * _throttle * (engineData.Speed * Time.fixedDeltaTime), ForceMode.Impulse);
         }
 
         private void MoveShip(Vector2 move)
         {//when starting to move, increase T and lerp towards top speed
          //when stopping, decrease T and lerp towards 0 speed
-            throttle = new Vector3(move.x, 0, move.y).magnitude;
-            MoveValue = move;
+            _throttle = new Vector3(move.x, 0, move.y).magnitude;
+            _moveValue = move;
 
         }
 
         private void MoveUp(ButtonStates arg0)
         {
-            if (!ChangingHeight)
+            if (!_changingHeight)
             {
                 StartCoroutine(ChangeYForTime(HeightTime, HeightDifference, HeightSpeed));
             }
@@ -78,23 +81,25 @@ namespace Parts
 
         private void MoveDown(ButtonStates arg0)
         {
-            if (!ChangingHeight)
+            if (!_changingHeight)
             {
                 StartCoroutine(ChangeYForTime(HeightTime, -HeightDifference, HeightSpeed));
             }
         }
 
 
-        private void CrashShip(Vector3 velocity)
+        private void CrashShip(Vector3 velocity, GameObject collision)
         {
-            //Rigidbody rb = ShipRoot.GetComponent<Rigidbody>();
-            float crashVelocity = velocity.magnitude; //Mathf.Abs(Vector3.Dot(velocity, ShipRoot.forward));
-            //float velocity = rb.velocity.sqrMagnitude;
-            //Debug.Log($"{ShipRoot.name} velocity: {crashVelocity} Remapped to {crashVelocity.Remap(0, engineData.Speed, _minVibrateAmount, _maxVibrateAmount)}");
-            //UnityEngine.InputSystem.Gamepad.current.SetMotorSpeeds(0, velocity.Remap(0, engineData.Speed, 0, 1));
-            StartCoroutine(VibrateForTime(VibrateTime, 0, crashVelocity.Remap(0, engineData.Speed, _minVibrateAmount, _maxVibrateAmount)));
+            if (velocity.magnitude >= _rumbleThreshold)
+            {
+                float crashVelocity = velocity.magnitude; //Mathf.Abs(Vector3.Dot(velocity, ShipRoot.forward));
+                                                          //float velocity = rb.velocity.sqrMagnitude;
+                                                          //Debug.Log($"{ShipRoot.name} velocity: {crashVelocity} Remapped to {crashVelocity.Remap(0, _maxSpeed, _minVibrateAmount, _maxVibrateAmount)}");
+                float rumbleStrenght = crashVelocity.Remap(0, _maxSpeed, _minVibrateAmount, _maxVibrateAmount) * _rumbleMultiplier;
+                //UnityEngine.InputSystem.Gamepad.current.SetMotorSpeeds(0, rumbleStrenght);
+                StartCoroutine(VibrateForTime(_vibrateTime, rumbleStrenght * _lowRumbleFreq, rumbleStrenght * _highRumbleFreq));
+            }
         }
-
         private IEnumerator VibrateForTime(float time, float low, float high)
         {
             //UnityEngine.InputSystem.PlayerInput playerInput = new UnityEngine.InputSystem.PlayerInput();
@@ -108,7 +113,7 @@ namespace Parts
 
         private IEnumerator ChangeYForTime(float time, float height, float speed)
         {
-            ChangingHeight = true;
+            _changingHeight = true;
             Vector3 origin = ShipRoot.transform.position;
             float posy = origin.y;
             float t = 0;
@@ -129,7 +134,7 @@ namespace Parts
                 yield return new WaitForEndOfFrame();
             }
             ShipRoot.transform.position = new Vector3(ShipRoot.transform.position.x, origin.y, ShipRoot.transform.position.z);
-            ChangingHeight = false;
+            _changingHeight = false;
         }
 
         public override bool IsMyConnectionType(ConnectionPoint connectionPoint)
