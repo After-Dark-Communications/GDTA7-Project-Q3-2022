@@ -10,6 +10,9 @@ public class ShipEngineSoundManager : MonoBehaviour
     private float rpm;
     private int playerNumber;
 
+    [SerializeField]
+    private float RPMSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +26,7 @@ public class ShipEngineSoundManager : MonoBehaviour
     {
         if (this.playerNumber == playerNumber)
         {
-            emitter.SetParameter("RPM", movement.x + movement.y);
+            emitter.SetParameter("RPM", (movement.x + movement.y) * RPMSpeed);
         }
     }
 

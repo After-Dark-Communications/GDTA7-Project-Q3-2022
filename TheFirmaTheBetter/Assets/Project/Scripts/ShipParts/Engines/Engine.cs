@@ -65,7 +65,7 @@ namespace Parts
             throttle = new Vector3(move.x, 0, move.y).magnitude;
             Debug.Log($"move:{move} with {engineData.Speed} speed");
             MoveValue = move;
-
+            Channels.Movement.OnShipMove?.Invoke(move, transform.GetComponentInParent<ShipBuilder>().PlayerNumber);
         }
 
         private void MoveUp(ButtonStates arg0)
