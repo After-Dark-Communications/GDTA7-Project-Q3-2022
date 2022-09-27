@@ -1,4 +1,4 @@
-using  ShipSelection.ShipBuilder.ConnectionPoints;
+using ShipSelection.ShipBuilder.ConnectionPoints;
 using Parts;
 using System;
 //using  ShipSelection;
@@ -6,16 +6,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Util;
+using ShipParts.Ship;
 
 namespace Parts
 {
     [AddComponentMenu("Parts/Engine")]
     public class Engine : Part
     {
+        private const float _minVibrateAmount = 0.01f, _maxVibrateAmount = 1f;
         [SerializeField]
         private EngineData engineData;
         [SerializeField]
-        private float VibrateTime = 1f;
+        private float VibrateTime = 0.1f;
         [SerializeField]
         private float HeightTime = 0.125f, HeightDifference = 5f, HeightSpeed = 7f;
 
@@ -29,7 +31,7 @@ namespace Parts
             if (RootInputHandler != null)
             {
                 RootInputHandler.OnPlayerMove.AddListener(MoveShip);
-                RootInputHandler.OnPlayerCrash.AddListener(CrashShip);
+                ShipRoot.GetComponent<ShipBody>().OnPlayerCrash.AddListener(CrashShip);
                 RootInputHandler.OnPlayerMoveUp.AddListener(MoveUp);
                 RootInputHandler.OnPlayerMoveDown.AddListener(MoveDown);
             }
@@ -55,7 +57,6 @@ namespace Parts
 
             Vector3 forward = ShipRoot.transform.forward;
             forward.y = 0;
-            Debug.Log(ShipRigidBody + "from" + ShipRigidBody.gameObject.name);
             ShipRigidBody.AddForce(forward.normalized * throttle * (engineData.Speed * Time.fixedDeltaTime), ForceMode.Impulse);
         }
 
@@ -63,7 +64,6 @@ namespace Parts
         {//when starting to move, increase T and lerp towards top speed
          //when stopping, decrease T and lerp towards 0 speed
             throttle = new Vector3(move.x, 0, move.y).magnitude;
-            Debug.Log($"move:{move} with {engineData.Speed} speed");
             MoveValue = move;
 
         }
@@ -85,14 +85,14 @@ namespace Parts
         }
 
 
-        private void CrashShip(float velocity)
+        private void CrashShip(Vector3 velocity)
         {
             //Rigidbody rb = ShipRoot.GetComponent<Rigidbody>();
-            //float velocity = Mathf.Abs(Vector3.Dot(rb.velocity, ShipRoot.forward));
+            float crashVelocity = velocity.magnitude; //Mathf.Abs(Vector3.Dot(velocity, ShipRoot.forward));
             //float velocity = rb.velocity.sqrMagnitude;
-            Debug.Log($"{ShipRoot.name} velocity: {velocity} Remapped to {velocity.Remap(0, engineData.Speed, 0, 1)}");
+            //Debug.Log($"{ShipRoot.name} velocity: {crashVelocity} Remapped to {crashVelocity.Remap(0, engineData.Speed, _minVibrateAmount, _maxVibrateAmount)}");
             //UnityEngine.InputSystem.Gamepad.current.SetMotorSpeeds(0, velocity.Remap(0, engineData.Speed, 0, 1));
-            StartCoroutine(VibrateForTime(VibrateTime, 0, velocity.Remap(0, engineData.Speed, 0, 1)));
+            StartCoroutine(VibrateForTime(VibrateTime, 0, crashVelocity.Remap(0, engineData.Speed, _minVibrateAmount, _maxVibrateAmount)));
         }
 
         private IEnumerator VibrateForTime(float time, float low, float high)
@@ -100,9 +100,10 @@ namespace Parts
             //UnityEngine.InputSystem.PlayerInput playerInput = new UnityEngine.InputSystem.PlayerInput();
             //(playerInput.devices[1] as UnityEngine.InputSystem.Gamepad).SetMotorSpeeds(low, high);
             //TODO: change Gamepad.current to the bit above
-            UnityEngine.InputSystem.Gamepad.current.SetMotorSpeeds(low, high);
+            (MyInputDevice as UnityEngine.InputSystem.Gamepad).SetMotorSpeeds(low, high);
+            //UnityEngine.InputSystem.Gamepad.current.SetMotorSpeeds(low, high);
             yield return new WaitForSecondsRealtime(time);
-            UnityEngine.InputSystem.Gamepad.current.SetMotorSpeeds(0, 0);
+            (MyInputDevice as UnityEngine.InputSystem.Gamepad).SetMotorSpeeds(0, 0);
         }
 
         private IEnumerator ChangeYForTime(float time, float height, float speed)
@@ -146,7 +147,7 @@ namespace Parts
 
             return false;
         }
-        
+
         public override string PartCategoryName => "Engine";
     }
 }

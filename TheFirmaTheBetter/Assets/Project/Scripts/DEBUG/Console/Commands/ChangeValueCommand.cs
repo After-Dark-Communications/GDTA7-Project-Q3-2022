@@ -16,7 +16,7 @@ using UnityEngine;
                 try
                 {
                     GameObject obj = GameObject.Find(args[0]);
-                    DEBUG_ShipMovement d_ShipMovement = obj.GetComponentInChildren<DEBUG_ShipMovement>();//TODO: get the class that has the variable value, or cast the parts class to the correct one.
+                    DEBUG_ShipMovement d_ShipMovement = obj.GetComponentInChildren<DEBUG_ShipMovement>();
                     Type type = d_ShipMovement.GetType().GetField(args[1]).FieldType;
                     d_ShipMovement.GetType().GetField(args[1]).SetValue(d_ShipMovement, Convert.ChangeType(args[2], type));//Tries to set the variable in args[2] to the type of args[1]
                     return true;

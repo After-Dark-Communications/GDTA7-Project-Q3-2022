@@ -2,6 +2,7 @@ using ShipSelection.ShipBuilder.ConnectionPoints;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Parts
@@ -21,19 +22,22 @@ namespace Parts
         public abstract bool IsMyType(Part part);
         public abstract bool IsMyConnectionType(ConnectionPoint connectionPoint);
 
-        protected Transform ShipRoot { get; private set; }
+        //protected Transform ShipRoot { get; private set; }
+        public Transform ShipRoot;
         protected ShipInputHandler RootInputHandler { get; private set; }
         protected Rigidbody ShipRigidBody { get; private set; }
+        protected InputDevice MyInputDevice { get; private set; }
 
         /// <summary>Sets the events and any other things that the part needs</summary>
         protected abstract void Setup();
 
-        public void SetupPart(Transform root, ShipInputHandler shipInputHandler, Rigidbody rigidbody)
+        public void SetupPart(Transform root, ShipInputHandler shipInputHandler, Rigidbody rigidbody, InputDevice playerDevice)
         {
             //not virtual because ShipRoot and RootInputHanlder MUST be set before regular setup is called
-            ShipRoot = root;//TODO: fix
+            ShipRoot = root;
             RootInputHandler = shipInputHandler;
             ShipRigidBody = rigidbody;
+            MyInputDevice = playerDevice;
             Setup();
         }
         public ConnectionPointsCollection ConnectionPointCollection => connectionPointCollection;
