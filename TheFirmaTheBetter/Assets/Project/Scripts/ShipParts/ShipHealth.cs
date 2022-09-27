@@ -16,7 +16,7 @@ namespace Assets.Project.Scripts.ShipParts
         private float maxHealth;
 
         public ShipHealth(int playerNumber, ShipStats shipStats)
-        {
+        {//TODO: reinstantiate ShipHealth when starting game (playerspawned?)
             this.playerNumber = playerNumber;
 
             maxHealth = shipStats.MaxHealth;
@@ -36,10 +36,9 @@ namespace Assets.Project.Scripts.ShipParts
             {
                 currentShipHealth = 0;
                 Channels.OnPlayerBecomesDeath?.Invoke(shipBuilder);
-                return;
             }
-
             Channels.OnHealthChanged(playerNumber, currentShipHealth / maxHealth);
+
         }
 
         public float MaxHealth { get => maxHealth; set => maxHealth = value; }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Project.Scripts.Collision
+namespace Collisions
 {
     public interface ICollidable
     {

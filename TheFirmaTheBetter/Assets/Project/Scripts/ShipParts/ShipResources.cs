@@ -50,7 +50,7 @@ public class ShipResources : MonoBehaviour
             shipStats.UpdateStats(selectedPart.GetData() as CoreData);
         }
 
-        Channels.OnPlayerStatsChanged(shipBuilder, shipStats);
+        Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, shipStats);
     }
 
     public ShipStats ShipStats => shipStats;

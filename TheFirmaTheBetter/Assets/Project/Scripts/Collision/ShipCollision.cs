@@ -1,4 +1,4 @@
-using Assets.Project.Scripts.Collision;
+using Collisions;
 using System;
 using UnityEngine;
 
@@ -36,6 +36,7 @@ public class ShipCollision : MonoBehaviour, ICollidable
 
     private void HandleHitByProjectile(Projectile projectileThatHit)
     {
+        //Debug.Log($"took damage! ({Channels.OnPlayerTakeDamage?.GetInvocationList().Length})called");
         Channels.OnPlayerTakeDamage?.Invoke(shipBuilder, projectileThatHit.ProjectileDamage);
 
         projectileThatHit.DestroySelf();

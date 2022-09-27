@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
-namespace Assets.Project.Scripts.Collision
+namespace Collisions
 {
-    public class Wall : ICollidable
+    public class Wall : MonoBehaviour, ICollidable
     {
         public void DestroySelf() { }
 

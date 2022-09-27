@@ -1,4 +1,5 @@
-using Assets.Project.Scripts.Collision;
+
+using Collisions;
 using System.Collections;
 using UnityEngine;
 
