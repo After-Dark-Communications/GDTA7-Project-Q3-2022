@@ -1,6 +1,7 @@
+using Assets.Project.Scripts.Collision;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour, IObjectPoolItem
+public class Projectile : MonoBehaviour, IObjectPoolItem, ICollidable
 {
     [SerializeField]
     private ProjectileData projectileData;
@@ -41,14 +42,17 @@ public class Projectile : MonoBehaviour, IObjectPoolItem
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ship"))
+        ICollidable collisionObject = other.GetComponentInParent<ICollidable>();
+
+        if (collisionObject != null)
         {
-            Debug.Log($"Ship takes {ProjectileDamage}");
+            collisionObject.HandleCollision(this);
+
             if(amountToSpawn > 0)
             {
                 SpawnObjectOnImpact();
             }
-            ResetPoolItem();
+            
             // ship.TakeDamage;
             //Debug.Log("A ship was hit");
         }
@@ -57,6 +61,13 @@ public class Projectile : MonoBehaviour, IObjectPoolItem
             // destroy bullet
             //Debug.Log("Something else was hit: " + other.name);
         }
+    }
+
+    public void HandleCollision<T1>(T1 objectThatHit) where T1 : ICollidable { }
+
+    public void DestroySelf()
+    {
+        ResetPoolItem();
     }
 
     public int ProjectileDamage { get { return projectileDamage; } }

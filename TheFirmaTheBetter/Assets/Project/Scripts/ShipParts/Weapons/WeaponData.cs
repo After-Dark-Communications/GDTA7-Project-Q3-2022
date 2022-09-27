@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Weapon", menuName = "Ship Parts/Weapon")]
-public class WeaponData : ScriptableObject
+public class WeaponData : PartData
 {
     [SerializeField]
     private string weaponName;

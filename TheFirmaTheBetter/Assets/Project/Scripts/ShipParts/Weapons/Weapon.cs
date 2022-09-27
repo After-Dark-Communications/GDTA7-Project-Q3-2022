@@ -21,11 +21,6 @@ namespace Parts
         private ObjectPool projectilesPool;
         private float lastShootTime;
 
-        private void Start()
-        {
-
-        }
-
         protected override void Setup()
         {
             if (RootInputHandler != null)
@@ -38,6 +33,11 @@ namespace Parts
             {
                 projectilesPool = new ObjectPool(weaponData.ProjectilePrefab, 10);
             }
+        }
+
+        private void OnPlayerSpawned(GameObject spawnedObject, int playerNumber)
+        {
+            throw new NotImplementedException();
         }
 
         private void ShootWeapon(ButtonStates state)
@@ -109,6 +109,11 @@ namespace Parts
         {
             yield return new WaitForSeconds(seconds);
             projectilesPool.ReturnToPool(projectile);
+        }
+
+        public override PartData GetData()
+        {
+            return weaponData;
         }
     }
 }

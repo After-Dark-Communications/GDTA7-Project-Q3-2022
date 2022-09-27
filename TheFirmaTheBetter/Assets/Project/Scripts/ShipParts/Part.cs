@@ -20,6 +20,7 @@ namespace Parts
 
         public abstract bool IsMyType(Part part);
         public abstract bool IsMyConnectionType(ConnectionPoint connectionPoint);
+        public abstract PartData GetData();
 
         protected Transform ShipRoot { get; private set; }
         protected ShipInputHandler RootInputHandler { get; private set; }
