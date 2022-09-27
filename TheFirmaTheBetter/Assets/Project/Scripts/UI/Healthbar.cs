@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HealthBar : ShipStatBar
+public class Healthbar : ShipStatBar
 {
     [SerializeField]
     private Color lowColor;
