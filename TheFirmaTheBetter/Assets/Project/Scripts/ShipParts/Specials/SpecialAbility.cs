@@ -55,5 +55,10 @@ namespace Parts
                 }
             }
         }
+
+        public override PartData GetData()
+        {
+            return specialData;
+        }
     }
 }

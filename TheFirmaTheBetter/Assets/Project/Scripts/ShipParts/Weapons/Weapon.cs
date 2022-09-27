@@ -21,11 +21,6 @@ namespace Parts
         private ObjectPool projectilesPool;
         private float lastShootTime;
 
-        private void Start()
-        {
-
-        }
-
         protected override void Setup()
         {
             if (RootInputHandler != null)
@@ -38,6 +33,11 @@ namespace Parts
             {
                 projectilesPool = new ObjectPool(weaponData.ProjectilePrefab, 10);
             }
+        }
+
+        private void OnPlayerSpawned(GameObject spawnedObject, int playerNumber)
+        {
+            throw new NotImplementedException();
         }
 
         private void ShootWeapon(ButtonStates state)
@@ -86,11 +86,21 @@ namespace Parts
 
                     // Return projectile after time
                     float projectileLifetime = weaponData.Range / projectile.ProjectileSpeed;
-                    StartCoroutine(ReturnProjectile(projectileObject, projectileLifetime));
+                    StartCoroutine(ArmProjectile(projectile));
+                    projectile.SetupProjectile(projectilesPool, projectileLifetime);
                 }
 
                 lastShootTime = Time.time;
             }
+        }
+
+
+        private IEnumerator ArmProjectile(Projectile projectile)
+        {
+            Collider col = projectile.GetComponent<Collider>();
+            col.enabled = false;
+            yield return new WaitForSeconds(projectile.ArmingTime);
+            col.enabled = true;
         }
 
         private Vector3 GetShootDirection(Transform shootingPoint, float sideSpreadAngle)
@@ -105,10 +115,9 @@ namespace Parts
             return direction;
         }
 
-        IEnumerator ReturnProjectile(GameObject projectile, float seconds)
+        public override PartData GetData()
         {
-            yield return new WaitForSeconds(seconds);
-            projectilesPool.ReturnToPool(projectile);
+            return weaponData;
         }
     }
 }

@@ -153,6 +153,13 @@ namespace Parts
             return false;
         }
 
+        public override PartData GetData()
+        {
+            return engineData;
+        }
+
         public override string PartCategoryName => "Engine";
+
+        public EngineData EngineData => engineData;
     }
 }

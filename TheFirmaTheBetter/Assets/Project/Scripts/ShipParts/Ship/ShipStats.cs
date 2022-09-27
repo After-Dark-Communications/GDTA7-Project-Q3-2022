@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace ShipParts
 {
-    public struct ShipStats
+    public class ShipStats
     {
         //movement
         private float _speed;
@@ -32,17 +32,19 @@ namespace ShipParts
         private readonly List<float> _fuelCapacityModifier;
         private readonly List<float> _fuelUsageModifier;
 
-        public ShipStats(EngineData engineData, CoreData coreData)//, SpecialData specialData, WeaponData weaponData)
+        public ShipStats()//, SpecialData specialData, WeaponData weaponData)
         {
             //set fixed values
             //engine
-            _speed = engineData.Speed;
-            _handling = engineData.Handling;
-            _fuelUsage = engineData.FuelUsage;
+            _speed = 0;
+            _handling = 0;
+            _fuelUsage = 0;
+
             //core
-            _ammoCapacity = coreData.AmmoCapacity;
-            _fuelCapacity = coreData.FuelCapacity;
-            _maxHealth = coreData.Health;
+            _ammoCapacity = 0;
+            _fuelCapacity = 0;
+            _maxHealth = 0;
+
             //set modifier based values
             _ammoGenerationRate = 0;
             //calculate drag
@@ -58,6 +60,20 @@ namespace ShipParts
             _fuelCapacityModifier = new List<float>();
             _fuelUsageModifier = new List<float>();
 
+        }
+
+        public void UpdateStats(EngineData engineData)
+        {
+            _speed = engineData.Speed;
+            _handling = engineData.Handling;
+            _fuelUsage = engineData.FuelUsage;
+        }
+
+        public void UpdateStats(CoreData coreData)
+        {
+            _ammoCapacity = coreData.AmmoCapacity;
+            _fuelCapacity = coreData.FuelCapacity;
+            _maxHealth = coreData.Health;
         }
 
         public float Speed { get => _speed; }

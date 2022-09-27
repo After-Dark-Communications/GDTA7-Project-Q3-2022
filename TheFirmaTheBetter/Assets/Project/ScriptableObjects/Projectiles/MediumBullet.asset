@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   projectileSpeed: 3
-  armingTime: 0
+  armingTime: 1
   isDoT: 0
   spawnedObjectOnImpact: {fileID: 3505460257065262164, guid: 21425875da62e494fa80e347fbb22dec,
     type: 3}

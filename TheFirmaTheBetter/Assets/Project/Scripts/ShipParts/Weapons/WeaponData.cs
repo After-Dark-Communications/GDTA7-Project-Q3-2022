@@ -1,14 +1,15 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Weapon", menuName = "Ship Parts/Weapon")]
-public class WeaponData : ScriptableObject
+public class WeaponData : PartData
 {
     [SerializeField]
     private string weaponName;
 
     [SerializeField]
     private GameObject projectilePrefab;
-
+    [SerializeField]
+    private float armingTime;
     [Header("Weapon stats")]
     [SerializeField]
     [Range(0, 10)]
@@ -29,4 +30,5 @@ public class WeaponData : ScriptableObject
     public float SideSpreadAngle { get { return sideSpreadAngle; } }
     public float Range { get { return range; } }
 
+    public float ArmingTime => armingTime;
 }

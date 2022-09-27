@@ -1,14 +1,21 @@
+using Assets.Project.Scripts.Collision;
+using System.Collections;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour, IObjectPoolItem
+public class Projectile : MonoBehaviour, IObjectPoolItem, ICollidable
 {
     [SerializeField]
     private ProjectileData projectileData;
 
     private int projectileDamage;
-    private float projectileSpeed;
-    private float armingTime;
     private int amountToSpawn;
+
+    private float armingTime;
+    private float projectileSpeed;
+    private float currentLifeTime;
+    private float lifeTime;
+
+    private ObjectPool projectilesPool;
 
     private void OnEnable()
     {
@@ -16,6 +23,23 @@ public class Projectile : MonoBehaviour, IObjectPoolItem
         projectileSpeed = projectileData.ProjectileSpeed;
         armingTime = projectileData.ArmingTime;
         amountToSpawn = projectileData.AmountToSpawn;
+        currentLifeTime = 0;
+    }
+
+    private void Update()
+    {
+        currentLifeTime += Time.deltaTime;
+
+        if (currentLifeTime < lifeTime)
+            return;
+
+        projectilesPool.ReturnToPool(gameObject);
+    }
+
+    public void SetupProjectile(ObjectPool projectilesPool, float lifeTime)
+    {
+        this.projectilesPool = projectilesPool;
+        this.lifeTime = lifeTime;
     }
 
     public void ResetPoolItem()
@@ -41,14 +65,12 @@ public class Projectile : MonoBehaviour, IObjectPoolItem
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ship"))
+        ICollidable collisionObject = other.GetComponentInParent<ICollidable>();
+
+        if (collisionObject != null)
         {
-            Debug.Log($"Ship takes {ProjectileDamage}");
-            if(amountToSpawn > 0)
-            {
-                SpawnObjectOnImpact();
-            }
-            ResetPoolItem();
+            collisionObject.HandleCollision(this);
+            
             // ship.TakeDamage;
             //Debug.Log("A ship was hit");
         }
@@ -59,9 +81,15 @@ public class Projectile : MonoBehaviour, IObjectPoolItem
         }
     }
 
+    public void HandleCollision<T1>(T1 objectThatHit) where T1 : ICollidable { }
+
+    public void DestroySelf()
+    {
+        projectilesPool.ReturnToPool(gameObject);
+    }
+
     public int ProjectileDamage { get { return projectileDamage; } }
     public float ProjectileSpeed { get { return projectileSpeed; } }
     public float ArmingTime { get { return armingTime; } }
     public int AmountToSpawn { get { return amountToSpawn; } }
-
 }
