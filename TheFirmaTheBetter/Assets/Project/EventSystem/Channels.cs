@@ -10,6 +10,7 @@ using UnityEngine.InputSystem;
 public static class Channels
 {
     public static InputChannel Input = new InputChannel();
+    public static MovementChannel Movement = new MovementChannel();
 
     public static Action<GameObject> OnZoneEntered;
     public static Action<Manager> OnManagerInitialized;

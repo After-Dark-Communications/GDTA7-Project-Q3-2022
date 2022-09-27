@@ -35,8 +35,8 @@ public class SceneSwitchManager : Manager
         int totalAmountOfScenes = SceneManager.sceneCountInBuildSettings;
         int currentLoadedSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-        if (currentLoadedSceneIndex == totalAmountOfScenes - 1)
-            return;
+        //if (currentLoadedSceneIndex == totalAmountOfScenes - 1)
+        //    return;
         
         SceneManager.LoadScene(currentLoadedSceneIndex+1);
     }

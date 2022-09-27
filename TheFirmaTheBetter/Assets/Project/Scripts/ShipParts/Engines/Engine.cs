@@ -1,4 +1,4 @@
-using  ShipSelection.ShipBuilder.ConnectionPoints;
+using ShipSelection.ShipBuilder.ConnectionPoints;
 using Parts;
 using System;
 //using  ShipSelection;
@@ -146,7 +146,7 @@ namespace Parts
 
             return false;
         }
-        
+
         public override string PartCategoryName => "Engine";
     }
 }
