@@ -1,4 +1,5 @@
 using Assets.Project.Scripts.Collision;
+using System.Collections;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour, IObjectPoolItem, ICollidable
@@ -7,9 +8,14 @@ public class Projectile : MonoBehaviour, IObjectPoolItem, ICollidable
     private ProjectileData projectileData;
 
     private int projectileDamage;
-    private float projectileSpeed;
-    private float armingTime;
     private int amountToSpawn;
+
+    private float armingTime;
+    private float projectileSpeed;
+    private float currentLifeTime;
+    private float lifeTime;
+
+    private ObjectPool projectilesPool;
 
     private void OnEnable()
     {
@@ -17,6 +23,23 @@ public class Projectile : MonoBehaviour, IObjectPoolItem, ICollidable
         projectileSpeed = projectileData.ProjectileSpeed;
         armingTime = projectileData.ArmingTime;
         amountToSpawn = projectileData.AmountToSpawn;
+        currentLifeTime = 0;
+    }
+
+    private void Update()
+    {
+        currentLifeTime += Time.deltaTime;
+
+        if (currentLifeTime < lifeTime)
+            return;
+
+        projectilesPool.ReturnToPool(gameObject);
+    }
+
+    public void SetupProjectile(ObjectPool projectilesPool, float lifeTime)
+    {
+        this.projectilesPool = projectilesPool;
+        this.lifeTime = lifeTime;
     }
 
     public void ResetPoolItem()
@@ -47,11 +70,6 @@ public class Projectile : MonoBehaviour, IObjectPoolItem, ICollidable
         if (collisionObject != null)
         {
             collisionObject.HandleCollision(this);
-
-            if(amountToSpawn > 0)
-            {
-                SpawnObjectOnImpact();
-            }
             
             // ship.TakeDamage;
             //Debug.Log("A ship was hit");
@@ -67,12 +85,11 @@ public class Projectile : MonoBehaviour, IObjectPoolItem, ICollidable
 
     public void DestroySelf()
     {
-        ResetPoolItem();
+        projectilesPool.ReturnToPool(gameObject);
     }
 
     public int ProjectileDamage { get { return projectileDamage; } }
     public float ProjectileSpeed { get { return projectileSpeed; } }
     public float ArmingTime { get { return armingTime; } }
     public int AmountToSpawn { get { return amountToSpawn; } }
-
 }

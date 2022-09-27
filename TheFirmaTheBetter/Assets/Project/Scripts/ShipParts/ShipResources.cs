@@ -1,4 +1,5 @@
-﻿using Parts;
+﻿using Assets.Project.Scripts.ShipParts;
+using Parts;
 using ShipParts;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,13 @@ public class ShipResources : MonoBehaviour
 {
     private ShipBuilder shipBuilder;
     private ShipStats shipStats;
+    private ShipHealth shipHealth;
 
     private void Awake()
     {
         shipBuilder = GetComponent<ShipBuilder>();
         shipStats = new ShipStats();
+        shipHealth = new ShipHealth(shipBuilder.PlayerNumber, shipStats);
     }
 
     private void Start()

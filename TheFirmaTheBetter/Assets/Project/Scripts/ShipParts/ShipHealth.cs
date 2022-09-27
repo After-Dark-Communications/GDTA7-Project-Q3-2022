@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShipParts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,9 +15,13 @@ namespace Assets.Project.Scripts.ShipParts
 
         private float maxHealth;
 
-        public ShipHealth(int playerNumber)
+        public ShipHealth(int playerNumber, ShipStats shipStats)
         {
             this.playerNumber = playerNumber;
+
+            maxHealth = shipStats.MaxHealth;
+            currentShipHealth = maxHealth;
+
             Channels.OnPlayerTakeDamage += TakeDamage;
         }
 
@@ -30,7 +35,7 @@ namespace Assets.Project.Scripts.ShipParts
             if (currentShipHealth <= 0)
             {
                 currentShipHealth = 0;
-                Channels.OnPlayerBecomesDeath.Invoke(shipBuilder);
+                Channels.OnPlayerBecomesDeath?.Invoke(shipBuilder);
                 return;
             }
 

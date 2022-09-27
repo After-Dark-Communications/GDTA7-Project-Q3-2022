@@ -36,7 +36,7 @@ public class ShipCollision : MonoBehaviour, ICollidable
 
     private void HandleHitByProjectile(Projectile projectileThatHit)
     {
-        Channels.OnPlayerTakeDamage.Invoke(shipBuilder, projectileThatHit.ProjectileDamage);
+        Channels.OnPlayerTakeDamage?.Invoke(shipBuilder, projectileThatHit.ProjectileDamage);
 
         projectileThatHit.DestroySelf();
     }

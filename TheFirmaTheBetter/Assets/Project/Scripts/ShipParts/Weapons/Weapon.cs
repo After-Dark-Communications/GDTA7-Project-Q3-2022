@@ -86,11 +86,21 @@ namespace Parts
 
                     // Return projectile after time
                     float projectileLifetime = weaponData.Range / projectile.ProjectileSpeed;
-                    StartCoroutine(ReturnProjectile(projectileObject, projectileLifetime));
+                    StartCoroutine(ArmProjectile(projectile));
+                    projectile.SetupProjectile(projectilesPool, projectileLifetime);
                 }
 
                 lastShootTime = Time.time;
             }
+        }
+
+
+        private IEnumerator ArmProjectile(Projectile projectile)
+        {
+            Collider col = projectile.GetComponent<Collider>();
+            col.enabled = false;
+            yield return new WaitForSeconds(projectile.ArmingTime);
+            col.enabled = true;
         }
 
         private Vector3 GetShootDirection(Transform shootingPoint, float sideSpreadAngle)
@@ -103,12 +113,6 @@ namespace Parts
             direction.Normalize();
 
             return direction;
-        }
-
-        IEnumerator ReturnProjectile(GameObject projectile, float seconds)
-        {
-            yield return new WaitForSeconds(seconds);
-            projectilesPool.ReturnToPool(projectile);
         }
 
         public override PartData GetData()
