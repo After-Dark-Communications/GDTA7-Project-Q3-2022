@@ -29,6 +29,9 @@ public class Projectile : MonoBehaviour, IObjectPoolItem, ICollidable
 
     private void Update()
     {
+        if (gameObject.activeSelf == false)
+            return;
+
         currentLifeTime += Time.deltaTime;
 
         if (currentLifeTime < lifeTime)
