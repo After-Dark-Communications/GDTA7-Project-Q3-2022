@@ -10,6 +10,7 @@ public class ShipEngineSoundManager : MonoBehaviour
     private float rpm;
     private int playerNumber;
 
+    [Tooltip("The multiplier used for manipulating the RPM parameter")]
     [SerializeField]
     private float RPMSpeed;
 
@@ -17,7 +18,14 @@ public class ShipEngineSoundManager : MonoBehaviour
     void Start()
     {
         emitter = GetComponent<StudioEventEmitter>();
-        playerNumber = transform.GetChild(1).GetComponent<ShipBuilder>().PlayerNumber;
+        try
+        {
+            playerNumber = transform.GetChild(1).GetComponent<ShipBuilder>().PlayerNumber;
+        }
+        catch
+        {
+
+        }
         Channels.Movement.OnShipMove += SetRPM;
     }
 
@@ -26,7 +34,13 @@ public class ShipEngineSoundManager : MonoBehaviour
     {
         if (this.playerNumber == playerNumber)
         {
-            emitter.SetParameter("RPM", (movement.x + movement.y) * RPMSpeed);
+            rpm = movement.x + movement.y;
+            if (rpm < 0)
+            {
+                rpm = rpm * -1;
+            }
+            Debug.Log(rpm * RPMSpeed);
+            emitter.SetParameter("RPM", rpm * RPMSpeed);
         }
     }
 
