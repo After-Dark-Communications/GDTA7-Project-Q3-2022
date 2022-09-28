@@ -1,30 +1,34 @@
+using EventSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSelectionScreensData : MonoBehaviour
+namespace ShipSelection
 {
-    private PartsCollectionManager collectionManager;
-    private CamPreviewManager camPreviewManager;
-
-    public PartsCollectionManager CollectionManager => collectionManager;
-    public CamPreviewManager CamPreviewManager => camPreviewManager;
-
-    private void Awake()
+    public class PlayerSelectionScreensData : MonoBehaviour
     {
-        Channels.OnManagerInitialized += OnManagerInitialize;
-    }
+        private PartsCollectionManager collectionManager;
+        private CamPreviewManager camPreviewManager;
 
-    private void OnManagerInitialize(Manager manager)
-    {
-        if (manager.GetType() == typeof(PartsCollectionManager))
+        public PartsCollectionManager CollectionManager => collectionManager;
+        public CamPreviewManager CamPreviewManager => camPreviewManager;
+
+        private void Awake()
         {
-            collectionManager = manager as PartsCollectionManager;
+            Channels.OnManagerInitialized += OnManagerInitialize;
         }
 
-        if (manager.GetType() == typeof(CamPreviewManager))
+        private void OnManagerInitialize(Manager manager)
         {
-            camPreviewManager = manager as CamPreviewManager;
+            if (manager.GetType() == typeof(PartsCollectionManager))
+            {
+                collectionManager = manager as PartsCollectionManager;
+            }
+
+            if (manager.GetType() == typeof(CamPreviewManager))
+            {
+                camPreviewManager = manager as CamPreviewManager;
+            }
         }
     }
 }

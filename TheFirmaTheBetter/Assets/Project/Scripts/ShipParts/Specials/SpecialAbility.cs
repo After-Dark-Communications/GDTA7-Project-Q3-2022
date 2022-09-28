@@ -1,9 +1,10 @@
-﻿using  ShipSelection.ShipBuilder.ConnectionPoints;
+﻿using ShipParts;
+using ShipSelection.ShipBuilders.ConnectionPoints;
 using System;
 using UnityEngine;
 using Util;
 
-namespace Parts
+namespace ShipParts.Specials
 {
     [AddComponentMenu("Parts/Special")]
     public class SpecialAbility : Part

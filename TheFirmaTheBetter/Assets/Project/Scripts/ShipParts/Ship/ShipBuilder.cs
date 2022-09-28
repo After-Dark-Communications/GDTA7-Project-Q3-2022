@@ -1,145 +1,147 @@
-using Parts;
-using ShipParts;
-using System;
-using System.Collections;
+using EventSystem;
+using ShipParts.Cores;
+using ShipSelection;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ShipBuilder : MonoBehaviour
+namespace ShipParts.Ship
 {
-    [SerializeField]
-    private int playerNumber;
-
-    [SerializeField]
-    private PartsCollectionManager collectionManager;
-
-    private InputDevice playerDevice;
-
-    private List<Part> availablePlayerParts = new List<Part>();
-
-    private Core selectedCore;
-
-    private List<Part> selectedParts = new List<Part>();
-
-    private void Awake()
+    public class ShipBuilder : MonoBehaviour
     {
-        Channels.OnPlayerJoined += OnPlayerJoined;
-        Channels.OnShipPartSelected += OnShipPartSelected;
-        Channels.Input.OnShipCompletedInput += OnShipCompletedInput;
-    }
+        [SerializeField]
+        private int playerNumber;
 
-    private void OnPlayerJoined(int playerNumber, InputDevice playerDevice)
-    {
-        if (this.playerNumber != playerNumber)
-            return;
+        [SerializeField]
+        private PartsCollectionManager collectionManager;
 
-        this.playerDevice = playerDevice;
-    }
+        private InputDevice playerDevice;
 
-    private void OnShipCompletedInput(int playerNumber)
-    {
-        if (playerNumber != this.playerNumber)
-            return;
+        private List<Part> availablePlayerParts = new List<Part>();
 
-        transform.parent = null;
-        DontDestroyOnLoad(transform);
+        private Core selectedCore;
 
-        Channels.OnShipCompleted.Invoke(this);
-    }
+        private List<Part> selectedParts = new List<Part>();
 
-    private void Start()
-    {
-        foreach (Part part in collectionManager.AllParts)
+        private void Awake()
         {
-            GameObject instance = Instantiate(part.gameObject);
-
-            Part instancePart = instance.GetComponent<Part>();
-            availablePlayerParts.Add(instancePart);
-
-            instance.transform.SetParent(transform);
-
-            instance.transform.position = new Vector3(0, 0, 0);
-            instance.transform.localPosition = Vector3.zero;
-            instance.gameObject.SetActive(false);
+            Channels.OnPlayerJoined += OnPlayerJoined;
+            Channels.OnShipPartSelected += OnShipPartSelected;
+            Channels.Input.OnShipCompletedInput += OnShipCompletedInput;
         }
-    }
 
-    private void OnShipPartSelected(Part selectedPart, int playerNumber)
-    {
-        if (this.playerNumber != playerNumber)
-            return;
-
-        Part currentSelectedPart = selectedPart;
-
-        HideAllParts();
-        SpawnPart();
-
-        void HideAllParts()
+        private void OnPlayerJoined(int playerNumber, InputDevice playerDevice)
         {
-            foreach (Part part in availablePlayerParts)
-            {
-                if (part.PartCategoryName != currentSelectedPart.PartCategoryName)
-                    continue;
+            if (this.playerNumber != playerNumber)
+                return;
 
-                part.gameObject.SetActive(false);
+            this.playerDevice = playerDevice;
+        }
+
+        private void OnShipCompletedInput(int playerNumber)
+        {
+            if (playerNumber != this.playerNumber)
+                return;
+
+            transform.parent = null;
+            DontDestroyOnLoad(transform);
+
+            Channels.OnShipCompleted.Invoke(this);
+        }
+
+        private void Start()
+        {
+            foreach (Part part in collectionManager.AllParts)
+            {
+                GameObject instance = Instantiate(part.gameObject);
+
+                Part instancePart = instance.GetComponent<Part>();
+                availablePlayerParts.Add(instancePart);
+
+                instance.transform.SetParent(transform);
+
+                instance.transform.position = new Vector3(0, 0, 0);
+                instance.transform.localPosition = Vector3.zero;
+                instance.gameObject.SetActive(false);
             }
         }
 
-        void SpawnPart()
+        private void OnShipPartSelected(Part selectedPart, int playerNumber)
         {
-            foreach (Part part in availablePlayerParts)
+            if (this.playerNumber != playerNumber)
+                return;
+
+            Part currentSelectedPart = selectedPart;
+
+            HideAllParts();
+            SpawnPart();
+
+            void HideAllParts()
             {
-                if (part.GetType() == currentSelectedPart.GetType())
+                foreach (Part part in availablePlayerParts)
                 {
-                    RemovePartFromListIfAble(part);
+                    if (part.PartCategoryName != currentSelectedPart.PartCategoryName)
+                        continue;
 
-                    if (part is Core)
-                    {
-                        HandleSelectedCore(part);
-                        part.gameObject.SetActive(true);
-                        selectedParts.Add(part);
-                        return;
-                    }
-
-                    if (selectedCore == null)
-                        return;
-
-                    part.gameObject.SetActive(true);
-
-                    ConnectSelectedPart(part);
-                    break;
+                    part.gameObject.SetActive(false);
                 }
             }
 
-            void ConnectSelectedPart(Part part)
+            void SpawnPart()
             {
-                selectedParts.Add(part);
+                foreach (Part part in availablePlayerParts)
+                {
+                    if (part.GetType() == currentSelectedPart.GetType())
+                    {
+                        RemovePartFromListIfAble(part);
 
-                selectedCore.ConnectionPointCollection.ConnectPartToCorrectPoint(part);
-            }
+                        if (part is Core)
+                        {
+                            HandleSelectedCore(part);
+                            part.gameObject.SetActive(true);
+                            selectedParts.Add(part);
+                            return;
+                        }
 
-            void RemovePartFromListIfAble(Part part)
-            {
-                int index = selectedParts.FindIndex(p => p.IsMyType(part));
+                        if (selectedCore == null)
+                            return;
 
-                if (index >= 0)
-                    selectedParts.RemoveAt(index);
+                        part.gameObject.SetActive(true);
+
+                        ConnectSelectedPart(part);
+                        break;
+                    }
+                }
+
+                void ConnectSelectedPart(Part part)
+                {
+                    selectedParts.Add(part);
+
+                    selectedCore.ConnectionPointCollection.ConnectPartToCorrectPoint(part);
+                }
+
+                void RemovePartFromListIfAble(Part part)
+                {
+                    int index = selectedParts.FindIndex(p => p.IsMyType(part));
+
+                    if (index >= 0)
+                        selectedParts.RemoveAt(index);
+                }
             }
         }
-    }
 
-    private void HandleSelectedCore(Part part)
-    {
-        selectedCore = part as Core;
-
-        foreach (Part selectedPart in selectedParts)
+        private void HandleSelectedCore(Part part)
         {
-            selectedCore.ConnectionPointCollection.ConnectPartToCorrectPoint(selectedPart);
-        }
-    }
+            selectedCore = part as Core;
 
-    public int PlayerNumber => playerNumber;
-    public List<Part> SelectedParts => selectedParts;
-    public InputDevice PlayerDevice => playerDevice;
+            foreach (Part selectedPart in selectedParts)
+            {
+                selectedCore.ConnectionPointCollection.ConnectPartToCorrectPoint(selectedPart);
+            }
+        }
+
+        public int PlayerNumber => playerNumber;
+        public List<Part> SelectedParts => selectedParts;
+        public InputDevice PlayerDevice => playerDevice;
+    }
 }

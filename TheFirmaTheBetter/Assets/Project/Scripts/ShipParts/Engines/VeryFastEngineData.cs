@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewVeryFastEngineData", menuName = "Part/Create new VeryFastEngineData")]
-public class VeryFastEngineData : EngineData
+
+namespace ShipParts.Engines
 {
-    [Header("VeryFastEngine stats")]
-    [SerializeField]
-    private float minumumTimeToFallOut;
-    [SerializeField]
-    private float maximumTimeToFallOut;
+    [CreateAssetMenu(fileName = "NewVeryFastEngineData", menuName = "Part/Create new VeryFastEngineData")]
+    public class VeryFastEngineData : EngineData
+    {
+        [Header("VeryFastEngine stats")]
+        [SerializeField]
+        private float minumumTimeToFallOut;
+        [SerializeField]
+        private float maximumTimeToFallOut;
+    }
 }

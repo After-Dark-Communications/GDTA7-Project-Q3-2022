@@ -1,11 +1,14 @@
-using ShipSelection.ShipBuilder.ConnectionPoints;
+using ShipParts;
+using Pooling;
+using Projectiles;
+using ShipSelection.ShipBuilders.ConnectionPoints;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Util;
 
-namespace Parts
+namespace ShipParts.Weapons
 {
     [AddComponentMenu("Parts/Weapon")]
     public class Weapon : Part

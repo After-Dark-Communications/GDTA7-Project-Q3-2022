@@ -1,14 +1,11 @@
-using ShipSelection.ShipBuilder.ConnectionPoints;
-using Parts;
-using System;
+using ShipParts.Ship;
+using ShipSelection.ShipBuilders.ConnectionPoints;
 //using  ShipSelection;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Util;
-using ShipParts.Ship;
 
-namespace Parts
+namespace ShipParts.Engines
 {
     [AddComponentMenu("Parts/Engine")]
     public class Engine : Part

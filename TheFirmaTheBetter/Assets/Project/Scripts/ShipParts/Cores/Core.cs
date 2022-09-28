@@ -1,9 +1,7 @@
-using  ShipSelection.ShipBuilder.ConnectionPoints;
-using System.Collections;
-using System.Collections.Generic;
+using ShipSelection.ShipBuilders.ConnectionPoints;
 using UnityEngine;
 
-namespace Parts
+namespace ShipParts.Cores
 {
     [AddComponentMenu("Parts/Core")]
     public class Core : Part

@@ -1,50 +1,51 @@
-using  ShipSelection.ShipBuilder.ConnectionPoints;
-using Parts;
-using System;
-using System.Collections;
+using ShipParts;
+using ShipSelection.ShipBuilders.ConnectionPoints;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConnectionPointsCollection : MonoBehaviour
+namespace ShipSelection
 {
-    private List<ConnectionPoint> connectionPoints = new List<ConnectionPoint>();
-
-    private void Awake()
+    public class ConnectionPointsCollection : MonoBehaviour
     {
-        foreach (ConnectionPoint connectionPoint in gameObject.GetComponentsInChildren<ConnectionPoint>())
-        {
-            connectionPoints.Add(connectionPoint);
-        }
-    }
+        private List<ConnectionPoint> connectionPoints = new List<ConnectionPoint>();
 
-    public ConnectionPoint ConnectPartToCorrectPoint(Part part)
-    {
-        foreach (ConnectionPoint connection in connectionPoints)
+        private void Awake()
         {
-            if (!part.IsMyConnectionType(connection))
-                continue;
-
-            connection.ConnectPart(part);
+            foreach (ConnectionPoint connectionPoint in gameObject.GetComponentsInChildren<ConnectionPoint>())
+            {
+                connectionPoints.Add(connectionPoint);
+            }
         }
 
-        return null;
-    }
-
-    public void RepositionAllParts()
-    {
-        foreach (ConnectionPoint connectionPoint in connectionPoints)
+        public ConnectionPoint ConnectPartToCorrectPoint(Part part)
         {
-            connectionPoint.ConnectPart(connectionPoint.ConnectedPart);
+            foreach (ConnectionPoint connection in connectionPoints)
+            {
+                if (!part.IsMyConnectionType(connection))
+                    continue;
+
+                connection.ConnectPart(part);
+            }
+
+            return null;
         }
-    }
 
-    public ConnectionPoint GetConnectionPoint(Part part)
-    {
-        int index = connectionPoints.FindIndex(cp => part.IsMyConnectionType(cp));
-        
-        if (index < 0)
-            index = 0;
+        public void RepositionAllParts()
+        {
+            foreach (ConnectionPoint connectionPoint in connectionPoints)
+            {
+                connectionPoint.ConnectPart(connectionPoint.ConnectedPart);
+            }
+        }
 
-        return connectionPoints[index];
+        public ConnectionPoint GetConnectionPoint(Part part)
+        {
+            int index = connectionPoints.FindIndex(cp => part.IsMyConnectionType(cp));
+
+            if (index < 0)
+                index = 0;
+
+            return connectionPoints[index];
+        }
     }
 }

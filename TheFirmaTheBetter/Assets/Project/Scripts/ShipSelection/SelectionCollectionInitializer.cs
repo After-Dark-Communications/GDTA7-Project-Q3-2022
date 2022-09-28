@@ -1,11 +1,7 @@
-﻿using Parts;
-using System;
+﻿using ShipParts;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace  ShipSelection
+namespace ShipSelection
 {
     public static class SelectionCollectionInitializer
     {

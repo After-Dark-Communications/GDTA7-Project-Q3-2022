@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using EventSystem;
 using UnityEngine;
 
 public class DebugPlayerSpawner : MonoBehaviour
@@ -12,7 +11,7 @@ public class DebugPlayerSpawner : MonoBehaviour
     {
         for (int i = 0; i < playerCount; i++)
         {
-            GameObject player = Instantiate(playerPrefab, transform.position + new Vector3 (i*2, 0, i*2), transform.rotation);
+            GameObject player = Instantiate(playerPrefab, transform.position + new Vector3(i * 2, 0, i * 2), transform.rotation);
             Channels.OnPlayerSpawned?.Invoke(player, i + 1);
         }
 

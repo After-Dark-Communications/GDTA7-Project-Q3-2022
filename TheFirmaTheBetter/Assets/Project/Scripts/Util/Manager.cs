@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using EventSystem;
 using UnityEngine;
 
 public abstract class Manager : MonoBehaviour

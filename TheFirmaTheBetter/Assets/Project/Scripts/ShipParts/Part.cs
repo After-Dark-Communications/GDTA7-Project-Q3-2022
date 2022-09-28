@@ -1,11 +1,13 @@
-using ShipSelection.ShipBuilder.ConnectionPoints;
+using Controls;
+using ShipSelection;
+using ShipSelection.ShipBuilders.ConnectionPoints;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace Parts
+namespace ShipParts
 {
     public abstract class Part : MonoBehaviour
     {

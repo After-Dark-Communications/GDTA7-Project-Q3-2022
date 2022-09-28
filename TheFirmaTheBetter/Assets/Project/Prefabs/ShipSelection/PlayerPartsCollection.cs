@@ -1,10 +1,8 @@
-using Parts;
-using System.Collections;
-using System.Collections.Generic;
+using EventSystem;
+using ShipParts;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace  ShipSelection
+namespace ShipSelection
 {
     public class PlayerPartsCollection : MonoBehaviour
     {

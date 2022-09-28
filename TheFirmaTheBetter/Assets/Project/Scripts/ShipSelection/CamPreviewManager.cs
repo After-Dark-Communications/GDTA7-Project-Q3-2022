@@ -2,40 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CamPreviewManager : Manager
+namespace ShipSelection
 {
-    [SerializeField]
-    [Tooltip("An orderd list of player rendering textures")]
-    private List<RenderTexture> playerPreviewTextures = new List<RenderTexture>();
-    [SerializeField]
-    [Tooltip("An orderd list of player preview cameras")]
-    private List<Camera> previewCameras = new List<Camera>();
-
-    public void SetCamOutputToPlayerRenderingTexture(int playerIndex)
+    public class CamPreviewManager : Manager
     {
-        playerIndex = NormalizeIndex(playerIndex);
+        [SerializeField]
+        [Tooltip("An orderd list of player rendering textures")]
+        private List<RenderTexture> playerPreviewTextures = new List<RenderTexture>();
+        [SerializeField]
+        [Tooltip("An orderd list of player preview cameras")]
+        private List<Camera> previewCameras = new List<Camera>();
 
-        Camera camera = previewCameras[playerIndex];
-        RenderTexture renderTexture = playerPreviewTextures[playerIndex];
+        public void SetCamOutputToPlayerRenderingTexture(int playerIndex)
+        {
+            playerIndex = NormalizeIndex(playerIndex);
 
-        camera.targetTexture = renderTexture;
-    }
+            Camera camera = previewCameras[playerIndex];
+            RenderTexture renderTexture = playerPreviewTextures[playerIndex];
 
-    public RenderTexture GetRenderTextureByPlayerIndex(int playerIndex)
-    {
-        playerIndex = NormalizeIndex(playerIndex);
+            camera.targetTexture = renderTexture;
+        }
 
-        return playerPreviewTextures[playerIndex];
-    }
+        public RenderTexture GetRenderTextureByPlayerIndex(int playerIndex)
+        {
+            playerIndex = NormalizeIndex(playerIndex);
 
-    private int NormalizeIndex(int index)
-    {
-        if (index >= playerPreviewTextures.Count)
-            index = playerPreviewTextures.Count - 1;
+            return playerPreviewTextures[playerIndex];
+        }
 
-        if (index < 0)
-            index = 0;
+        private int NormalizeIndex(int index)
+        {
+            if (index >= playerPreviewTextures.Count)
+                index = playerPreviewTextures.Count - 1;
 
-        return index;
+            if (index < 0)
+                index = 0;
+
+            return index;
+        }
     }
 }

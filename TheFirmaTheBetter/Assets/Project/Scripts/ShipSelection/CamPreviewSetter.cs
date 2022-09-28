@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(RawImage))]
-public class CamPreviewSetter : MonoBehaviour
+namespace ShipSelection
 {
-    [SerializeField]
-    private RawImage rawImage;
+    [RequireComponent(typeof(RawImage))]
+    public class CamPreviewSetter : MonoBehaviour
+    {
+        [SerializeField]
+        private RawImage rawImage;
 
-    public RawImage RawImage { get => rawImage; set => rawImage = value; }
+        public RawImage RawImage { get => rawImage; set => rawImage = value; }
+    }
 }
