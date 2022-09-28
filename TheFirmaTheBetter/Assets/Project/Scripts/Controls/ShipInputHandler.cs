@@ -1,3 +1,4 @@
+using Collisions;
 using EventSystem;
 using ShipParts;
 using ShipParts.Ship;
@@ -80,7 +81,7 @@ namespace Controls
                     _Rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
                     foreach (Part part in shipBuilder.SelectedParts)
                     {
-                        part.SetupPart(shipBuilder.transform.parent.transform, this, _Rb, shipBuilder.PlayerDevice);
+                        part.SetupPart(shipBuilder.transform.parent.transform, this, _Rb, shipBuilder.PlayerDevice, shipBuilder.GetComponent<ShipCollision>());
                     }
                 }
             }

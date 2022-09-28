@@ -1,4 +1,7 @@
+using Collisions;
+using ShipParts.Ship;
 using ShipSelection.ShipBuilders.ConnectionPoints;
+using System;
 using UnityEngine;
 
 namespace ShipParts.Cores
@@ -32,6 +35,21 @@ namespace ShipParts.Cores
             return false;
         }
         //TODO: determine drag based on weight
-        protected override void Setup() { }
+        protected override void Setup()
+        {
+            if (rootInputHandler != null)
+            {
+                shipRoot.GetComponent<ShipBody>().OnPlayerCrash.AddListener(CrashShip);
+            }
+        }
+
+        private void CrashShip(Vector3 Velocity, GameObject other)
+        {
+            ICollidable collisionObject = other.GetComponentInChildren<ICollidable>();
+            if (collisionObject != null)
+            {//bump ship
+                collisionObject.HandleCollision(thisCollision);
+            }
+        }
     }
 }

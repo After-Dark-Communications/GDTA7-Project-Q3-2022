@@ -26,10 +26,10 @@ namespace ShipParts.Weapons
 
         protected override void Setup()
         {
-            if (RootInputHandler != null)
+            if (rootInputHandler != null)
             {
-                RootInputHandler.OnPlayerAim.AddListener(AimWeapon);
-                RootInputHandler.OnPlayerShoot.AddListener(ShootWeapon);
+                rootInputHandler.OnPlayerAim.AddListener(AimWeapon);
+                rootInputHandler.OnPlayerShoot.AddListener(ShootWeapon);
             }
 
             if (weaponData != null)

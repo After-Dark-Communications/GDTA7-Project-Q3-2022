@@ -32,9 +32,9 @@ namespace ShipParts.Specials
 
         protected override void Setup()
         {
-            if (RootInputHandler != null)
+            if (rootInputHandler != null)
             {
-                RootInputHandler.OnPlayerSpecial.AddListener(PerformSpecial);
+                rootInputHandler.OnPlayerSpecial.AddListener(PerformSpecial);
             }
         }
 
