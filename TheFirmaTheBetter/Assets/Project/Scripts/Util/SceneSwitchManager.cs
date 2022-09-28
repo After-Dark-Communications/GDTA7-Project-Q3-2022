@@ -11,14 +11,19 @@ public static class SceneSwitchManager
         SceneManager.LoadScene(0);
     }
 
+    public static void LoadFirstScene()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public static void SwitchToNextScene()
     {
         int totalAmountOfScenes = SceneManager.sceneCountInBuildSettings;
         int currentLoadedSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-        //if (currentLoadedSceneIndex == totalAmountOfScenes - 1)
-            //return;
-        
+        if (currentLoadedSceneIndex == totalAmountOfScenes - 1)
+            return;
+
         SceneManager.LoadScene(currentLoadedSceneIndex+1);
     }
 }
