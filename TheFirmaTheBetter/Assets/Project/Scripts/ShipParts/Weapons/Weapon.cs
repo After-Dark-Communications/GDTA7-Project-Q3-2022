@@ -21,8 +21,13 @@ namespace Parts
         private ObjectPool projectilesPool;
         private float lastShootTime;
 
+        private ShipResources shipResources;
+        private int playerNumber;
         protected override void Setup()
         {
+            shipResources = GetComponentInParent<ShipResources>();
+            playerNumber = GetComponentInParent<ShipBuilder>().PlayerNumber;
+
             if (RootInputHandler != null)
             {
                 RootInputHandler.OnPlayerAim.AddListener(AimWeapon);
@@ -33,11 +38,6 @@ namespace Parts
             {
                 projectilesPool = new ObjectPool(weaponData.ProjectilePrefab, 10);
             }
-        }
-
-        private void OnPlayerSpawned(GameObject spawnedObject, int playerNumber)
-        {
-            throw new NotImplementedException();
         }
 
         private void ShootWeapon(ButtonStates state)
@@ -69,31 +69,50 @@ namespace Parts
 
         public void FireWeapon()
         {
-            if (lastShootTime + 1 / weaponData.FireRate < Time.time)
+            if (weaponData.EnergyCost <= shipResources.CurrentEnergyAmount)
             {
-                foreach (Transform point in projectileStartingPoints)
+                if (lastShootTime + 1 / weaponData.FireRate < Time.time)
                 {
-                    // Get projectile from pool
-                    GameObject projectileObject = projectilesPool.RentFromPool();
-                    projectileObject.transform.SetPositionAndRotation(point.position, point.rotation);
 
-                    Vector3 direction = GetShootDirection(point, weaponData.SideSpreadAngle);
+                    foreach (Transform point in projectileStartingPoints)
+                    {
+                        GameObject projectileObject;
+                        Vector3 direction;
+                        Projectile projectile;
 
-                    Projectile projectile = projectileObject.GetComponent<Projectile>();
+                        GetNewProjectileFromPool(point, out projectileObject, out direction, out projectile);
 
-                    // Fire projectile
-                    projectileObject.GetComponent<Rigidbody>().AddForce(direction * projectile.ProjectileSpeed, ForceMode.Impulse);
+                        FireProjectile(projectileObject, direction, projectile);
 
-                    // Return projectile after time
-                    float projectileLifetime = weaponData.Range / projectile.ProjectileSpeed;
-                    StartCoroutine(ArmProjectile(projectile));
-                    projectile.SetupProjectile(projectilesPool, projectileLifetime);
+                        ReturnProjectileToPoolAfterTime(projectile);
+                    }
                 }
 
                 lastShootTime = Time.time;
             }
-        }
 
+            void ReturnProjectileToPoolAfterTime(Projectile projectile)
+            {
+                float projectileLifetime = weaponData.Range / projectile.ProjectileSpeed;
+                StartCoroutine(ArmProjectile(projectile));
+                projectile.SetupProjectile(projectilesPool, projectileLifetime);
+            }
+
+            void FireProjectile(GameObject projectileObject, Vector3 direction, Projectile projectile)
+            {
+                projectileObject.GetComponent<Rigidbody>().AddForce(direction * projectile.ProjectileSpeed, ForceMode.Impulse);
+                Channels.OnEnergyUsed.Invoke(playerNumber, weaponData.EnergyCost);
+            }
+
+            void GetNewProjectileFromPool(Transform point, out GameObject projectileObject, out Vector3 direction, out Projectile projectile)
+            {
+                projectileObject = projectilesPool.RentFromPool();
+                projectileObject.transform.SetPositionAndRotation(point.position, point.rotation);
+
+                direction = GetShootDirection(point, weaponData.SideSpreadAngle);
+                projectile = projectileObject.GetComponent<Projectile>();
+            }
+        }
 
         private IEnumerator ArmProjectile(Projectile projectile)
         {

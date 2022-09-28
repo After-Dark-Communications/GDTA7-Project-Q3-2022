@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c6cfbd28a22af44a7461704b0bfe8b, type: 3}
   m_Name: MediumWeapon
   m_EditorClassIdentifier: 
+  connectionPoint: {x: 0, y: 0, z: 0}
+  partWeight: 0
   weaponName: Medium
   projectilePrefab: {fileID: 8795236707980728124, guid: cffc0c60e9c1c5c4282f1e1ce8ad4a65,
     type: 3}
+  armingTime: 1
   fireRate: 2.4
+  energyCost: 1
   sideSpreadAngle: 10.2
   range: 27.8

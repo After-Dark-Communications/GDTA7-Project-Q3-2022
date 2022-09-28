@@ -13,6 +13,21 @@ public static class Channels
     public static InputChannel Input = new InputChannel();
 
     /// <summary>
+    /// <para><see cref="int" /> PlayerNumber</para>
+    /// <para><see cref="int" /> amount of energy used</para>
+    /// </summary>
+    public static Action<int, int> OnEnergyUsed;
+    /// <summary>
+    /// <para><see cref="int" /> Player number</para>
+    /// <para><see cref="float" /> New energy persentage </para>
+    /// </summary>
+    public static Action<int, float> OnEnergyChanged;
+    /// <summary>
+    /// <para><see cref="int" /> Player number</para>
+    /// <para><see cref="int" /> amount of energy to refill</para>
+    /// </summary>
+    public static Action<int, int> OnRefillEnergy;
+    /// <summary>
     /// <para><see cref="ShipBuilder" /> The shipbuilder that is changed</para>
     /// <para><see cref="ShipStats" /> The updated shipstats</para>
     /// </summary>
@@ -52,7 +67,7 @@ public static class Channels
 
     public static Action OnEveryPlayerReady;
     /// <summary>
-    /// <para><see cref="GameObject" /> The object that is spawned</para>
+    /// <para><see cref="GameObject" /> The shipbuilder object that is spawned</para>
     /// <para><see cref="int" /> The player number </para>
     /// </summary>
     public static Action<GameObject, int> OnPlayerSpawned;
@@ -67,10 +82,5 @@ public static class Channels
     /// <para><see cref="float" /> New fuel persentage </para>
     /// </summary>
     public static Action<int, float> OnFuelChanged;
-    /// <summary>
-    /// <para><see cref="int" /> Player number</para>
-    /// <para><see cref="float" /> New ammo persentage </para>
-    /// </summary>
-    public static Action<int, float> OnAmmoChanged;
 
 }

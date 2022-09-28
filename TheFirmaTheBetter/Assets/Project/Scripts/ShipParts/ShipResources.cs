@@ -13,12 +13,14 @@ public class ShipResources : MonoBehaviour
     private ShipBuilder shipBuilder;
     private ShipStats shipStats;
     private ShipHealth shipHealth;
+    private ShipEnergy shipEnergy;
 
     private void Awake()
     {
         shipBuilder = GetComponent<ShipBuilder>();
         shipStats = new ShipStats();
         shipHealth = new ShipHealth(shipBuilder.PlayerNumber, shipStats);
+        shipEnergy = new ShipEnergy(shipBuilder.PlayerNumber, shipStats);
     }
 
     private void Start()
@@ -32,7 +34,8 @@ public class ShipResources : MonoBehaviour
         if (shipBuilder.PlayerNumber != completedShipBuilder.PlayerNumber)
             return;
 
-
+        shipHealth.UpdateHealth(shipStats);
+        shipEnergy.UpdateEnergy(shipStats);
     }
 
     private void OnShipPartSelected(Part selectedPart, int playerNumber)
@@ -52,6 +55,8 @@ public class ShipResources : MonoBehaviour
 
         Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, shipStats);
     }
+
+    public int CurrentEnergyAmount => shipEnergy.CurrentEnergyAmount;
 
     public ShipStats ShipStats => shipStats;
 }
