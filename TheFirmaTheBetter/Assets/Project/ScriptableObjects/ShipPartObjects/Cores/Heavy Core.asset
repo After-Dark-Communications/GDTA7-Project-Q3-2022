@@ -15,5 +15,5 @@ MonoBehaviour:
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 100
   health: 100
-  energyCapacity: 8
+  energyCapacity: 12
   fuelCapacity: 100
