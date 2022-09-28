@@ -12,6 +12,10 @@ public static class Channels
 {
     public static InputChannel Input = new InputChannel();
 
+    /// <summary> Callled when firemode has to change to the new value
+    /// <para><see cref="bool" /> new firemode value</para>
+    /// </summary>
+    public static Action<bool> OnChangeFireMode;
     /// <summary>
     /// <para><see cref="int" /> PlayerNumber</para>
     /// <para><see cref="int" /> amount of energy used</para>

@@ -23,10 +23,15 @@ namespace Parts
 
         private ShipResources shipResources;
         private int playerNumber;
+        private bool canShoot;
+
         protected override void Setup()
         {
             shipResources = GetComponentInParent<ShipResources>();
             playerNumber = GetComponentInParent<ShipBuilder>().PlayerNumber;
+
+            Channels.OnChangeFireMode += OnChangeFireMode;
+            canShoot = true;
 
             if (RootInputHandler != null)
             {
@@ -38,6 +43,11 @@ namespace Parts
             {
                 projectilesPool = new ObjectPool(weaponData.ProjectilePrefab, 10);
             }
+        }
+
+        private void OnChangeFireMode(bool newValue)
+        {
+            canShoot = newValue;
         }
 
         private void ShootWeapon(ButtonStates state)
@@ -69,27 +79,30 @@ namespace Parts
 
         public void FireWeapon()
         {
-            if (weaponData.EnergyCost <= shipResources.CurrentEnergyAmount)
+            if (canShoot == false)
+                return;
+
+            if (weaponData.EnergyCost > shipResources.CurrentEnergyAmount)
+                return;
+
+            if (lastShootTime + 1 / weaponData.FireRate >= Time.time)
+                return;
+
+            foreach (Transform point in projectileStartingPoints)
             {
-                if (lastShootTime + 1 / weaponData.FireRate < Time.time)
-                {
+                GameObject projectileObject;
+                Vector3 direction;
+                Projectile projectile;
 
-                    foreach (Transform point in projectileStartingPoints)
-                    {
-                        GameObject projectileObject;
-                        Vector3 direction;
-                        Projectile projectile;
+                GetNewProjectileFromPool(point, out projectileObject, out direction, out projectile);
 
-                        GetNewProjectileFromPool(point, out projectileObject, out direction, out projectile);
+                FireProjectile(projectileObject, direction, projectile);
 
-                        FireProjectile(projectileObject, direction, projectile);
-
-                        ReturnProjectileToPoolAfterTime(projectile);
-                    }
-                }
-
-                lastShootTime = Time.time;
+                ReturnProjectileToPoolAfterTime(projectile);
             }
+    
+            lastShootTime = Time.time;
+
 
             void ReturnProjectileToPoolAfterTime(Projectile projectile)
             {
