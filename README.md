@@ -2,6 +2,9 @@
 
 ![Open Pull  Requests](https://img.shields.io/github/issues-pr-raw/After-Dark-Communications/GDTA7-Project-Q3-2022?style=plastic)
 ![Closed Pull Requests](https://img.shields.io/github/issues-pr-closed-raw/After-Dark-Communications/GDTA7-Project-Q3-2022?style=plastic)
+![Open Issues](https://img.shields.io/github/issues-raw/After-Dark-Communications/GDTA7-Project-Q3-2022?style=plastic)
+![Closed Issues](https://img.shields.io/github/issues-closed-raw/After-Dark-Communications/GDTA7-Project-Q3-2022?style=plastic)
+![Closed Milestones](https://img.shields.io/github/milestones/closed/After-Dark-Communications/GDTA7-Project-Q3-2022?style=plastic)
 
 ## Unity Version
 This project uses Unity version [2021.3.9f1 (LTS)](unityhub://2022.1.15f1/42973686a05c)
