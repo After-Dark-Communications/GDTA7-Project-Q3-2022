@@ -21,13 +21,18 @@ namespace Parts
         private ObjectPool projectilesPool;
         private float lastShootTime;
 
-        private void Start()
-        {
-
-        }
+        private ShipResources shipResources;
+        private int playerNumber;
+        private bool canShoot;
 
         protected override void Setup()
         {
+            shipResources = GetComponentInParent<ShipResources>();
+            playerNumber = GetComponentInParent<ShipBuilder>().PlayerNumber;
+
+            Channels.OnChangeFireMode += OnChangeFireMode;
+            canShoot = true;
+
             if (RootInputHandler != null)
             {
                 RootInputHandler.OnPlayerAim.AddListener(AimWeapon);
@@ -38,6 +43,11 @@ namespace Parts
             {
                 projectilesPool = new ObjectPool(weaponData.ProjectilePrefab, 10);
             }
+        }
+
+        private void OnChangeFireMode(bool newValue)
+        {
+            canShoot = newValue;
         }
 
         private void ShootWeapon(ButtonStates state)
@@ -69,28 +79,60 @@ namespace Parts
 
         public void FireWeapon()
         {
-            if (lastShootTime + 1 / weaponData.FireRate < Time.time)
+            if (canShoot == false)
+                return;
+
+            if (weaponData.EnergyCost > shipResources.CurrentEnergyAmount)
+                return;
+
+            if (lastShootTime + 1 / weaponData.FireRate >= Time.time)
+                return;
+
+            foreach (Transform point in projectileStartingPoints)
             {
-                foreach (Transform point in projectileStartingPoints)
-                {
-                    // Get projectile from pool
-                    GameObject projectileObject = projectilesPool.RentFromPool();
-                    projectileObject.transform.SetPositionAndRotation(point.position, point.rotation);
+                GameObject projectileObject;
+                Vector3 direction;
+                Projectile projectile;
 
-                    Vector3 direction = GetShootDirection(point, weaponData.SideSpreadAngle);
+                GetNewProjectileFromPool(point, out projectileObject, out direction, out projectile);
 
-                    Projectile projectile = projectileObject.GetComponent<Projectile>();
+                FireProjectile(projectileObject, direction, projectile);
 
-                    // Fire projectile
-                    projectileObject.GetComponent<Rigidbody>().AddForce(direction * projectile.ProjectileSpeed, ForceMode.Impulse);
-
-                    // Return projectile after time
-                    float projectileLifetime = weaponData.Range / projectile.ProjectileSpeed;
-                    StartCoroutine(ReturnProjectile(projectileObject, projectileLifetime));
-                }
-
-                lastShootTime = Time.time;
+                ReturnProjectileToPoolAfterTime(projectile);
             }
+    
+            lastShootTime = Time.time;
+
+
+            void ReturnProjectileToPoolAfterTime(Projectile projectile)
+            {
+                float projectileLifetime = weaponData.Range / projectile.ProjectileSpeed;
+                StartCoroutine(ArmProjectile(projectile));
+                projectile.SetupProjectile(projectilesPool, projectileLifetime);
+            }
+
+            void FireProjectile(GameObject projectileObject, Vector3 direction, Projectile projectile)
+            {
+                projectileObject.GetComponent<Rigidbody>().AddForce(direction * projectile.ProjectileSpeed, ForceMode.Impulse);
+                Channels.OnEnergyUsed.Invoke(playerNumber, weaponData.EnergyCost);
+            }
+
+            void GetNewProjectileFromPool(Transform point, out GameObject projectileObject, out Vector3 direction, out Projectile projectile)
+            {
+                projectileObject = projectilesPool.RentFromPool();
+                projectileObject.transform.SetPositionAndRotation(point.position, point.rotation);
+
+                direction = GetShootDirection(point, weaponData.SideSpreadAngle);
+                projectile = projectileObject.GetComponent<Projectile>();
+            }
+        }
+
+        private IEnumerator ArmProjectile(Projectile projectile)
+        {
+            Collider col = projectile.GetComponent<Collider>();
+            col.enabled = false;
+            yield return new WaitForSeconds(projectile.ArmingTime);
+            col.enabled = true;
         }
 
         private Vector3 GetShootDirection(Transform shootingPoint, float sideSpreadAngle)
@@ -105,10 +147,9 @@ namespace Parts
             return direction;
         }
 
-        IEnumerator ReturnProjectile(GameObject projectile, float seconds)
+        public override PartData GetData()
         {
-            yield return new WaitForSeconds(seconds);
-            projectilesPool.ReturnToPool(projectile);
+            return weaponData;
         }
     }
 }

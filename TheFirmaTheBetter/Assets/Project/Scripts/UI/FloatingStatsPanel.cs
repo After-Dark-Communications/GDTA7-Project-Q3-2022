@@ -8,7 +8,8 @@ public class FloatingStatsPanel : MonoBehaviour
     private List<ShipStatBar> statBars;
 
     [SerializeField]
-    [Tooltip("The game object which the stats panel should follow")]
+    private EnergyBar energyBar;
+    
     private GameObject objectToFollow;
 
     [SerializeField]
@@ -21,6 +22,9 @@ public class FloatingStatsPanel : MonoBehaviour
 
     private void Update()
     {
+        if (objectToFollow == null)
+            return;
+
         if (objectToFollow.activeInHierarchy)
         {
             Vector3 screenPosition = Camera.main.WorldToScreenPoint(objectToFollow.transform.position);
@@ -45,4 +49,6 @@ public class FloatingStatsPanel : MonoBehaviour
     {
         get { return statBars.ToArray(); }
     }
+
+    public EnergyBar EnergyBar => energyBar;
 }

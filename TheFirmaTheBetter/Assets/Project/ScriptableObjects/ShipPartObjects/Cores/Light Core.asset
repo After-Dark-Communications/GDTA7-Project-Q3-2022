@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 079fd4a3f41539b499dbe47d57e8bb0c, type: 3}
-  m_Name: BatteryCore
+  m_Name: Light Core
   m_EditorClassIdentifier: 
   connectionPoint: {x: 0, y: 0, z: 0}
-  partWeight: 50
-  health: 50
-  ammoCapacity: 0
-  fuelCapacity: 50
+  partWeight: 30
+  health: 30
+  energyCapacity: 8
+  fuelCapacity: 30

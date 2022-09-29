@@ -18,8 +18,8 @@ public class PartsCollectionManager : Manager
 
     private void Awake()
     {
-        allParts.AddRange(engineList);
         allParts.AddRange(coreList);
+        allParts.AddRange(engineList);
         allParts.AddRange(weaponList);
         allParts.AddRange(specialList);
     }

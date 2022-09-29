@@ -22,10 +22,8 @@ public class ShipInputHandler : MonoBehaviour
     public UnityButtonStateEvent OnPlayerSpecial = new UnityButtonStateEvent();
     public UnityButtonStateEvent OnPlayerMoveUp = new UnityButtonStateEvent();
     public UnityButtonStateEvent OnPlayerMoveDown = new UnityButtonStateEvent();
-    public UnityFloatEvent OnPlayerCrash = new UnityFloatEvent();
 
     private Rigidbody _Rb;
-    private float _PrevVelocity;
     private InputAction _Move;
     private InputAction _Aim;
 
@@ -33,17 +31,16 @@ public class ShipInputHandler : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("called by " + transform.name);
         //Enable input events
         SetupInputEvents();
         //ensure rigidbody exists
-       //_Rb = GetComponent<Rigidbody>();
-       //if (_Rb == null)
-       //{
-       //    //_Rb = gameObject.AddComponent<Rigidbody>();
-       //    _Rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
-       //    _Rb.drag = 7;
-       //}
+        //_Rb = GetComponent<Rigidbody>();
+        //if (_Rb == null)
+        //{
+        //    //_Rb = gameObject.AddComponent<Rigidbody>();
+        //    _Rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+        //    _Rb.drag = 7;
+        //}
 
         SetupParts();
 
@@ -81,16 +78,13 @@ public class ShipInputHandler : MonoBehaviour
                 _Rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
                 foreach (Part part in shipBuilder.SelectedParts)
                 {
-                    part.SetupPart(shipBuilder.transform.parent.transform, this, _Rb);
+                    part.SetupPart(shipBuilder.transform.parent.transform, this, _Rb, shipBuilder.PlayerDevice);
                 }
             }
         }
     }
 
-    private void FixedUpdate()
-    {
-        _PrevVelocity = Mathf.Abs(Vector3.Dot(_Rb.velocity, transform.forward)); ;
-    }
+
 
     private void Update()
     {
@@ -145,11 +139,6 @@ public class ShipInputHandler : MonoBehaviour
     public void OnMoveDown(InputAction.CallbackContext ctx)
     {
         OnPlayerMoveDown.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
-    }
-
-    public void OnCollisionEnter(Collision collision)
-    {
-        OnPlayerCrash.Invoke(_PrevVelocity);
     }
 }
 

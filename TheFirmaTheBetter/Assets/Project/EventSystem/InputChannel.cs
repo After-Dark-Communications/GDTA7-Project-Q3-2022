@@ -8,6 +8,9 @@ namespace Assets.EventSystem
 {
     public class InputChannel
     {
+        /// <summary>
+        /// <para><see cref="int" /> Player number</para>
+        /// </summary>
         public Action<int> OnShipCompletedInput;
     }
 }

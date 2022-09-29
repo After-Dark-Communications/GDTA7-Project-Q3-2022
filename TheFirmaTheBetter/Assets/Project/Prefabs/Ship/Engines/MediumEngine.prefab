@@ -79,8 +79,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partIcon: {fileID: 0}
+  connectionPoint: {x: 0, y: 0, z: 0}
   connectionPointCollection: {fileID: 5751735449183543953}
+  ShipRoot: {fileID: 0}
   engineData: {fileID: 11400000, guid: c23261f0f1e27c1418b9be6d4b2a8f97, type: 2}
+  VibrateTime: 0.2
+  HeightTime: 0.125
+  HeightDifference: 5
+  HeightSpeed: 7
 --- !u!1 &5127617087217717202
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,27 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneSwitchManager : Manager
+public static class SceneSwitchManager
 {
-    #region Singleton
-    public static SceneSwitchManager Instance;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-
-        if (Instance != this)
-        {
-            Destroy(gameObject);
-        }
-
-        DontDestroyOnLoad(gameObject);
-    }
-    #endregion
-
     public static void SwitchScene()
     {
         SceneManager.LoadScene(0);
@@ -36,7 +17,7 @@ public class SceneSwitchManager : Manager
         int currentLoadedSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
         //if (currentLoadedSceneIndex == totalAmountOfScenes - 1)
-        //    return;
+            //return;
         
         SceneManager.LoadScene(currentLoadedSceneIndex+1);
     }

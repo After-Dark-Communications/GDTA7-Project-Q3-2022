@@ -17,4 +17,6 @@ public class UnityVector3Event : UnityEvent<Vector3> { }
 public class UnityButtonStateEvent : UnityEvent<ButtonStates> { }
 ///<summary>unity event with a <see cref="GameObject"/> parameter</summary>
 public class UnityGameObjectEvent : UnityEvent<GameObject> { }
+/// <summary>unity event with the collision impulse <see cref="Vector3"/> value parameter and the <see cref="GameObject"/> that it collided with</summary>
+public class UnityCollisionEvent : UnityEvent<Vector3, GameObject> { }
 

@@ -66,9 +66,7 @@ public class DEBUG_ShipMovement : MonoBehaviour
 
 
     private void DEBUG_Engine_Move(Vector2 move)
-    {//when starting to move, increase T and lerp towards top speed
-     //when stopping, decrease T and lerp towards 0 speed
-        
+    {
         if (move != Vector2.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(new Vector3(move.x, 0, move.y), GlobalUp.UP.up);
@@ -77,7 +75,6 @@ public class DEBUG_ShipMovement : MonoBehaviour
         DEBUG_Engine_Forward(new Vector3(move.x, 0, move.y).magnitude);
     }
 
-    //TODO: Make forward and turning based on camera forward instead of ship forward
     public void DEBUG_Engine_Forward(float throttle)
     {
         Vector3 forward = _Parent.transform.forward;
@@ -125,6 +122,6 @@ public class DEBUG_ShipMovement : MonoBehaviour
 
     private void DEBUG_InputBools(ButtonStates state)
     {
-       // Debug.Log($"started:{state.HasFlag(ButtonStates.STARTED)}, performed:{state.HasFlag(ButtonStates.PERFORMED)}, canceled:{state.HasFlag(ButtonStates.CANCELED)}");
+        // Debug.Log($"started:{state.HasFlag(ButtonStates.STARTED)}, performed:{state.HasFlag(ButtonStates.PERFORMED)}, canceled:{state.HasFlag(ButtonStates.CANCELED)}");
     }
 }

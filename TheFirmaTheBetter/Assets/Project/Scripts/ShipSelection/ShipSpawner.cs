@@ -43,14 +43,13 @@ public class ShipSpawner : MonoBehaviour
             spawnPointTransform.gameObject.SetActive(true);
 
             shipBuilder.transform.position = spawnPointTransform.position;
-            shipBuilder.transform.rotation = Quaternion.Euler(0, -90, 0);
+            shipBuilder.transform.rotation = Quaternion.Euler(0, -90, 0);//TODO: set rotation relative to parent, not to world
             shipBuilder.transform.parent = spawnPointTransform;
 
-            //shipBuilder.transform.parent.gameObject.AddComponent<ShipInputHandler>();
             PlayerInputManager.instance.playerPrefab = joinprefab;
             PlayerInput inp = PlayerInputManager.instance.JoinPlayer(playerIndex, -1, null, shipBuilder.PlayerDevice);
-            //inp.GetComponent<ShipInputHandler>().MyDevice = inp.devices[0];
             inp.transform.parent = spawnPointTransform;
+            Channels.OnPlayerSpawned.Invoke(shipBuilder.gameObject, shipBuilder.PlayerNumber);
         }
     }
 }

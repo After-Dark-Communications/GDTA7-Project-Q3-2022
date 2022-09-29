@@ -13,6 +13,11 @@ namespace Parts
 
         public override string PartCategoryName => "Core";
 
+        public override PartData GetData()
+        {
+            return coreData;
+        }
+
         public override bool IsMyConnectionType(ConnectionPoint connectionPoint)
         {
             if (connectionPoint is CoreConnectionPoint)

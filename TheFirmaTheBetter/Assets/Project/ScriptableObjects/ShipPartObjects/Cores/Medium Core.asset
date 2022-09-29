@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 079fd4a3f41539b499dbe47d57e8bb0c, type: 3}
-  m_Name: Gunrunner Core
+  m_Name: Medium Core
   m_EditorClassIdentifier: 
   connectionPoint: {x: 0, y: 0, z: 0}
-  partWeight: 30
-  health: 20
-  ammoCapacity: 100
+  partWeight: 50
+  health: 50
+  energyCapacity: 8
   fuelCapacity: 50
