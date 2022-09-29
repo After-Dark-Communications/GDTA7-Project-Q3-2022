@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MainMenu : MenuNavigator
+public class MainMenu : Menu
 {
     public void StartGame()
     {
