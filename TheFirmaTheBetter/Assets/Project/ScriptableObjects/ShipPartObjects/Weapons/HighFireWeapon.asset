@@ -19,6 +19,7 @@ MonoBehaviour:
     type: 3}
   armingTime: 1
   fireRate: 6.29
+  amountOfBullets: 1
   energyCost: 1
   sideSpreadAngle: 15
   range: 12.1

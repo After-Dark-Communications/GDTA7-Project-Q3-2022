@@ -88,7 +88,7 @@ namespace ShipParts.Weapons
             {
                 if (weaponData.EnergyCost > shipResources.CurrentEnergyAmount)
                 {
-                    Channels.OnEnergyEmpty.Invoke();
+                    Channels.OnEnergyEmpty?.Invoke();
                     return;
                 }
 

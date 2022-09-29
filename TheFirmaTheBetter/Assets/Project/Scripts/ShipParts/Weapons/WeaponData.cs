@@ -20,7 +20,7 @@ namespace ShipParts.Weapons
     [Range(1, 20)]
     [Tooltip("amountOfBullets")]
     [SerializeField]
-    private float amountOfBullets;
+    private float amountOfBullets = 1f;
     [SerializeField]
     [Range(1, 10)]
     [Tooltip("Cost in energy to fire weapon")]
