@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ShipStat : MonoBehaviour
+public class WeaponStat : Stat
 {
-    [SerializeField]
-    private TMP_Text statName;
     [SerializeField]
     private TMP_Text statValue;
 

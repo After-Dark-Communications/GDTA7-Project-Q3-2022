@@ -51,7 +51,11 @@ public class PlayerJoinManager : MonoBehaviour
         playerInput.gameObject.transform.localScale = Vector3.one;
 
         PlayerSelectionScreen playerSelectionScreen = playerInput.gameObject.GetComponent<PlayerSelectionScreen>();
-        playerSelectionScreen.PlayerNumber = playerInput.playerIndex;
+        int playerNumber = playerInput.playerIndex;
+        playerSelectionScreen.PlayerNumber = playerNumber;
+
+
+        playerSelectionScreen.GetComponentInChildren<ShipStatsManager>().PlayerIndex = playerNumber;
 
         ShowAndHideJoinPlayerButton(playerInput);
 

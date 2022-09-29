@@ -7,14 +7,15 @@ using UnityEngine;
 public class ShipStatsManager : MonoBehaviour
 {
     [SerializeField]
-    private List<ShipStatsCollection> stats = new List<ShipStatsCollection>();
+    private ShipStatsCollection stats;
     [SerializeField]
     private int playerIndex;
     private void Awake()
     {
-        foreach (ShipStatsCollection shipStatsCollection in gameObject.GetComponentsInChildren<ShipStatsCollection>())
+        ShipStatsCollection statsCollection = gameObject.GetComponentInChildren<ShipStatsCollection>();
+        if (statsCollection != null)
         {
-            stats.Add(shipStatsCollection);
+            stats = statsCollection;
         }
 
         Channels.OnPlayerStatsChanged += PlayerStatChange;
@@ -22,21 +23,27 @@ public class ShipStatsManager : MonoBehaviour
 
     private void PlayerStatChange(ShipBuilder shipBuilder, ShipStats changedShipStats)
     {
-        playerIndex = shipBuilder.PlayerNumber;
-        SetShipStats(stats[0], changedShipStats);
+        if (playerIndex != shipBuilder.PlayerNumber)
+            return;
+        SetShipStats(stats.ShipStats, changedShipStats);
+        SetWeaponStats(stats.WeaponStats, changedShipStats);
     }
 
-    private void SetShipStats(ShipStatsCollection shipStatsUI, ShipStats changedShipStats)
+    private void SetShipStats(List<ShipStat> shipStatsUI, ShipStats changedShipStats)
     {
-        shipStatsUI.ShipStats[0].GetComponent<ShipStat>().StatValue.text = changedShipStats.Speed.ToString();
-        shipStatsUI.ShipStats[1].GetComponent<ShipStat>().StatValue.text = changedShipStats.MaxHealth.ToString();
-        shipStatsUI.ShipStats[2].GetComponent<ShipStat>().StatValue.text = changedShipStats.Handling.ToString();
-        shipStatsUI.ShipStats[3].GetComponent<ShipStat>().StatValue.text = changedShipStats.EnergyCapacity.ToString();
+        shipStatsUI[0].StatValue.text = changedShipStats.Speed.ToString();
+        shipStatsUI[1].StatValue.text = changedShipStats.MaxHealth.ToString();
+        shipStatsUI[2].StatValue.text = changedShipStats.Handling.ToString();
+        shipStatsUI[3].StatValue.text = changedShipStats.EnergyCapacity.ToString();
 
     }
 
-    private void SetWeaponStats()
+    private void SetWeaponStats(List<WeaponStat> weaponStatsUI, ShipStats changedWeaponStats)
     {
-
+        weaponStatsUI[0].StatValue.text = changedWeaponStats.Range.ToString();
+        weaponStatsUI[1].StatValue.text = changedWeaponStats.FireRate.ToString();
+        weaponStatsUI[2].StatValue.text = changedWeaponStats.EnergyCost.ToString();
     }
+
+    public int PlayerIndex { get { return playerIndex; } set { playerIndex = value; } }
 }
