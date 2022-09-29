@@ -1,22 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MainMenu : MonoBehaviour
+public class MenuNavigator : MonoBehaviour
 {
     [SerializeField]
     private MenuPanel startingPanel;
 
-    private MenuPanel currentPanel;
+    protected MenuPanel currentPanel;
 
     private void OnEnable()
     {
         OpenMenuPanel(startingPanel);
-    }
-
-    public void StartGame()
-    {
-        SceneSwitchManager.SwitchToNextScene();
     }
 
     public void OpenMenuPanel(MenuPanel menuPanel)
@@ -24,10 +17,5 @@ public class MainMenu : MonoBehaviour
         if (currentPanel != null) currentPanel.ClosePanel();
         menuPanel.OpenPanel();
         currentPanel = menuPanel;
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
     }
 }
