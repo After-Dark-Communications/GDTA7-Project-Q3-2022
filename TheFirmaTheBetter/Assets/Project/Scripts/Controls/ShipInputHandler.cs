@@ -121,7 +121,6 @@ namespace Controls
 
         public void OnFire(InputAction.CallbackContext ctx)
         {
-            Debug.Log("OnPlayerShoot subscribers: " + OnPlayerShoot.GetPersistentEventCount());
             OnPlayerShoot.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
         }
 

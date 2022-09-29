@@ -56,8 +56,8 @@ namespace Collisions
                     Vector3 bumpDir = transform.position - shipCollision.transform.position;
 
                     //apply force to both ships based on position delta
-                    Debug.DrawLine(transform.position, transform.position + (bumpDir.normalized * otherRigidbody.velocity.magnitude), Color.red, 2f);
-                    Debug.Log(bumpDir.normalized * otherRigidbody.velocity.magnitude);
+                    //Debug.DrawLine(transform.position, transform.position + (bumpDir.normalized * otherRigidbody.velocity.magnitude), Color.red, 2f);
+                    //Debug.Log(bumpDir.normalized * otherRigidbody.velocity.magnitude);
                     rigidbody.AddForce(bumpDir.normalized * otherRigidbody.velocity.magnitude, ForceMode.Impulse);//issue, some bumps are too strong
 
                     //swap velocities of bumping rigidbodies
