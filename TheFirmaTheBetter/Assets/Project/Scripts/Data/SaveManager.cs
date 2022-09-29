@@ -3,35 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System;
 
 [System.Serializable]
-public class SaveManager<T> where T : class
+public class SaveManager
 {
     private static string StringPath()
     {
-        return $"{Application.persistentDataPath}/Astrofire Arena";
+        return Application.persistentDataPath;
     }
 
-    public static void Save(T data, string name)
+    /// <summary>
+    /// Saves data of type T
+    /// </summary>
+    /// <param name="data">The data to save</param>
+    /// <param name="name">The name the savefile will be called</param>
+    public static void Save<T>(T data, string name)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream = File.Create($"{StringPath()}/{name}.aa");
+        FileStream stream = new FileStream($"{StringPath()}/{name}.aa", FileMode.Create);
         formatter.Serialize(stream, data);
         stream.Close();
     }
 
-    public static T Load(string name)
+    /// <summary>
+    /// Loads the data
+    /// </summary>
+    /// <param name="name">The name under which the file was saved</param>
+    /// <returns>Save data if present, null if none exist</returns>
+    public static T Load<T>(string name)
     {
         if (!File.Exists($"{StringPath()}/{name}"))
         {
             Debug.Log($"No {name} data exists!");
-            return null;
+            return default(T);
         }
 
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream($"{StringPath()}/{name}", FileMode.Open);
-        T data = formatter.Deserialize(stream) as T;
+        T data = (T)formatter.Deserialize(stream);
         Debug.Log($"Loaded {name} data successfully");
+        stream.Close();
         return data;
     }
 }
