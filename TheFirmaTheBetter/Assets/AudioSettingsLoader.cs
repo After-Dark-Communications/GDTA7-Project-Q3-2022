@@ -5,15 +5,15 @@ using FMODUnity;
 
 public class AudioSettingsLoader : MonoBehaviour
 {
-    private FMOD.Studio.Bus Master;
-    private FMOD.Studio.Bus Music;
-    private FMOD.Studio.Bus SFX;
+    private FMOD.Studio.VCA Master;
+    private FMOD.Studio.VCA Music;
+    private FMOD.Studio.VCA SFX;
 
     private void Awake()
     {
-        //Master = RuntimeManager.GetBus("bus:/Master Bus");
-        Music = RuntimeManager.GetBus("bus:/Music");
-        SFX = RuntimeManager.GetBus("bus:/SFX");
+        Master = RuntimeManager.GetVCA("vca:/Master");
+        Music = RuntimeManager.GetVCA("vca:/Music");
+        SFX = RuntimeManager.GetVCA("vca:/SFX");
     }
 
     // Start is called before the first frame update
