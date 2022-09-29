@@ -13,6 +13,9 @@ public static class Channels
     public static InputChannel Input = new InputChannel();
     public static MovementChannel Movement = new MovementChannel();
 
+    /// <summary> Called when firing the gun while not having enough ammo
+    /// </summary>
+    public static Action OnEnergyEmpty;
     /// <summary> Callled when firemode has to change to the new value
     /// <para><see cref="bool" /> new firemode value</para>
     /// </summary>

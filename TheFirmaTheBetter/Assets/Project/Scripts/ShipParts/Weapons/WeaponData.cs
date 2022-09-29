@@ -15,8 +15,12 @@ public class WeaponData : PartData
     [Range(0, 10)]
     [Tooltip("Bullets per second")]
     private float fireRate;
+    [Range(1, 20)]
+    [Tooltip("amountOfBullets")]
     [SerializeField]
-    [Range(0, 10)]
+    private float amountOfBullets;
+    [SerializeField]
+    [Range(1, 10)]
     [Tooltip("Cost in energy to fire weapon")]
     private int energyCost;
 
@@ -37,4 +41,6 @@ public class WeaponData : PartData
     public float ArmingTime => armingTime;
 
     public int EnergyCost => energyCost;
+
+    public float AmountOfBullets => amountOfBullets;
 }

@@ -82,25 +82,31 @@ namespace Parts
             if (canShoot == false)
                 return;
 
-            if (weaponData.EnergyCost > shipResources.CurrentEnergyAmount)
-                return;
-
-            if (lastShootTime + 1 / weaponData.FireRate >= Time.time)
-                return;
-
-            foreach (Transform point in projectileStartingPoints)
+            for (int i = 0; i < weaponData.AmountOfBullets; i++)
             {
-                GameObject projectileObject;
-                Vector3 direction;
-                Projectile projectile;
+                if (weaponData.EnergyCost > shipResources.CurrentEnergyAmount)
+                {
+                    Channels.OnEnergyEmpty.Invoke();
+                    return;
+                }
 
-                GetNewProjectileFromPool(point, out projectileObject, out direction, out projectile);
+                if (lastShootTime + 1 / weaponData.FireRate >= Time.time)
+                    return;
 
-                FireProjectile(projectileObject, direction, projectile);
+                foreach (Transform point in projectileStartingPoints)
+                {
+                    GameObject projectileObject;
+                    Vector3 direction;
+                    Projectile projectile;
 
-                ReturnProjectileToPoolAfterTime(projectile);
+                    GetNewProjectileFromPool(point, out projectileObject, out direction, out projectile);
+
+                    FireProjectile(projectileObject, direction, projectile);
+
+                    ReturnProjectileToPoolAfterTime(projectile);
+                }
             }
-    
+
             lastShootTime = Time.time;
 
 
