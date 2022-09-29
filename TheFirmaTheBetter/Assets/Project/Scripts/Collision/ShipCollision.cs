@@ -47,7 +47,6 @@ namespace Collisions
 
         private void HandleHitByOtherShip(ShipCollision shipCollision)
         {
-            //TODO: handle getting hit by other ship
             if (shipCollision != null)
             {
                 Rigidbody otherRigidbody = shipCollision.gameObject.GetComponentInParent<Rigidbody>();
@@ -56,14 +55,9 @@ namespace Collisions
                     Vector3 bumpDir = transform.position - shipCollision.transform.position;
 
                     //apply force to both ships based on position delta
-                    //Debug.DrawLine(transform.position, transform.position + (bumpDir.normalized * otherRigidbody.velocity.magnitude), Color.red, 2f);
-                    //Debug.Log(bumpDir.normalized * otherRigidbody.velocity.magnitude);
+                    //TODO: adjust force based on (total?) weight of ship
                     rigidbody.AddForce(bumpDir.normalized * otherRigidbody.velocity.magnitude, ForceMode.Impulse);//issue, some bumps are too strong
-
-                    //swap velocities of bumping rigidbodies
-                    //Vector3 vel = otherRigidbody.velocity;
-                    //otherRigidbody.velocity = rigidbody.velocity;
-                    //rigidbody.velocity = vel;
+                    //Debug.DrawLine(transform.position, transform.position + (bumpDir.normalized * otherRigidbody.velocity.magnitude), Color.red, 2f);
                 }
             }
         }
