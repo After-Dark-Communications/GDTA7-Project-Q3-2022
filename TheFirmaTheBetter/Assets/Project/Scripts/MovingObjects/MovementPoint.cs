@@ -16,12 +16,10 @@ public class MovementPoint : MonoBehaviour
     public void Spawn()
     {
         animator.SetTrigger(SpawnTriggerName);
-        animator.enabled = true;
     }
 
     public void DeSpawn()
     {
         animator.SetTrigger(DeSpawnTriggerName);
-        animator.enabled = true;
     }
 }
