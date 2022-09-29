@@ -1,11 +1,18 @@
 ﻿using EventSystem;
+using ShipParts;
+using ShipParts.Cores;
 using ShipParts.Engines;
 using ShipParts.Ship;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace ShipParts
 {
-    class ShipResources : MonoBehaviour
+    public class ShipResources : MonoBehaviour
     {
         private ShipBuilder shipBuilder;
         private ShipStats shipStats;
@@ -42,11 +49,17 @@ namespace ShipParts
 
             if (selectedPart is Engine)
             {
-                shipBuilder = GetComponent<ShipBuilder>();
-                shipStats = new ShipStats();
-                shipHealth = new ShipHealth(shipBuilder.PlayerNumber, shipStats);
+                shipStats.UpdateStats(selectedPart.GetData() as EngineData);
             }
+
+            if (selectedPart is Core)
+            {
+                shipStats.UpdateStats(selectedPart.GetData() as CoreData);
+            }
+
+            Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, shipStats);
         }
+
         public int CurrentEnergyAmount => shipEnergy.CurrentEnergyAmount;
 
         public ShipStats ShipStats => shipStats;

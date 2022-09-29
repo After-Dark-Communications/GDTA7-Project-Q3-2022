@@ -52,8 +52,8 @@ namespace ShipParts
 
         private void OnEnergyUsed(int playerNumber, int usedAmount)
         {
-            if (IsThisNotMe(playerNumber))
-                return;
+            if (IsThisNotMe(playerNumber)) return;
+            if (maxEnergyAmount == 0) return;
 
             currentEnergyAmount -= usedAmount;
 

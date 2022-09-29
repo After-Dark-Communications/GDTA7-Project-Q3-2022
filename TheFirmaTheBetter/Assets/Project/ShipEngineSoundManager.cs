@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using ShipParts.Ship;
+using EventSystem;
 
 public class ShipEngineSoundManager : MonoBehaviour
 {

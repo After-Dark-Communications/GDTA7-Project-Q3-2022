@@ -48,12 +48,9 @@ namespace Collisions
         private void HandleHitByOtherShip(ShipCollision shipCollision)
         {
             //TODO: handle getting hit by other ship
-
-            Debug.Log("Hit by " + shipCollision?.gameObject.name);
             if (shipCollision != null)
             {
                 Rigidbody otherRigidbody = shipCollision.gameObject.GetComponentInParent<Rigidbody>();
-                Debug.Log($"{shipCollision?.gameObject.name}'s rigidbody: {otherRigidbody}");
                 if (otherRigidbody)
                 {
                     Vector3 bumpDir = transform.position - shipCollision.transform.position;
