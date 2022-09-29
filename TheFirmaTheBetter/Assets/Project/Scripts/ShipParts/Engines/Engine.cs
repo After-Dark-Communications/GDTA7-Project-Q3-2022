@@ -68,7 +68,7 @@ namespace Parts
          //when stopping, decrease T and lerp towards 0 speed
             _throttle = new Vector3(move.x, 0, move.y).magnitude;
             _moveValue = move;
-
+            Channels.Movement.OnShipMove?.Invoke(move, transform.GetComponentInParent<ShipBuilder>().PlayerNumber);
         }
 
         private void MoveUp(ButtonStates arg0)
