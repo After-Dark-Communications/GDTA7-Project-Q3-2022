@@ -8,7 +8,8 @@ namespace EventSystem
 {
     public static class Channels
     {
-        public static InputChannel Input = new InputChannel();
+    public static InputChannel Input = new InputChannel();
+    public static MovementChannel Movement = new MovementChannel();
 
         /// <summary> Callled when firemode has to change to the new value
         /// <para><see cref="bool" /> new firemode value</para>
