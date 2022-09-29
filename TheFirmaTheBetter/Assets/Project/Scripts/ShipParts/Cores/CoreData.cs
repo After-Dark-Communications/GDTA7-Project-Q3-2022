@@ -11,15 +11,15 @@ namespace ShipParts.Cores
         [SerializeField]
         private int health;
 
-        [SerializeField]
-        private float ammoCapacity;
+    [SerializeField]
+    private int energyCapacity;
 
         [SerializeField]
         private float fuelCapacity;
 
         public int Health => health;
 
-        public float AmmoCapacity => ammoCapacity;
+    public int EnergyCapacity => energyCapacity;
 
         public float FuelCapacity => fuelCapacity;
     }

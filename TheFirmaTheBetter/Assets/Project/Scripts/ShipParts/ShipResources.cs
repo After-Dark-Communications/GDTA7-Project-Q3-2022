@@ -12,13 +12,40 @@ using ShipParts.Cores;
 
 namespace ShipParts
 {
-    public class ShipResources : MonoBehaviour
-    {
-        private ShipBuilder shipBuilder;
-        private ShipStats shipStats;
-        private ShipHealth shipHealth;
+    private ShipBuilder shipBuilder;
+    private ShipStats shipStats;
+    private ShipHealth shipHealth;
+    private ShipEnergy shipEnergy;
 
-        private void Awake()
+    private void Awake()
+    {
+        shipBuilder = GetComponent<ShipBuilder>();
+        shipStats = new ShipStats();
+        shipHealth = new ShipHealth(shipBuilder.PlayerNumber, shipStats);
+        shipEnergy = new ShipEnergy(shipBuilder.PlayerNumber, shipStats);
+    }
+
+    private void Start()
+    {
+        Channels.OnShipPartSelected += OnShipPartSelected;
+        Channels.OnShipCompleted += OnShipCompleted;
+    }
+
+    private void OnShipCompleted(ShipBuilder completedShipBuilder)
+    {
+        if (shipBuilder.PlayerNumber != completedShipBuilder.PlayerNumber)
+            return;
+
+        shipHealth.UpdateHealth(shipStats);
+        shipEnergy.UpdateEnergy(shipStats);
+    }
+
+    private void OnShipPartSelected(Part selectedPart, int playerNumber)
+    {
+        if (shipBuilder.PlayerNumber != playerNumber)
+            return;
+
+        if (selectedPart is Engine)
         {
             shipBuilder = GetComponent<ShipBuilder>();
             shipStats = new ShipStats();
@@ -36,27 +63,7 @@ namespace ShipParts
             if (shipBuilder.PlayerNumber != completedShipBuilder.PlayerNumber)
                 return;
 
+    public int CurrentEnergyAmount => shipEnergy.CurrentEnergyAmount;
 
-        }
-
-        private void OnShipPartSelected(Part selectedPart, int playerNumber)
-        {
-            if (shipBuilder.PlayerNumber != playerNumber)
-                return;
-
-            if (selectedPart is Engine)
-            {
-                shipStats.UpdateStats(selectedPart.GetData() as EngineData);
-            }
-
-            if (selectedPart is Core)
-            {
-                shipStats.UpdateStats(selectedPart.GetData() as CoreData);
-            }
-
-            Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, shipStats);
-        }
-
-        public ShipStats ShipStats => shipStats;
-    }
+    public ShipStats ShipStats => shipStats;
 }

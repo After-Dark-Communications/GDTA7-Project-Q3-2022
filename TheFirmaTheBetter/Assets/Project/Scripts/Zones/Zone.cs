@@ -1,4 +1,7 @@
 using EventSystem;
+using Assets.Project.Scripts.Zones;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Zone : MonoBehaviour
@@ -6,11 +9,24 @@ public abstract class Zone : MonoBehaviour
 
     public virtual void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            TriggerEffect(other.gameObject);
-            Channels.OnZoneEntered?.Invoke(other.gameObject);
-        }
+        IHaveZoneInteraction zoneInteractor = other.GetComponentInParent<IHaveZoneInteraction>();
+
+        if (zoneInteractor == null)
+            return;
+
+        zoneInteractor.HandleZoneEnterInteraction(this);
+
+        Channels.OnZoneEntered?.Invoke(other.gameObject);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        IHaveZoneInteraction zoneInteractor = other.GetComponentInParent<IHaveZoneInteraction>();
+
+        if (zoneInteractor == null)
+            return;
+
+        zoneInteractor.HandleZoneExitInteraction(this);
     }
 
     /// <summary>

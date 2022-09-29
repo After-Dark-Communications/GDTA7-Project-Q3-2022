@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4958743205640137277}
   - component: {fileID: 4224625532589462300}
   - component: {fileID: 5406474560743814457}
+  - component: {fileID: 4115077990170237956}
   m_Layer: 0
   m_Name: ShipBuilder
   m_TagString: Untagged
@@ -89,6 +90,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf86169c4a7308347a57c65c36cf4852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4115077990170237956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429549271885258455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622e9fbaa455aaa4788bd4c29cf48cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8247279926959544897
