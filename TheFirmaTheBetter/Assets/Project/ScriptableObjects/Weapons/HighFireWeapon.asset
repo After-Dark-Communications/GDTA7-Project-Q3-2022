@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: HighFireWeapon
   m_EditorClassIdentifier: 
   connectionPoint: {x: 0, y: 0, z: 0}
-  partWeight: 0
+  partWeight: 1
   weaponName: High fire rate
   projectilePrefab: {fileID: 8795236707980728124, guid: cffc0c60e9c1c5c4282f1e1ce8ad4a65,
     type: 3}
   armingTime: 1
   fireRate: 6.29
+  amountOfBullets: 1
   energyCost: 1
   sideSpreadAngle: 15
   range: 12.1
