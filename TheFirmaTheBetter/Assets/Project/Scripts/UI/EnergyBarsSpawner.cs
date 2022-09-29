@@ -1,28 +1,32 @@
+using EventSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnergyBarsSpawner : MonoBehaviour
+namespace UI
 {
-    [SerializeField]
-    private List<FloatingStatsPanel> floatingStatsPanels = new List<FloatingStatsPanel>();
-
-    private void Awake()
+    public class EnergyBarsSpawner : MonoBehaviour
     {
-        Channels.OnPlayerSpawned += OnPlayerSpawned;
-    }
+        [SerializeField]
+        private List<FloatingStatsPanel> floatingStatsPanels = new List<FloatingStatsPanel>();
 
-    private void OnPlayerSpawned(GameObject spawnedObject, int playerNumber)
-    {
-        foreach(FloatingStatsPanel panel in floatingStatsPanels)
+        private void Awake()
         {
-            if (panel.EnergyBar.PlayerIndex != playerNumber)
-                continue;
+            Channels.OnPlayerSpawned += OnPlayerSpawned;
+        }
 
-            panel.gameObject.SetActive(true);
-            panel.ObjectToFollow = spawnedObject.transform.parent.gameObject;
-            return;
+        private void OnPlayerSpawned(GameObject spawnedObject, int playerNumber)
+        {
+            foreach (FloatingStatsPanel panel in floatingStatsPanels)
+            {
+                if (panel.EnergyBar.PlayerIndex != playerNumber)
+                    continue;
+
+                panel.gameObject.SetActive(true);
+                panel.ObjectToFollow = spawnedObject.transform.parent.gameObject;
+                return;
+            }
         }
     }
 }

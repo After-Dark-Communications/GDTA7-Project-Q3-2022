@@ -13,12 +13,6 @@ namespace Projectiles
 
         private int projectileDamage;
         private int amountToSpawn;
-    private void Update()
-    {
-        if (gameObject.activeSelf == false)
-            return;
-
-        currentLifeTime += Time.deltaTime;
 
         private float armingTime;
         private float projectileSpeed;
@@ -39,6 +33,8 @@ namespace Projectiles
         private void Update()
         {
             currentLifeTime += Time.deltaTime;
+            if (gameObject.activeSelf == false)
+                return;
 
             if (currentLifeTime < lifeTime)
                 return;

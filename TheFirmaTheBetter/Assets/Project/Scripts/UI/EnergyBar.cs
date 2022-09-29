@@ -1,14 +1,18 @@
+using EventSystem;
 using UnityEngine;
 
-public class EnergyBar : ShipStatBar
+namespace UI
 {
-    private void OnEnable()
+    public class EnergyBar : ShipStatBar
     {
-        Channels.OnEnergyChanged += UpdateStatbar;
-    }
+        private void OnEnable()
+        {
+            Channels.OnEnergyChanged += UpdateStatbar;
+        }
 
-    private void OnDisable()
-    {
-        Channels.OnEnergyChanged -= UpdateStatbar;
+        private void OnDisable()
+        {
+            Channels.OnEnergyChanged -= UpdateStatbar;
+        }
     }
 }

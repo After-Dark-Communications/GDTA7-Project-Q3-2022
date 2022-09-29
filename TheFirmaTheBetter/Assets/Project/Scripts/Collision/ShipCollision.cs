@@ -14,7 +14,16 @@ namespace Collisions
         private void Awake()
         {
             shipBuilder = GetComponent<ShipBuilder>();
-            rigidbody = GetComponentInParent<Rigidbody>();
+            Channels.OnPlayerSpawned += ShipSpawned;
+
+        }
+
+        private void ShipSpawned(GameObject SpawnedShip, int playerIndex)
+        {
+            if (playerIndex == shipBuilder.PlayerNumber)
+            {
+                rigidbody = GetComponentInParent<Rigidbody>();
+            }
         }
 
         public void DestroySelf()
@@ -45,9 +54,20 @@ namespace Collisions
             {
                 Rigidbody otherRigidbody = shipCollision.gameObject.GetComponentInParent<Rigidbody>();
                 Debug.Log($"{shipCollision?.gameObject.name}'s rigidbody: {otherRigidbody}");
-                //get velocity of other ship
-                //get dot product of both this and other ship's velocity
-                //push and rotate this ship in that direction
+                if (otherRigidbody)
+                {
+                    Vector3 bumpDir = transform.position - shipCollision.transform.position;
+
+                    //apply force to both ships based on position delta
+                    Debug.DrawLine(transform.position, transform.position + (bumpDir.normalized * otherRigidbody.velocity.magnitude), Color.red, 2f);
+                    Debug.Log(bumpDir.normalized * otherRigidbody.velocity.magnitude);
+                    rigidbody.AddForce(bumpDir.normalized * otherRigidbody.velocity.magnitude, ForceMode.Impulse);//issue, some bumps are too strong
+
+                    //swap velocities of bumping rigidbodies
+                    //Vector3 vel = otherRigidbody.velocity;
+                    //otherRigidbody.velocity = rigidbody.velocity;
+                    //rigidbody.velocity = vel;
+                }
             }
         }
 

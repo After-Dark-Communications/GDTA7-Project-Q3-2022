@@ -8,19 +8,19 @@ namespace ShipParts.Weapons
         [SerializeField]
         private string weaponName;
 
-    [SerializeField]
-    private GameObject projectilePrefab;
-    [SerializeField]
-    private float armingTime;
-    [Header("Weapon stats")]
-    [SerializeField]
-    [Range(0, 10)]
-    [Tooltip("Bullets per second")]
-    private float fireRate;
-    [SerializeField]
-    [Range(0, 10)]
-    [Tooltip("Cost in energy to fire weapon")]
-    private int energyCost;
+        [SerializeField]
+        private GameObject projectilePrefab;
+        [SerializeField]
+        private float armingTime;
+        [Header("Weapon stats")]
+        [SerializeField]
+        [Range(0, 10)]
+        [Tooltip("Bullets per second")]
+        private float fireRate;
+        [SerializeField]
+        [Range(0, 10)]
+        [Tooltip("Cost in energy to fire weapon")]
+        private int energyCost;
 
         [SerializeField]
         [Range(0, 45)]
@@ -36,7 +36,8 @@ namespace ShipParts.Weapons
         public float SideSpreadAngle { get { return sideSpreadAngle; } }
         public float Range { get { return range; } }
 
-    public float ArmingTime => armingTime;
+        public float ArmingTime => armingTime;
 
-    public int EnergyCost => energyCost;
+        public int EnergyCost => energyCost;
+    }
 }

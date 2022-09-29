@@ -1,26 +1,30 @@
+using EventSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthBarSpawner : MonoBehaviour
+namespace UI
 {
-    [SerializeField]
-    private List<Healthbar> AllHealthbars = new List<Healthbar>();
-
-    private void Awake()
+    public class HealthBarSpawner : MonoBehaviour
     {
-        Channels.OnPlayerSpawned += OnPlayerSpawned;
-    }
+        [SerializeField]
+        private List<Healthbar> AllHealthbars = new List<Healthbar>();
 
-    private void OnPlayerSpawned(GameObject spawnedObject, int playerNumber)
-    {
-        foreach (Healthbar healthbar in AllHealthbars)
+        private void Awake()
         {
-            if (playerNumber != healthbar.PlayerIndex)
-                continue;
+            Channels.OnPlayerSpawned += OnPlayerSpawned;
+        }
 
-            healthbar.gameObject.SetActive(true);
+        private void OnPlayerSpawned(GameObject spawnedObject, int playerNumber)
+        {
+            foreach (Healthbar healthbar in AllHealthbars)
+            {
+                if (playerNumber != healthbar.PlayerIndex)
+                    continue;
+
+                healthbar.gameObject.SetActive(true);
+            }
         }
     }
 }

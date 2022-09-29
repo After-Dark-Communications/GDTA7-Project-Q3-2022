@@ -1,10 +1,9 @@
-using ShipParts;
+using EventSystem;
 using Pooling;
 using Projectiles;
+using ShipParts.Ship;
 using ShipSelection.ShipBuilders.ConnectionPoints;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Util;
 
@@ -36,7 +35,7 @@ namespace ShipParts.Weapons
             Channels.OnChangeFireMode += OnChangeFireMode;
             canShoot = true;
 
-            if (RootInputHandler != null)
+            if (rootInputHandler != null)
             {
                 rootInputHandler.OnPlayerAim.AddListener(AimWeapon);
                 rootInputHandler.OnPlayerShoot.AddListener(ShootWeapon);
@@ -103,7 +102,7 @@ namespace ShipParts.Weapons
 
                 ReturnProjectileToPoolAfterTime(projectile);
             }
-    
+
             lastShootTime = Time.time;
 
 

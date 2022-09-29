@@ -1,12 +1,14 @@
-﻿using Assets.Project.Scripts.Zones;
+﻿using Zones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using ShipParts.Ship;
+using EventSystem;
 
-namespace Assets.Project.Scripts.ShipParts
+namespace ShipParts
 {
     public class ShipZoneInteraction : MonoBehaviour, IHaveZoneInteraction
     {

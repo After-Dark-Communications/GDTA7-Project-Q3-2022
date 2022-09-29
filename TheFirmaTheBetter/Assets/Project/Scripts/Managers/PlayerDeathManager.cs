@@ -1,17 +1,22 @@
+using EventSystem;
+using ShipParts.Ship;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDeathManager : MonoBehaviour
+namespace Managers
 {
-    private void Awake()
+    public class PlayerDeathManager : MonoBehaviour
     {
-        Channels.OnPlayerBecomesDeath += OnPlayerDeath;
-    }
+        private void Awake()
+        {
+            Channels.OnPlayerBecomesDeath += OnPlayerDeath;
+        }
 
-    private void OnPlayerDeath(ShipBuilder shipBuilderThatDied)
-    {
-        shipBuilderThatDied.gameObject.SetActive(false);
+        private void OnPlayerDeath(ShipBuilder shipBuilderThatDied)
+        {
+            shipBuilderThatDied.gameObject.SetActive(false);
+        }
     }
 }

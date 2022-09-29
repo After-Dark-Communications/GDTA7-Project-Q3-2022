@@ -1,5 +1,5 @@
 using EventSystem;
-using Assets.Project.Scripts.Zones;
+using Zones;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
