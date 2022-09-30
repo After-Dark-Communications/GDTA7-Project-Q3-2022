@@ -17,8 +17,8 @@ MonoBehaviour:
   weaponName: Slow fire rate
   projectilePrefab: {fileID: 8795236707980728124, guid: cffc0c60e9c1c5c4282f1e1ce8ad4a65,
     type: 3}
-  armingTime: 1
-  fireRate: 1
+  armingTime: 0
+  fireRate: 3
   amountOfBullets: 1
   energyCost: 1
   weaponFireEvent:
@@ -28,5 +28,5 @@ MonoBehaviour:
       Data3: -1323155564
       Data4: -262866754
     Path: event:/Weapons/Weap_Laser
-  sideSpreadAngle: 5.4
-  range: 53.5
+  sideSpreadAngle: 6
+  range: 80

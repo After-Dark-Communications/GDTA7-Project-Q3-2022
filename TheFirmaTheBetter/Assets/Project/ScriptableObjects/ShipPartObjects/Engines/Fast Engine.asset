@@ -15,5 +15,5 @@ MonoBehaviour:
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 30
   speed: 150
-  handling: 500
+  handling: 2
   fuelUsage: 70
