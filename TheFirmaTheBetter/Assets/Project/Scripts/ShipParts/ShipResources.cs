@@ -40,6 +40,13 @@ namespace ShipParts
 
             shipHealth.UpdateHealth(shipStats);
             shipEnergy.UpdateEnergy(shipStats);
+
+            int[] partWeights = new int[shipBuilder.SelectedParts.Count];
+            for (int i = 0; i < partWeights.Length; i++)
+            {
+                partWeights[i] = shipBuilder.SelectedParts[i].GetData().PartWeight;
+            }
+            shipStats.SetTotalWeight(shipBuilder, partWeights);
         }
 
         private void OnShipPartSelected(Part selectedPart, int playerNumber)
@@ -49,15 +56,13 @@ namespace ShipParts
 
             if (selectedPart is Engine)
             {
-                shipStats.UpdateStats(selectedPart.GetData() as EngineData);
+                shipStats.UpdateStats(selectedPart.GetData() as EngineData, shipBuilder);
             }
 
             if (selectedPart is Core)
             {
-                shipStats.UpdateStats(selectedPart.GetData() as CoreData);
+                shipStats.UpdateStats(selectedPart.GetData() as CoreData, shipBuilder);
             }
-
-            Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, shipStats);
         }
 
         public int CurrentEnergyAmount => shipEnergy.CurrentEnergyAmount;

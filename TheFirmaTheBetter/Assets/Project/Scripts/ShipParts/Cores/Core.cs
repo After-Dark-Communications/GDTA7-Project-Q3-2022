@@ -11,6 +11,7 @@ namespace ShipParts.Cores
     {
         [SerializeField]
         private CoreData coreData;
+        private ShipResources shipResources;
 
         public override string PartCategoryName => "Core";
 
@@ -37,6 +38,7 @@ namespace ShipParts.Cores
         //TODO: determine drag based on weight
         protected override void Setup()
         {
+            shipResources = GetComponentInParent<ShipResources>();
             if (rootInputHandler != null)
             {
                 shipRoot.GetComponent<ShipBody>().OnPlayerCrash.AddListener(CrashShip);
@@ -48,7 +50,7 @@ namespace ShipParts.Cores
             ICollidable collisionObject = other.GetComponentInChildren<ICollidable>();
             if (collisionObject != null)
             {//bump ship
-                collisionObject.HandleCollision(thisCollision);
+                collisionObject.HandleCollision(thisCollision, shipResources.ShipStats);
             }
         }
     }

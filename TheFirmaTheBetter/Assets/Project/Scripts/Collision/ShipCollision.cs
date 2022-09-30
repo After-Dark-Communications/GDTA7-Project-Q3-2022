@@ -11,6 +11,8 @@ namespace Collisions
         private ShipBuilder shipBuilder;
         private Rigidbody rigidbody;
 
+        private const float _collisionWeightImpactMultiplier = 0.1f;
+
         private void Awake()
         {
             shipBuilder = GetComponent<ShipBuilder>();
@@ -31,7 +33,7 @@ namespace Collisions
 
         }
 
-        public void HandleCollision<T1>(T1 objectThatHit) where T1 : ICollidable
+        public void HandleCollision<T1>(T1 objectThatHit, ShipStats shipStats) where T1 : ICollidable
         {
 
             if (objectThatHit is Projectile)
@@ -41,11 +43,11 @@ namespace Collisions
 
             if (objectThatHit is ShipCollision)
             {
-                HandleHitByOtherShip(objectThatHit as ShipCollision);
+                HandleHitByOtherShip(objectThatHit as ShipCollision, shipStats);
             }
         }
 
-        private void HandleHitByOtherShip(ShipCollision shipCollision)
+        private void HandleHitByOtherShip(ShipCollision shipCollision, ShipStats shipStats)
         {
             if (shipCollision != null)
             {
@@ -53,11 +55,12 @@ namespace Collisions
                 if (otherRigidbody)
                 {
                     Vector3 bumpDir = transform.position - shipCollision.transform.position;
-
+                    float totalBumpForce = otherRigidbody.velocity.magnitude * (shipStats.TotalWeight * _collisionWeightImpactMultiplier);
                     //apply force to both ships based on position delta
-                    //TODO: adjust force based on (total?) weight of ship
-                    rigidbody.AddForce(bumpDir.normalized * otherRigidbody.velocity.magnitude, ForceMode.Impulse);//issue, some bumps are too strong
-                    //Debug.DrawLine(transform.position, transform.position + (bumpDir.normalized * otherRigidbody.velocity.magnitude), Color.red, 2f);
+                    //TODO: adjust force based on total weight of ship?
+                    Debug.DrawLine(transform.position, transform.position + (bumpDir.normalized * totalBumpForce), Color.red, 2f);
+                    Debug.Log("BumpForce: " + totalBumpForce);
+                    rigidbody.AddForce(bumpDir.normalized * totalBumpForce, ForceMode.Impulse);//issue, some bumps are too strong
                 }
             }
         }
