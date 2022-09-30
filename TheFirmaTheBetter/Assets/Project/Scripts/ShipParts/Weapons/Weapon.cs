@@ -83,7 +83,6 @@ namespace ShipParts.Weapons
         {
             if (canShoot == false)
                 return;
-
             for (int i = 0; i < weaponData.AmountOfBullets; i++)
             {
                 if (weaponData.EnergyCost > shipResources.CurrentEnergyAmount)
@@ -106,6 +105,8 @@ namespace ShipParts.Weapons
                     FireProjectile(projectileObject, direction, projectile);
 
                     ReturnProjectileToPoolAfterTime(projectile);
+
+                    Channels.OnWeaponFired?.Invoke(weaponData.WeaponFireEvent);
                 }
             }
 

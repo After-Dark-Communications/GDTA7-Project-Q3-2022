@@ -10,6 +10,12 @@ public class OneShotEventHandler : MonoBehaviour
     public void Start()
     {
         Channels.OnEnergyEmpty += PlayEnergyEmpty;
+        Channels.OnWeaponFired += PlayEvent;
+    }
+
+    public void PlayEvent(FMODUnity.EventReference fmodEvent)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(fmodEvent, transform.position);
     }
 
     public void PlayEnergyEmpty()

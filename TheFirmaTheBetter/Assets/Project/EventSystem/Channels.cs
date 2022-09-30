@@ -87,6 +87,10 @@ namespace EventSystem
         /// </summary>
         public static Action<int, float> OnFuelChanged;
 
+        /// <summary>
+        /// <para><see cref="FMODUnity.EventReference"/>The weapon's event to play</para>
+        /// </summary>
+        public static Action<FMODUnity.EventReference> OnWeaponFired;
     }
 
 }
