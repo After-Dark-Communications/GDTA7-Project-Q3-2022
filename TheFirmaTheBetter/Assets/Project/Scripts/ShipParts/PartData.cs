@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace ShipParts
 {
-    public class PartData : ScriptableObject
-    {
-        [Header("PartStats")]
-        [SerializeField]
-        private Vector3 connectionPoint;
+    [Header("PartStats")]
+    [SerializeField]
+    private string partName = "part";
+    [SerializeField]
+    private Vector3 connectionPoint;
 
         [SerializeField]
         private int partWeight;
@@ -18,7 +18,9 @@ namespace ShipParts
         [SerializeField]
         private DataModifier dragModifier;
 
-        public Vector3 ConnectionPoint => connectionPoint;
+    public string PartName => partName;
+
+    public Vector3 ConnectionPoint => connectionPoint;
 
         public int PartWeight => partWeight;
 

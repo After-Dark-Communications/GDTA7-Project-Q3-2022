@@ -66,5 +66,6 @@ namespace ShipSelection
         }
 
         public SelectableCollection CurrentSelectedCollection => selectionCollections[currentSelectedCollectionIndex];
+        public int CurrentSelectedIndex { get => currentSelectedCollectionIndex; }
     }
 }

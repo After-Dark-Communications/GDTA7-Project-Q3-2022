@@ -41,6 +41,14 @@ namespace ShipParts
             shipHealth.UpdateHealth(shipStats);
             shipEnergy.UpdateEnergy(shipStats);
         }
+        if (selectedPart is Weapon)
+        {
+            shipStats.UpdateStats(selectedPart.GetData() as WeaponData);
+        }
+        if (selectedPart is SpecialAbility)
+        {
+            shipStats.UpdateStats(selectedPart.GetData() as SpecialData);
+        }
 
         private void OnShipPartSelected(Part selectedPart, int playerNumber)
         {

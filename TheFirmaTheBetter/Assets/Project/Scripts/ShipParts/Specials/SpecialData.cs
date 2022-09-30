@@ -7,10 +7,13 @@ namespace ShipParts.Specials
     [CreateAssetMenu(fileName = "NewSpecialData", menuName = "Part/Create new SpecialData")]
     public class SpecialData : PartData
     {
-        [Header("SpecialStats")]
-        [SerializeField]
-        private int abilityCooldown;
+    [Header("SpecialStats")]
+    [SerializeField]
+    private string description;
+    [SerializeField]
+    private int abilityCooldown;
 
-        public int AbilityCooldown => abilityCooldown;
-    }
+    public string Description => description;
+
+    public int AbilityCooldown => abilityCooldown;
 }
