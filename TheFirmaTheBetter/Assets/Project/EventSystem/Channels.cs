@@ -82,5 +82,10 @@ public static class Channels
     /// <para><see cref="float" /> New fuel persentage </para>
     /// </summary>
     public static Action<int, float> OnFuelChanged;
+    /// <summary>
+    /// <para><see cref="int" /> The number of the enabled stat Game Object: 0 is Ship stats, 1 is Weapon stats</para>
+    /// <para><see cref="int" /> The player number </para>
+    /// </summary>
+    public static Action<int, int> OnEnabledStatGameObject;
 
 }

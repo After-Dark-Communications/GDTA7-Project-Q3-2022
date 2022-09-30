@@ -7,6 +7,8 @@ public class PartData : ScriptableObject
 {
     [Header("PartStats")]
     [SerializeField]
+    private string partName = "part";
+    [SerializeField]
     private Vector3 connectionPoint;
 
     [SerializeField]
@@ -15,6 +17,8 @@ public class PartData : ScriptableObject
     [Header("Modifiers")]
     [SerializeField]
     private DataModifier dragModifier;
+
+    public string PartName => partName;
 
     public Vector3 ConnectionPoint => connectionPoint;
 

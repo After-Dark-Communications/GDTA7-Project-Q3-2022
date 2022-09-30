@@ -25,6 +25,10 @@ public class PlayerInputCatcher : MonoBehaviour
         {
             selectionBar.OnNavigate_Down();
         }
+        int selectionBarIndex = selectionBar.CurrentSelectedIndex;
+        int playerNumber = playerSelectionScreen.PlayerNumber;
+
+        Channels.Input.OnSelectionBarUpAndDownNaviagtedInput.Invoke(playerNumber,selectionBarIndex);
     }
 
     public void OnInputConfirmShip(InputAction.CallbackContext callbackContext)

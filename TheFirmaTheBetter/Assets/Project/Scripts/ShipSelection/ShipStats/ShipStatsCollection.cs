@@ -14,23 +14,23 @@ public class ShipStatsCollection : MonoBehaviour
 
     private void Start()
     {
-        foreach (Stat stat in gameObject.GetComponentsInChildren<Stat>())
-        {
-            switch (stat)
-            {
-                case ShipStat shipStat:
-                    shipStats.Add(shipStat);
-                    break;
-                case WeaponStat weaponStat:
-                    weaponStats.Add(weaponStat);
-                    break;
-                case SpecialStat specialStat:
-                    specialStats.Add(specialStat);
-                    break;
-                default:
-                    break;
-            }
-        }
+        //foreach (Stat stat in gameObject.GetComponentsInChildren<Stat>())
+        //{
+        //    switch (stat)
+        //    {
+        //        case ShipStat shipStat:
+        //            shipStats.Add(shipStat);
+        //            break;
+        //        case WeaponStat weaponStat:
+        //            weaponStats.Add(weaponStat);
+        //            break;
+        //        case SpecialStat specialStat:
+        //            specialStats.Add(specialStat);
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
     }
 
     public List<ShipStat> ShipStats { get => shipStats; }

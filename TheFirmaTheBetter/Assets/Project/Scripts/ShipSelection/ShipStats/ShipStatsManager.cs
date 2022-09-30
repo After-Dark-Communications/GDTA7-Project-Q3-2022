@@ -9,6 +9,8 @@ public class ShipStatsManager : MonoBehaviour
     [SerializeField]
     private ShipStatsCollection stats;
     [SerializeField]
+    private int enabledStatGameObjectIndex;
+    [SerializeField]
     private int playerIndex;
     private void Awake()
     {
@@ -19,14 +21,36 @@ public class ShipStatsManager : MonoBehaviour
         }
 
         Channels.OnPlayerStatsChanged += PlayerStatChange;
+        Channels.OnEnabledStatGameObject += SetAsEnableGameObject;
+    }
+
+    private void SetAsEnableGameObject(int activateStatGameObjectIndex, int playerNumber)
+    {
+        if (playerIndex != playerNumber)
+            return;
+        enabledStatGameObjectIndex = activateStatGameObjectIndex;
     }
 
     private void PlayerStatChange(ShipBuilder shipBuilder, ShipStats changedShipStats)
     {
         if (playerIndex != shipBuilder.PlayerNumber)
             return;
-        SetShipStats(stats.ShipStats, changedShipStats);
-        SetWeaponStats(stats.WeaponStats, changedShipStats);
+
+        switch (enabledStatGameObjectIndex)
+        {
+            case 0:
+                SetShipStats(stats.ShipStats, changedShipStats);
+                break;
+            case 1:
+                SetWeaponStats(stats.WeaponStats, changedShipStats);
+                break;
+            case 2:
+                SetSpecialStats(stats.SpecialStats, changedShipStats);
+                break;
+            default:
+                break;
+        }
+
     }
 
     private void SetShipStats(List<ShipStat> shipStatsUI, ShipStats changedShipStats)
@@ -43,6 +67,12 @@ public class ShipStatsManager : MonoBehaviour
         weaponStatsUI[0].StatValue.text = changedWeaponStats.Range.ToString();
         weaponStatsUI[1].StatValue.text = changedWeaponStats.FireRate.ToString();
         weaponStatsUI[2].StatValue.text = changedWeaponStats.EnergyCost.ToString();
+    }
+
+    private void SetSpecialStats(List<SpecialStat> specialStatsUI, ShipStats changedSpecialStats)
+    {
+        specialStatsUI[0].StatName.text = changedSpecialStats.SpecialName.ToString();
+        specialStatsUI[0].Description.text = changedSpecialStats.SpecialDescription.ToString();
     }
 
     public int PlayerIndex { get { return playerIndex; } set { playerIndex = value; } }

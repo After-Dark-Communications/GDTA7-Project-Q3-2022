@@ -26,6 +26,9 @@ namespace ShipParts
         private float _range;
         private float _fireRate;
         private float _energyCost;
+        //special
+        private string _specialName;
+        private string _specialDescription;
 
         private readonly List<float> _speedModifier;
         private readonly List<float> _handlingModifier;
@@ -57,6 +60,9 @@ namespace ShipParts
             _range = 0;
             _fireRate = 0;
             _energyCost = 0;
+            //special
+            _specialName = "";
+            _specialDescription = "";
 
             //initialize lists
             _speedModifier = new List<float>();
@@ -91,6 +97,11 @@ namespace ShipParts
             _energyCost = weaponData.EnergyCost;
         }
 
+        public void UpdateStats(SpecialData specialData)
+        {
+            _specialName = specialData.PartName;
+            _specialDescription = specialData.Description;
+        }
 
         public float Speed { get => _speed; }
         public float Handling { get => _handling; }
@@ -102,6 +113,8 @@ namespace ShipParts
         public float Range { get => _range; }
         public float FireRate { get => _fireRate; }
         public float EnergyCost { get => _energyCost; }
+        public string SpecialName { get => _specialName; }
+        public string SpecialDescription { get => _specialDescription; }
 
         public List<float> SpeedModifier => _speedModifier;
         public List<float> handlingModifier => _handlingModifier;

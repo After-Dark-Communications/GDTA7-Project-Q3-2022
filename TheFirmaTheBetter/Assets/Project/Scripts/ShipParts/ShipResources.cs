@@ -56,6 +56,10 @@ public class ShipResources : MonoBehaviour
         {
             shipStats.UpdateStats(selectedPart.GetData() as WeaponData);
         }
+        if (selectedPart is SpecialAbility)
+        {
+            shipStats.UpdateStats(selectedPart.GetData() as SpecialData);
+        }
 
         Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, shipStats);
     }
