@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1517596049251841086}
   - component: {fileID: 8506073912017806675}
   - component: {fileID: 1799470718415815863}
+  - component: {fileID: -7354329224114436568}
   m_Layer: 0
   m_Name: Player Ship
   m_TagString: Player
@@ -139,6 +140,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RPMSpeed: 50
+--- !u!114 &-7354329224114436568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3459444363550364846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 613b15b6d8ee25444ad8f0df2e47a95b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuelEmptyEvent:
+    Guid:
+      Data1: 150556774
+      Data2: 1204776458
+      Data3: -623659358
+      Data4: 1365131661
+    Path: event:/Vehicles/Energy Empty
 --- !u!1001 &5970501817694765255
 PrefabInstance:
   m_ObjectHideFlags: 0
