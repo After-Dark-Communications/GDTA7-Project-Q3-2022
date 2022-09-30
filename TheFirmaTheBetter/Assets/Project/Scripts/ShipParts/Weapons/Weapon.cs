@@ -95,20 +95,19 @@ namespace ShipParts.Weapons
             if (canShoot == false)
                 return;
 
-
             if (lastShootTime + 1 / weaponData.FireRate >= Time.time)
                 return;
 
             lastShootTime = Time.time;
 
+            if (weaponData.EnergyCost > shipResources.CurrentEnergyAmount)
+            {
+                Channels.OnEnergyEmpty?.Invoke();
+                return;
+            }
+
             for (int i = 0; i < weaponData.AmountOfBullets; i++)
             {
-                if (weaponData.EnergyCost > shipResources.CurrentEnergyAmount)
-                {
-                    Channels.OnEnergyEmpty?.Invoke();
-                    return;
-                }
-
                 foreach (Transform point in projectileStartingPoints)
                 {
                     GameObject projectileObject;
