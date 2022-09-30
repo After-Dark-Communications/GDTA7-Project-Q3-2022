@@ -1,4 +1,4 @@
-﻿using Parts;
+﻿using ShipParts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

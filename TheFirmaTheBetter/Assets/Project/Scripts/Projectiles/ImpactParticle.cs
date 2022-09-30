@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(ParticleSystem))]
-public class ImpactParticle : MonoBehaviour
+namespace Projectiles
 {
-    private ParticleSystem particleSystem;
-    // Start is called before the first frame update
-    private void OnEnable()
+    [RequireComponent(typeof(ParticleSystem))]
+    public class ImpactParticle : MonoBehaviour
     {
-        particleSystem = GetComponent<ParticleSystem>();
-        particleSystem.Play();
+        private ParticleSystem particleSystem;
+        // Start is called before the first frame update
+        private void OnEnable()
+        {
+            particleSystem = GetComponent<ParticleSystem>();
+            particleSystem.Play();
+        }
+
+        public void ResetPoolItem()
+        {
+            particleSystem.Clear();
+        }
+
+        public ParticleSystem ParticleSystem { get { return particleSystem; } }
+
     }
-
-    public void ResetPoolItem()
-    {
-        particleSystem.Clear();
-    }
-
-    public ParticleSystem ParticleSystem { get { return particleSystem; } }
-
 }

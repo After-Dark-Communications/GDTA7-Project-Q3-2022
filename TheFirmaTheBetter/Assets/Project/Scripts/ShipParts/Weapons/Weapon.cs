@@ -1,11 +1,13 @@
-using ShipSelection.ShipBuilder.ConnectionPoints;
-using System;
+using EventSystem;
+using Pooling;
+using Projectiles;
+using ShipParts.Ship;
+using ShipSelection.ShipBuilders.ConnectionPoints;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Util;
 
-namespace Parts
+namespace ShipParts.Weapons
 {
     [AddComponentMenu("Parts/Weapon")]
     public class Weapon : Part
@@ -21,12 +23,22 @@ namespace Parts
         private ObjectPool projectilesPool;
         private float lastShootTime;
 
+        private ShipResources shipResources;
+        private int playerNumber;
+        private bool canShoot;
+
         protected override void Setup()
         {
-            if (RootInputHandler != null)
+            shipResources = GetComponentInParent<ShipResources>();
+            playerNumber = GetComponentInParent<ShipBuilder>().PlayerNumber;
+
+            Channels.OnChangeFireMode += OnChangeFireMode;
+            canShoot = true;
+
+            if (rootInputHandler != null)
             {
-                RootInputHandler.OnPlayerAim.AddListener(AimWeapon);
-                RootInputHandler.OnPlayerShoot.AddListener(ShootWeapon);
+                rootInputHandler.OnPlayerAim.AddListener(AimWeapon);
+                rootInputHandler.OnPlayerShoot.AddListener(ShootWeapon);
             }
 
             if (weaponData != null)
@@ -35,9 +47,9 @@ namespace Parts
             }
         }
 
-        private void OnPlayerSpawned(GameObject spawnedObject, int playerNumber)
+        private void OnChangeFireMode(bool newValue)
         {
-            throw new NotImplementedException();
+            canShoot = newValue;
         }
 
         private void ShootWeapon(ButtonStates state)
@@ -69,31 +81,59 @@ namespace Parts
 
         public void FireWeapon()
         {
-            if (lastShootTime + 1 / weaponData.FireRate < Time.time)
+            if (canShoot == false)
+                return;
+
+            for (int i = 0; i < weaponData.AmountOfBullets; i++)
             {
-                foreach (Transform point in projectileStartingPoints)
+                if (weaponData.EnergyCost > shipResources.CurrentEnergyAmount)
                 {
-                    // Get projectile from pool
-                    GameObject projectileObject = projectilesPool.RentFromPool();
-                    projectileObject.transform.SetPositionAndRotation(point.position, point.rotation);
-
-                    Vector3 direction = GetShootDirection(point, weaponData.SideSpreadAngle);
-
-                    Projectile projectile = projectileObject.GetComponent<Projectile>();
-
-                    // Fire projectile
-                    projectileObject.GetComponent<Rigidbody>().AddForce(direction * projectile.ProjectileSpeed, ForceMode.Impulse);
-
-                    // Return projectile after time
-                    float projectileLifetime = weaponData.Range / projectile.ProjectileSpeed;
-                    StartCoroutine(ArmProjectile(projectile));
-                    projectile.SetupProjectile(projectilesPool, projectileLifetime);
+                    Channels.OnEnergyEmpty?.Invoke();
+                    return;
                 }
 
-                lastShootTime = Time.time;
+                if (lastShootTime + 1 / weaponData.FireRate >= Time.time)
+                    return;
+
+                foreach (Transform point in projectileStartingPoints)
+                {
+                    GameObject projectileObject;
+                    Vector3 direction;
+                    Projectile projectile;
+
+                    GetNewProjectileFromPool(point, out projectileObject, out direction, out projectile);
+
+                    FireProjectile(projectileObject, direction, projectile);
+
+                    ReturnProjectileToPoolAfterTime(projectile);
+                }
+            }
+
+            lastShootTime = Time.time;
+
+
+            void ReturnProjectileToPoolAfterTime(Projectile projectile)
+            {
+                float projectileLifetime = weaponData.Range / projectile.ProjectileSpeed;
+                StartCoroutine(ArmProjectile(projectile));
+                projectile.SetupProjectile(projectilesPool, projectileLifetime);
+            }
+
+            void FireProjectile(GameObject projectileObject, Vector3 direction, Projectile projectile)
+            {
+                projectileObject.GetComponent<Rigidbody>().AddForce(direction * projectile.ProjectileSpeed, ForceMode.Impulse);
+                Channels.OnEnergyUsed.Invoke(playerNumber, weaponData.EnergyCost);
+            }
+
+            void GetNewProjectileFromPool(Transform point, out GameObject projectileObject, out Vector3 direction, out Projectile projectile)
+            {
+                projectileObject = projectilesPool.RentFromPool();
+                projectileObject.transform.SetPositionAndRotation(point.position, point.rotation);
+
+                direction = GetShootDirection(point, weaponData.SideSpreadAngle);
+                projectile = projectileObject.GetComponent<Projectile>();
             }
         }
-
 
         private IEnumerator ArmProjectile(Projectile projectile)
         {

@@ -1,4 +1,7 @@
-﻿public interface IObjectPoolItem
+﻿namespace Pooling
 {
-    public void ResetPoolItem();
+    public interface IObjectPoolItem
+    {
+        public void ResetPoolItem();
+    }
 }

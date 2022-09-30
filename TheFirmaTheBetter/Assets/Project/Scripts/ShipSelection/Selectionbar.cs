@@ -1,5 +1,5 @@
 using Helper;
-using Parts;
+using ShipParts;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;

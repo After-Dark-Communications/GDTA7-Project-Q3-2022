@@ -1,7 +1,10 @@
 ﻿using System;
 using UnityEngine;
 
-public class MovementChannel
+namespace EventSystem
 {
-
+    public class MovementChannel
+    {
+        public Action<Vector2, int> OnShipMove;
+    }
 }

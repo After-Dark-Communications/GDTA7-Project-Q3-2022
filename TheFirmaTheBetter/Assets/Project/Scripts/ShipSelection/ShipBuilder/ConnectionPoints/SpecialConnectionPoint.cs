@@ -1,11 +1,7 @@
-﻿using Parts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShipParts;
+using ShipParts.Specials;
 
-namespace  ShipSelection.ShipBuilder.ConnectionPoints
+namespace ShipSelection.ShipBuilders.ConnectionPoints
 {
     public class SpecialConnectionPoint : ConnectionPoint
     {

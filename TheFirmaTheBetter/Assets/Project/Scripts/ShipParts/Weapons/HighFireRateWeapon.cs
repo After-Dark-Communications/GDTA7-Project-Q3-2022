@@ -1,13 +1,6 @@
-﻿using Parts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace  ShipParts.Weapons
+﻿namespace ShipParts.Weapons
 {
-    internal class HighFireRateWeapon :Weapon
+    internal class HighFireRateWeapon : Weapon
     {
     }
 }

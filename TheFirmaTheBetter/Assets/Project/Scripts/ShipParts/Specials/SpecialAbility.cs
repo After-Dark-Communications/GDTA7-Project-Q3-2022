@@ -1,9 +1,10 @@
-﻿using  ShipSelection.ShipBuilder.ConnectionPoints;
+﻿using ShipParts;
+using ShipSelection.ShipBuilders.ConnectionPoints;
 using System;
 using UnityEngine;
 using Util;
 
-namespace Parts
+namespace ShipParts.Specials
 {
     [AddComponentMenu("Parts/Special")]
     public class SpecialAbility : Part
@@ -31,9 +32,9 @@ namespace Parts
 
         protected override void Setup()
         {
-            if (RootInputHandler != null)
+            if (rootInputHandler != null)
             {
-                RootInputHandler.OnPlayerSpecial.AddListener(PerformSpecial);
+                rootInputHandler.OnPlayerSpecial.AddListener(PerformSpecial);
             }
         }
 

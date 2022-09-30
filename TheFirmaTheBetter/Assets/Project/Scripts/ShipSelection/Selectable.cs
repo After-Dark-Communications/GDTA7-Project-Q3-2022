@@ -1,9 +1,7 @@
-using Parts;
-using System.Collections;
-using System.Collections.Generic;
+using ShipParts;
 using UnityEngine;
 
-namespace  ShipSelection
+namespace ShipSelection
 {
     public class Selectable : MonoBehaviour
     {

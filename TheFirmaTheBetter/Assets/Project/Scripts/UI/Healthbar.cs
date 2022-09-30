@@ -1,41 +1,45 @@
+using EventSystem;
 using UnityEngine;
 
-public class Healthbar : ShipStatBar
+namespace UI
 {
-    [SerializeField]
-    private Color lowColor;
-
-    [SerializeField]
-    private Color mediumColor;
-
-    [SerializeField]
-    private Color highColor;
-
-    private void OnEnable()
+    public class Healthbar : ShipStatBar
     {
-        Channels.OnHealthChanged += UpdateStatbar;
-    }
+        [SerializeField]
+        private Color lowColor;
 
-    private void OnDisable()
-    {
-        Channels.OnHealthChanged -= UpdateStatbar;
-    }
+        [SerializeField]
+        private Color mediumColor;
 
-    protected override void UpdateFill(float fillAmount)
-    {
-        if (fillAmount < 0.33f)
+        [SerializeField]
+        private Color highColor;
+
+        private void OnEnable()
         {
-            fillImage.color = lowColor;
-        }
-        else if (fillAmount > 0.66f)
-        {
-            fillImage.color = highColor;
-        }
-        else
-        {
-            fillImage.color = mediumColor;
+            Channels.OnHealthChanged += UpdateStatbar;
         }
 
-        base.UpdateFill(fillAmount);
+        private void OnDisable()
+        {
+            Channels.OnHealthChanged -= UpdateStatbar;
+        }
+
+        protected override void UpdateFill(float fillAmount)
+        {
+            if (fillAmount < 0.33f)
+            {
+                fillImage.color = lowColor;
+            }
+            else if (fillAmount > 0.66f)
+            {
+                fillImage.color = highColor;
+            }
+            else
+            {
+                fillImage.color = mediumColor;
+            }
+
+            base.UpdateFill(fillAmount);
+        }
     }
 }

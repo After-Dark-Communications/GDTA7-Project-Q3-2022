@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipInfo : MonoBehaviour
+namespace ShipSelection
 {
-    [SerializeField]
-    private int playerNumber;
+    public class ShipInfo : MonoBehaviour
+    {
+        [SerializeField]
+        private int playerNumber;
 
-    public int PlayerNumber => playerNumber;
+        public int PlayerNumber => playerNumber;
+    }
 }

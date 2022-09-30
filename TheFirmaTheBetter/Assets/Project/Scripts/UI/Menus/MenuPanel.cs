@@ -10,12 +10,12 @@ public class MenuPanel : MonoBehaviour
     public void OpenPanel()
     {
         gameObject.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(firstSelected);
+        //EventSystems.current.SetSelectedGameObject(firstSelected);
     }
 
     public void ClosePanel()
     {
-        EventSystem.current.SetSelectedGameObject(null);
+        //EventSystems.current.SetSelectedGameObject(null);
         gameObject.SetActive(false);
     }
 }

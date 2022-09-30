@@ -1,14 +1,17 @@
-using UnityEngine;
+using EventSystem;
 
-public class FuelBar : ShipStatBar
+namespace UI
 {
-    private void OnEnable()
+    public class FuelBar : ShipStatBar
     {
-        Channels.OnFuelChanged += UpdateStatbar;
-    }
+        private void OnEnable()
+        {
+            Channels.OnFuelChanged += UpdateStatbar;
+        }
 
-    private void OnDisable()
-    {
-        Channels.OnFuelChanged -= UpdateStatbar;
+        private void OnDisable()
+        {
+            Channels.OnFuelChanged -= UpdateStatbar;
+        }
     }
 }

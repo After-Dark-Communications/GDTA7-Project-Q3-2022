@@ -1,22 +1,25 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class ShipStatBar : FillBar
+namespace UI
 {
-    [SerializeField]
-    private int playerIndex;
-
-    protected virtual void UpdateStatbar(int playerIndex, float statPrecentage)
+    public abstract class ShipStatBar : FillBar
     {
-        if (playerIndex == this.playerIndex)
+        [SerializeField]
+        private int playerIndex;
+
+        protected virtual void UpdateStatbar(int playerIndex, float statPrecentage)
         {
-            UpdateFill(statPrecentage);
+            if (playerIndex == this.playerIndex)
+            {
+                UpdateFill(statPrecentage);
+            }
         }
-    }
 
-    public int PlayerIndex
-    {
-        get { return playerIndex; }
-        set { if (value >= 1 && value <= 4) playerIndex = value; }
+        public int PlayerIndex
+        {
+            get { return playerIndex; }
+            set { if (value >= 1 && value <= 4) playerIndex = value; }
+        }
     }
 }

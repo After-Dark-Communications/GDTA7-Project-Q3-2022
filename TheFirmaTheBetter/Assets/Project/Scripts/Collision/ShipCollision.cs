@@ -1,44 +1,73 @@
-using Collisions;
+using EventSystem;
+using Projectiles;
+using ShipParts.Ship;
 using System;
 using UnityEngine;
 
-public class ShipCollision : MonoBehaviour, ICollidable
+namespace Collisions
 {
-    private ShipBuilder shipBuilder;
-
-    private void Awake()
+    public class ShipCollision : MonoBehaviour, ICollidable
     {
-        shipBuilder = GetComponent<ShipBuilder>();
-    }
+        private ShipBuilder shipBuilder;
+        private Rigidbody rigidbody;
 
-    public void DestroySelf()
-    {
-
-    }
-
-    public void HandleCollision<T1>(T1 objectThatHit) where T1 : ICollidable
-    {
-        if (objectThatHit is Projectile)
+        private void Awake()
         {
-            HandleHitByProjectile(objectThatHit as Projectile);
+            shipBuilder = GetComponent<ShipBuilder>();
+            Channels.OnPlayerSpawned += ShipSpawned;
+
         }
 
-        if (objectThatHit is ShipCollision)
+        private void ShipSpawned(GameObject SpawnedShip, int playerIndex)
         {
-            HandleHitByOtherShip(objectThatHit as ShipCollision);
+            if (playerIndex == shipBuilder.PlayerNumber)
+            {
+                rigidbody = GetComponentInParent<Rigidbody>();
+            }
         }
-    }
 
-    private void HandleHitByOtherShip(ShipCollision shipCollision)
-    {
-        //TODO: handle getting hit by other ship
-    }
+        public void DestroySelf()
+        {
 
-    private void HandleHitByProjectile(Projectile projectileThatHit)
-    {
-        //Debug.Log($"took damage! ({Channels.OnPlayerTakeDamage?.GetInvocationList().Length})called");
-        Channels.OnPlayerTakeDamage?.Invoke(shipBuilder, projectileThatHit.ProjectileDamage);
+        }
 
-        projectileThatHit.DestroySelf();
+        public void HandleCollision<T1>(T1 objectThatHit) where T1 : ICollidable
+        {
+
+            if (objectThatHit is Projectile)
+            {
+                HandleHitByProjectile(objectThatHit as Projectile);
+            }
+
+            if (objectThatHit is ShipCollision)
+            {
+                HandleHitByOtherShip(objectThatHit as ShipCollision);
+            }
+        }
+
+        private void HandleHitByOtherShip(ShipCollision shipCollision)
+        {
+            if (shipCollision != null)
+            {
+                Rigidbody otherRigidbody = shipCollision.gameObject.GetComponentInParent<Rigidbody>();
+                if (otherRigidbody)
+                {
+                    Vector3 bumpDir = transform.position - shipCollision.transform.position;
+
+                    //apply force to both ships based on position delta
+                    //TODO: adjust force based on (total?) weight of ship
+                    rigidbody.AddForce(bumpDir.normalized * otherRigidbody.velocity.magnitude, ForceMode.Impulse);//issue, some bumps are too strong
+                    //Debug.DrawLine(transform.position, transform.position + (bumpDir.normalized * otherRigidbody.velocity.magnitude), Color.red, 2f);
+                }
+            }
+        }
+
+        private void HandleHitByProjectile(Projectile projectileThatHit)
+        {
+            //Debug.Log($"took damage! ({Channels.OnPlayerTakeDamage?.GetInvocationList().Length})called");
+            Channels.OnPlayerTakeDamage?.Invoke(shipBuilder, projectileThatHit.ProjectileDamage);
+
+            projectileThatHit.DestroySelf();
+        }
     }
 }

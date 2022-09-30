@@ -1,11 +1,12 @@
-using ShipSelection.ShipBuilder.ConnectionPoints;
-using System.Collections;
-using System.Collections.Generic;
+using Collisions;
+using Controls;
+using ShipSelection;
+using ShipSelection.ShipBuilders.ConnectionPoints;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace Parts
+namespace ShipParts
 {
     public abstract class Part : MonoBehaviour
     {
@@ -23,24 +24,26 @@ namespace Parts
         public abstract bool IsMyConnectionType(ConnectionPoint connectionPoint);
         public abstract PartData GetData();
 
-        //protected Transform ShipRoot { get; private set; }
-        public Transform ShipRoot;
-        protected ShipInputHandler RootInputHandler { get; private set; }
-        protected Rigidbody ShipRigidBody { get; private set; }
-        protected InputDevice MyInputDevice { get; private set; }
+        protected Transform shipRoot { get; private set; }
+        protected ShipInputHandler rootInputHandler { get; private set; }
+        protected Rigidbody shipRigidBody { get; private set; }
+        protected InputDevice myInputDevice { get; private set; }
+        protected ShipCollision thisCollision { get; private set; }
 
         /// <summary>Sets the events and any other things that the part needs</summary>
         protected abstract void Setup();
 
-        public void SetupPart(Transform root, ShipInputHandler shipInputHandler, Rigidbody rigidbody, InputDevice playerDevice)
+        public void SetupPart(Transform root, ShipInputHandler shipInputHandler, Rigidbody rigidbody, InputDevice playerDevice, ShipCollision shipCollision)
         {
             //not virtual because ShipRoot and RootInputHanlder MUST be set before regular setup is called
-            ShipRoot = root;
-            RootInputHandler = shipInputHandler;
-            ShipRigidBody = rigidbody;
-            MyInputDevice = playerDevice;
+            shipRoot = root;
+            rootInputHandler = shipInputHandler;
+            shipRigidBody = rigidbody;
+            myInputDevice = playerDevice;
+            thisCollision = shipCollision;
             Setup();
         }
+
         public ConnectionPointsCollection ConnectionPointCollection => connectionPointCollection;
     }
 }

@@ -3,22 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewEngineData", menuName = "Part/Create new EngineData")]
-public class EngineData : PartData
+namespace ShipParts.Engines
 {
-    [Header("EngineStats")]
-    [SerializeField]
-    private float speed;
+    [CreateAssetMenu(fileName = "NewEngineData", menuName = "Part/Create new EngineData")]
+    public class EngineData : PartData
+    {
+        [Header("EngineStats")]
+        [SerializeField]
+        private float speed;
 
-    [SerializeField]
-    private float handling;
+        [SerializeField]
+        private float handling;
 
-    [SerializeField]
-    private float fuelUsage;
+        [SerializeField]
+        private float fuelUsage;
 
-    public float Speed => speed;
+        public float Speed => speed;
 
-    public float Handling => handling;
+        public float Handling => handling;
 
-    public float FuelUsage => fuelUsage;
+        public float FuelUsage => fuelUsage;
+    }
 }

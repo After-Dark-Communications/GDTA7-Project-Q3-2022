@@ -1,6 +1,8 @@
-﻿using Assets.Project.Scripts.ShipParts;
-using Parts;
+﻿using EventSystem;
 using ShipParts;
+using ShipParts.Cores;
+using ShipParts.Engines;
+using ShipParts.Ship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,50 +10,58 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class ShipResources : MonoBehaviour
+namespace ShipParts
 {
-    private ShipBuilder shipBuilder;
-    private ShipStats shipStats;
-    private ShipHealth shipHealth;
-
-    private void Awake()
+    public class ShipResources : MonoBehaviour
     {
-        shipBuilder = GetComponent<ShipBuilder>();
-        shipStats = new ShipStats();
-        shipHealth = new ShipHealth(shipBuilder.PlayerNumber, shipStats);
-    }
+        private ShipBuilder shipBuilder;
+        private ShipStats shipStats;
+        private ShipHealth shipHealth;
+        private ShipEnergy shipEnergy;
 
-    private void Start()
-    {
-        Channels.OnShipPartSelected += OnShipPartSelected;
-        Channels.OnShipCompleted += OnShipCompleted;
-    }
-
-    private void OnShipCompleted(ShipBuilder completedShipBuilder)
-    {
-        if (shipBuilder.PlayerNumber != completedShipBuilder.PlayerNumber)
-            return;
-
-
-    }
-
-    private void OnShipPartSelected(Part selectedPart, int playerNumber)
-    {
-        if (shipBuilder.PlayerNumber != playerNumber)
-            return;
-
-        if (selectedPart is Engine)
+        private void Awake()
         {
-            shipStats.UpdateStats(selectedPart.GetData() as EngineData);
+            shipBuilder = GetComponent<ShipBuilder>();
+            shipStats = new ShipStats();
+            shipHealth = new ShipHealth(shipBuilder.PlayerNumber, shipStats);
+            shipEnergy = new ShipEnergy(shipBuilder.PlayerNumber, shipStats);
         }
 
-        if (selectedPart is Core)
+        private void Start()
         {
-            shipStats.UpdateStats(selectedPart.GetData() as CoreData);
+            Channels.OnShipPartSelected += OnShipPartSelected;
+            Channels.OnShipCompleted += OnShipCompleted;
         }
 
-        Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, shipStats);
-    }
+        private void OnShipCompleted(ShipBuilder completedShipBuilder)
+        {
+            if (shipBuilder.PlayerNumber != completedShipBuilder.PlayerNumber)
+                return;
 
-    public ShipStats ShipStats => shipStats;
+            shipHealth.UpdateHealth(shipStats);
+            shipEnergy.UpdateEnergy(shipStats);
+        }
+
+        private void OnShipPartSelected(Part selectedPart, int playerNumber)
+        {
+            if (shipBuilder.PlayerNumber != playerNumber)
+                return;
+
+            if (selectedPart is Engine)
+            {
+                shipStats.UpdateStats(selectedPart.GetData() as EngineData);
+            }
+
+            if (selectedPart is Core)
+            {
+                shipStats.UpdateStats(selectedPart.GetData() as CoreData);
+            }
+
+            Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, shipStats);
+        }
+
+        public int CurrentEnergyAmount => shipEnergy.CurrentEnergyAmount;
+
+        public ShipStats ShipStats => shipStats;
+    }
 }

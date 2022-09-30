@@ -1,9 +1,9 @@
-using Parts;
+using ShipParts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ShipSelection.ShipBuilder.ConnectionPoints
+namespace ShipSelection.ShipBuilders.ConnectionPoints
 {
     public abstract class ConnectionPoint : MonoBehaviour
     {

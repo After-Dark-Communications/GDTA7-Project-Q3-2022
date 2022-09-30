@@ -1,51 +1,55 @@
+using EventSystem;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStatsVisualizer : MonoBehaviour
+namespace UI
 {
-    [SerializeField]
-    private List<ShipStatBar> healthBars = new(4);
-
-    [SerializeField]
-    private GameObject statsPanelPrefab;
-
-    private void OnEnable()
+    public class PlayerStatsVisualizer : MonoBehaviour
     {
-        Channels.OnPlayerSpawned += InitializePlayerStats;
-    }
+        [SerializeField]
+        private List<ShipStatBar> healthBars = new(4);
 
-    private void OnDisable()
-    {
-        Channels.OnPlayerSpawned -= InitializePlayerStats;
-    }
+        [SerializeField]
+        private GameObject statsPanelPrefab;
 
-    private void Awake()
-    {
-        // Hide all healthbars
-        foreach (ShipStatBar healthBar in healthBars)
+        private void OnEnable()
         {
-            healthBar.gameObject.SetActive(false);
+            Channels.OnPlayerSpawned += InitializePlayerStats;
         }
-    }
 
-    public void InitializePlayerStats(GameObject player, int playerIndex)
-    {
-        // Get the healthbar
-        List<ShipStatBar> playerStatBars = new()
+        private void OnDisable()
         {
-            healthBars[playerIndex - 1]
-        };
+            Channels.OnPlayerSpawned -= InitializePlayerStats;
+        }
 
-        // Instantiate the stats panel
-        FloatingStatsPanel statsPanel = Instantiate(statsPanelPrefab, transform).GetComponent<FloatingStatsPanel>();
-        playerStatBars.AddRange(statsPanel.StatBars);
-        statsPanel.ObjectToFollow = player;
-
-        // Assign the player index to all stat bars
-        foreach (ShipStatBar statBar in playerStatBars)
+        private void Awake()
         {
-            statBar.PlayerIndex = playerIndex;
-            statBar.gameObject.SetActive(true);
+            // Hide all healthbars
+            foreach (ShipStatBar healthBar in healthBars)
+            {
+                healthBar.gameObject.SetActive(false);
+            }
+        }
+
+        public void InitializePlayerStats(GameObject player, int playerIndex)
+        {
+            // Get the healthbar
+            List<ShipStatBar> playerStatBars = new()
+            {
+                healthBars[playerIndex - 1]
+            };
+
+            // Instantiate the stats panel
+            FloatingStatsPanel statsPanel = Instantiate(statsPanelPrefab, transform).GetComponent<FloatingStatsPanel>();
+            playerStatBars.AddRange(statsPanel.StatBars);
+            statsPanel.ObjectToFollow = player;
+
+            // Assign the player index to all stat bars
+            foreach (ShipStatBar statBar in playerStatBars)
+            {
+                statBar.PlayerIndex = playerIndex;
+                statBar.gameObject.SetActive(true);
+            }
         }
     }
 }

@@ -1,55 +1,58 @@
-using System;
-using System.Collections;
+using EventSystem;
+using ShipParts.Ship;
+using ShipSelection.ShipBuilders;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static PlayerControlls;
 
-public class ShipSpawner : MonoBehaviour
+namespace ShipSelection
 {
-    [SerializeField]
-    [Tooltip("Important is that the order of the list is also the player number order")]
-    private List<Transform> playerSpawnPoints;
-
-    [SerializeField]
-    private GameObject joinprefab;
-
-
-    private ShipBuildManager shipBuildManager;
-
-    private void Awake()
+    public class ShipSpawner : MonoBehaviour
     {
-        Channels.OnManagerInitialized += OnManagerInitialized;
-    }
+        [SerializeField]
+        [Tooltip("Important is that the order of the list is also the player number order")]
+        private List<Transform> playerSpawnPoints;
 
-    private void OnManagerInitialized(Manager manager)
-    {
-        if (manager is not ShipBuildManager)
-            return;
+        [SerializeField]
+        private GameObject joinprefab;
 
-        shipBuildManager = manager as ShipBuildManager;
 
-        SpawnShips();
-    }
+        private ShipBuildManager shipBuildManager;
 
-    private void SpawnShips()
-    {
-        foreach (ShipBuilder shipBuilder in shipBuildManager.ShipBuilders)
+        private void Awake()
         {
-            int playerIndex = shipBuilder.PlayerNumber;
+            Channels.OnManagerInitialized += OnManagerInitialized;
+        }
 
-            Transform spawnPointTransform = playerSpawnPoints[playerIndex];
+        private void OnManagerInitialized(Manager manager)
+        {
+            if (manager is not ShipBuildManager)
+                return;
 
-            spawnPointTransform.gameObject.SetActive(true);
+            shipBuildManager = manager as ShipBuildManager;
 
-            shipBuilder.transform.position = spawnPointTransform.position;
-            shipBuilder.transform.rotation = Quaternion.Euler(0, -90, 0);//TODO: set rotation relative to parent, not to world
-            shipBuilder.transform.parent = spawnPointTransform;
+            SpawnShips();
+        }
 
-            PlayerInputManager.instance.playerPrefab = joinprefab;
-            PlayerInput inp = PlayerInputManager.instance.JoinPlayer(playerIndex, -1, null, shipBuilder.PlayerDevice);
-            inp.transform.parent = spawnPointTransform;
-            Channels.OnPlayerSpawned.Invoke(shipBuilder.gameObject, shipBuilder.PlayerNumber);
+        private void SpawnShips()
+        {
+            foreach (ShipBuilder shipBuilder in shipBuildManager.ShipBuilders)
+            {
+                int playerIndex = shipBuilder.PlayerNumber;
+
+                Transform spawnPointTransform = playerSpawnPoints[playerIndex];
+
+                spawnPointTransform.gameObject.SetActive(true);
+
+                shipBuilder.transform.position = spawnPointTransform.position;
+                shipBuilder.transform.rotation = Quaternion.Euler(0, spawnPointTransform.eulerAngles.y - 90, 0);//TODO: set rotation relative to parent, not to world
+                shipBuilder.transform.parent = spawnPointTransform;
+
+                PlayerInputManager.instance.playerPrefab = joinprefab;
+                PlayerInput inp = PlayerInputManager.instance.JoinPlayer(playerIndex, -1, null, shipBuilder.PlayerDevice);
+                inp.transform.parent = spawnPointTransform;
+                Channels.OnPlayerSpawned.Invoke(shipBuilder.gameObject, shipBuilder.PlayerNumber);
+            }
         }
     }
 }
