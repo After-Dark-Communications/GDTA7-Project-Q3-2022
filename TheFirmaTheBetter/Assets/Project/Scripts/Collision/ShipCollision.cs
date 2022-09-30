@@ -12,6 +12,7 @@ namespace Collisions
         private Rigidbody rigidbody;
 
         private const float _collisionWeightImpactMultiplier = 0.1f;
+        private const float _bumpForceClamp = 100f;//adjust to get different feel (used to prevent "random" spikes to 500+ bumpforce)
 
         private void Awake()
         {
@@ -56,9 +57,10 @@ namespace Collisions
                 {
                     //apply force to both ships based on position delta and respective weights
                     Vector3 bumpDir = transform.position - shipCollision.transform.position;
-                    float totalBumpForce = otherRigidbody.velocity.magnitude * (shipStats.TotalWeight + shipStats.SumTotalWeightModifier * _collisionWeightImpactMultiplier);
+                    float totalBumpForce = Mathf.Clamp(otherRigidbody.velocity.magnitude * ((shipStats.TotalWeight + shipStats.SumTotalWeightModifier) * _collisionWeightImpactMultiplier), 0, _bumpForceClamp);
                     //Debug.DrawLine(transform.position, transform.position + (bumpDir.normalized * totalBumpForce), Color.red, 2f);
                     rigidbody.AddForce(bumpDir.normalized * totalBumpForce, ForceMode.Impulse);//issue, some bumps are too strong
+                    Debug.Log("BumpForce: " + totalBumpForce);
                 }
             }
         }
