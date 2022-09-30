@@ -54,12 +54,10 @@ namespace Collisions
                 Rigidbody otherRigidbody = shipCollision.gameObject.GetComponentInParent<Rigidbody>();
                 if (otherRigidbody)
                 {
+                    //apply force to both ships based on position delta and respective weights
                     Vector3 bumpDir = transform.position - shipCollision.transform.position;
-                    float totalBumpForce = otherRigidbody.velocity.magnitude * (shipStats.TotalWeight * _collisionWeightImpactMultiplier);
-                    //apply force to both ships based on position delta
-                    //TODO: adjust force based on total weight of ship?
-                    Debug.DrawLine(transform.position, transform.position + (bumpDir.normalized * totalBumpForce), Color.red, 2f);
-                    Debug.Log("BumpForce: " + totalBumpForce);
+                    float totalBumpForce = otherRigidbody.velocity.magnitude * (shipStats.TotalWeight + shipStats.SumTotalWeightModifier * _collisionWeightImpactMultiplier);
+                    //Debug.DrawLine(transform.position, transform.position + (bumpDir.normalized * totalBumpForce), Color.red, 2f);
                     rigidbody.AddForce(bumpDir.normalized * totalBumpForce, ForceMode.Impulse);//issue, some bumps are too strong
                 }
             }

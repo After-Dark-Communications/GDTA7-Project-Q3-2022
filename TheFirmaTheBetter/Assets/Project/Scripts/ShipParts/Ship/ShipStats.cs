@@ -136,15 +136,23 @@ namespace ShipParts.Ship
         public int TotalWeight { get => _totalWeight; }
 
         public List<float> SpeedModifier => _speedModifier;
-        public List<float> handlingModifier => _handlingModifier;
-        public List<float> dragModifier => _dragModifier;
-        public List<int> healthModifier => _healthModifier;
-        public List<int> energyCapacityModifier => _energyCapacityModifier;
-        public List<float> energyGenerationModifier => _energuGenerationModifier;
-        public List<float> fuelCapacityModifier => _fuelCapacityModifier;
-        public List<float> fuelUsageModifier => _fuelUsageModifier;
+        public List<float> HandlingModifier => _handlingModifier;
+        public List<float> DragModifier => _dragModifier;
+        public List<int> HealthModifier => _healthModifier;
+        public List<int> EnergyCapacityModifier => _energyCapacityModifier;
+        public List<float> EnergyGenerationModifier => _energuGenerationModifier;
+        public List<float> FuelCapacityModifier => _fuelCapacityModifier;
+        public List<float> FuelUsageModifier => _fuelUsageModifier;
         public List<int> TotalWeightModifier => _totalWeightModifier;
 
-
+        public float SumSpeedModifier => _speedModifier.Sum();
+        public float SumhHandlingModifier => _handlingModifier.Sum();
+        public float SumDragModifier => _dragModifier.Sum();
+        public int SumHealthModifier => _healthModifier.Sum();
+        public int SumEnergyCapacityModifier => _energyCapacityModifier.Sum();
+        public float SumEnergyGenerationModifier => _energuGenerationModifier.Sum();
+        public float SumFuelCapacityModifier => _fuelCapacityModifier.Sum();
+        public float SumFuelUsageModifier => _fuelUsageModifier.Sum();
+        public int SumTotalWeightModifier => _totalWeightModifier.Sum();
     }
 }
