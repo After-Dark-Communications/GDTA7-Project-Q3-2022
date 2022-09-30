@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 public class MenuPanel : MonoBehaviour
 {
     [SerializeField]
@@ -7,12 +9,12 @@ public class MenuPanel : MonoBehaviour
     public void OpenPanel()
     {
         gameObject.SetActive(true);
-        //EventSystems.current.SetSelectedGameObject(firstSelected);
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(firstSelected);
     }
 
     public void ClosePanel()
     {
-        //EventSystems.current.SetSelectedGameObject(null);
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
         gameObject.SetActive(false);
     }
 }

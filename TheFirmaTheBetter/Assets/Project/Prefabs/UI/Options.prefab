@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a7b2b35ea6b5f47ab550adb82ac432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 2048354240080106789}
+  firstSelected: {fileID: 4005732601052728178}
 --- !u!1 &2048354240474013112
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 2048354240474012998}
   - component: {fileID: 2048354240474012997}
   m_Layer: 5
-  m_Name: Settings
+  m_Name: VolumeSettings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -365,7 +365,7 @@ PrefabInstance:
     - target: {fileID: 2663187993459875158, guid: fde5b382928d5a343aa18f97f6f625ae,
         type: 3}
       propertyPath: m_Name
-      value: Master Volume
+      value: MasterVolumeSlider
       objectReference: {fileID: 0}
     - target: {fileID: 2663187994084546238, guid: fde5b382928d5a343aa18f97f6f625ae,
         type: 3}
@@ -405,13 +405,19 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1396876529613526564}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4005732601052728178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2663187993459875158, guid: fde5b382928d5a343aa18f97f6f625ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 1396876529613526564}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4005732601052728180 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2663187993459875152, guid: fde5b382928d5a343aa18f97f6f625ae,
     type: 3}
   m_PrefabInstance: {fileID: 1396876529613526564}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4005732601052728178}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
@@ -436,13 +442,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5835038697421193884, guid: dd3a19ee605996344af98797f8a81c3b,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5835038697421193884, guid: dd3a19ee605996344af98797f8a81c3b,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4903087148224107075}
+    - target: {fileID: 5835038697421193884, guid: dd3a19ee605996344af98797f8a81c3b,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenMenuPanel
+      value: SaveSettings
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835038697421193884, guid: dd3a19ee605996344af98797f8a81c3b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: VolumeOptionsSaveManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5835038697421193884, guid: dd3a19ee605996344af98797f8a81c3b,
         type: 3}
@@ -452,7 +468,7 @@ PrefabInstance:
     - target: {fileID: 5835038697421193884, guid: dd3a19ee605996344af98797f8a81c3b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: MenuPanel, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 9037768633633168622, guid: dd3a19ee605996344af98797f8a81c3b,
         type: 3}
@@ -610,6 +626,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Text (TMP)
       objectReference: {fileID: 0}
+    - target: {fileID: 2663187993459875158, guid: fde5b382928d5a343aa18f97f6f625ae,
+        type: 3}
+      propertyPath: m_Name
+      value: SoundsSlider
+      objectReference: {fileID: 0}
     - target: {fileID: 2663187994084546238, guid: fde5b382928d5a343aa18f97f6f625ae,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -757,6 +778,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Text (TMP)
       objectReference: {fileID: 0}
+    - target: {fileID: 2663187993459875158, guid: fde5b382928d5a343aa18f97f6f625ae,
+        type: 3}
+      propertyPath: m_Name
+      value: MusicSlider
+      objectReference: {fileID: 0}
     - target: {fileID: 2663187993459875159, guid: fde5b382928d5a343aa18f97f6f625ae,
         type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -800,18 +826,12 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 4078216216242620531}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2048354240080106789}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2048354240080106789 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2663187993459875158, guid: fde5b382928d5a343aa18f97f6f625ae,
-    type: 3}
-  m_PrefabInstance: {fileID: 4078216216242620531}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3685234213799171835 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 845595860992302728, guid: fde5b382928d5a343aa18f97f6f625ae,
