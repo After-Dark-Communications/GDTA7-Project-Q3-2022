@@ -95,6 +95,12 @@ namespace ShipParts.Weapons
             if (canShoot == false)
                 return;
 
+
+            if (lastShootTime + 1 / weaponData.FireRate >= Time.time)
+                return;
+
+            lastShootTime = Time.time;
+
             for (int i = 0; i < weaponData.AmountOfBullets; i++)
             {
                 if (weaponData.EnergyCost > shipResources.CurrentEnergyAmount)
@@ -102,9 +108,6 @@ namespace ShipParts.Weapons
                     Channels.OnEnergyEmpty?.Invoke();
                     return;
                 }
-
-                if (lastShootTime + 1 / weaponData.FireRate >= Time.time)
-                    return;
 
                 foreach (Transform point in projectileStartingPoints)
                 {
@@ -122,7 +125,6 @@ namespace ShipParts.Weapons
                 }
             }
 
-            lastShootTime = Time.time;
 
 
             void ReturnProjectileToPoolAfterTime(Projectile projectile)
