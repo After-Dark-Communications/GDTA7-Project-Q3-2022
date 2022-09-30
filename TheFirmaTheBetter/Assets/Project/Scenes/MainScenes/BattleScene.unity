@@ -1725,7 +1725,7 @@ PrefabInstance:
     - target: {fileID: 4239441300965493153, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
         type: 3}
       propertyPath: yOffsetPixels
-      value: 20
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 4239441300965493180, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
         type: 3}
@@ -1761,6 +1761,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239441300965493180, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239441300965493180, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4239441300965493180, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
         type: 3}
@@ -3142,7 +3152,7 @@ PrefabInstance:
     - target: {fileID: 4239441300965493153, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
         type: 3}
       propertyPath: yOffsetPixels
-      value: 20
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 4239441300965493180, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
         type: 3}
@@ -3178,6 +3188,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239441300965493180, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239441300965493180, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4239441300965493180, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
         type: 3}
@@ -4015,7 +4035,7 @@ PrefabInstance:
     - target: {fileID: 4239441300965493153, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
         type: 3}
       propertyPath: yOffsetPixels
-      value: 20
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 4239441300965493180, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
         type: 3}
@@ -4051,6 +4071,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239441300965493180, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239441300965493180, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4239441300965493180, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
         type: 3}
@@ -4149,16 +4179,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 759509937}
     m_Modifications:
-    - target: {fileID: 4239441300965493153, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
-        type: 3}
-      propertyPath: xOffsetPixels
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4239441300965493153, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
-        type: 3}
-      propertyPath: yOffsetPixels
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 4239441300965493180, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
         type: 3}
       propertyPath: m_Pivot.x
@@ -4193,6 +4213,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239441300965493180, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239441300965493180, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4239441300965493180, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
         type: 3}
@@ -4258,11 +4288,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerStatsPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 4239441300965493181, guid: 6a5705e171995ee4dbcfc483ddf9aa52,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a5705e171995ee4dbcfc483ddf9aa52, type: 3}

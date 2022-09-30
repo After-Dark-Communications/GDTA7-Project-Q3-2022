@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4239441300965493180
 RectTransform:
   m_ObjectHideFlags: 0
@@ -94,8 +94,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 4239441300722748013}
   energyBar: {fileID: 4239441300722748013}
-  xOffsetPixels: 250
-  yOffsetPixels: 0
+  xOffsetPixels: 0
+  yOffsetPixels: -50
 --- !u!1001 &7537202663913342786
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146,12 +146,12 @@ PrefabInstance:
     - target: {fileID: 5930115381931658536, guid: 4f89dc0a9353e8246bb70489c00ad3af,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -30
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 5930115381931658536, guid: 4f89dc0a9353e8246bb70489c00ad3af,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -13
+      value: -6.4999995
       objectReference: {fileID: 0}
     - target: {fileID: 5930115381931658536, guid: 4f89dc0a9353e8246bb70489c00ad3af,
         type: 3}
