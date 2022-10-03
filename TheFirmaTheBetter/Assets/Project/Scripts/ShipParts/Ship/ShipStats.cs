@@ -1,5 +1,7 @@
 ﻿using ShipParts.Cores;
 using ShipParts.Engines;
+using ShipParts.Specials;
+using ShipParts.Weapons;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -3,6 +3,8 @@ using ShipParts;
 using ShipParts.Cores;
 using ShipParts.Engines;
 using ShipParts.Ship;
+using ShipParts.Specials;
+using ShipParts.Weapons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,7 @@ using UnityEngine;
 namespace ShipParts
 {
     public class ShipResources : MonoBehaviour
+
     {
         private ShipBuilder shipBuilder;
         private ShipStats shipStats;
@@ -41,14 +44,6 @@ namespace ShipParts
             shipHealth.UpdateHealth(shipStats);
             shipEnergy.UpdateEnergy(shipStats);
         }
-        if (selectedPart is Weapon)
-        {
-            shipStats.UpdateStats(selectedPart.GetData() as WeaponData);
-        }
-        if (selectedPart is SpecialAbility)
-        {
-            shipStats.UpdateStats(selectedPart.GetData() as SpecialData);
-        }
 
         private void OnShipPartSelected(Part selectedPart, int playerNumber)
         {
@@ -64,6 +59,14 @@ namespace ShipParts
             {
                 shipStats.UpdateStats(selectedPart.GetData() as CoreData);
             }
+            if (selectedPart is Weapon)
+            {
+                shipStats.UpdateStats(selectedPart.GetData() as WeaponData);
+            }
+            if (selectedPart is SpecialAbility)
+            {
+                shipStats.UpdateStats(selectedPart.GetData() as SpecialData);
+            }
 
             Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, shipStats);
         }
@@ -72,4 +75,6 @@ namespace ShipParts
 
         public ShipStats ShipStats => shipStats;
     }
+
+    
 }

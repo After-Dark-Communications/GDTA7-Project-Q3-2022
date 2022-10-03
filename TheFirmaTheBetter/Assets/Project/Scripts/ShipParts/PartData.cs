@@ -5,6 +5,8 @@ using UnityEngine;
 
 namespace ShipParts
 {
+    public abstract class PartData : MonoBehaviour
+    { 
     [Header("PartStats")]
     [SerializeField]
     private string partName = "part";

@@ -1,4 +1,6 @@
+using EventSystem;
 using ShipParts;
+using ShipParts.Ship;
 using System;
 using System.Collections;
 using System.Collections.Generic;
