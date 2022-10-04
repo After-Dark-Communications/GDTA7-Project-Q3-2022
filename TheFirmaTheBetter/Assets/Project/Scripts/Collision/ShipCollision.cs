@@ -66,7 +66,7 @@ namespace Collisions
         {
             //Debug.Log($"took damage! ({Channels.OnPlayerTakeDamage?.GetInvocationList().Length})called");
             Channels.OnPlayerTakeDamage?.Invoke(shipBuilder, projectileThatHit.ProjectileDamage);
-
+            Channels.OnPlayerHit?.Invoke();
             projectileThatHit.DestroySelf();
         }
     }

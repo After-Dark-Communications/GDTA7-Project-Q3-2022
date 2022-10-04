@@ -12,34 +12,41 @@ public class OneShotEventHandler : MonoBehaviour
     [Header("FMOD Events")]
     [SerializeField]
     private FMODUnity.EventReference fuelEmptyEvent;
-    [Header("FMOD Events")]
     [SerializeField]
     private FMODUnity.EventReference fuelAlmostEmptyEvent;
-    public void Start()
+    [SerializeField]
+    private FMODUnity.EventReference hitmarker;
+    private void Start()
     {
         Channels.OnEnergyEmpty += PlayEnergyEmpty;
         Channels.OnWeaponFired += PlayEvent;
         Channels.OnEnergyChanged += CompareEnergy;
+        Channels.OnPlayerHit += PlayHitmarker;
     }
 
-    public void PlayEvent(FMODUnity.EventReference fmodEvent)
+    private void PlayEvent(FMODUnity.EventReference fmodEvent)
     {
         FMODUnity.RuntimeManager.PlayOneShot(fmodEvent, transform.position);
     }
 
-    public void PlayEnergyEmpty()
+    private void PlayEnergyEmpty()
     {
         FMODUnity.RuntimeManager.PlayOneShot(fuelEmptyEvent, transform.position);
     }
 
-    public void CompareEnergy(int playerNumber, float energy)
+    private void CompareEnergy(int playerNumber, float energy)
     {
         if (energy * 100 <= energyPercentage)
             PlayEnergyAlert();
     }
 
-    public void PlayEnergyAlert()
+    private void PlayEnergyAlert()
     {
         FMODUnity.RuntimeManager.PlayOneShot(fuelAlmostEmptyEvent, transform.position);
+    }
+
+    private void PlayHitmarker()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(hitmarker, transform.position);
     }
 }

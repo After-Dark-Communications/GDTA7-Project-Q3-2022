@@ -75,7 +75,7 @@ namespace EventSystem
         /// <summary> Called when firing the gun while not having enough ammo
         /// </summary>
         public static Action OnEnergyEmpty;
-
+        public static Action OnPlayerHit;
         /// <summary>
         /// <para><see cref="int" /> Player number</para>
         /// <para><see cref="float" /> New health persentage </para>
