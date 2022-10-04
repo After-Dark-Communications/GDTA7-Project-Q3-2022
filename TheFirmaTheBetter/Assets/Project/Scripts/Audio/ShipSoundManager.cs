@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using ShipParts.Ship;
+using ShipSelection;
 using EventSystem;
 
 public class ShipSoundManager : MonoBehaviour
@@ -30,7 +31,7 @@ public class ShipSoundManager : MonoBehaviour
     {
         try
         {
-            playerNumber = transform.GetChild(1).GetComponent<ShipBuilder>().PlayerNumber;
+            playerNumber = GetComponent<ShipInfo>().PlayerNumber;
         }
         catch
         {
@@ -62,7 +63,7 @@ public class ShipSoundManager : MonoBehaviour
         {
             this.health = health * 100;
             healthEmitter.SetParameter("Player_Health", this.health);
-            if (health < 20)
+            if (this.health < 20)
             {
                 if (!healthEmitter.IsPlaying())
                 {
