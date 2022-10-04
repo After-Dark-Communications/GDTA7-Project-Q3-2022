@@ -20,5 +20,11 @@ namespace Managers
             shipBuilderThatDied.transform.parent = null;
             DontDestroyOnLoad(shipBuilderThatDied);
         }
+
+        private IEnumerator WaitForRestart()
+        {
+            yield return new WaitForSeconds(1.5f);
+            SceneSwitchManager.LoadFirstScene();
+        }
     }
 }

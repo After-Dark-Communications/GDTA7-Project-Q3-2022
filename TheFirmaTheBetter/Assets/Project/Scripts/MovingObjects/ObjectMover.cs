@@ -27,7 +27,7 @@ public class ObjectMover : MonoBehaviour
     {
         MovementPoint oldPoint = currentMovementPoint;
 
-        IncrementIndex();
+        ChangeIndex();
 
         MovementPoint newPoint = currentMovementPoint;
 
@@ -41,6 +41,11 @@ public class ObjectMover : MonoBehaviour
 
             if (currentMovementPointIndex >= movementPoints.Count)
                 currentMovementPointIndex = 0;
+        }
+
+        void ChangeIndex()
+        {
+            currentMovementPointIndex = Random.Range(0, movementPoints.Count);
         }
     }
 

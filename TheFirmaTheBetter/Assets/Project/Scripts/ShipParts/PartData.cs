@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ShipParts
 {
-    public abstract class PartData : MonoBehaviour
+    public abstract class PartData : ScriptableObject
     { 
     [Header("PartStats")]
     [SerializeField]

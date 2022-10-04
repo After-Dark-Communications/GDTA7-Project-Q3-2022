@@ -72,7 +72,7 @@ namespace Projectiles
         private void OnTriggerEnter(Collider other)
         {
             ICollidable collisionObject = other.GetComponentInParent<ICollidable>();
-
+            //Debug.Log($"Hit a {collisionObject.GetType()}");
             if (collisionObject != null)
             {
                 collisionObject.HandleCollision(this);
