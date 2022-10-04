@@ -6,11 +6,6 @@ using UnityEngine.SceneManagement;
 
 public static class SceneSwitchManager
 {
-    public static void SwitchScene()
-    {
-        SceneManager.LoadScene(0);
-    }
-
     public static void LoadFirstScene()
     {
         SceneManager.LoadScene(0);
@@ -27,17 +22,18 @@ public static class SceneSwitchManager
         SceneManager.LoadScene(currentLoadedSceneIndex + 1);
     }
 
-    public static void LoadScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-    }
+    // Additive loading
+    //public static void LoadScene(string sceneName)
+    //{
+    //    SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+    //}
 
-    public static void UnloadScene(int index)
-    {
-        Scene scene = SceneManager.GetSceneByBuildIndex(index);
-        if (scene.IsValid() && scene.isLoaded)
-        {
-            SceneManager.UnloadSceneAsync(index);
-        }
-    }
+    //public static void UnloadScene(int index)
+    //{
+    //    Scene scene = SceneManager.GetSceneByBuildIndex(index);
+    //    if (scene.IsValid() && scene.isLoaded)
+    //    {
+    //        SceneManager.UnloadSceneAsync(index);
+    //    }
+    //}
 }

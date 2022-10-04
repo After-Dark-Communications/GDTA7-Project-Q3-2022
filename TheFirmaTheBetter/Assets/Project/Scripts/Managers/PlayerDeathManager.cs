@@ -17,6 +17,8 @@ namespace Managers
         private void OnPlayerDeath(ShipBuilder shipBuilderThatDied)
         {
             shipBuilderThatDied.gameObject.SetActive(false);
+            shipBuilderThatDied.transform.parent = null;
+            DontDestroyOnLoad(shipBuilderThatDied);
         }
     }
 }
