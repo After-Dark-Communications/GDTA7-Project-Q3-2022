@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 613b15b6d8ee25444ad8f0df2e47a95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyPercentage: 20
+  energyPercentage: 10
   fuelEmptyEvent:
     Guid:
       Data1: 150556774

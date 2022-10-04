@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c6cfbd28a22af44a7461704b0bfe8b, type: 3}
   m_Name: SlowFireWeapon
   m_EditorClassIdentifier: 
+  partName: part
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 0
   weaponName: Slow fire rate
@@ -23,10 +24,10 @@ MonoBehaviour:
   energyCost: 1
   weaponFireEvent:
     Guid:
-      Data1: -1845492624
-      Data2: 1241857302
-      Data3: -1323155564
-      Data4: -262866754
-    Path: event:/Weapons/Weap_Laser
+      Data1: 674240336
+      Data2: 1107783607
+      Data3: 1372337337
+      Data4: 1736597987
+    Path: event:/Weapons/Weap_Shotgun
   sideSpreadAngle: 6
   range: 80
