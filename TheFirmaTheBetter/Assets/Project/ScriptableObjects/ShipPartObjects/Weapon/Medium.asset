@@ -9,11 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a0e995c14976aa419fd4b59fa94ffba, type: 3}
-  m_Name: RocketLauncher
+  m_Script: {fileID: 0}
+  m_Name: Medium
   m_EditorClassIdentifier: 
-  partName: Rocket Launcher
-  connectionPoint: {x: 0, y: 0, z: 0}
-  partWeight: 0
-  description: Launches a Rocket
-  abilityCooldown: 0
