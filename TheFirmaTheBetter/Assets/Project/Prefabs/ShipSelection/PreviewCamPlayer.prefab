@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4224625532589462300}
   - component: {fileID: 5406474560743814457}
   - component: {fileID: 4115077990170237956}
+  - component: {fileID: 3545785238961844195}
   m_Layer: 0
   m_Name: ShipBuilder
   m_TagString: Untagged
@@ -104,6 +105,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622e9fbaa455aaa4788bd4c29cf48cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &3545785238961844195
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429549271885258455}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e83f6654f983f7340a470c234fe8c6dc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8247279926959544897
 GameObject:
   m_ObjectHideFlags: 0
