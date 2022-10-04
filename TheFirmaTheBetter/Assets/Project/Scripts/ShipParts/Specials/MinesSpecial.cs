@@ -1,6 +1,9 @@
-﻿namespace ShipParts.Specials
+﻿using Assets.Project.Scripts.ShipParts.Specials;
+
+namespace ShipParts.Specials
 {
-    internal class MinesSpecial : SpecialAbility
+    public class MinesSpecial : ShootingSpecial
     {
+
     }
 }

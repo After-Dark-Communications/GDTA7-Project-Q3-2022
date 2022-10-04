@@ -1,6 +1,17 @@
-﻿namespace ShipParts.Specials
+﻿using Assets.Project.Scripts.ShipParts.Specials;
+using Projectiles;
+using UnityEngine;
+
+namespace ShipParts.Specials
 {
-    internal class GunTurretSpecial : SpecialAbility
+    public class GunTurretSpecial : ShootingSpecial
     {
+        protected override void HandleSpecial()
+        {
+            base.HandleSpecial();
+            DroneProjectile drone = lastFiredProjectile as DroneProjectile;
+
+            drone.Notarget = shipRoot;
+        }
     }
 }

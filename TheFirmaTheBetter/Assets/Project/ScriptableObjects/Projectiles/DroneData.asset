@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a0e995c14976aa419fd4b59fa94ffba, type: 3}
-  m_Name: Blink
+  m_Script: {fileID: 11500000, guid: 2f14301244174ea4cb09eb58edf90fec, type: 3}
+  m_Name: DroneData
   m_EditorClassIdentifier: 
-  partName: Blink
-  connectionPoint: {x: 0, y: 0, z: 0}
-  partWeight: 0
-  description: Blink and you'll miss.
-  abilityCooldown: 1
+  damage: 0
+  projectileSpeed: 0
+  armingTime: 1
+  isDoT: 0
+  spawnedObjectOnImpact: {fileID: 0}
+  amountToSpawn: 0
