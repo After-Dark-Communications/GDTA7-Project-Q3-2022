@@ -260,7 +260,7 @@ namespace FMODUnity
             {
                 isInitializing = true;
 
-                instance = Resources.Load(SettingsAssetName) as Settings;
+                instance = Resources.Load(SettingsAssetName) as Settings; 
 
                 if (instance == null)
                 {

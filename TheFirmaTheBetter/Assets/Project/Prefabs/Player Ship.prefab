@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1345060508276091685}
   - component: {fileID: 1517596049251841086}
   - component: {fileID: 8506073912017806675}
+  - component: {fileID: 5375297862451939840}
   - component: {fileID: 1799470718415815863}
   - component: {fileID: -7354329224114436568}
   m_Layer: 0
@@ -127,6 +128,36 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &5375297862451939840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3459444363550364846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -30876221
+      Data2: 1179816915
+      Data3: -1336603772
+      Data4: -1700036229
+    Path: event:/Vehicles/Ve_Health_Low
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!114 &1799470718415815863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,7 +170,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e9197c5565c224fb73f562182126fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  engineEmitter: {fileID: 8506073912017806675}
   RPMSpeed: 50
+  healthEmitter: {fileID: 5375297862451939840}
 --- !u!114 &-7354329224114436568
 MonoBehaviour:
   m_ObjectHideFlags: 0
