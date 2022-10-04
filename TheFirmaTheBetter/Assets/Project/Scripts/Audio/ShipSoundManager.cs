@@ -39,7 +39,7 @@ public class ShipSoundManager : MonoBehaviour
         }
         Channels.Movement.OnShipMove += SetRPM;
         Channels.OnHealthChanged += SetHealth;
-        healthEmitter.Stop();
+        healthEmitter.SetParameter("Player_Health", 100f);
     }
 
 
@@ -63,16 +63,12 @@ public class ShipSoundManager : MonoBehaviour
         {
             this.health = health * 100;
             healthEmitter.SetParameter("Player_Health", this.health);
-            if (this.health < 20)
+            if (this.health <= 20)
             {
                 if (!healthEmitter.IsPlaying())
                 {
                     healthEmitter.Play();
                 }
-            }
-            else
-            {
-                healthEmitter.Stop();
             }
         }
     }
