@@ -1,5 +1,7 @@
 ﻿using ShipParts.Cores;
 using ShipParts.Engines;
+using ShipParts.Specials;
+using ShipParts.Weapons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,13 @@ namespace ShipParts.Ship
         //fuel
         private float _fuelCapacity;
         private float _fuelUsage;
+        //weapon
+        private float _range;
+        private float _fireRate;
+        private float _energyCost;
+        //special
+        private string _specialName;
+        private string _specialDescription;
 
         private readonly List<float> _speedModifier;
         private readonly List<float> _handlingModifier;
@@ -51,6 +60,13 @@ namespace ShipParts.Ship
             _energyGenerationRate = 0;
             //calculate drag
             _drag = 0;
+            //weapon
+            _range = 0;
+            _fireRate = 0;
+            _energyCost = 0;
+            //special
+            _specialName = "";
+            _specialDescription = "";
 
             //initialize lists
             _speedModifier = new List<float>();
@@ -78,6 +94,19 @@ namespace ShipParts.Ship
             _maxHealth = coreData.Health;
         }
 
+        public void UpdateStats(WeaponData weaponData)
+        {
+            _range = weaponData.Range;
+            _fireRate = weaponData.FireRate;
+            _energyCost = weaponData.EnergyCost;
+        }
+
+        public void UpdateStats(SpecialData specialData)
+        {
+            _specialName = specialData.PartName;
+            _specialDescription = specialData.Description;
+        }
+
         public float Speed { get => _speed; }
         public float Handling { get => _handling; }
         public float Drag { get => _drag; }
@@ -85,6 +114,11 @@ namespace ShipParts.Ship
         public int EnergyCapacity { get => _energyCapacity; }
         public float FuelCapacity { get => _fuelCapacity; }
         public float FuelUsage { get => _fuelUsage; }
+        public float Range { get => _range; }
+        public float FireRate { get => _fireRate; }
+        public float EnergyCost { get => _energyCost; }
+        public string SpecialName { get => _specialName; }
+        public string SpecialDescription { get => _specialDescription; }
 
         public List<float> SpeedModifier => _speedModifier;
         public List<float> handlingModifier => _handlingModifier;

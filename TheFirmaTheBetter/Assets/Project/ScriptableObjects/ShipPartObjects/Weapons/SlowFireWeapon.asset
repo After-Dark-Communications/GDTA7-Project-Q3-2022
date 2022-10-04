@@ -21,5 +21,12 @@ MonoBehaviour:
   fireRate: 1
   amountOfBullets: 1
   energyCost: 1
+  weaponFireEvent:
+    Guid:
+      Data1: -1845492624
+      Data2: 1241857302
+      Data3: -1323155564
+      Data4: -262866754
+    Path: event:/Weapons/Weap_Laser
   sideSpreadAngle: 5.4
   range: 53.5
