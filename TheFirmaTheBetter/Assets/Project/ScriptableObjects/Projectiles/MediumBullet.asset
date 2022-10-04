@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f14301244174ea4cb09eb58edf90fec, type: 3}
   m_Name: MediumBullet
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 100
   projectileSpeed: 30
   armingTime: 0
   isDoT: 0

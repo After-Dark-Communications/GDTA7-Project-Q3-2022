@@ -17,9 +17,16 @@ MonoBehaviour:
   weaponName: Medium
   projectilePrefab: {fileID: 8795236707980728124, guid: cffc0c60e9c1c5c4282f1e1ce8ad4a65,
     type: 3}
-  armingTime: 1
-  fireRate: 2.4
+  armingTime: 0
+  fireRate: 4
   amountOfBullets: 1
   energyCost: 1
-  sideSpreadAngle: 10.2
-  range: 27.8
+  weaponFireEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  sideSpreadAngle: 5
+  range: 30

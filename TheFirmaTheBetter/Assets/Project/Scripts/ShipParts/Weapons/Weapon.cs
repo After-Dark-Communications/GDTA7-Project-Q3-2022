@@ -27,6 +27,8 @@ namespace ShipParts.Weapons
         private int playerNumber;
         private bool canShoot;
 
+        private ButtonStates currentFireButtonState = ButtonStates.NONE;
+
         protected override void Setup()
         {
             shipResources = GetComponentInParent<ShipResources>();
@@ -47,6 +49,15 @@ namespace ShipParts.Weapons
             }
         }
 
+        private void Update()
+        {
+            if (currentFireButtonState == ButtonStates.CANCELED || currentFireButtonState == ButtonStates.NONE)
+                return;
+
+            if (currentFireButtonState == ButtonStates.STARTED || currentFireButtonState == ButtonStates.PERFORMED)
+                FireWeapon();    
+        }
+
         private void OnChangeFireMode(bool newValue)
         {
             canShoot = newValue;
@@ -54,7 +65,7 @@ namespace ShipParts.Weapons
 
         private void ShootWeapon(ButtonStates state)
         {
-            FireWeapon();
+            currentFireButtonState = state;
         }
 
         private void AimWeapon(float rotation)
@@ -83,17 +94,20 @@ namespace ShipParts.Weapons
         {
             if (canShoot == false)
                 return;
+
+            if (lastShootTime + 1 / weaponData.FireRate >= Time.time)
+                return;
+
+            lastShootTime = Time.time;
+
+            if (weaponData.EnergyCost > shipResources.CurrentEnergyAmount)
+            {
+                Channels.OnEnergyEmpty?.Invoke();
+                return;
+            }
+
             for (int i = 0; i < weaponData.AmountOfBullets; i++)
             {
-                if (weaponData.EnergyCost > shipResources.CurrentEnergyAmount)
-                {
-                    Channels.OnEnergyEmpty?.Invoke();
-                    return;
-                }
-
-                if (lastShootTime + 1 / weaponData.FireRate >= Time.time)
-                    return;
-
                 foreach (Transform point in projectileStartingPoints)
                 {
                     GameObject projectileObject;
@@ -110,7 +124,6 @@ namespace ShipParts.Weapons
                 }
             }
 
-            lastShootTime = Time.time;
 
 
             void ReturnProjectileToPoolAfterTime(Projectile projectile)
@@ -139,7 +152,11 @@ namespace ShipParts.Weapons
         private IEnumerator ArmProjectile(Projectile projectile)
         {
             Collider col = projectile.GetComponent<Collider>();
-            col.enabled = false;
+
+            if (weaponData.ArmingTime > 0)
+            { 
+                col.enabled = false;
+            }
             yield return new WaitForSeconds(projectile.ArmingTime);
             col.enabled = true;
         }

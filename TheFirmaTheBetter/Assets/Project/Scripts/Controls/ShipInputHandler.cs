@@ -111,6 +111,7 @@ namespace Controls
             controls.FindAction(actions.Special.name).started += OnSpecial;
 
             controls.FindAction(actions.Fire.name).performed += OnFire;
+            controls.FindAction(actions.Fire.name).canceled += OnFire;
         }
 
         private InputActionMap GetInputActions()

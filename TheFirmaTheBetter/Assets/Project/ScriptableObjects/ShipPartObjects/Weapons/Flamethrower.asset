@@ -15,11 +15,18 @@ MonoBehaviour:
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 0
   weaponName: Flamethrower
-  projectilePrefab: {fileID: 8795236707980728124, guid: cffc0c60e9c1c5c4282f1e1ce8ad4a65,
+  projectilePrefab: {fileID: 8795236707980728124, guid: 1211eb9fe99ae1a468acfc976b0f4192,
     type: 3}
-  armingTime: 1
-  fireRate: 6
-  amountOfBullets: 1
+  armingTime: 0
+  fireRate: 10
+  amountOfBullets: 3
   energyCost: 1
-  sideSpreadAngle: 5
-  range: 29
+  weaponFireEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  sideSpreadAngle: 10
+  range: 15
