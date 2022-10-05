@@ -98,5 +98,7 @@ namespace Projectiles
         public float ProjectileSpeed { get { return projectileSpeed; } }
         public float ArmingTime { get { return armingTime; } }
         public int AmountToSpawn { get { return amountToSpawn; } }
+
+        public ProjectileData ProjectileData => projectileData;
     }
 }

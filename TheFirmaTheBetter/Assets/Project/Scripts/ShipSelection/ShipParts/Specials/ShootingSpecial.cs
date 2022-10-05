@@ -17,16 +17,15 @@ namespace Assets.Project.Scripts.ShipParts.Specials
         [SerializeField]
         private Projectile projectilePrefab;
 
-        protected Projectile lastFiredProjectile;
-
         protected override void HandleSpecial()
         {
-            lastFiredProjectile = Instantiate(projectilePrefab);
+            Projectile createdProjectile = Instantiate(projectilePrefab);
+
             Vector3 direction = shootingPoint.forward;
 
-            lastFiredProjectile.transform.SetPositionAndRotation(shootingPoint.position, shootingPoint.rotation);
+            createdProjectile.transform.SetPositionAndRotation(shootingPoint.position, shootingPoint.rotation);
 
-            lastFiredProjectile.GetComponent<Rigidbody>().AddForce(direction * lastFiredProjectile.ProjectileSpeed, ForceMode.Impulse);
+            createdProjectile.GetComponent<Rigidbody>().AddForce(direction * createdProjectile.ProjectileSpeed, ForceMode.Impulse);
         }
     }
 }
