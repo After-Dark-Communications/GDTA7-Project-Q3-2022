@@ -1,17 +1,40 @@
 ﻿using Assets.Project.Scripts.ShipParts.Specials;
 using Projectiles;
+using ShipParts.Ship;
 using UnityEngine;
 
 namespace ShipParts.Specials
 {
-    public class GunTurretSpecial : ShootingSpecial
+    public class GunTurretSpecial : SpecialAbility
     {
+        [SerializeField]
+        private Transform shootingPoint;
+
+        [SerializeField]
+        private Projectile projectilePrefab;
+
         protected override void HandleSpecial()
         {
-            base.HandleSpecial();
-            DroneProjectile drone = lastFiredProjectile as DroneProjectile;
+            Projectile createdProjectile = Instantiate(projectilePrefab);
 
-            drone.Notarget = shipRoot;
+            SetNoTarget(createdProjectile);
+
+            FireProjectile(createdProjectile);
+        }
+
+        private void FireProjectile(Projectile createdProjectile)
+        {
+            Vector3 direction = shootingPoint.forward;
+            createdProjectile.transform.SetPositionAndRotation(shootingPoint.position, shootingPoint.rotation);
+
+            createdProjectile.GetComponent<Rigidbody>().AddForce(direction * createdProjectile.ProjectileSpeed, ForceMode.Impulse);
+        }
+
+        private DroneProjectile SetNoTarget(Projectile createdProjectile)
+        {
+            DroneProjectile drone = createdProjectile as DroneProjectile;
+            drone.Notarget = shipRoot.GetComponentInChildren<ShipBuilder>();
+            return drone;
         }
     }
 }
