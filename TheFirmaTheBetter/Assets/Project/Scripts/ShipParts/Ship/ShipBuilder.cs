@@ -1,6 +1,7 @@
 using EventSystem;
 using ShipParts.Cores;
 using ShipSelection;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -28,6 +29,7 @@ namespace ShipParts.Ship
             Channels.OnPlayerJoined += OnPlayerJoined;
             Channels.OnShipPartSelected += OnShipPartSelected;
             Channels.Input.OnShipCompletedInput += OnShipCompletedInput;
+            Channels.OnPlayerBecomesDeath += OnPlayerDies;
         }
 
         private void OnPlayerJoined(int playerNumber, InputDevice playerDevice)
@@ -48,7 +50,16 @@ namespace ShipParts.Ship
 
             Channels.OnShipCompleted.Invoke(this);
         }
-
+        private void OnPlayerDies(ShipBuilder shipbuilder)
+        {
+            //TODO: figure out if this solves the bug where if a player dies their controller stays vibrating
+            if (shipbuilder == this)
+            {
+                UnityEngine.InputSystem.Gamepad gamepad = playerDevice as UnityEngine.InputSystem.Gamepad;
+                //stop rumble
+                gamepad?.SetMotorSpeeds(0, 0);
+            }
+        }
         private void Start()
         {
             foreach (Part part in collectionManager.AllParts)
