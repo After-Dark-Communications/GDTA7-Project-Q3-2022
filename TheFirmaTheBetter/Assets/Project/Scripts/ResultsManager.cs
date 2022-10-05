@@ -1,13 +1,15 @@
-using ShipParts.Ship;
+using ShipSelection.ShipBuilders;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ResultsManager : Manager
 {
-    [SerializeField]
-    private List<ShipBuilder> results;
-
     public static ResultsManager Instance;
+
+    [SerializeField]
+    private EndStatsData[] results;
+
+    private int lastEmptyPosition;
 
     void Awake()
     {
@@ -21,21 +23,22 @@ public class ResultsManager : Manager
         {
             Destroy(gameObject);
         }
-
-        results = new();
     }
 
-    public void AddResult(ShipBuilder shipBuilder)
+    public void SetupResults(int numberOfPlayers)
     {
-        results.Add(shipBuilder);
+        results = new EndStatsData[numberOfPlayers];
+        lastEmptyPosition = numberOfPlayers - 1;
     }
 
-    public ShipBuilder[] Results
+    public void AddResult(EndStatsData result)
     {
-        get
+        if (lastEmptyPosition >= 0)
         {
-            results.Reverse();
-            return results.ToArray();
+            results[lastEmptyPosition] = result;
+            lastEmptyPosition--;
         }
     }
+
+    public EndStatsData[] Results { get { return results; } }
 }

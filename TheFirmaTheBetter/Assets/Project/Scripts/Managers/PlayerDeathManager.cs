@@ -10,14 +10,14 @@ namespace Managers
         private int playersAlive;
 
         private ShipBuildManager shipBuildManager;
-        private ResultsManager resultsManager;
+
+        [SerializeField]
+        private BattleTimer battleTimer;
 
         private void Awake()
         {
             Channels.OnPlayerBecomesDeath += OnPlayerDeath;
             Channels.OnManagerInitialized += OnManagerInitialized;
-
-            resultsManager = ResultsManager.Instance;
         }
 
         private void OnManagerInitialized(Manager manager)
@@ -27,30 +27,34 @@ namespace Managers
 
             shipBuildManager = manager as ShipBuildManager;
             playersAlive = shipBuildManager.AmountOfPlayersJoined;
-
+            ResultsManager.Instance.SetupResults(playersAlive);
         }
 
-        private void OnPlayerDeath(ShipBuilder shipBuilderThatDied)
+        private void OnPlayerDeath(ShipBuilder shipBuilderThatDied, int killerIndex)
         {
-            shipBuilderThatDied.gameObject.SetActive(false);
-            shipBuilderThatDied.transform.parent = null;
-            DontDestroyOnLoad(shipBuilderThatDied);
+            RemoveShip(shipBuilderThatDied);
             playersAlive--;
-            resultsManager.AddResult(shipBuilderThatDied);
-
+            ResultsManager.Instance.AddResult(new EndStatsData(shipBuilderThatDied.PlayerNumber, shipBuilderThatDied.gameObject, battleTimer.TimeSinceStart, 0));
+            
             if (playersAlive <= 1)
             {
                 foreach (ShipBuilder ship in shipBuildManager.ShipBuilders)
                 {
                     if (ship.gameObject.activeInHierarchy)
                     {
-                        resultsManager.AddResult(ship);
-                        shipBuilderThatDied.transform.parent = null;
-                        DontDestroyOnLoad(shipBuilderThatDied);
+                        RemoveShip(ship);
+                        ResultsManager.Instance.AddResult(new EndStatsData(shipBuilderThatDied.PlayerNumber, ship.gameObject, battleTimer.TimeSinceStart, 0));
                     }
                 }
                 SceneSwitchManager.SwitchToNextScene();
             }
+        }
+
+        private void RemoveShip(ShipBuilder ship)
+        {
+            ship.gameObject.SetActive(false);
+            ship.transform.parent = null;
+            DontDestroyOnLoad(ship);
         }
     }
 }

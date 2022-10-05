@@ -1,4 +1,6 @@
+using EventSystem;
 using ShipParts.Ship;
+using ShipSelection.ShipBuilders;
 using UnityEngine;
 
 
@@ -14,10 +16,6 @@ public class EndScreen : MenuPanel
     private void OnEnable()
     {
         OpenPanel();
-        foreach (EndScreenPanel panel in panels)
-        {
-            panel.gameObject.SetActive(false);
-        }
 
         resultsManager = ResultsManager.Instance;
         DisplayResults();
@@ -25,11 +23,17 @@ public class EndScreen : MenuPanel
 
     private void DisplayResults()
     {
-        ShipBuilder[] results = resultsManager.Results;
+        foreach (EndScreenPanel panel in panels)
+        {
+            panel.gameObject.SetActive(false);
+        }
+
+        EndStatsData[] results = resultsManager.Results;
         for (int i = 0; i < results.Length; i++)
         {
-            previewCams[i].PlaceShipPreview(results[i].gameObject);
+            previewCams[i].PlaceShipPreview(results[i].ShipObject);
             panels[i].gameObject.SetActive(true);
+            panels[i].SetPlayerStats(results[i]);
         }
     }
     public void Rematch()

@@ -19,6 +19,9 @@ namespace Projectiles
         private float currentLifeTime;
         private float lifeTime;
 
+        [SerializeField]
+        private int playerIndex;
+
         private ObjectPool projectilesPool;
 
         private void OnEnable()
@@ -42,10 +45,11 @@ namespace Projectiles
             projectilesPool.ReturnToPool(gameObject);
         }
 
-        public void SetupProjectile(ObjectPool projectilesPool, float lifeTime)
+        public void SetupProjectile(ObjectPool projectilesPool, float lifeTime, int playerIndex)
         {
             this.projectilesPool = projectilesPool;
             this.lifeTime = lifeTime;
+            this.playerIndex = playerIndex;
         }
 
         public void ResetPoolItem()
@@ -72,18 +76,9 @@ namespace Projectiles
         private void OnTriggerEnter(Collider other)
         {
             ICollidable collisionObject = other.GetComponentInParent<ICollidable>();
-            //Debug.Log($"Hit a {collisionObject.GetType()}");
             if (collisionObject != null)
             {
                 collisionObject.HandleCollision(this);
-
-                // ship.TakeDamage;
-                //Debug.Log("A ship was hit");
-            }
-            else
-            {
-                // destroy bullet
-                //Debug.Log("Something else was hit: " + other.name);
             }
         }
 
@@ -98,5 +93,6 @@ namespace Projectiles
         public float ProjectileSpeed { get { return projectileSpeed; } }
         public float ArmingTime { get { return armingTime; } }
         public int AmountToSpawn { get { return amountToSpawn; } }
+        public int PlayerIndex { get { return playerIndex; } }
     }
 }
