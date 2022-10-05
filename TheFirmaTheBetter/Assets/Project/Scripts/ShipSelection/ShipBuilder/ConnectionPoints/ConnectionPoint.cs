@@ -8,6 +8,7 @@ namespace ShipSelection.ShipBuilders.ConnectionPoints
     public abstract class ConnectionPoint : MonoBehaviour
     {
         private Part connectedPart;
+        private const float _gizmoRadius = 0.1f;
 
         public Part ConnectedPart => connectedPart;
 
@@ -45,9 +46,17 @@ namespace ShipSelection.ShipBuilders.ConnectionPoints
             if (toConnect == null)
                 return;
 
-           // DisconnectPartFromCategory(toConnect);
+            // DisconnectPartFromCategory(toConnect);
 
             PositionPart(toConnect);
+        }
+
+        protected void OnDrawGizmosSelected()
+        {
+            if (this.isActiveAndEnabled)
+            {
+                Gizmos.DrawCube(transform.position, (Vector3.one * _gizmoRadius) + (Vector3.forward * _gizmoRadius));
+            }
         }
     }
 }

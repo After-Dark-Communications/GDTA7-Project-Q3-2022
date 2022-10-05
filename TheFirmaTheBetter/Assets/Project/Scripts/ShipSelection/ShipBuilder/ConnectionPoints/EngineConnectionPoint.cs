@@ -12,5 +12,11 @@ namespace ShipSelection.ShipBuilders.ConnectionPoints
 
             base.ConnectPart(toConnect);
         }
+
+        private void OnDrawGizmosSelected()
+        {
+            UnityEngine.Gizmos.color = UnityEngine.Color.red;
+            base.OnDrawGizmosSelected();
+        }
     }
 }
