@@ -7,12 +7,30 @@ using Util;
 namespace ShipParts.Specials
 {
     [AddComponentMenu("Parts/Special")]
-    public class SpecialAbility : Part
+    public abstract class SpecialAbility : Part
     {
         [SerializeField]
         private SpecialData specialData;
 
+        protected bool CanDoSpecial = true;
+
+        protected float currentCooldown = 0;
+
         public override string PartCategoryName => "Special";
+
+        private void Update()
+        {
+            if (CanDoSpecial)
+                return;
+
+            currentCooldown += Time.deltaTime;
+
+            if (currentCooldown >= specialData.AbilityCooldown)
+            {
+                CanDoSpecial = true;
+                currentCooldown = 0;
+            }
+        }
 
         public override bool IsMyType(Part part)
         {
@@ -40,22 +58,20 @@ namespace ShipParts.Specials
 
         private void PerformSpecial(ButtonStates state)
         {
-            if (state != ButtonStates.NONE)
-            {
-                if (state.HasFlag(ButtonStates.STARTED))
-                {
-                    Debug.Log("Special Started");
-                }
-                if (state.HasFlag(ButtonStates.PERFORMED))
-                {
-                    Debug.Log("Special Performed");
-                }
-                if (state.HasFlag(ButtonStates.CANCELED))
-                {
-                    Debug.Log("Special Canceled");
-                }
-            }
+            if (CanDoSpecial == false)
+                return;
+
+            if (state == ButtonStates.NONE)
+                return;
+
+            if (state.HasFlag(ButtonStates.PERFORMED) == false)
+                return;
+
+            CanDoSpecial = false;
+            HandleSpecial();
         }
+
+        protected abstract void HandleSpecial();
 
         public override PartData GetData()
         {

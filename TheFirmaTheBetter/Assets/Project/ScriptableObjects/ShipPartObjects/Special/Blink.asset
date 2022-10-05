@@ -16,4 +16,4 @@ MonoBehaviour:
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 0
   description: Blink and you'll miss.
-  abilityCooldown: 0
+  abilityCooldown: 1
