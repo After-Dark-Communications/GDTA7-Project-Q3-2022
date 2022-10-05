@@ -38,7 +38,7 @@ public class ShipSoundManager : MonoBehaviour
 
         }
         Channels.Movement.OnShipMove += SetRPM;
-        Channels.OnHealthChanged += SetHealth;x
+        Channels.OnHealthChanged += SetHealth;
         healthEmitter.SetParameter("Player_Health", 100f);
     }
 
