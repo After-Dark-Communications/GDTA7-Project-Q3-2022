@@ -12,7 +12,7 @@ public class ShipAnimationManager : MonoBehaviour
     private const string trigger = "ShipIdle";
     private Animator shipAnimator;
     private ShipBuilder shipBuilder;
-    
+
     private void Awake()
     {
         shipAnimator = GetComponent<Animator>();
@@ -23,7 +23,7 @@ public class ShipAnimationManager : MonoBehaviour
     private void OnEnable()
     {
         Channels.OnShipCompleted += OnShipCompleted;
-       
+
     }
 
     private void OnShipCompleted(ShipBuilder obj)
@@ -31,10 +31,12 @@ public class ShipAnimationManager : MonoBehaviour
         //throw new NotImplementedException();
         //Debug.Log($"Completed");
         if (obj.PlayerNumber != shipBuilder.PlayerNumber)
-            return ;
+            return;
 
         shipAnimator.SetTrigger(trigger);
-        
+        shipAnimator.enabled = false;
+        this.enabled = false;
+
     }
 
     private void OnDisable()

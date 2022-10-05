@@ -1984,6 +1984,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1680627906}
     m_Modifications:
+    - target: {fileID: 414908217916560885, guid: 8dabe48e60294c64698c2d8818467459,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6423892840416182312, guid: 8dabe48e60294c64698c2d8818467459,
         type: 3}
       propertyPath: playerNumber
@@ -2018,6 +2023,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PreviewCamPlayer1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015091416441768763, guid: 8dabe48e60294c64698c2d8818467459,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dabe48e60294c64698c2d8818467459, type: 3}
