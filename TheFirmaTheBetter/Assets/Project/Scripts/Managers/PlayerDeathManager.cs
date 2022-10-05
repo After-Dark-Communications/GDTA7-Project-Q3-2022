@@ -1,17 +1,33 @@
 using EventSystem;
 using ShipParts.Ship;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using ShipSelection.ShipBuilders;
 using UnityEngine;
 
 namespace Managers
 {
     public class PlayerDeathManager : MonoBehaviour
     {
+        private int playersAlive;
+
+        private ShipBuildManager shipBuildManager;
+        private ResultsManager resultsManager;
+
         private void Awake()
         {
             Channels.OnPlayerBecomesDeath += OnPlayerDeath;
+            Channels.OnManagerInitialized += OnManagerInitialized;
+
+            resultsManager = ResultsManager.Instance;
+        }
+
+        private void OnManagerInitialized(Manager manager)
+        {
+            if (manager is not ShipBuildManager)
+                return;
+
+            shipBuildManager = manager as ShipBuildManager;
+            playersAlive = shipBuildManager.AmountOfPlayersJoined;
+
         }
 
         private void OnPlayerDeath(ShipBuilder shipBuilderThatDied)
@@ -19,12 +35,22 @@ namespace Managers
             shipBuilderThatDied.gameObject.SetActive(false);
             shipBuilderThatDied.transform.parent = null;
             DontDestroyOnLoad(shipBuilderThatDied);
-        }
+            playersAlive--;
+            resultsManager.AddResult(shipBuilderThatDied);
 
-        private IEnumerator WaitForRestart()
-        {
-            yield return new WaitForSeconds(1.5f);
-            SceneSwitchManager.LoadFirstScene();
+            if (playersAlive <= 1)
+            {
+                foreach (ShipBuilder ship in shipBuildManager.ShipBuilders)
+                {
+                    if (ship.gameObject.activeInHierarchy)
+                    {
+                        resultsManager.AddResult(ship);
+                        shipBuilderThatDied.transform.parent = null;
+                        DontDestroyOnLoad(shipBuilderThatDied);
+                    }
+                }
+                SceneSwitchManager.SwitchToNextScene();
+            }
         }
     }
 }

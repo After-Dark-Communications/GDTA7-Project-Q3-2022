@@ -1,23 +1,28 @@
-using EventSystem;
 using ShipParts.Ship;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResultsManager : MonoBehaviour
+public class ResultsManager : Manager
 {
     [SerializeField]
     private List<ShipBuilder> results;
 
-    private void Awake()
+    public static ResultsManager Instance;
+
+    void Awake()
     {
-        transform.parent = null;
-        DontDestroyOnLoad(gameObject);
+        if (Instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
 
         results = new();
-
-        Channels.OnPlayerBecomesDeath += AddResult;
     }
 
     public void AddResult(ShipBuilder shipBuilder)
@@ -25,4 +30,12 @@ public class ResultsManager : MonoBehaviour
         results.Add(shipBuilder);
     }
 
+    public ShipBuilder[] Results
+    {
+        get
+        {
+            results.Reverse();
+            return results.ToArray();
+        }
+    }
 }

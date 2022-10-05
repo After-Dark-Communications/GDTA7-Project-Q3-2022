@@ -11,8 +11,9 @@ public class ShipPreviewCam : MonoBehaviour
         {
             child.gameObject.SetActive(false);
         }
+
         GameObject preview = Instantiate(ship, shipParent.transform);
-        preview.transform.position = Vector3.zero;
+        preview.transform.localPosition = Vector3.zero;
         preview.SetActive(true);
     }
 
