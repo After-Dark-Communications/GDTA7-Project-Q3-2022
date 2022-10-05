@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c6cfbd28a22af44a7461704b0bfe8b, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
+  partName: part
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 0
   weaponName: Shotgun
-  projectilePrefab: {fileID: 8795236707980728124, guid: cffc0c60e9c1c5c4282f1e1ce8ad4a65,
+  projectilePrefab: {fileID: 8795236707980728124, guid: d90a371098a4b3247a4f0d62f89d5c04,
     type: 3}
   armingTime: 0
   fireRate: 1
@@ -23,10 +24,10 @@ MonoBehaviour:
   energyCost: 1
   weaponFireEvent:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 674240336
+      Data2: 1107783607
+      Data3: 1372337337
+      Data4: 1736597987
+    Path: event:/Weapons/Weap_Shotgun
   sideSpreadAngle: 30
   range: 10

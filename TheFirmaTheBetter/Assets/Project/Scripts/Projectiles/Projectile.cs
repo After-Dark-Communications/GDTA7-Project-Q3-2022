@@ -1,6 +1,7 @@
 
 using Collisions;
 using Pooling;
+using ShipParts.Ship;
 using System.Collections;
 using UnityEngine;
 
@@ -75,7 +76,7 @@ namespace Projectiles
             //Debug.Log($"Hit a {collisionObject.GetType()}");
             if (collisionObject != null)
             {
-                collisionObject.HandleCollision(this);
+                collisionObject.HandleCollision(this,null);
 
                 // ship.TakeDamage;
                 //Debug.Log("A ship was hit");
@@ -87,7 +88,7 @@ namespace Projectiles
             }
         }
 
-        public void HandleCollision<T1>(T1 objectThatHit) where T1 : ICollidable { }
+        public void HandleCollision<T1>(T1 objectThatHit, ShipStats shipStats) where T1 : ICollidable { }
 
         public void DestroySelf()
         {

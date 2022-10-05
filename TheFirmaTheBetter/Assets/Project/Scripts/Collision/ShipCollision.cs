@@ -1,5 +1,6 @@
 using EventSystem;
 using Projectiles;
+using ShipParts;
 using ShipParts.Ship;
 using System;
 using UnityEngine;
@@ -10,6 +11,9 @@ namespace Collisions
     {
         private ShipBuilder shipBuilder;
         private Rigidbody rigidbody;
+        private ShipStats shipStats;
+
+        private const float _collisionWeightImpactMultiplier = 0.5f, _bumpForceClamp = 25f;//adjust to get different feel (used to prevent "random" spikes to 500+ bumpforce)
 
         private void Awake()
         {
@@ -23,6 +27,7 @@ namespace Collisions
             if (playerIndex == shipBuilder.PlayerNumber)
             {
                 rigidbody = GetComponentInParent<Rigidbody>();
+                shipStats = GetComponent<ShipResources>()?.ShipStats;
             }
         }
 
@@ -31,8 +36,8 @@ namespace Collisions
 
         }
 
-        public void HandleCollision<T1>(T1 objectThatHit) where T1 : ICollidable
-        {
+        public void HandleCollision<T1>(T1 objectThatHit, ShipStats shipStats) where T1 : ICollidable
+        {//objectThatHit and shipStats are BOTH from the object that hit this one
 
             if (objectThatHit is Projectile)
             {
@@ -41,24 +46,35 @@ namespace Collisions
 
             if (objectThatHit is ShipCollision)
             {
-                HandleHitByOtherShip(objectThatHit as ShipCollision);
+                HandleHitByOtherShip(objectThatHit as ShipCollision, shipStats);
             }
         }
 
-        private void HandleHitByOtherShip(ShipCollision shipCollision)
+        private void HandleHitByOtherShip(ShipCollision shipCollision, ShipStats collisionShipStats)
         {
             if (shipCollision != null)
             {
+                Debug.Log($"{transform.parent.name} got hit by {shipCollision.transform.parent.name}");
                 Rigidbody otherRigidbody = shipCollision.gameObject.GetComponentInParent<Rigidbody>();
                 if (otherRigidbody)
                 {
+                    //apply force to both ships based on position delta and respective weights
                     Vector3 bumpDir = transform.position - shipCollision.transform.position;
 
-                    //apply force to both ships based on position delta
-                    //TODO: adjust force based on (total?) weight of ship
-                    rigidbody.AddForce(bumpDir.normalized * otherRigidbody.velocity.magnitude, ForceMode.Impulse);//issue, some bumps are too strong
-                    //Debug.DrawLine(transform.position, transform.position + (bumpDir.normalized * otherRigidbody.velocity.magnitude), Color.red, 2f);
+                    float WeightDif = getWeightDif();
+
+                    float totalBumpForce = otherRigidbody.velocity.magnitude + (WeightDif * _collisionWeightImpactMultiplier);
+                    //Debug.DrawLine(transform.position, transform.position + (bumpDir.normalized * totalBumpForce), Color.red, 2f);
+                    rigidbody.AddForce(bumpDir.normalized * Mathf.Clamp(totalBumpForce, 0, _bumpForceClamp), ForceMode.Impulse);//issue, some bumps are too strong
+                    Debug.Log($"[{shipCollision.name}]BumpForce: {Mathf.Clamp(totalBumpForce, 0, _bumpForceClamp)} (unclamped: {totalBumpForce})");
                 }
+            }
+
+            float getWeightDif()
+            {
+                float myWeight = shipStats.TotalWeight + shipStats.SumTotalWeightModifier;
+                float otherWeight = collisionShipStats.TotalWeight + collisionShipStats.SumTotalWeightModifier;
+                return Mathf.Clamp(otherWeight - myWeight, 0, Mathf.Infinity);
             }
         }
 
@@ -66,7 +82,7 @@ namespace Collisions
         {
             //Debug.Log($"took damage! ({Channels.OnPlayerTakeDamage?.GetInvocationList().Length})called");
             Channels.OnPlayerTakeDamage?.Invoke(shipBuilder, projectileThatHit.ProjectileDamage);
-
+            Channels.OnPlayerHit?.Invoke();
             projectileThatHit.DestroySelf();
         }
     }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c6cfbd28a22af44a7461704b0bfe8b, type: 3}
   m_Name: MediumWeapon
   m_EditorClassIdentifier: 
+  partName: part
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 0
   weaponName: Medium
@@ -23,10 +24,10 @@ MonoBehaviour:
   energyCost: 1
   weaponFireEvent:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -1845492624
+      Data2: 1241857302
+      Data3: -1323155564
+      Data4: -262866754
+    Path: event:/Weapons/Weap_Laser
   sideSpreadAngle: 5
   range: 30

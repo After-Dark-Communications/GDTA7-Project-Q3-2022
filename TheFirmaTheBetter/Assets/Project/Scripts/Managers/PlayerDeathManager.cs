@@ -23,7 +23,9 @@ namespace Managers
         private IEnumerator WaitForRestart()
         {
             yield return new WaitForSeconds(1.5f);
-            SceneSwitchManager.LoadFirstScene();
+            //TODO: check if only one player is left, THEN load first scene.
+            //issue caused by objects with DontDestroyOnLoad
+            //SceneSwitchManager.LoadFirstScene();
         }
     }
 }
