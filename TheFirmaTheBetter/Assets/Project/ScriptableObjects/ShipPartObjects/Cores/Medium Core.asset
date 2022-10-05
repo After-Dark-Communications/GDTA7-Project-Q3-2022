@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 079fd4a3f41539b499dbe47d57e8bb0c, type: 3}
   m_Name: Medium Core
   m_EditorClassIdentifier: 
+  partName: part
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 50
-  health: 500
+  health: 300
   energyCapacity: 30
   fuelCapacity: 50

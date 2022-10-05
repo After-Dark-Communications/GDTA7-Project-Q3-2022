@@ -16,7 +16,7 @@ MonoBehaviour:
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 0
   weaponName: Shotgun
-  projectilePrefab: {fileID: 8795236707980728124, guid: cffc0c60e9c1c5c4282f1e1ce8ad4a65,
+  projectilePrefab: {fileID: 8795236707980728124, guid: d90a371098a4b3247a4f0d62f89d5c04,
     type: 3}
   armingTime: 0
   fireRate: 1

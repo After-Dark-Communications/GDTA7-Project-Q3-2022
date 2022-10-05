@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 079fd4a3f41539b499dbe47d57e8bb0c, type: 3}
-  m_Name: Heavy Core
+  m_Script: {fileID: 11500000, guid: 2f14301244174ea4cb09eb58edf90fec, type: 3}
+  m_Name: ShotgunBullet
   m_EditorClassIdentifier: 
-  partName: part
-  connectionPoint: {x: 0, y: 0, z: 0}
-  partWeight: 100
-  health: 1000
-  energyCapacity: 12
-  fuelCapacity: 100
+  damage: 120
+  projectileSpeed: 60
+  armingTime: 1
+  isDoT: 0
+  spawnedObjectOnImpact: {fileID: 0}
+  amountToSpawn: 5
