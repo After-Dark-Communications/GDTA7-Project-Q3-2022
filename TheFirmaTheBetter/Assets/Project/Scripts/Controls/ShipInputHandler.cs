@@ -91,8 +91,21 @@ namespace Controls
 
         private void Update()
         {
-            OnPlayerMove.Invoke(_Move.ReadValue<Vector2>());
-            OnPlayerAim.Invoke(_Aim.ReadValue<Vector2>().x);
+            if (_Move.activeControl != null)
+            {
+                Vector2 move = _Move.ReadValue<Vector2>();
+                if (move != null)
+                { OnPlayerMove?.Invoke(move); }
+
+            }
+            if (_Aim.activeControl != null)
+            {
+                Vector2 aim = _Aim.ReadValue<Vector2>();
+                if (aim != null)
+                {
+                    OnPlayerAim?.Invoke(aim.x);
+                }
+            }
         }
 
         private void SetupInputEvents()

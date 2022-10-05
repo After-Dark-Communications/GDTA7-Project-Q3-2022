@@ -22,7 +22,7 @@ namespace ShipParts.Engines
         private Vector2 _moveValue;
         private bool _changingHeight;
         private float _maxSpeed = 1f;
-
+        private ShipBuilder shipBuilder;
         protected override void Setup()
         {
             //set the evenets
@@ -33,6 +33,8 @@ namespace ShipParts.Engines
                 rootInputHandler.OnPlayerMoveUp.AddListener(MoveUp);
                 rootInputHandler.OnPlayerMoveDown.AddListener(MoveDown);
             }
+            //cache shipBuilder
+            shipBuilder = transform.GetComponentInParent<ShipBuilder>();
             //determine unaltered max speed
             _maxSpeed = engineData.Speed / shipRigidBody.drag;
         }
@@ -62,14 +64,16 @@ namespace ShipParts.Engines
         private void MoveShip(Vector2 move)
         {//when starting to move, increase T and lerp towards top speed
          //when stopping, decrease T and lerp towards 0 speed
+            if (shipBuilder == null)
+            { return; }
             _throttle = new Vector3(move.x, 0, move.y).magnitude;
             _moveValue = move;
-            Channels.Movement.OnShipMove?.Invoke(move, transform.GetComponentInParent<ShipBuilder>().PlayerNumber);
+            Channels.Movement.OnShipMove?.Invoke(move, shipBuilder.PlayerNumber);
         }
 
         private void MoveUp(ButtonStates arg0)
         {
-            if (!_changingHeight)
+            if (!_changingHeight && gameObject.activeInHierarchy)
             {
                 StartCoroutine(ChangeYForTime(HeightTime, HeightDifference, HeightSpeed));
             }
@@ -77,7 +81,7 @@ namespace ShipParts.Engines
 
         private void MoveDown(ButtonStates arg0)
         {
-            if (!_changingHeight)
+            if (!_changingHeight && gameObject.activeInHierarchy)
             {
                 StartCoroutine(ChangeYForTime(HeightTime, -HeightDifference, HeightSpeed));
             }
