@@ -452,6 +452,8 @@ MonoBehaviour:
   projectileData: {fileID: 11400000, guid: 4039f9b82c8a976458d060a3ef20355f, type: 2}
   projectilePrefab: {fileID: 3994246806297512443, guid: cffc0c60e9c1c5c4282f1e1ce8ad4a65,
     type: 3}
+  explosionPrefab: {fileID: 1441409669194595524, guid: c3b62c902fa63b64198cef56fcc5b307,
+    type: 3}
   shootingPoint: {fileID: 4886431264086944275}
 --- !u!135 &562063238439551960
 SphereCollider:
