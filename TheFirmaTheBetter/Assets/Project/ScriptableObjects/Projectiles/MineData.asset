@@ -18,4 +18,4 @@ MonoBehaviour:
   isDoT: 0
   spawnedObjectOnImpact: {fileID: 0}
   amountToSpawn: 0
-  explodingTime: 2
+  explodingTime: 10
