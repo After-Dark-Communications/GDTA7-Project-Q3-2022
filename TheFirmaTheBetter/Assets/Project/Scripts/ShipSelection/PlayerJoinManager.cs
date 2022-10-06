@@ -61,7 +61,7 @@ namespace ShipSelection
 
             SetCamPreview(playerInput);
 
-            Channels.OnPlayerJoined.Invoke(playerSelectionScreen.PlayerNumber, playerGamepad);
+            Channels.OnPlayerJoined?.Invoke(playerSelectionScreen.PlayerNumber, playerGamepad);
         }
 
         private void SetCamPreview(PlayerInput playerInput)

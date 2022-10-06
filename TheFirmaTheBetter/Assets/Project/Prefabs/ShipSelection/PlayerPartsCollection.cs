@@ -16,7 +16,7 @@ namespace ShipSelection
         {
             Part currentSelectedPart = selectionBar.GetCurrentSelectedPart();
 
-            Channels.OnShipPartSelected.Invoke(currentSelectedPart, selectionScreen.PlayerNumber);
+            Channels.OnShipPartSelected?.Invoke(currentSelectedPart, selectionScreen.PlayerNumber);
         }
     }
 }

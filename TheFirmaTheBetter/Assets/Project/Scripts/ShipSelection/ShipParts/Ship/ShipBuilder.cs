@@ -46,7 +46,7 @@ namespace ShipParts.Ship
             transform.parent = null;
             DontDestroyOnLoad(transform);
 
-            Channels.OnShipCompleted.Invoke(this);
+            Channels.OnShipCompleted?.Invoke(this);
         }
 
         private void Start()

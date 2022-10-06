@@ -51,7 +51,7 @@ namespace ShipSelection
                 PlayerInputManager.instance.playerPrefab = joinprefab;
                 PlayerInput inp = PlayerInputManager.instance.JoinPlayer(playerIndex, -1, null, shipBuilder.PlayerDevice);
                 inp.transform.parent = spawnPointTransform;
-                Channels.OnPlayerSpawned.Invoke(shipBuilder.gameObject, shipBuilder.PlayerNumber);
+                Channels.OnPlayerSpawned?.Invoke(shipBuilder.gameObject, shipBuilder.PlayerNumber);
             }
         }
     }
