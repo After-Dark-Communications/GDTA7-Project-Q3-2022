@@ -13,15 +13,17 @@ namespace ShipSelection.ShipBuilders
 
         void Awake()
         {
-            if (Instance != this && Instance != null)
+            if (Instance != null)
             {
-                Destroy(Instance.gameObject);
+                Instance.shipBuilders.Clear();
+                Destroy(gameObject);
+                return;
             }
 
             if (Instance == null)
             {
-                DontDestroyOnLoad(gameObject);
                 Instance = this;
+                DontDestroyOnLoad(gameObject);
             }
 
             SceneManager.sceneLoaded += OnSceneLoaded;
