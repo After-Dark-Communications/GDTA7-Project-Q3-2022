@@ -14,6 +14,7 @@ public class ShipPreviewCam : MonoBehaviour
 
         GameObject preview = Instantiate(ship, shipParent.transform);
         preview.transform.localPosition = Vector3.zero;
+        preview.transform.rotation = Quaternion.Euler(Vector3.zero);
         preview.SetActive(true);
     }
 
