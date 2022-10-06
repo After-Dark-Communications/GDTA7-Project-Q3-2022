@@ -16,4 +16,4 @@ MonoBehaviour:
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 0
   description: Place a mine and after a while, it will explode.
-  abilityCooldown: 0
+  abilityCooldown: 2
