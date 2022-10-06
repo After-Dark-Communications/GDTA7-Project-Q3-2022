@@ -19,10 +19,8 @@ namespace Projectiles
         private Rigidbody _firerer;
 
         private float _desiredSegmentLength = 0.25f;//must be positive
-        private float _segmentDecreaseRate = 1f, _currentSegmentLength = 1f;
+        private float  _initialSegmentLength = 1f, _currentSegmentLength = 1f;
         private Vector3 _ropeDirection;
-
-        //private Transform 
 
         private LineRenderer _lineRenderer;
         private List<RopeSegment> _ropeSegments = new List<RopeSegment>();
@@ -31,6 +29,7 @@ namespace Projectiles
         private const float _lineWidth = 0.1f;
         private const float _rotateTime = 10f;
         private const int _constraintSimulations = 50;//higher should get better results
+        private const float _pullDelay = 1f;//should be less than HookConnectedTime
 
         private void Awake()
         {
@@ -60,13 +59,13 @@ namespace Projectiles
             target = shipBuilder;
             Vector3 ropeStart = _firerer.position;
             Vector3 diff = (_firerer.position - target.transform.parent.position);
-            _currentSegmentLength = Mathf.Abs(diff.magnitude) / _segmentCount;
+            _initialSegmentLength = Mathf.Abs(diff.magnitude) / _segmentCount;
+            _currentSegmentLength = _initialSegmentLength;
             for (int i = 0; i < _segmentCount; i++)
             {
                 _ropeSegments.Add(new RopeSegment(ropeStart));
                 ropeStart -= diff.normalized * _currentSegmentLength;
             }
-            _segmentDecreaseRate = _toDesiredLengthTime / (_currentSegmentLength * _segmentCount);
             //_ropeSegments[^1] = new RopeSegment(_firerer.position);
 
         }
@@ -75,15 +74,10 @@ namespace Projectiles
         {
             if (target == null)
                 return;
-            //_currentSegmentLength = Mathf.Lerp(_currentSegmentLength, _desiredSegmentLength, 1f * Time.deltaTime);
-            if (_currentSegmentLength > _desiredSegmentLength)
-            { _currentSegmentLength -= _segmentDecreaseRate * Time.deltaTime; }
-            if (_currentSegmentLength < _desiredSegmentLength)
-            { _currentSegmentLength = _desiredSegmentLength; }
+            _currentSegmentLength = Mathf.Lerp(_initialSegmentLength, _desiredSegmentLength, -_pullDelay + currentConnectedTime);
             FollowHookShotWithTarget();
 
             currentConnectedTime += Time.deltaTime;
-
             if (currentConnectedTime < HookConnectedTime)
                 return;
 
