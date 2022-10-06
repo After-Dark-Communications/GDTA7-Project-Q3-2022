@@ -7,7 +7,7 @@ public class ResultsManager : Manager
     public static ResultsManager Instance;
 
     [SerializeField]
-    private EndStatsData[] results;
+    private PlayerStatistics[] results;
 
     private int lastEmptyPosition;
 
@@ -27,11 +27,11 @@ public class ResultsManager : Manager
 
     public void SetupResults(int numberOfPlayers)
     {
-        results = new EndStatsData[numberOfPlayers];
+        results = new PlayerStatistics[numberOfPlayers];
         lastEmptyPosition = numberOfPlayers - 1;
     }
 
-    public void AddResult(EndStatsData result)
+    public void AddResult(PlayerStatistics result)
     {
         if (lastEmptyPosition >= 0)
         {
@@ -40,5 +40,5 @@ public class ResultsManager : Manager
         }
     }
 
-    public EndStatsData[] Results { get { return results; } }
+    public PlayerStatistics[] Results { get { return results; } }
 }

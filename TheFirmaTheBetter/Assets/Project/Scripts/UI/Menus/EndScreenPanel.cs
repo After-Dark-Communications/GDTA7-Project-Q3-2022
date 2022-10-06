@@ -9,12 +9,12 @@ public class EndScreenPanel : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI timeSurvivedVlaue;
 
-    public void SetPlayerStats(EndStatsData endStatsData)
+    public void SetPlayerStats(PlayerStatistics playerStatistics)
     {
-        playersKilledValue.text = endStatsData.PlayersKilled.ToString();
+        playersKilledValue.text = playerStatistics.PlayersKilled.ToString();
 
-        float minutes = Mathf.FloorToInt(endStatsData.TimeSurvived / 60);
-        float seconds = Mathf.FloorToInt(endStatsData.TimeSurvived % 60);
+        float minutes = Mathf.FloorToInt(playerStatistics.TimeSurvived / 60);
+        float seconds = Mathf.FloorToInt(playerStatistics.TimeSurvived % 60);
         timeSurvivedVlaue.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }
