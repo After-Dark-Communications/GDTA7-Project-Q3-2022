@@ -32,29 +32,39 @@ namespace Managers
 
         private void OnPlayerDeath(ShipBuilder shipBuilderThatDied, int killerIndex)
         {
-            RemoveShip(shipBuilderThatDied);
-            playersAlive--;
-            ResultsManager.Instance.AddResult(new EndStatsData(shipBuilderThatDied.PlayerNumber, shipBuilderThatDied.gameObject, battleTimer.TimeSinceStart, 0));
+            PlayerStatistics playerStatistics = shipBuilderThatDied.GetComponent<PlayerStatistics>();
+            RemoveShipFromScene(shipBuilderThatDied);
+            SetKillStats(playerStatistics);
+            ResultsManager.Instance.AddResult(playerStatistics);
             
             if (playersAlive <= 1)
             {
                 foreach (ShipBuilder ship in shipBuildManager.ShipBuilders)
                 {
-                    if (ship.gameObject.activeInHierarchy)
+                    playerStatistics = ship.GetComponent<PlayerStatistics>();
+                    if (playerStatistics.IsAlive)
                     {
-                        RemoveShip(ship);
-                        ResultsManager.Instance.AddResult(new EndStatsData(shipBuilderThatDied.PlayerNumber, ship.gameObject, battleTimer.TimeSinceStart, 0));
+                        RemoveShipFromScene(ship);
+                        SetKillStats(playerStatistics);
+                        ResultsManager.Instance.AddResult(playerStatistics);
                     }
                 }
                 SceneSwitchManager.SwitchToNextScene();
             }
         }
 
-        private void RemoveShip(ShipBuilder ship)
+        private void RemoveShipFromScene(ShipBuilder ship)
         {
             ship.gameObject.SetActive(false);
             ship.transform.parent = null;
             DontDestroyOnLoad(ship);
+        }
+
+        private void SetKillStats(PlayerStatistics playerStatistics)
+        {
+            playerStatistics.TimeSurvived = battleTimer.TimeSinceStart;
+            playerStatistics.IsAlive = false;
+            playersAlive--;
         }
     }
 }

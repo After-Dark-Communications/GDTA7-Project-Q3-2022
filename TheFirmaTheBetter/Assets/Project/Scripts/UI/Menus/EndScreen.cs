@@ -28,10 +28,10 @@ public class EndScreen : MenuPanel
             panel.gameObject.SetActive(false);
         }
 
-        EndStatsData[] results = resultsManager.Results;
+        PlayerStatistics[] results = resultsManager.Results;
         for (int i = 0; i < results.Length; i++)
         {
-            previewCams[i].PlaceShipPreview(results[i].ShipObject);
+            previewCams[i].PlaceShipPreview(results[i].gameObject);
             panels[i].gameObject.SetActive(true);
             panels[i].SetPlayerStats(results[i]);
         }

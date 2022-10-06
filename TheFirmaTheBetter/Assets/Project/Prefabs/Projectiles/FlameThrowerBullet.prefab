@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3852572413530482919}
   - component: {fileID: 4823603599349192703}
   - component: {fileID: 3994246806297512443}
+  - component: {fileID: 5347808386704539653}
   m_Layer: 0
   m_Name: FlameThrowerBullet
   m_TagString: Untagged
@@ -114,7 +115,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &3994246806297512443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,3 +129,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileData: {fileID: 11400000, guid: 8ca551a565e0764409d93845f358575a, type: 2}
+--- !u!114 &5347808386704539653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795236707980728124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7428f0bd4f031d84381c26347e5492a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactHitPrefab: {fileID: 8246906655773735241, guid: 4e73861a7eabca04183b1fe2547fb1aa,
+    type: 3}
