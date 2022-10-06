@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f14301244174ea4cb09eb58edf90fec, type: 3}
   m_Name: FastBullet
   m_EditorClassIdentifier: 
-  damage: 0
-  projectileSpeed: 0
-  armingTime: 0
+  damage: 70
+  projectileSpeed: 60
+  armingTime: 1
   isDoT: 0
   spawnedObjectOnImpact: {fileID: 0}
-  amountToSpawn: 0
+  amountToSpawn: 1

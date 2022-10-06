@@ -1,6 +1,7 @@
 
 using Collisions;
 using Pooling;
+using ShipParts.Ship;
 using System.Collections;
 using UnityEngine;
 
@@ -78,11 +79,11 @@ namespace Projectiles
             ICollidable collisionObject = other.GetComponentInParent<ICollidable>();
             if (collisionObject != null)
             {
-                collisionObject.HandleCollision(this);
+                collisionObject.HandleCollision(this,null);
             }
         }
 
-        public void HandleCollision<T1>(T1 objectThatHit) where T1 : ICollidable { }
+        public void HandleCollision<T1>(T1 objectThatHit, ShipStats shipStats) where T1 : ICollidable { }
 
         public void DestroySelf()
         {
@@ -94,5 +95,7 @@ namespace Projectiles
         public float ArmingTime { get { return armingTime; } }
         public int AmountToSpawn { get { return amountToSpawn; } }
         public int PlayerIndex { get { return playerIndex; } }
+
+        public ProjectileData ProjectileData => projectileData;
     }
 }

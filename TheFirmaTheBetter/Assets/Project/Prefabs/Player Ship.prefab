@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 613b15b6d8ee25444ad8f0df2e47a95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyPercentage: 20
+  energyPercentage: 10
   fuelEmptyEvent:
     Guid:
       Data1: 150556774
@@ -200,6 +200,13 @@ MonoBehaviour:
       Data3: -444830038
       Data4: -2056007736
     Path: event:/Vehicles/En_AlmostEmpty
+  hitmarker:
+    Guid:
+      Data1: -1616140721
+      Data2: 1190613681
+      Data3: -1906423408
+      Data4: 1085249597
+    Path: event:/General SFX/Hitmarker_Hiss
 --- !u!1001 &5970501817694765255
 PrefabInstance:
   m_ObjectHideFlags: 0

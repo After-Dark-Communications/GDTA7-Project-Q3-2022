@@ -108,7 +108,7 @@ namespace Controls
             controls.FindAction(actions.MoveUp.name).started += OnMoveUp;
             controls.FindAction(actions.MoveDown.name).started += OnMoveDown;
             controls.FindAction(actions.Pause.name).started += OnPause;
-            controls.FindAction(actions.Special.name).started += OnSpecial;
+            controls.FindAction(actions.Special.name).performed += OnSpecial;
 
             controls.FindAction(actions.Fire.name).performed += OnFire;
             controls.FindAction(actions.Fire.name).canceled += OnFire;

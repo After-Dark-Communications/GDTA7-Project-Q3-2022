@@ -1,4 +1,5 @@
 ﻿using Projectiles;
+using ShipParts.Ship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Collisions
     {
         public void DestroySelf() { }
 
-        public void HandleCollision<T1>(T1 objectThatHit) where T1 : ICollidable
+        public void HandleCollision<T1>(T1 objectThatHit, ShipStats shipStats) where T1 : ICollidable
         {
             if (objectThatHit is Projectile)
             {

@@ -10,6 +10,7 @@ namespace EventSystem
     {
         public static InputChannel Input = new InputChannel();
         public static MovementChannel Movement = new MovementChannel();
+        public static AnnouncerChannel Announcer = new AnnouncerChannel();
 
         /// <summary> Callled when firemode has to change to the new value
         /// <para><see cref="bool" /> new firemode value</para>
@@ -77,7 +78,7 @@ namespace EventSystem
         /// <summary> Called when firing the gun while not having enough ammo
         /// </summary>
         public static Action OnEnergyEmpty;
-
+        public static Action OnPlayerHit;
         /// <summary>
         /// <para><see cref="int" /> Player number</para>
         /// <para><see cref="float" /> New health persentage </para>
