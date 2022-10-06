@@ -100,7 +100,7 @@ public class MineProjectile : Projectile
 
         foreach (ShipBuilder item in buildersInRange)
         {
-            Channels.OnPlayerTakeDamage(item, mineData.Damage);
+            Channels.OnPlayerTakeDamage(item, mineData.Damage, PlayerIndex);
         }
 
     }

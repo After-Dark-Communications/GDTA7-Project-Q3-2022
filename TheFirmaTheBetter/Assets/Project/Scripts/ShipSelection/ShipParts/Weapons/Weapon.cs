@@ -129,7 +129,7 @@ namespace ShipParts.Weapons
             void ReturnProjectileToPoolAfterTime(Projectile projectile)
             {
                 float projectileLifetime = weaponData.Range / projectile.ProjectileSpeed;
-                projectile.SetupProjectile(projectilesPool, projectileLifetime);
+                projectile.SetupProjectile(projectilesPool, projectileLifetime, playerNumber);
             }
 
             void FireProjectile(GameObject projectileObject, Vector3 direction, Projectile projectile)

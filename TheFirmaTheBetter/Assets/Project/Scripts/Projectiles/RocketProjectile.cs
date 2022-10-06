@@ -26,7 +26,7 @@ public class RocketProjectile : Projectile
         if (otherBuilder == null)
             Explode();
 
-        Channels.OnPlayerTakeDamage(otherBuilder, ProjectileData.Damage);
+        Channels.OnPlayerTakeDamage(otherBuilder, ProjectileData.Damage, PlayerIndex);
     }
 
     private void Update()
