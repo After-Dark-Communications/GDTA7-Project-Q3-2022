@@ -12,10 +12,10 @@ public class ShipPreviewCam : MonoBehaviour
             child.gameObject.SetActive(false);
         }
 
-        GameObject preview = Instantiate(ship, shipParent.transform);
-        preview.transform.localPosition = Vector3.zero;
-        preview.transform.rotation = Quaternion.Euler(Vector3.zero);
-        preview.SetActive(true);
+        ship.transform.SetParent(shipParent.transform);
+        ship.transform.localPosition = Vector3.zero;
+        ship.transform.rotation = Quaternion.Euler(Vector3.zero);
+        ship.SetActive(true);
     }
 
     private void OnDrawGizmosSelected()
