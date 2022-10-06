@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:TheFirmaTheBetter/Assets/Project/Prefabs/EndScreen.meta
 guid: 03ac7dd81c8db2f41aa67dd3ae19479b
+========
+guid: 4905ff230c4181b4f9dff57adbd9f842
+>>>>>>>> Specials:TheFirmaTheBetter/Assets/Project/Scripts/ShipParts.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
