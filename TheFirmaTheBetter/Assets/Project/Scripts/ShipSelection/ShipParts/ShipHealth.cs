@@ -31,7 +31,7 @@ namespace  ShipParts
             currentShipHealth = maxHealth;
         }
 
-        public void TakeDamage(ShipBuilder shipBuilder, int amount)
+        public void TakeDamage(ShipBuilder shipBuilder, int amount, int damagerIndex)
         {
             if (playerNumber != shipBuilder.PlayerNumber)
                 return;
@@ -41,7 +41,7 @@ namespace  ShipParts
             if (currentShipHealth <= 0)
             {
                 currentShipHealth = 0;
-                Channels.OnPlayerBecomesDeath?.Invoke(shipBuilder);
+                Channels.OnPlayerBecomesDeath?.Invoke(shipBuilder, damagerIndex);
             }
 
             Channels.OnHealthChanged(playerNumber, currentShipHealth / maxHealth);

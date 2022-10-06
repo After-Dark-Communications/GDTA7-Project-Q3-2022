@@ -130,7 +130,7 @@ namespace ShipParts.Weapons
             {
                 float projectileLifetime = weaponData.Range / projectile.ProjectileSpeed;
                 StartCoroutine(ArmProjectile(projectile));
-                projectile.SetupProjectile(projectilesPool, projectileLifetime);
+                projectile.SetupProjectile(projectilesPool, projectileLifetime, playerNumber);
             }
 
             void FireProjectile(GameObject projectileObject, Vector3 direction, Projectile projectile)

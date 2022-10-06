@@ -38,8 +38,9 @@ namespace EventSystem
         public static Action<ShipBuilder, ShipStats> OnPlayerStatsChanged;
         /// <summary>
         /// <para><see cref="ShipBuilder" /> The shipbuilder that is in need of dying</para>
+        /// <para><see cref="int" /> The player index of the killer</para>
         /// </summary>
-        public static Action<ShipBuilder> OnPlayerBecomesDeath;
+        public static Action<ShipBuilder, int> OnPlayerBecomesDeath;
         /// <summary>
         /// <para><see cref="GameObject" /> Object of the entered zone</para>
         /// </summary>
@@ -65,8 +66,9 @@ namespace EventSystem
         /// <summary>
         /// <para><see cref="ShipBuilder" /> Shipbuilder object that got hit by the bullet</para>
         /// <para><see cref="int" /> DamageAmount</para>
+        /// <para><see cref="int" /> The index of the player that dealt the damage</para>
         /// </summary>
-        public static Action<ShipBuilder, int> OnPlayerTakeDamage;
+        public static Action<ShipBuilder, int, int> OnPlayerTakeDamage;
         public static Action OnEveryPlayerReady;
         /// <summary>
         /// <para><see cref="GameObject" /> The shipbuilder object that is spawned</para>
