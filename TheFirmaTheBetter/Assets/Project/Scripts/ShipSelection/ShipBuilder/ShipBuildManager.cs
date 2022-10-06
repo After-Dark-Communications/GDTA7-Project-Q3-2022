@@ -13,6 +13,8 @@ namespace ShipSelection.ShipBuilders
 
         void Awake()
         {
+            DontDestroyOnLoad(gameObject);
+
             if (Instance != this && Instance != null)
             {
                 Destroy(Instance.gameObject);
@@ -20,7 +22,6 @@ namespace ShipSelection.ShipBuilders
 
             if (Instance == null)
             {
-                DontDestroyOnLoad(gameObject);
                 Instance = this;
             }
 

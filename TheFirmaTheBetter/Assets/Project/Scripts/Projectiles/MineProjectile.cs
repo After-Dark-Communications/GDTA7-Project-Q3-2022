@@ -48,6 +48,9 @@ public class MineProjectile : Projectile
 
         int index = buildersInRange.FindIndex(b => b.PlayerNumber == otherBuilder.PlayerNumber);
 
+        if (index >= 0)
+            return;
+
         buildersInRange.RemoveAt(index);
     }
 

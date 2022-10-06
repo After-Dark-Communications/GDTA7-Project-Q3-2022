@@ -31,18 +31,21 @@ namespace ShipSelection
 
         private void OnManagerInitialized(Manager manager)
         {
-            if (manager is not ShipBuildManager)
-                return;
+            if (manager is ShipBuildManager)
+            {
+                shipBuildManager = manager as ShipBuildManager;
 
-            shipBuildManager = manager as ShipBuildManager;
-
-            SpawnShips();
+                SpawnShips();
+            }
         }
 
         private void SpawnShips()
         {
-            foreach (ShipBuilder shipBuilder in shipBuildManager.ShipBuilders)
+            foreach (ShipBuilder shipBuilder in ShipBuildManager.Instance.ShipBuilders)
             {
+                if (shipBuilder == null)
+                    continue;
+
                 int playerIndex = shipBuilder.PlayerNumber;
 
                 Transform spawnPointTransform = playerSpawnPoints[playerIndex];
