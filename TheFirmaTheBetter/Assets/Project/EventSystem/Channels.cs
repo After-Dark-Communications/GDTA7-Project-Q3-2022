@@ -10,6 +10,7 @@ namespace EventSystem
     {
         public static InputChannel Input = new InputChannel();
         public static MovementChannel Movement = new MovementChannel();
+        public static AnnouncerChannel Announcer = new AnnouncerChannel();
 
         /// <summary> Callled when firemode has to change to the new value
         /// <para><see cref="bool" /> new firemode value</para>
