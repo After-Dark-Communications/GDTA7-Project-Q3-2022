@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace Projectiles
 {
+    [RequireComponent(typeof(ImpactSpawner))]
     public class Projectile : MonoBehaviour, IObjectPoolItem, ICollidable
     {
         [SerializeField]
@@ -22,6 +23,8 @@ namespace Projectiles
 
         private ObjectPool projectilesPool;
 
+        private ImpactSpawner impactSpawner;
+
         private void OnEnable()
         {
             projectileDamage = projectileData.Damage;
@@ -29,6 +32,7 @@ namespace Projectiles
             armingTime = projectileData.ArmingTime;
             amountToSpawn = projectileData.AmountToSpawn;
             currentLifeTime = 0;
+            impactSpawner = GetComponent<ImpactSpawner>();
         }
 
         private void Update()
@@ -74,17 +78,13 @@ namespace Projectiles
         {
             ICollidable collisionObject = other.GetComponentInParent<ICollidable>();
             //Debug.Log($"Hit a {collisionObject.GetType()}");
+                Debug.Log($"Projectile hit something");
             if (collisionObject != null)
             {
+                impactSpawner.SpawnImpactHitPrefab();
                 collisionObject.HandleCollision(this,null);
-
                 // ship.TakeDamage;
                 //Debug.Log("A ship was hit");
-            }
-            else
-            {
-                // destroy bullet
-                //Debug.Log("Something else was hit: " + other.name);
             }
         }
 

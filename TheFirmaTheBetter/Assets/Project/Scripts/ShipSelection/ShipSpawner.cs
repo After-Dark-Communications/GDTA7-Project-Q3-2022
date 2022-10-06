@@ -24,6 +24,11 @@ namespace ShipSelection
             Channels.OnManagerInitialized += OnManagerInitialized;
         }
 
+        private void OnDisable()
+        {
+            Channels.OnManagerInitialized -= OnManagerInitialized;
+        }
+
         private void OnManagerInitialized(Manager manager)
         {
             if (manager is not ShipBuildManager)
@@ -41,6 +46,9 @@ namespace ShipSelection
                 int playerIndex = shipBuilder.PlayerNumber;
 
                 Transform spawnPointTransform = playerSpawnPoints[playerIndex];
+
+                if (spawnPointTransform == null)
+                    continue;
 
                 spawnPointTransform.gameObject.SetActive(true);
 

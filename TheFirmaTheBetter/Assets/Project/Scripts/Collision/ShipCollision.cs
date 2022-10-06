@@ -22,6 +22,11 @@ namespace Collisions
 
         }
 
+        private void OnDisable()
+        {
+            Channels.OnPlayerSpawned -= ShipSpawned;
+        }
+
         private void ShipSpawned(GameObject SpawnedShip, int playerIndex)
         {
             if (playerIndex == shipBuilder.PlayerNumber)

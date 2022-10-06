@@ -20,7 +20,7 @@ public class DroneProjectile : Projectile
     private ShipBuilder target;
 
     private float currentAttackSpeed = 0;
-    private float currentLifeTime = 0;
+    private float currentDroneLifeTime = 0;
 
     public ShipBuilder Notarget { get => noTarget; set => noTarget = value; }
 
@@ -62,9 +62,9 @@ public class DroneProjectile : Projectile
 
         ShootTarget();
 
-        currentLifeTime += Time.deltaTime;
+        currentDroneLifeTime += Time.deltaTime;
 
-        if (currentLifeTime < lifeTime)
+        if (currentDroneLifeTime < lifeTime)
             return;
 
         GameObject go = Instantiate(explosionPrefab);

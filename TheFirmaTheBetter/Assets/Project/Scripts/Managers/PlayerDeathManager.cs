@@ -25,7 +25,7 @@ namespace Managers
             yield return new WaitForSeconds(1.5f);
             //TODO: check if only one player is left, THEN load first scene.
             //issue caused by objects with DontDestroyOnLoad
-            //SceneSwitchManager.LoadFirstScene();
+            SceneSwitchManager.LoadFirstScene();
         }
     }
 }
