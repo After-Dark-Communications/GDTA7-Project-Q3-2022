@@ -24,6 +24,8 @@ namespace ShipParts.Engines
         private bool _changingHeight;
         private float _maxSpeed = 1f;
 
+        private Vector3 _lastPosition;
+
         protected override void Setup()
         {
             //set the evenets
@@ -36,6 +38,8 @@ namespace ShipParts.Engines
             }
             //determine unaltered max speed
             _maxSpeed = engineData.Speed / shipRigidBody.drag;
+
+            _lastPosition = shipRigidBody.position;
         }
 
         private void Update()
@@ -47,6 +51,8 @@ namespace ShipParts.Engines
             {
                 Quaternion toRotation = Quaternion.LookRotation(new Vector3(_moveValue.x, 0, _moveValue.y), GlobalUp.UP.up);
                 shipRoot.rotation = Quaternion.RotateTowards(shipRoot.rotation, toRotation, engineData.Handling * Time.deltaTime);
+
+                GetComponentInParent<PlayerStatistics>().DistanceTravelled += shipRigidBody.velocity.magnitude * Time.deltaTime;
             }
         }
 

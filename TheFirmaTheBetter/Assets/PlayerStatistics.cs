@@ -13,7 +13,7 @@ public class PlayerStatistics : MonoBehaviour
     [SerializeField]
     private int playersKilled;
     [SerializeField]
-    private int distanceTravelled;
+    private float distanceTravelled;
 
     private void Awake()
     {
@@ -64,7 +64,7 @@ public class PlayerStatistics : MonoBehaviour
         get { return playersKilled; }
     }
 
-    public int DistanceTravelled
+    public float DistanceTravelled
     {
         get { return distanceTravelled; }
         set { distanceTravelled = value; }
