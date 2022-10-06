@@ -16,12 +16,14 @@ public class OneShotEventHandler : MonoBehaviour
     private FMODUnity.EventReference fuelAlmostEmptyEvent;
     [SerializeField]
     private FMODUnity.EventReference hitmarker;
+    private bool energyLowHasPlayed;
     private void Start()
     {
         Channels.OnEnergyEmpty += PlayEnergyEmpty;
         Channels.OnWeaponFired += PlayEvent;
         Channels.OnEnergyChanged += CompareEnergy;
         Channels.OnPlayerHit += PlayHitmarker;
+        energyLowHasPlayed = false;
     }
 
     private void PlayEvent(FMODUnity.EventReference fmodEvent)
@@ -36,8 +38,15 @@ public class OneShotEventHandler : MonoBehaviour
 
     private void CompareEnergy(int playerNumber, float energy)
     {
-        if (energy * 100 <= energyPercentage)
+        energy *= 100;
+        if (energy <= energyPercentage && energy >= 0 && !energyLowHasPlayed)
+        {
             PlayEnergyAlert();
+            energyLowHasPlayed = true;
+        }
+
+        else if (energy == 100)
+            energyLowHasPlayed = false;
     }
 
     private void PlayEnergyAlert()

@@ -63,7 +63,7 @@ public class ShipSoundManager : MonoBehaviour
         {
             this.health = health * 100;
             healthEmitter.SetParameter("Player_Health", this.health);
-            if (this.health <= 20)
+            if (this.health <= 20 && this.health >= 0)
             {
                 if (!healthEmitter.IsPlaying())
                 {
