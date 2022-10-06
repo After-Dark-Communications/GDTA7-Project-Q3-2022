@@ -59,6 +59,8 @@ namespace Controls
             _Move.Disable();
             _Aim.Disable();
 
+
+
             controls.FindAction(actions.MoveUp.name).started -= OnMoveUp;
             controls.FindAction(actions.MoveDown.name).started -= OnMoveDown;
             controls.FindAction(actions.Pause.name).started -= OnPause;
