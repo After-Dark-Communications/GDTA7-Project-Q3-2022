@@ -30,6 +30,13 @@ namespace ShipParts.Ship
             Channels.Input.OnShipCompletedInput += OnShipCompletedInput;
         }
 
+        private void OnDestroy()
+        {
+            Channels.OnPlayerJoined -= OnPlayerJoined;
+            Channels.OnShipPartSelected -= OnShipPartSelected;
+            Channels.Input.OnShipCompletedInput -= OnShipCompletedInput;
+        }
+
         private void OnPlayerJoined(int playerNumber, InputDevice playerDevice)
         {
             if (this.playerNumber != playerNumber)
@@ -43,26 +50,28 @@ namespace ShipParts.Ship
             if (playerNumber != this.playerNumber)
                 return;
 
+            if (transform == null)
+                return;
+
             transform.parent = null;
             DontDestroyOnLoad(transform);
 
-            Channels.OnShipCompleted.Invoke(this);
+            Channels.OnShipCompleted?.Invoke(this);
         }
 
         private void Start()
         {
             foreach (Part part in collectionManager.AllParts)
             {
-                GameObject instance = Instantiate(part.gameObject);
+                Part instancePart = Instantiate(part);
 
-                Part instancePart = instance.GetComponent<Part>();
                 availablePlayerParts.Add(instancePart);
 
-                instance.transform.SetParent(transform);
+                instancePart.transform.SetParent(transform);
 
-                instance.transform.position = new Vector3(0, 0, 0);
-                instance.transform.localPosition = Vector3.zero;
-                instance.gameObject.SetActive(false);
+                instancePart.transform.position = new Vector3(0, 0, 0);
+                instancePart.transform.localPosition = Vector3.zero;
+                instancePart.gameObject.SetActive(false);
             }
         }
 

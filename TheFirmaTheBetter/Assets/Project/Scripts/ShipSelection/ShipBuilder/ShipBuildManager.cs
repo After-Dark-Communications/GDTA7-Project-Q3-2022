@@ -13,15 +13,15 @@ namespace ShipSelection.ShipBuilders
 
         void Awake()
         {
+            if (Instance != this && Instance != null)
+            {
+                Destroy(Instance.gameObject);
+            }
+
             if (Instance == null)
             {
                 DontDestroyOnLoad(gameObject);
                 Instance = this;
-            }
-
-            if (Instance != this)
-            {
-                Destroy(gameObject);
             }
 
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -54,7 +54,12 @@ namespace ShipSelection.ShipBuilders
                 Channels.OnEveryPlayerReady.Invoke();
         }
 
-
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            Channels.OnShipCompleted -= OnShipCompleted;
+            Channels.OnPlayerJoined -= OnPlayerJoined;
+        }
 
         private int GetIndexOfShipBuilderInList(ShipBuilder shipBuilder)
         {

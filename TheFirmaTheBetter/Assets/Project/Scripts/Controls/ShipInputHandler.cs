@@ -91,8 +91,8 @@ namespace Controls
 
         private void Update()
         {
-            OnPlayerMove.Invoke(_Move.ReadValue<Vector2>());
-            OnPlayerAim.Invoke(_Aim.ReadValue<Vector2>().x);
+            OnPlayerMove?.Invoke(_Move.ReadValue<Vector2>());
+            OnPlayerAim?.Invoke(_Aim.ReadValue<Vector2>().x);
         }
 
         private void SetupInputEvents()
@@ -122,27 +122,27 @@ namespace Controls
 
         public void OnFire(InputAction.CallbackContext ctx)
         {
-            OnPlayerShoot.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
+            OnPlayerShoot?.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
         }
 
         public void OnPause(InputAction.CallbackContext ctx)
         {
-            OnPlayerPause.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
+            OnPlayerPause?.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
         }
 
         public void OnSpecial(InputAction.CallbackContext ctx)
         {
-            OnPlayerSpecial.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
+            OnPlayerSpecial?.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
         }
 
         public void OnMoveUp(InputAction.CallbackContext ctx)
         {
-            OnPlayerMoveUp.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
+            OnPlayerMoveUp?.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
         }
 
         public void OnMoveDown(InputAction.CallbackContext ctx)
         {
-            OnPlayerMoveDown.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
+            OnPlayerMoveDown?.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
         }
     }
 }

@@ -129,7 +129,6 @@ namespace ShipParts.Weapons
             void ReturnProjectileToPoolAfterTime(Projectile projectile)
             {
                 float projectileLifetime = weaponData.Range / projectile.ProjectileSpeed;
-                StartCoroutine(ArmProjectile(projectile));
                 projectile.SetupProjectile(projectilesPool, projectileLifetime, playerNumber);
             }
 
@@ -147,18 +146,6 @@ namespace ShipParts.Weapons
                 direction = GetShootDirection(point, weaponData.SideSpreadAngle);
                 projectile = projectileObject.GetComponent<Projectile>();
             }
-        }
-
-        private IEnumerator ArmProjectile(Projectile projectile)
-        {
-            Collider col = projectile.GetComponent<Collider>();
-
-            if (weaponData.ArmingTime > 0)
-            { 
-                col.enabled = false;
-            }
-            yield return new WaitForSeconds(projectile.ArmingTime);
-            col.enabled = true;
         }
 
         private Vector3 GetShootDirection(Transform shootingPoint, float sideSpreadAngle)

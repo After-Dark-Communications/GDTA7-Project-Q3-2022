@@ -20,6 +20,7 @@ public class MineProjectile : Projectile
     private float currentArmingTime = 0;
 
     private bool armed = false;
+    private bool exploded = false;
 
     private List<ShipBuilder> buildersInRange = new List<ShipBuilder>();
 
@@ -30,15 +31,12 @@ public class MineProjectile : Projectile
         if (otherBuilder == null)
             return;
 
-        buildersInRange.Add(otherBuilder);
-    }
+        ShipBuilder inList = buildersInRange.Find(sb => sb.PlayerNumber == otherBuilder.PlayerNumber); 
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (armed == false)
+        if (inList != null)
             return;
 
-        Explode();
+        buildersInRange.Add(otherBuilder);
     }
 
     private void OnTriggerExit(Collider other)
@@ -57,9 +55,9 @@ public class MineProjectile : Projectile
     {
         ArmMine();
 
+        CheckExplode();
+
         currentTime += Time.deltaTime;
-
-
 
         if (currentTime < mineData.ExplodingTime)
             return;
@@ -67,9 +65,19 @@ public class MineProjectile : Projectile
         Explode();
     }
 
+    private void CheckExplode()
+    {
+        if (buildersInRange.Count <= 0 || armed == false || exploded)
+            return;
+
+        armed = false;
+
+        Explode();
+    }
+
     private void ArmMine()
     {
-        if (armed)
+        if (armed || exploded)
             return;
 
         currentArmingTime += Time.deltaTime;
@@ -82,6 +90,8 @@ public class MineProjectile : Projectile
 
     private void Explode()
     {
+        exploded = true;
+        Destroy(gameObject);
         GameObject spawnedExplosion  = Instantiate(mineExplosionPrefab);
         spawnedExplosion.transform.position = transform.position;
 
@@ -90,6 +100,5 @@ public class MineProjectile : Projectile
             Channels.OnPlayerTakeDamage(item, mineData.Damage, PlayerIndex);
         }
 
-        Destroy(gameObject);
     }
 }
