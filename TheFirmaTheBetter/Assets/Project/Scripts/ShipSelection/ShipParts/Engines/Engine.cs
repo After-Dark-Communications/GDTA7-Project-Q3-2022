@@ -3,6 +3,7 @@ using EventSystem;
 using ShipParts.Ship;
 using ShipSelection.ShipBuilders.ConnectionPoints;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using Util;
 
@@ -64,7 +65,12 @@ namespace ShipParts.Engines
          //when stopping, decrease T and lerp towards 0 speed
             _throttle = new Vector3(move.x, 0, move.y).magnitude;
             _moveValue = move;
-            Channels.Movement.OnShipMove?.Invoke(move, transform.GetComponentInParent<ShipBuilder>().PlayerNumber);
+            ShipBuilder shipBuilder = transform.GetComponentInParent<ShipBuilder>();
+
+            if (shipBuilder == null)
+                return;
+
+            Channels.Movement.OnShipMove?.Invoke(move, shipBuilder.PlayerNumber);
         }
 
         private void MoveUp(ButtonStates arg0)

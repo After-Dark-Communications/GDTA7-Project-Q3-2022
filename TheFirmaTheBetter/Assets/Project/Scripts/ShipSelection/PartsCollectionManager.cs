@@ -24,6 +24,8 @@ namespace ShipSelection
 
         private void Awake()
         {
+            allParts.Clear();
+
             allParts.AddRange(coreList);
             allParts.AddRange(engineList);
             allParts.AddRange(weaponList);

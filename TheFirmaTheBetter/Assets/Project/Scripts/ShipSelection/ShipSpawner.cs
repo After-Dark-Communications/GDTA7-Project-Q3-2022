@@ -24,6 +24,11 @@ namespace ShipSelection
             Channels.OnManagerInitialized += OnManagerInitialized;
         }
 
+        private void OnDisable()
+        {
+            Channels.OnManagerInitialized -= OnManagerInitialized;
+        }
+
         private void OnManagerInitialized(Manager manager)
         {
             if (manager is not ShipBuildManager)
@@ -42,6 +47,9 @@ namespace ShipSelection
 
                 Transform spawnPointTransform = playerSpawnPoints[playerIndex];
 
+                if (spawnPointTransform == null)
+                    continue;
+
                 spawnPointTransform.gameObject.SetActive(true);
 
                 shipBuilder.transform.position = spawnPointTransform.position;
@@ -51,7 +59,7 @@ namespace ShipSelection
                 PlayerInputManager.instance.playerPrefab = joinprefab;
                 PlayerInput inp = PlayerInputManager.instance.JoinPlayer(playerIndex, -1, null, shipBuilder.PlayerDevice);
                 inp.transform.parent = spawnPointTransform;
-                Channels.OnPlayerSpawned.Invoke(shipBuilder.gameObject, shipBuilder.PlayerNumber);
+                Channels.OnPlayerSpawned?.Invoke(shipBuilder.gameObject, shipBuilder.PlayerNumber);
             }
         }
     }
