@@ -1,3 +1,4 @@
+using Collisions;
 using EventSystem;
 using Projectiles;
 using ShipParts.Ship;
@@ -25,7 +26,11 @@ public class RocketProjectile : Projectile
 
         if (otherBuilder == null)
         {
-            Explode();
+            ICollidable collidable = other.GetComponentInParent<ICollidable>();
+
+            if (collidable != null)
+                Explode();
+
             return;
         }
 
