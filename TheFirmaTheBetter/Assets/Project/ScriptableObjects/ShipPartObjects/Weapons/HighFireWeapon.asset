@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c6cfbd28a22af44a7461704b0bfe8b, type: 3}
   m_Name: HighFireWeapon
   m_EditorClassIdentifier: 
+  partName: part
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 1
   weaponName: High fire rate
-  projectilePrefab: {fileID: 8795236707980728124, guid: cffc0c60e9c1c5c4282f1e1ce8ad4a65,
+  projectilePrefab: {fileID: 8795236707980728124, guid: 1d73750356c4a964f9ed2346c1e9b299,
     type: 3}
   armingTime: 0
-  fireRate: 10
+  fireRate: 9
   amountOfBullets: 1
   energyCost: 1
   weaponFireEvent:

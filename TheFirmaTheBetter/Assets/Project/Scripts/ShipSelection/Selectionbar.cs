@@ -15,6 +15,8 @@ namespace ShipSelection
 
         private List<SelectableCollection> selectionCollections = new List<SelectableCollection>();
 
+        private List<Arrow> arrowsUI = new List<Arrow>();
+
         private List<TMP_Text> buttonLabels = new List<TMP_Text>();
 
         private int currentSelectedCollectionIndex = 0;
@@ -24,6 +26,10 @@ namespace ShipSelection
             foreach (Button button in gameObject.GetComponentsInChildren<Button>())
             {
                 buttonLabels.Add(button.GetComponentInChildren<TMP_Text>());
+            }
+            foreach (Arrow arrow in GetComponentsInChildren<Arrow>())
+            {
+                arrowsUI.Add(arrow);
             }
 
             selectionScreensData = GetComponentInParent<PlayerSelectionScreensData>();
@@ -37,13 +43,14 @@ namespace ShipSelection
         public void OnNavigate_Up()
         {
             currentSelectedCollectionIndex = ListLooper.SelectPrevious(selectionCollections, currentSelectedCollectionIndex);
+            PlayArrowAnimation(arrowsUI[0]);
             UpdateLabelTexts();
         }
 
         public void OnNavigate_Down()
         {
             currentSelectedCollectionIndex = ListLooper.SelectNext(selectionCollections, currentSelectedCollectionIndex);
-
+            PlayArrowAnimation(arrowsUI[1]);
             UpdateLabelTexts();
         }
 
@@ -63,6 +70,11 @@ namespace ShipSelection
         public Part GetCurrentSelectedPart()
         {
             return CurrentSelectedCollection.Selectables[CurrentSelectedCollection.CurrentSelectedIndex].Part;
+        }
+
+        public void PlayArrowAnimation(Arrow arrow)
+        {
+            arrow.PlaySelectedAnimation();
         }
 
         public SelectableCollection CurrentSelectedCollection => selectionCollections[currentSelectedCollectionIndex];

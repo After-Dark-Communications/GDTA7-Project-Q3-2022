@@ -127,7 +127,7 @@ MonoBehaviour:
   Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  OverrideMaxDistance: 90
 --- !u!114 &5375297862451939840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,11 +143,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -30876221
-      Data2: 1179816915
-      Data3: -1336603772
-      Data4: -1700036229
-    Path: event:/Vehicles/Ve_Health_Low
+      Data1: -1817635798
+      Data2: 1162905509
+      Data3: -236322169
+      Data4: -208331276
+    Path: event:/Vehicles/Ve_LowHealth
   Event: 
   PlayEvent: 0
   StopEvent: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
   Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  OverrideMaxDistance: 85
 --- !u!114 &1799470718415815863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,27 +185,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 613b15b6d8ee25444ad8f0df2e47a95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyPercentage: 10
+  energyPercentage: 20
   fuelEmptyEvent:
     Guid:
-      Data1: 150556774
-      Data2: 1204776458
-      Data3: -623659358
-      Data4: 1365131661
-    Path: event:/Vehicles/En_Empty
+      Data1: -1342684717
+      Data2: 1335533859
+      Data3: 1561681812
+      Data4: -437178744
+    Path: event:/Vehicles/Nrg_Empty
   fuelAlmostEmptyEvent:
     Guid:
-      Data1: -164378072
-      Data2: 1201403388
-      Data3: -444830038
-      Data4: -2056007736
-    Path: event:/Vehicles/En_AlmostEmpty
+      Data1: -1864232394
+      Data2: 1203837422
+      Data3: 1740254614
+      Data4: 1408568394
+    Path: event:/Vehicles/Nrg_Low
   hitmarker:
     Guid:
-      Data1: -1616140721
-      Data2: 1190613681
-      Data3: -1906423408
-      Data4: 1085249597
+      Data1: 2001237010
+      Data2: 1120816786
+      Data3: -899080305
+      Data4: 294024946
     Path: event:/General SFX/Hitmarker_Hiss
 --- !u!1001 &5970501817694765255
 PrefabInstance:

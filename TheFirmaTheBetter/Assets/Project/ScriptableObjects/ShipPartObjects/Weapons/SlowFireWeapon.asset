@@ -16,7 +16,7 @@ MonoBehaviour:
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 0
   weaponName: Slow fire rate
-  projectilePrefab: {fileID: 8795236707980728124, guid: cffc0c60e9c1c5c4282f1e1ce8ad4a65,
+  projectilePrefab: {fileID: 8795236707980728124, guid: 995e68a81b3330c4693b73faf018f767,
     type: 3}
   armingTime: 0
   fireRate: 3
@@ -24,10 +24,10 @@ MonoBehaviour:
   energyCost: 1
   weaponFireEvent:
     Guid:
-      Data1: 674240336
-      Data2: 1107783607
-      Data3: 1372337337
-      Data4: 1736597987
+      Data1: -1523842194
+      Data2: 1084725929
+      Data3: -1189224023
+      Data4: -1307751479
     Path: event:/Weapons/Weap_Shotgun
   sideSpreadAngle: 6
   range: 80

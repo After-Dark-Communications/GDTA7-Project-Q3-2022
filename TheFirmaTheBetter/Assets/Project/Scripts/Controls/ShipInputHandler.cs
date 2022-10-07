@@ -59,6 +59,8 @@ namespace Controls
             _Move.Disable();
             _Aim.Disable();
 
+
+
             controls.FindAction(actions.MoveUp.name).started -= OnMoveUp;
             controls.FindAction(actions.MoveDown.name).started -= OnMoveDown;
             controls.FindAction(actions.Pause.name).started -= OnPause;
@@ -91,21 +93,8 @@ namespace Controls
 
         private void Update()
         {
-            if (_Move.activeControl != null)
-            {
-                Vector2 move = _Move.ReadValue<Vector2>();
-                if (move != null)
-                { OnPlayerMove?.Invoke(move); }
-
-            }
-            if (_Aim.activeControl != null)
-            {
-                Vector2 aim = _Aim.ReadValue<Vector2>();
-                if (aim != null)
-                {
-                    OnPlayerAim?.Invoke(aim.x);
-                }
-            }
+            OnPlayerMove?.Invoke(_Move.ReadValue<Vector2>());
+            OnPlayerAim?.Invoke(_Aim.ReadValue<Vector2>().x);
         }
 
         private void SetupInputEvents()

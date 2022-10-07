@@ -1,31 +1,72 @@
 using EventSystem;
 using ShipParts.Ship;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using ShipSelection.ShipBuilders;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Managers
 {
     public class PlayerDeathManager : MonoBehaviour
     {
+        private int playersAlive;
+
+        private ShipBuildManager shipBuildManager;
+
+        [SerializeField]
+        private BattleTimer battleTimer;
+
         private void Awake()
         {
             Channels.OnPlayerBecomesDeath += OnPlayerDeath;
+            Channels.OnManagerInitialized += OnManagerInitialized;
         }
 
-        private void OnPlayerDeath(ShipBuilder shipBuilderThatDied)
+        private void OnManagerInitialized(Manager manager)
         {
-            shipBuilderThatDied.gameObject.SetActive(false);
-            StartCoroutine(WaitForRestart());
+            if (manager is not ShipBuildManager)
+                return;
+
+            shipBuildManager = manager as ShipBuildManager;
+            playersAlive = shipBuildManager.AmountOfPlayersJoined;
+            ResultsManager.Instance.SetupResults(playersAlive);
         }
 
-        private IEnumerator WaitForRestart()
+        private void OnPlayerDeath(ShipBuilder shipBuilderThatDied, int killerIndex)
         {
-            yield return new WaitForSeconds(1.5f);
-            //TODO: check if only one player is left, THEN load first scene.
-            //issue caused by objects with DontDestroyOnLoad
-            //SceneSwitchManager.LoadFirstScene();
+            PlayerStatistics playerStatistics = shipBuilderThatDied.GetComponent<PlayerStatistics>();
+            RemoveShipFromScene(shipBuilderThatDied);
+            SetKillStats(playerStatistics);
+            ResultsManager.Instance.AddResult(playerStatistics);
+            
+            if (playersAlive <= 1)
+            {
+                foreach (ShipBuilder ship in shipBuildManager.ShipBuilders)
+                {
+                    playerStatistics = ship.GetComponent<PlayerStatistics>();
+                    if (playerStatistics.IsAlive)
+                    {
+                        RemoveShipFromScene(ship);
+                        SetKillStats(playerStatistics);
+                        ResultsManager.Instance.AddResult(playerStatistics);
+                    }
+                }
+
+                SceneSwitchManager.SwitchToNextScene();
+            }
+        }
+
+        private void RemoveShipFromScene(ShipBuilder ship)
+        {
+            ship.gameObject.SetActive(false);
+            ship.transform.parent = null;
+            DontDestroyOnLoad(ship);
+        }
+
+        private void SetKillStats(PlayerStatistics playerStatistics)
+        {
+            playerStatistics.TimeSurvived = battleTimer.TimeSinceStart;
+            playerStatistics.IsAlive = false;
+            playersAlive--;
         }
     }
 }

@@ -20,13 +20,12 @@ namespace ShipSelection.ShipBuilders.ConnectionPoints
 
             void MovePartToConnect()
             {
-                Vector3 targetPosition = transform.position;
+                Vector3 targetPosition = transform.localPosition;
                 Vector3 currentChildPosition = toConnect.ConnectionPointCollection.GetConnectionPoint(toConnect).transform.localPosition;
 
-                Vector3 childToTargetDistance = targetPosition - currentChildPosition;
+                Vector3 childToTargetDistance = (targetPosition - currentChildPosition);
 
-                toConnect.transform.position = Vector3.zero;
-                toConnect.transform.position += childToTargetDistance;
+                toConnect.transform.localPosition = childToTargetDistance;
             }
         }
 

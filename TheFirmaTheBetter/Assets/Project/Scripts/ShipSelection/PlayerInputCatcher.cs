@@ -25,10 +25,7 @@ namespace ShipSelection
                 selectionBar.OnNavigate_Down();
             }
 
-            int selectionBarIndex = selectionBar.CurrentSelectedIndex;
-            int playerNumber = playerSelectionScreen.PlayerNumber;
-
-            Channels.Input.OnSelectionBarUpAndDownNaviagtedInput?.Invoke(playerNumber, selectionBarIndex);
+        Channels.Input.OnSelectionBarUpAndDownNaviagtedInput?.Invoke(playerNumber,selectionBarIndex);
         }
 
         public void OnInputConfirmShip(InputAction.CallbackContext callbackContext)
@@ -36,7 +33,7 @@ namespace ShipSelection
             if (callbackContext.started)
             {
                 int playerNumber = playerSelectionScreen.PlayerNumber;
-                Channels.Input.OnShipCompletedInput.Invoke(playerNumber);
+                Channels.Input.OnShipCompletedInput?.Invoke(playerNumber);
             }
         }
     }

@@ -24,10 +24,10 @@ MonoBehaviour:
   energyCost: 1
   weaponFireEvent:
     Guid:
-      Data1: -1845492624
-      Data2: 1241857302
-      Data3: -1323155564
-      Data4: -262866754
+      Data1: -689092268
+      Data2: 1098547365
+      Data3: -363564145
+      Data4: -661582402
     Path: event:/Weapons/Weap_Laser
   sideSpreadAngle: 5
   range: 30

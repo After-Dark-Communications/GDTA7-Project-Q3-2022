@@ -9,7 +9,7 @@ public class PauseMenu : Menu
 
     public void UnpauseGame()
     {
-        SceneSwitchManager.UnloadScene(gameObject.scene.buildIndex);
+        //SceneSwitchManager.UnloadScene(gameObject.scene.buildIndex);
         //gameObject.SetActive(false);
     }
 

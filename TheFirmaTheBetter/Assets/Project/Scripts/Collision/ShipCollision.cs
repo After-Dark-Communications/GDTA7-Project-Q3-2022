@@ -22,6 +22,11 @@ namespace Collisions
 
         }
 
+        private void OnDisable()
+        {
+            Channels.OnPlayerSpawned -= ShipSpawned;
+        }
+
         private void ShipSpawned(GameObject SpawnedShip, int playerIndex)
         {
             if (playerIndex == shipBuilder.PlayerNumber)
@@ -66,7 +71,7 @@ namespace Collisions
                     float totalBumpForce = otherRigidbody.velocity.magnitude + (WeightDif * _collisionWeightImpactMultiplier);
                     //Debug.DrawLine(transform.position, transform.position + (bumpDir.normalized * totalBumpForce), Color.red, 2f);
                     rigidbody.AddForce(bumpDir.normalized * Mathf.Clamp(totalBumpForce, 0, _bumpForceClamp), ForceMode.Impulse);//issue, some bumps are too strong
-                    Debug.Log($"[{shipCollision.name}]BumpForce: {Mathf.Clamp(totalBumpForce, 0, _bumpForceClamp)} (unclamped: {totalBumpForce})");
+                    //Debug.Log($"[{shipCollision.name}]BumpForce: {Mathf.Clamp(totalBumpForce, 0, _bumpForceClamp)} (unclamped: {totalBumpForce})");
                 }
             }
 
@@ -81,7 +86,7 @@ namespace Collisions
         private void HandleHitByProjectile(Projectile projectileThatHit)
         {
             //Debug.Log($"took damage! ({Channels.OnPlayerTakeDamage?.GetInvocationList().Length})called");
-            Channels.OnPlayerTakeDamage?.Invoke(shipBuilder, projectileThatHit.ProjectileDamage);
+            Channels.OnPlayerTakeDamage?.Invoke(shipBuilder, projectileThatHit.ProjectileDamage, projectileThatHit.PlayerIndex);
             Channels.OnPlayerHit?.Invoke();
             projectileThatHit.DestroySelf();
         }

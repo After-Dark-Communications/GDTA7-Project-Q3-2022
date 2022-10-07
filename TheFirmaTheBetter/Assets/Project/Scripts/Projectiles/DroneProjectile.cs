@@ -7,9 +7,12 @@ using UnityEngine;
 public class DroneProjectile : Projectile
 {
     private const float attackSpeed = 2;
+    private const float lifeTime = 10f;
 
     [SerializeField]
     private Projectile projectilePrefab;
+    [SerializeField]
+    private GameObject explosionPrefab;
     [SerializeField]
     private Transform shootingPoint;
 
@@ -17,6 +20,7 @@ public class DroneProjectile : Projectile
     private ShipBuilder target;
 
     private float currentAttackSpeed = 0;
+    private float currentDroneLifeTime = 0;
 
     public ShipBuilder Notarget { get => noTarget; set => noTarget = value; }
 
@@ -57,6 +61,16 @@ public class DroneProjectile : Projectile
         LookAtTarget();
 
         ShootTarget();
+
+        currentDroneLifeTime += Time.deltaTime;
+
+        if (currentDroneLifeTime < lifeTime)
+            return;
+
+        GameObject go = Instantiate(explosionPrefab);
+        go.transform.position = transform.position;
+
+        Destroy(gameObject);
     }
 
     private void LookAtTarget()

@@ -16,6 +16,11 @@ namespace UI
             Channels.OnPlayerSpawned += OnPlayerSpawned;
         }
 
+        private void OnEnable()
+        {
+            Channels.OnPlayerSpawned -= OnPlayerSpawned;
+        }
+
         private void OnPlayerSpawned(GameObject spawnedObject, int playerNumber)
         {
             foreach (Healthbar healthbar in AllHealthbars)
