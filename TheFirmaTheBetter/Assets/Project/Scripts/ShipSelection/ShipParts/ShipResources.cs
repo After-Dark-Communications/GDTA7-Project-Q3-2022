@@ -88,7 +88,6 @@ namespace ShipParts
         public int CurrentEnergyAmount => shipEnergy.CurrentEnergyAmount;
 
         public ShipStats ShipStats => shipStats;
-    }
 
-    
+    } 
 }

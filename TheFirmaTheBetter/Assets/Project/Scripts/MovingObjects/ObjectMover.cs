@@ -11,6 +11,8 @@ public class ObjectMover : MonoBehaviour
 
     private MovementPoint currentMovementPoint => movementPoints[currentMovementPointIndex];
 
+    private MovementPoint nextMovementPoint;
+
     private void Start()
     {
         MovementPoint[] movementPoints = transform.GetComponentsInChildren<MovementPoint>();
@@ -19,21 +21,27 @@ public class ObjectMover : MonoBehaviour
         {
             this.movementPoints.Add(point);
         }
-
-        MoveToNextPoint();
+        StartCorountineMovePoint();
     }
 
-    public void MoveToNextPoint()
+    public void StartCorountineMovePoint()
+    {
+        StartCoroutine(MoveToNextPoint());
+    }
+
+    IEnumerator MoveToNextPoint()
     {
         MovementPoint oldPoint = currentMovementPoint;
 
         ChangeIndex();
 
-        MovementPoint newPoint = currentMovementPoint;
+        nextMovementPoint = currentMovementPoint;
 
         oldPoint.DeSpawn();
-        newPoint.Spawn();
+        yield return new WaitForSeconds(10f);
+        nextMovementPoint.Spawn();
 
+    }
 
         void IncrementIndex()
         {
@@ -47,6 +55,7 @@ public class ObjectMover : MonoBehaviour
         {
             currentMovementPointIndex = Random.Range(0, movementPoints.Count);
         }
-    }
+
+    public MovementPoint NextMovementPoint { get { return nextMovementPoint; } }
 
 }
