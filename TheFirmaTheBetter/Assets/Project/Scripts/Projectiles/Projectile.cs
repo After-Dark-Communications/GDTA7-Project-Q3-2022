@@ -84,6 +84,9 @@ namespace Projectiles
 
             if (collisionObject != null)
             {
+                if (collisionObject is Projectile)
+                    return;
+
                 impactSpawner.SpawnImpactHitPrefab();
                 collisionObject.HandleCollision(this,null);
             }

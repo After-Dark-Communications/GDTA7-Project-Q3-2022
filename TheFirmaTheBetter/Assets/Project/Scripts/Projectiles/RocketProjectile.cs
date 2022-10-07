@@ -24,9 +24,13 @@ public class RocketProjectile : Projectile
         ShipBuilder otherBuilder = other.GetComponentInParent<ShipBuilder>();
 
         if (otherBuilder == null)
+        {
             Explode();
+            return;
+        }
 
-        Channels.OnPlayerTakeDamage(otherBuilder, ProjectileData.Damage, PlayerIndex);
+        Explode();
+        Channels.OnPlayerTakeDamage?.Invoke(otherBuilder, ProjectileData.Damage, PlayerIndex);
     }
 
     private void Update()

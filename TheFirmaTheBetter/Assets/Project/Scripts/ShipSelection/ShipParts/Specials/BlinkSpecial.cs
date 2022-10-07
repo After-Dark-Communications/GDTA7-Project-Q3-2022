@@ -11,18 +11,24 @@ namespace  ShipParts.Specials
 {
     public class BlinkSpecial : SpecialAbility
     {
+        [SerializeField]
+        private GameObject dashParticle;
+
         private float blinkRange = 8;
 
         protected override void HandleSpecial()
         {
-            if(Physics.Raycast(transform.position, transform.forward, blinkRange))
+            Vector3 newPosition = shipRoot.position + (shipRoot.forward * blinkRange);
+
+            if (Physics.CheckBox(newPosition, new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity))
             {
-                currentCooldown = 0;
-                CanDoSpecial = false;
+                CanDoSpecial = true;
                 return;
             }
 
-            shipRoot.position += shipRoot.forward * blinkRange;
+            currentCooldown = 0;
+            CanDoSpecial = false;
+            shipRoot.position = newPosition;
         }
     }
 }
