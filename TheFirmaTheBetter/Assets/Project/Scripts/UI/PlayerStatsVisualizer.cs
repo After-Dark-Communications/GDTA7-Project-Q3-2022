@@ -41,7 +41,7 @@ namespace UI
             // Get the stats panel
             FloatingStatsPanel statPanel = statPanels[ship.PlayerNumber];
             statPanel.ObjectToFollow = null;
-            statPanel.gameObject.SetActive(true);
+            statPanel.gameObject.SetActive(false);
 
             // Remove the player index from all stat bars
             foreach (ShipStatBar statBar in statPanel.StatBars)
