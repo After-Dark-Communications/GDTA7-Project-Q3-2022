@@ -987,7 +987,7 @@ TextureImporter:
         height: 130
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 40, y: 44, z: 395, w: 9}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1419,27 +1419,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UnityReady_62
-      rect:
-        serializedVersion: 2
-        x: 781
-        y: 509
-        width: 551
-        height: 117
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9d9e350a441a67e4c971e938745cf25d
-      internalID: -507303590
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: UnityReady_64
       rect:
         serializedVersion: 2
@@ -1477,6 +1456,27 @@ TextureImporter:
       bones: []
       spriteID: f5f5b33278f05814988567d4e16da42d
       internalID: 156320631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UnityReady_51
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 503
+        width: 572
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 40, y: 44, z: 395, w: 9}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad5a47d8242bb8e4ea3811a303e65e4e
+      internalID: 450944589
       vertices: []
       indices: 
       edges: []
