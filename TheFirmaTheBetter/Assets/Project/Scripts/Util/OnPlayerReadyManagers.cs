@@ -8,7 +8,12 @@ public class OnPlayerReadyManagers : MonoBehaviour
         Channels.OnEveryPlayerReady += OnEveryPlayerReady;
     }
 
-    private void OnEveryPlayerReady()
+    private void OnDisable()
+    {
+        Channels.OnEveryPlayerReady -= OnEveryPlayerReady;
+    }
+
+    private void OnEveryPlayerReady(int amountOfPlayers)
     {
         SceneSwitchManager.SwitchToNextScene();
     }

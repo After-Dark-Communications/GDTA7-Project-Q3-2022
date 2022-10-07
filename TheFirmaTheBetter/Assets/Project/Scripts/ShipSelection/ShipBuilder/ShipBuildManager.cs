@@ -53,7 +53,7 @@ namespace ShipSelection.ShipBuilders
             shipBuilders.Add(shipBuilder);
 
             if (shipBuilders.Count == amountOfPlayersJoined)
-                Channels.OnEveryPlayerReady.Invoke();
+                Channels.OnEveryPlayerReady.Invoke(amountOfPlayersJoined);
         }
 
         private void OnDisable()
