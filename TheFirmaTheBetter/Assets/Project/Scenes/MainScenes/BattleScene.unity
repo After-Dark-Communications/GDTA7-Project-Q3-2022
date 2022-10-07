@@ -5612,6 +5612,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -3.74
       objectReference: {fileID: 0}
+    - target: {fileID: 728591750284377837, guid: d7369743a31def74f91417062f0600ad,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 728591750284377837, guid: d7369743a31def74f91417062f0600ad,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.22
+      objectReference: {fileID: 0}
     - target: {fileID: 1977287880535413402, guid: d7369743a31def74f91417062f0600ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5621,6 +5631,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -3.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279972374111239796, guid: d7369743a31def74f91417062f0600ad,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279972374111239796, guid: d7369743a31def74f91417062f0600ad,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.86
       objectReference: {fileID: 0}
     - target: {fileID: 3452396706798612738, guid: d7369743a31def74f91417062f0600ad,
         type: 3}
@@ -5632,6 +5652,16 @@ PrefabInstance:
       propertyPath: movementPointsParentObject
       value: 
       objectReference: {fileID: 1955292165}
+    - target: {fileID: 5027107041964362993, guid: d7369743a31def74f91417062f0600ad,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027107041964362993, guid: d7369743a31def74f91417062f0600ad,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.33
+      objectReference: {fileID: 0}
     - target: {fileID: 5411567495642403214, guid: d7369743a31def74f91417062f0600ad,
         type: 3}
       propertyPath: m_Name
