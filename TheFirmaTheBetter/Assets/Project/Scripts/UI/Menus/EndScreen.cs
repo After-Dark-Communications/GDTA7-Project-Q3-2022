@@ -1,6 +1,3 @@
-using EventSystem;
-using ShipParts.Ship;
-using ShipSelection.ShipBuilders;
 using UnityEngine;
 
 
@@ -11,13 +8,9 @@ public class EndScreen : MenuPanel
     [SerializeField]
     private EndScreenPanel[] panels;
 
-    private ResultsManager resultsManager;
-
     private void OnEnable()
     {
         OpenPanel();
-
-        resultsManager = ResultsManager.Instance;
         DisplayResults();
     }
 
@@ -28,7 +21,7 @@ public class EndScreen : MenuPanel
             panel.gameObject.SetActive(false);
         }
 
-        PlayerStatistics[] results = resultsManager.Results;
+        PlayerStatistics[] results = ResultsManager.Instance.Results;
         for (int i = 0; i < results.Length; i++)
         {
             previewCams[i].PlaceShipPreview(results[i].gameObject);

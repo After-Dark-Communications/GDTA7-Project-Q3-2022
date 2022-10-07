@@ -36,6 +36,13 @@ namespace ShipParts
             Channels.OnShipCompleted += OnShipCompleted;
         }
 
+        private void OnDisable()
+        {
+            shipHealth.Unsubscribe();
+            Channels.OnShipPartSelected -= OnShipPartSelected;
+            Channels.OnShipCompleted -= OnShipCompleted;
+        }
+
         private void OnShipCompleted(ShipBuilder completedShipBuilder)
         {
             if (shipBuilder.PlayerNumber != completedShipBuilder.PlayerNumber)
