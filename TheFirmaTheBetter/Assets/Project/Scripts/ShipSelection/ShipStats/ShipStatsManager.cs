@@ -77,4 +77,11 @@ public class ShipStatsManager : MonoBehaviour
     }
 
     public int PlayerIndex { get { return playerIndex; } set { playerIndex = value; } }
+
+
+    public void OnDisable()
+    {
+        Channels.OnPlayerStatsChanged -= PlayerStatChange;
+        Channels.OnEnabledStatGameObject -= SetAsEnableGameObject;
+    }
 }

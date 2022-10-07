@@ -88,7 +88,11 @@ namespace ShipParts
         public int CurrentEnergyAmount => shipEnergy.CurrentEnergyAmount;
 
         public ShipStats ShipStats => shipStats;
-    }
 
-    
+        private void OnDisable()
+        {
+            Channels.OnShipPartSelected -= OnShipPartSelected;
+            Channels.OnShipCompleted -= OnShipCompleted;
+        }
+    } 
 }

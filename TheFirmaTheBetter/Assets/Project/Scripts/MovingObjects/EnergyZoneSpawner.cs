@@ -24,6 +24,6 @@ public class EnergyZoneSpawner : MonoBehaviour
             return;
 
         timeSinceLastSpawned = 0;
-        objectMover.MoveToNextPoint();
+        objectMover.StartCorountineMovePoint();
     }
 }
