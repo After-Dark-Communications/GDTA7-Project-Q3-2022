@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class ShipStatsManager : MonoBehaviour
 {
-    [SerializeField]
     private ShipStatsCollection stats;
     [SerializeField]
     private int enabledStatGameObjectIndex;
