@@ -47,6 +47,7 @@ namespace Projectiles
             if (currentLifeTime < lifeTime)
                 return;
 
+            impactSpawner.SpawnImpactHitPrefab();
             projectilesPool.ReturnToPool(gameObject);
         }
 
