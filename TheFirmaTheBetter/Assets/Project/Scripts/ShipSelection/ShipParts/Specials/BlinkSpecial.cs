@@ -13,6 +13,8 @@ namespace  ShipParts.Specials
     {
         [SerializeField]
         private GameObject dashParticle;
+        [SerializeField]
+        private GameObject dashEndParticle;
 
         private float blinkRange = 15;
 
@@ -26,16 +28,18 @@ namespace  ShipParts.Specials
                 return;
             }
 
-            SpawnDashParticle();
+            SpawnDashParticle(dashParticle);
 
             ResetCooldowns(newPosition);
 
             shipRoot.position = newPosition;
 
+            SpawnDashParticle(dashEndParticle);
 
-            void SpawnDashParticle()
+
+            void SpawnDashParticle(GameObject dashParticleToSpawn)
             {
-                GameObject spawned = Instantiate(dashParticle);
+                GameObject spawned = Instantiate(dashParticleToSpawn);
                 spawned.transform.position = transform.position;
                 spawned.transform.rotation = transform.rotation;
             }

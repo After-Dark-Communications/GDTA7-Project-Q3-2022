@@ -225,3 +225,5 @@ MonoBehaviour:
   specialData: {fileID: 11400000, guid: 87b6b1dfcbb88a6418758b90e453d72a, type: 2}
   dashParticle: {fileID: 2251386682207517416, guid: c932962d44446ca4288d6be910bde918,
     type: 3}
+  dashEndParticle: {fileID: 1191624696711110, guid: 0cfd1e6f2227d1542ad3f306acf7ad4c,
+    type: 3}
