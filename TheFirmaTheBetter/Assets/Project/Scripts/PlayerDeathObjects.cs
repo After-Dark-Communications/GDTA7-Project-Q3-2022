@@ -46,7 +46,6 @@ public class PlayerDeathObjects : MonoBehaviour
         { return; }
         if (shipBuilder.PlayerNumber == _shipBuilder.PlayerNumber)
         {
-            Debug.Log($"{transform.name} with (index {shipBuilder.PlayerNumber})  has died");
             for (int i = 0; i < _OnDeathChildren.Length; i++)
             {
                 _OnDeathChildren[i].SetActive(true);
