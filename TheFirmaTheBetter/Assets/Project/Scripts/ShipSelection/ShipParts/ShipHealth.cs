@@ -52,6 +52,11 @@ namespace  ShipParts
             ResetHealth(shipStats);
         }
 
+        public void Unsubscribe()
+        {
+            Channels.OnPlayerTakeDamage -= TakeDamage;
+        }
+
         public float MaxHealth { get => maxHealth; set => maxHealth = value; }
         public float CurrentShipHealth => currentShipHealth;
     }

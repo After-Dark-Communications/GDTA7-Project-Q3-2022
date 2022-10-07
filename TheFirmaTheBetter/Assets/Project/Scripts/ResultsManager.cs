@@ -1,5 +1,5 @@
+using EventSystem;
 using ShipSelection.ShipBuilders;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ResultsManager : Manager
@@ -15,14 +15,22 @@ public class ResultsManager : Manager
     {
         if (Instance == null)
         {
-            DontDestroyOnLoad(gameObject);
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         if (Instance != this)
         {
             Destroy(gameObject);
+            return;
         }
+
+        SetupResults(ShipBuildManager.Instance.AmountOfPlayersJoined);
+    }
+
+    private void OnEnable()
+    {
+        Channels.OnEveryPlayerReady += SetupResults;
     }
 
     public void SetupResults(int numberOfPlayers)

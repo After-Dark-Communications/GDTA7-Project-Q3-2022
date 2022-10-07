@@ -2,7 +2,6 @@ using EventSystem;
 using ShipParts.Ship;
 using ShipSelection.ShipBuilders;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Managers
 {
@@ -10,25 +9,19 @@ namespace Managers
     {
         private int playersAlive;
 
-        private ShipBuildManager shipBuildManager;
-
         [SerializeField]
         private BattleTimer battleTimer;
 
-        private void Awake()
+        private void OnEnable()
         {
             Channels.OnPlayerBecomesDeath += OnPlayerDeath;
-            Channels.OnManagerInitialized += OnManagerInitialized;
+
+            playersAlive = ShipBuildManager.Instance.AmountOfPlayersJoined;
         }
 
-        private void OnManagerInitialized(Manager manager)
+        private void OnDisable()
         {
-            if (manager is not ShipBuildManager)
-                return;
-
-            shipBuildManager = manager as ShipBuildManager;
-            playersAlive = shipBuildManager.AmountOfPlayersJoined;
-            ResultsManager.Instance.SetupResults(playersAlive);
+            Channels.OnPlayerBecomesDeath -= OnPlayerDeath;
         }
 
         private void OnPlayerDeath(ShipBuilder shipBuilderThatDied, int killerIndex)
@@ -40,7 +33,7 @@ namespace Managers
             
             if (playersAlive <= 1)
             {
-                foreach (ShipBuilder ship in shipBuildManager.ShipBuilders)
+                foreach (ShipBuilder ship in ShipBuildManager.Instance.ShipBuilders)
                 {
                     playerStatistics = ship.GetComponent<PlayerStatistics>();
                     if (playerStatistics.IsAlive)

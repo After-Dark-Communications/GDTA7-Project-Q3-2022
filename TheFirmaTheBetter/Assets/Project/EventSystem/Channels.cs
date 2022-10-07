@@ -69,7 +69,10 @@ namespace EventSystem
         /// <para><see cref="int" /> The index of the player that dealt the damage</para>
         /// </summary>
         public static Action<ShipBuilder, int, int> OnPlayerTakeDamage;
-        public static Action OnEveryPlayerReady;
+        /// <summary>
+        /// <para><see cref="int" /> The number of players joined</para>
+        /// </summary>
+        public static Action<int> OnEveryPlayerReady;
         /// <summary>
         /// <para><see cref="GameObject" /> The shipbuilder object that is spawned</para>
         /// <para><see cref="int" /> The player number </para>
