@@ -10,8 +10,6 @@ namespace UI
         private List<ShipStatBar> statBars;
 
         [SerializeField]
-        private EnergyBar energyBar;
-
         private GameObject objectToFollow;
 
         [SerializeField]
@@ -38,7 +36,7 @@ namespace UI
         {
             // Creates an outline for where the player will be placed compared to the panel
             Vector3 reverseOffset = new Vector3(transform.position.x - xOffsetPixels, transform.position.y - yOffsetPixels);
-            Gizmos.DrawWireCube(reverseOffset, Vector3.one * 100);
+            Gizmos.DrawWireCube(reverseOffset, Vector3.one * 50);
         }
 
         public GameObject ObjectToFollow
@@ -51,7 +49,5 @@ namespace UI
         {
             get { return statBars.ToArray(); }
         }
-
-        public EnergyBar EnergyBar => energyBar;
     }
 }
