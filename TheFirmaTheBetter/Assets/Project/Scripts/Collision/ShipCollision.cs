@@ -71,7 +71,7 @@ namespace Collisions
                     float totalBumpForce = otherRigidbody.velocity.magnitude + (WeightDif * _collisionWeightImpactMultiplier);
                     //Debug.DrawLine(transform.position, transform.position + (bumpDir.normalized * totalBumpForce), Color.red, 2f);
                     rigidbody.AddForce(bumpDir.normalized * Mathf.Clamp(totalBumpForce, 0, _bumpForceClamp), ForceMode.Impulse);//issue, some bumps are too strong
-                    Debug.Log($"[{shipCollision.name}]BumpForce: {Mathf.Clamp(totalBumpForce, 0, _bumpForceClamp)} (unclamped: {totalBumpForce})");
+                    //Debug.Log($"[{shipCollision.name}]BumpForce: {Mathf.Clamp(totalBumpForce, 0, _bumpForceClamp)} (unclamped: {totalBumpForce})");
                 }
             }
 
