@@ -14,7 +14,7 @@ namespace  ShipParts.Specials
         [SerializeField]
         private GameObject dashParticle;
 
-        private float blinkRange = 8;
+        private float blinkRange = 15;
 
         protected override void HandleSpecial()
         {
@@ -26,9 +26,25 @@ namespace  ShipParts.Specials
                 return;
             }
 
-            currentCooldown = 0;
-            CanDoSpecial = false;
+            SpawnDashParticle();
+
+            ResetCooldowns(newPosition);
+
             shipRoot.position = newPosition;
+
+
+            void SpawnDashParticle()
+            {
+                GameObject spawned = Instantiate(dashParticle);
+                spawned.transform.position = transform.position;
+                spawned.transform.rotation = transform.rotation;
+            }
+
+            void ResetCooldowns(Vector3 newPosition)
+            {
+                currentCooldown = 0;
+                CanDoSpecial = false;
+            }
         }
     }
 }
