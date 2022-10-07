@@ -32,9 +32,6 @@ namespace ShipParts.Specials
             }
             _lineRenderer.startWidth = _lineWidth;
             _lineRenderer.endWidth = _lineWidth;
-
-
-            _gravityForce = Physics.gravity;
         }
 
         // Update is called once per frame

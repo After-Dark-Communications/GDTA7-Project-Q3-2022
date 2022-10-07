@@ -3,6 +3,7 @@ using ShipSelection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -12,6 +13,9 @@ public class ShipStatsShowcaser : MonoBehaviour
     private List<GameObject> statsGameObjectList = new List<GameObject>();
     [SerializeField]
     private int playerNumber;
+    private List<string> labelStatNames = new List<string> { "Ship Stats", "Weapon Stats", "Special Stats" };
+    [SerializeField]
+    private TMP_Text labelStats;
 
     private void Awake()
     {
@@ -31,12 +35,15 @@ public class ShipStatsShowcaser : MonoBehaviour
         {
             case 0:
                 statsGameObjectList[0].SetActive(true);
+                ChangeLabelStats(0);
                 break;
             case 1: 
-                statsGameObjectList[1].SetActive(true); 
+                statsGameObjectList[1].SetActive(true);
+                ChangeLabelStats(1);
                 break ;
             case 2:
                 statsGameObjectList[2].SetActive(true);
+                ChangeLabelStats(2);
                 break;
             default:
                 break;
@@ -73,6 +80,10 @@ public class ShipStatsShowcaser : MonoBehaviour
                 EnableOneStat(0);
                 break;
         }
+    }
+    private void ChangeLabelStats(int index)
+    {
+        labelStats.text = labelStatNames[index].ToString();
     }
 
     private void OnDisable()

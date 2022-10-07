@@ -1,9 +1,11 @@
 using EventSystem;
 using ShipParts.Ship;
 using ShipSelection.ShipBuilders;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace ShipSelection
 {
@@ -19,29 +21,14 @@ namespace ShipSelection
 
         private ShipBuildManager shipBuildManager;
 
-        private void Awake()
+        private void Start()
         {
-            Channels.OnManagerInitialized += OnManagerInitialized;
-        }
-
-        private void OnDisable()
-        {
-            Channels.OnManagerInitialized -= OnManagerInitialized;
-        }
-
-        private void OnManagerInitialized(Manager manager)
-        {
-            if (manager is not ShipBuildManager)
-                return;
-
-            shipBuildManager = manager as ShipBuildManager;
-
             SpawnShips();
         }
 
         private void SpawnShips()
         {
-            foreach (ShipBuilder shipBuilder in shipBuildManager.ShipBuilders)
+            foreach (ShipBuilder shipBuilder in ShipBuildManager.Instance.ShipBuilders)
             {
                 int playerIndex = shipBuilder.PlayerNumber;
 

@@ -2,6 +2,7 @@ using EventSystem;
 using ShipParts.Ship;
 using ShipSelection.ShipBuilders;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Managers
 {
@@ -49,6 +50,7 @@ namespace Managers
                         ResultsManager.Instance.AddResult(playerStatistics);
                     }
                 }
+
                 SceneSwitchManager.SwitchToNextScene();
             }
         }

@@ -643,8 +643,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EndAttachedTransform: {fileID: 932443627}
-  _rotateTime: 10
-  _gravityForce: {x: 0, y: -9.81, z: 0}
+  _segmentLength: 0.25
+  _gravityForce: {x: 0.24, y: 0, z: -18.63}
 --- !u!4 &213544318
 Transform:
   m_ObjectHideFlags: 0
