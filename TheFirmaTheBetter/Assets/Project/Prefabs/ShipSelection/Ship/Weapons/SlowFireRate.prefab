@@ -1,5 +1,74 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1212814587297781330
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3025934824252601680}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 6dd9357077206ed448dc9c0292e8607d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dd9357077206ed448dc9c0292e8607d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dd9357077206ed448dc9c0292e8607d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dd9357077206ed448dc9c0292e8607d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dd9357077206ed448dc9c0292e8607d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dd9357077206ed448dc9c0292e8607d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dd9357077206ed448dc9c0292e8607d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dd9357077206ed448dc9c0292e8607d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dd9357077206ed448dc9c0292e8607d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dd9357077206ed448dc9c0292e8607d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dd9357077206ed448dc9c0292e8607d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6dd9357077206ed448dc9c0292e8607d,
+        type: 3}
+      propertyPath: m_Name
+      value: 05_lowFire_v01
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6dd9357077206ed448dc9c0292e8607d, type: 3}
 --- !u!1001 &6562470842613001247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -103,6 +172,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 8648934767319726142, guid: f511f4eec4a107f4b8bea406b434b9d1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.195
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648934767319726142, guid: f511f4eec4a107f4b8bea406b434b9d1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.191
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648934767319726142, guid: f511f4eec4a107f4b8bea406b434b9d1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.185
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -3137361452136127484, guid: f511f4eec4a107f4b8bea406b434b9d1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f511f4eec4a107f4b8bea406b434b9d1, type: 3}
@@ -136,6 +220,12 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: f85416699c5ce0a45b617ba6edb3790a, type: 2}
   projectileStartingPoints:
   - {fileID: 305097556375690039}
+--- !u!4 &3025934824252601680 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8281226666341112143, guid: f511f4eec4a107f4b8bea406b434b9d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6562470842613001247}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8638876963055103000 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3238616610624897031, guid: f511f4eec4a107f4b8bea406b434b9d1,
