@@ -33,6 +33,11 @@ namespace ShipSelection
             joinPlayerScreens[0].gameObject.SetActive(true);
         }
 
+        private void OnDisable()
+        {
+            Channels.OnManagerInitialized -= OnManagerInitialized;
+        }
+
         private void OnManagerInitialized(Manager manager)
         {
             if (manager.GetType() != typeof(CamPreviewManager))

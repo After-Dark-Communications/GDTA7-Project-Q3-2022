@@ -135,7 +135,7 @@ namespace ShipParts.Weapons
             void FireProjectile(GameObject projectileObject, Vector3 direction, Projectile projectile)
             {
                 projectileObject.GetComponent<Rigidbody>().AddForce(direction * projectile.ProjectileSpeed, ForceMode.Impulse);
-                Channels.OnEnergyUsed.Invoke(playerNumber, weaponData.EnergyCost);
+                Channels.OnEnergyUsed?.Invoke(playerNumber, weaponData.EnergyCost);
             }
 
             void GetNewProjectileFromPool(Transform point, out GameObject projectileObject, out Vector3 direction, out Projectile projectile)
