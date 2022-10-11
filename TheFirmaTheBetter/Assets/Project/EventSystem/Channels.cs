@@ -12,95 +12,59 @@ namespace EventSystem
         public static MovementChannel Movement = new MovementChannel();
         public static AnnouncerChannel Announcer = new AnnouncerChannel();
 
-        /// <summary> Callled when firemode has to change to the new value
-        /// <para><see cref="bool" /> new firemode value</para>
-        /// </summary>
-        public static Action<bool> OnChangeFireMode;
+        public delegate void ChangeFireMode(bool newFireModeValue);
+        public delegate void EnergyUsed(int playerNumber, int amount);
+        public delegate void EnergyChanged(int playerNumber, int newEnergyPersentage);
+        public delegate void RefillEnergy(int playerNumber, int amountToRefill);
+        public delegate void PlayerStatsChanged(ShipBuilder shipBuilderThatChanged, ShipStats updatedShipStats);
+        public delegate void PlayerBecomesDeath(ShipBuilder shipBuilderThatNeedsDying, int playerIndexOfKiller);
+        public delegate void ZoneEntered(GameObject enteredZoneObject);
+        public delegate void ManagerInitialized(Manager initializedManager);
+        public delegate void ShipPartSelected(Part selectedPart, int playerNumber);
+        public delegate void ShipCompleted(ShipBuilder completedShipBuilder);
+        public delegate void PlayerJoined(int playerNumber, InputDevice joinedPlayerDevice);
+        public delegate void PlayerTakeDamage(ShipBuilder hittedBuilder, int damageAmount, int indexOfPlayerThatShotTheBullet);
+        public delegate void EveryPlayerReady(int playersInGameCount);
+        public delegate void PlayerSpawned(GameObject spawnedShipBuilderObject, int playerNumber);
         /// <summary>
-        /// <para><see cref="int" /> PlayerNumber</para>
-        /// <para><see cref="int" /> amount of energy used</para>
+        ///     Called when firing the gun while not having enough ammo
         /// </summary>
-        public static Action<int, int> OnEnergyUsed;
+        public delegate void EnergyEmpty();
+        public delegate void PlayerHit();
         /// <summary>
-        /// <para><see cref="int" /> Player number</para>
-        /// <para><see cref="float" /> New energy persentage </para>
+        /// Gets called when the health of the player changes
         /// </summary>
-        public static Action<int, float> OnEnergyChanged;
+        /// <param name="playerNumber">index of the player that got his health changed</param>
+        /// <param name="newHealthPersentage">number between 0 and 1</param>
+        public delegate void HealthChanged(int playerNumber, float newHealthPersentage);
+        public delegate void FuelChanged();
         /// <summary>
-        /// <para><see cref="int" /> Player number</para>
-        /// <para><see cref="int" /> amount of energy to refill</para>
+        ///     Gets called when the stat gameobject of a player is set to enable
         /// </summary>
-        public static Action<int, int> OnRefillEnergy;
-        /// <summary>
-        /// <para><see cref="ShipBuilder" /> The shipbuilder that is changed</para>
-        /// <para><see cref="ShipStats" /> The updated shipstats</para>
-        /// </summary>
-        public static Action<ShipBuilder, ShipStats> OnPlayerStatsChanged;
-        /// <summary>
-        /// <para><see cref="ShipBuilder" /> The shipbuilder that is in need of dying</para>
-        /// <para><see cref="int" /> The player index of the killer</para>
-        /// </summary>
-        public static Action<ShipBuilder, int> OnPlayerBecomesDeath;
-        /// <summary>
-        /// <para><see cref="GameObject" /> Object of the entered zone</para>
-        /// </summary>
-        public static Action<GameObject> OnZoneEntered;
-        /// <summary>
-        /// <para><see cref="Manager" /> The initialized manager</para>
-        /// </summary>
-        public static Action<Manager> OnManagerInitialized;
-        /// <summary>
-        /// <para><see cref="Part" /> Ship part that has been selected</para>
-        /// <para><see cref="int" /> Player number</para>
-        /// </summary>
-        public static Action<Part, int> OnShipPartSelected;
-        /// <summary>
-        /// <para><see cref="ShipBuilder" /> Builder from the completed ship</para>
-        /// </summary>
-        public static Action<ShipBuilder> OnShipCompleted;
-        /// <summary>
-        /// <para><see cref="int" /> Player number</para>
-        /// <para><see cref="InputDevice" /> The joined player device</para>
-        /// </summary>
-        public static Action<int, InputDevice> OnPlayerJoined;
-        /// <summary>
-        /// <para><see cref="ShipBuilder" /> Shipbuilder object that got hit by the bullet</para>
-        /// <para><see cref="int" /> DamageAmount</para>
-        /// <para><see cref="int" /> The index of the player that dealt the damage</para>
-        /// </summary>
-        public static Action<ShipBuilder, int, int> OnPlayerTakeDamage;
-        /// <summary>
-        /// <para><see cref="int" /> The number of players joined</para>
-        /// </summary>
-        public static Action<int> OnEveryPlayerReady;
-        /// <summary>
-        /// <para><see cref="GameObject" /> The shipbuilder object that is spawned</para>
-        /// <para><see cref="int" /> The player number </para>
-        /// </summary>
-        public static Action<GameObject, int> OnPlayerSpawned;
-        /// <summary> Called when firing the gun while not having enough ammo
-        /// </summary>
-        public static Action OnEnergyEmpty;
-        public static Action OnPlayerHit;
-        /// <summary>
-        /// <para><see cref="int" /> Player number</para>
-        /// <para><see cref="float" /> New health persentage </para>
-        /// </summary>
-        public static Action<int, float> OnHealthChanged;
-        /// <summary>
-        /// <para><see cref="int" /> Player number</para>
-        /// <para><see cref="float" /> New fuel persentage </para>
-        /// </summary>
-        public static Action<int, float> OnFuelChanged;
-        /// <summary>
-        /// <para><see cref="int" /> The number of the enabled stat Game Object: 0 is Ship stats, 1 is Weapon stats</para>
-        /// <para><see cref="int" /> The player number </para>
-        /// </summary>
-        public static Action<int, int> OnEnabledStatGameObject;
-        /// <summary>
-        /// <para><see cref="FMODUnity.EventReference"/>The weapon's event to play</para>
-        /// </summary>
-        public static Action<FMODUnity.EventReference> OnWeaponFired;
+        /// <param name="statGameObjectNumber">The number of the enabled stat Game Object: 0 is Ship stats, 1 is Weapon stats</param>
+        /// <param name="playerNumber">The index of the player that got its stat gameobject enabled</param>
+        public delegate void EnabledStatGameObject(int statGameObjectNumber, int playerNumber);
+        public delegate void WeaponFired(FMODUnity.EventReference weaponEventToPlay);
+
+        public static ChangeFireMode OnChangeFireMode;
+        public static EnergyUsed OnEnergyUsed;
+        public static EnergyChanged OnEnergyChanged;
+        public static RefillEnergy OnRefillEnergy;
+        public static PlayerStatsChanged OnPlayerStatsChanged;
+        public static PlayerBecomesDeath OnPlayerBecomesDeath;
+        public static ZoneEntered OnZoneEntered;
+        public static ManagerInitialized OnManagerInitialized;
+        public static ShipPartSelected OnShipPartSelected;
+        public static ShipCompleted OnShipCompleted;
+        public static PlayerJoined OnPlayerJoined;
+        public static PlayerTakeDamage OnPlayerTakeDamage;
+        public static EveryPlayerReady OnEveryPlayerReady;
+        public static PlayerSpawned OnPlayerSpawned;
+        public static EnergyEmpty OnEnergyEmpty;
+        public static PlayerHit OnPlayerHit;
+        public static HealthChanged OnHealthChanged;
+        public static EnabledStatGameObject OnEnabledStatGameObject;
+        public static WeaponFired OnWeaponFired;
     }
 
 }
