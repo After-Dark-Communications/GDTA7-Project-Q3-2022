@@ -14,7 +14,7 @@ namespace EventSystem
 
         public delegate void ChangeFireMode(bool newFireModeValue);
         public delegate void EnergyUsed(int playerNumber, int amount);
-        public delegate void EnergyChanged(int playerNumber, int newEnergyPersentage);
+        public delegate void EnergyChanged(int playerNumber, float newEnergyPersentage);
         public delegate void RefillEnergy(int playerNumber, int amountToRefill);
         public delegate void PlayerStatsChanged(ShipBuilder shipBuilderThatChanged, ShipStats updatedShipStats);
         public delegate void PlayerBecomesDeath(ShipBuilder shipBuilderThatNeedsDying, int playerIndexOfKiller);
