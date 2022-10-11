@@ -48,7 +48,10 @@ public class PlayerDeathObjects : MonoBehaviour
         {
             for (int i = 0; i < _OnDeathChildren.Length; i++)
             {
-                _OnDeathChildren[i].SetActive(true);
+                if (_OnDeathChildren[i] != null)
+                {
+                    _OnDeathChildren[i].SetActive(true);
+                }
             }
         }
     }
