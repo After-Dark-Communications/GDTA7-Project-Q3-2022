@@ -8,15 +8,10 @@ namespace EventSystem
 {
     public class InputChannel
     {
-        /// <summary>
-        /// <para><see cref="int" /> Player number</para>
-        /// </summary>
-        public Action<int> OnShipCompletedInput;
+        public delegate void ShipCompletedInput(int playerNumber);
+        public delegate void SelectionBarUpAndDownNaviagtedInput(int playerNumber, int indexOfSelectedNavigationBar);
 
-        /// <summary>
-        /// <para><see cref="int" /> Player number</para>
-        /// <para><see cref="int" /> Index of Selection Bar</para>
-        /// </summary>
-        public Action<int,int> OnSelectionBarUpAndDownNaviagtedInput;
+        public ShipCompletedInput OnShipCompletedInput;
+        public SelectionBarUpAndDownNaviagtedInput OnSelectionBarUpAndDownNaviagtedInput;
     }
 }

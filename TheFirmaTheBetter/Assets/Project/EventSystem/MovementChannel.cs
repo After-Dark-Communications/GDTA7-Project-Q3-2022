@@ -5,6 +5,8 @@ namespace EventSystem
 {
     public class MovementChannel
     {
-        public Action<Vector2, int> OnShipMove;
+        public delegate void ShipMove(Vector2 moveVector, int playerNumber);
+
+        public ShipMove OnShipMove;
     }
 }
