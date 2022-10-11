@@ -389,6 +389,7 @@ MonoBehaviour:
   pickups:
   - {fileID: 919132149155446097, guid: 1af0b4f49c7e38d42bf9090257d66453, type: 3}
   spawnAreaSize: {x: 3, y: 0, z: 3}
+  spawnInterval: 3
 --- !u!4 &1095891166
 Transform:
   m_ObjectHideFlags: 0
