@@ -57,7 +57,6 @@ public class ShipSoundManager : MonoBehaviour
             {
                 rpm = rpm * -1;
             }
-            //Debug.Log(rpm * RPMSpeed);
             engineEmitter.SetParameter("RPM", rpm * RPMSpeed);
         }
     }

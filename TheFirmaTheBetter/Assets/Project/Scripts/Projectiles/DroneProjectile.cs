@@ -87,7 +87,8 @@ public class DroneProjectile : Projectile
 
         if (exitShipBuilder == null)
             return;
-
+        if (target == null)
+            return ;
         if (exitShipBuilder.PlayerNumber != target.PlayerNumber)
             return;
 

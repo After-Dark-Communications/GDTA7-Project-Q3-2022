@@ -40,6 +40,8 @@ namespace Projectiles
 
         private void Update()
         {
+            if (projectilesPool == null)
+                return;
             currentLifeTime += Time.deltaTime;
             if (gameObject.activeSelf == false)
                 return;
@@ -89,7 +91,7 @@ namespace Projectiles
                     return;
 
                 impactSpawner.SpawnImpactHitPrefab();
-                collisionObject.HandleCollision(this,null);
+                collisionObject.HandleCollision(this, null);
             }
         }
 
@@ -97,6 +99,8 @@ namespace Projectiles
 
         public void DestroySelf()
         {
+            if (projectilesPool == null)
+                return;
             projectilesPool.ReturnToPool(gameObject);
         }
 
