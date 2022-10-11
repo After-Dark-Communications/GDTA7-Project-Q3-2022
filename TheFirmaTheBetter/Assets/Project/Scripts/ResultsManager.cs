@@ -33,6 +33,11 @@ public class ResultsManager : Manager
         Channels.OnEveryPlayerReady += SetupResults;
     }
 
+    private void OnDisable()
+    {
+        Channels.OnEveryPlayerReady -= SetupResults;
+    }
+
     public void SetupResults(int numberOfPlayers)
     {
         results = new PlayerStatistics[numberOfPlayers];

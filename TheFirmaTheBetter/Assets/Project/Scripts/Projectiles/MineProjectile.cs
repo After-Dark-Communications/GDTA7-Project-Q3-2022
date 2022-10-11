@@ -48,7 +48,7 @@ public class MineProjectile : Projectile
 
         int index = buildersInRange.FindIndex(b => b.PlayerNumber == otherBuilder.PlayerNumber);
 
-        if (index >= 0)
+        if (index < 0)
             return;
 
         buildersInRange.RemoveAt(index);
@@ -100,7 +100,7 @@ public class MineProjectile : Projectile
 
         foreach (ShipBuilder item in buildersInRange)
         {
-            Channels.OnPlayerTakeDamage(item, mineData.Damage, PlayerIndex);
+            Channels.OnPlayerTakeDamage?.Invoke(item, mineData.Damage, PlayerIndex);
         }
 
     }

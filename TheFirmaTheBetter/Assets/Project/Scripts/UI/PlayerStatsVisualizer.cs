@@ -1,4 +1,5 @@
 using EventSystem;
+using ShipParts.Ship;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,48 +8,47 @@ namespace UI
     public class PlayerStatsVisualizer : MonoBehaviour
     {
         [SerializeField]
-        private List<ShipStatBar> healthBars = new(4);
-
-        [SerializeField]
-        private GameObject statsPanelPrefab;
+        private List<FloatingStatsPanel> statPanels;
 
         private void OnEnable()
         {
             Channels.OnPlayerSpawned += InitializePlayerStats;
+            Channels.OnPlayerBecomesDeath += HidePlayerStats;
         }
 
         private void OnDisable()
         {
             Channels.OnPlayerSpawned -= InitializePlayerStats;
-        }
-
-        private void Awake()
-        {
-            // Hide all healthbars
-            foreach (ShipStatBar healthBar in healthBars)
-            {
-                healthBar.gameObject.SetActive(false);
-            }
+            Channels.OnPlayerBecomesDeath -= HidePlayerStats;
         }
 
         public void InitializePlayerStats(GameObject player, int playerIndex)
         {
-            // Get the healthbar
-            List<ShipStatBar> playerStatBars = new()
-            {
-                healthBars[playerIndex - 1]
-            };
-
             // Instantiate the stats panel
-            FloatingStatsPanel statsPanel = Instantiate(statsPanelPrefab, transform).GetComponent<FloatingStatsPanel>();
-            playerStatBars.AddRange(statsPanel.StatBars);
-            statsPanel.ObjectToFollow = player;
+            FloatingStatsPanel statPanel = statPanels[playerIndex];
+            statPanel.ObjectToFollow = player;
+            statPanel.gameObject.SetActive(true);
 
             // Assign the player index to all stat bars
-            foreach (ShipStatBar statBar in playerStatBars)
+            foreach (ShipStatBar statBar in statPanel.StatBars)
             {
                 statBar.PlayerIndex = playerIndex;
                 statBar.gameObject.SetActive(true);
+            }
+        }
+
+        private void HidePlayerStats(ShipBuilder ship, int killerIndex)
+        {
+            // Get the stats panel
+            FloatingStatsPanel statPanel = statPanels[ship.PlayerNumber];
+            statPanel.ObjectToFollow = null;
+            statPanel.gameObject.SetActive(false);
+
+            // Remove the player index from all stat bars
+            foreach (ShipStatBar statBar in statPanel.StatBars)
+            {
+                statBar.PlayerIndex = -1;
+                statBar.gameObject.SetActive(false);
             }
         }
     }

@@ -24,6 +24,13 @@ namespace ShipParts
             SetEnergy(shipStats);
         }
 
+        public void Unsubscribe()
+        {
+            Channels.OnEnergyUsed -= OnEnergyUsed;
+            Channels.OnRefillEnergy -= OnEnergyRefilled;
+        }
+
+
         private void SetEnergy(ShipStats shipStats)
         {
             maxEnergyAmount = shipStats.EnergyCapacity;

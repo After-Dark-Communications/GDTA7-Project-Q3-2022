@@ -16,6 +16,6 @@ MonoBehaviour:
   projectileSpeed: 20
   armingTime: 0.1
   isDoT: 0
-  spawnedObjectOnImpact: {fileID: 7709982113213534380, guid: a7eea6e33ad259b4ba8e4fade4bd239c,
+  spawnedObjectOnImpact: {fileID: 1070101629368536, guid: 1ef475ebfb44d964bb2037eaa9db1cb2,
     type: 3}
   amountToSpawn: 1

@@ -213,6 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileData: {fileID: 11400000, guid: d99a3232556c36843bf7d0522b4ed8e8, type: 2}
+  playerIndex: 0
   maxLifeTime: 3
 --- !u!136 &7400485963505007530
 CapsuleCollider:
@@ -240,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7428f0bd4f031d84381c26347e5492a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactHitPrefab: {fileID: 8246906655773735241, guid: 4e73861a7eabca04183b1fe2547fb1aa,
+  impactHitPrefab: {fileID: 1070101629368536, guid: 1ef475ebfb44d964bb2037eaa9db1cb2,
     type: 3}
 --- !u!1001 &8433972491913252607
 PrefabInstance:

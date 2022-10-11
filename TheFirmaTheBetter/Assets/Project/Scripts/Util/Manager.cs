@@ -5,6 +5,6 @@ public abstract class Manager : MonoBehaviour
 {
     public virtual void Start()
     {
-        Channels.OnManagerInitialized.Invoke(this);
+        Channels.OnManagerInitialized?.Invoke(this);
     }
 }

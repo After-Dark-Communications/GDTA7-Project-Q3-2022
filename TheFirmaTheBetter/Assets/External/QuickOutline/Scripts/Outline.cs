@@ -145,6 +145,7 @@ public class Outline : MonoBehaviour
         {
             RemoveRenderersFromList();
         }
+        Channels.OnPlayerSpawned -= AddRenderersToList;
     }
 
     void OnDestroy()

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace  ShipParts
+namespace ShipParts
 {
     public class ShipHealth
     {
@@ -33,6 +33,8 @@ namespace  ShipParts
 
         public void TakeDamage(ShipBuilder shipBuilder, int amount, int damagerIndex)
         {
+            if (shipBuilder == null)
+            { return; }
             if (playerNumber != shipBuilder.PlayerNumber)
                 return;
 

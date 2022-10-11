@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileData: {fileID: 11400000, guid: 8ca551a565e0764409d93845f358575a, type: 2}
+  playerIndex: 0
 --- !u!114 &5347808386704539653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,5 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7428f0bd4f031d84381c26347e5492a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactHitPrefab: {fileID: 8246906655773735241, guid: 4e73861a7eabca04183b1fe2547fb1aa,
+  impactHitPrefab: {fileID: 1879798220002124, guid: 8c988011ae9fc604a8a3761a0ac3d8a8,
     type: 3}

@@ -42,6 +42,11 @@ public class ShipSoundManager : MonoBehaviour
         healthEmitter.SetParameter("Player_Health", 100f);
     }
 
+    private void OnDisable()
+    {
+        Channels.Movement.OnShipMove -= SetRPM;
+        Channels.OnHealthChanged -= SetHealth;
+    }
 
     private void SetRPM(Vector2 movement, int playerNumber)
     {
@@ -52,7 +57,6 @@ public class ShipSoundManager : MonoBehaviour
             {
                 rpm = rpm * -1;
             }
-            //Debug.Log(rpm * RPMSpeed);
             engineEmitter.SetParameter("RPM", rpm * RPMSpeed);
         }
     }
