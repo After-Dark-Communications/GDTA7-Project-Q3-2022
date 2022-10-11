@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Project.Scripts.ShipParts.Specials
+namespace ShipParts.Specials
 {
     public class ShootingSpecial : SpecialAbility
     {

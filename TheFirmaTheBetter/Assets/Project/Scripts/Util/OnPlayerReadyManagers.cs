@@ -1,20 +1,24 @@
 using EventSystem;
+using Managers;
 using UnityEngine;
 
-public class OnPlayerReadyManagers : MonoBehaviour
+namespace Util
 {
-    private void OnEnable()
+    public class OnPlayerReadyManagers : MonoBehaviour
     {
-        Channels.OnEveryPlayerReady += OnEveryPlayerReady;
-    }
+        private void OnEnable()
+        {
+            Channels.OnEveryPlayerReady += OnEveryPlayerReady;
+        }
 
-    private void OnDisable()
-    {
-        Channels.OnEveryPlayerReady -= OnEveryPlayerReady;
-    }
+        private void OnDisable()
+        {
+            Channels.OnEveryPlayerReady -= OnEveryPlayerReady;
+        }
 
-    private void OnEveryPlayerReady(int amountOfPlayers)
-    {
-        SceneSwitchManager.SwitchToNextScene();
+        private void OnEveryPlayerReady(int amountOfPlayers)
+        {
+            SceneSwitchManager.SwitchToNextScene();
+        }
     }
 }

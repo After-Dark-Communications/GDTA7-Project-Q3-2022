@@ -2,23 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalUp : MonoBehaviour
+namespace Util
 {
-    [SerializeField, Tooltip("The transform to use the rotation as up for")]
-    private Transform GlobalUpwards;
-
-    private static GlobalUp _Instance;
-
-    private void Awake()
+    public class GlobalUp : MonoBehaviour
     {
-        if (_Instance != null && _Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        _Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+        [SerializeField, Tooltip("The transform to use the rotation as up for")]
+        private Transform GlobalUpwards;
 
-    public static Transform UP => _Instance.GlobalUpwards;
+        private static GlobalUp _Instance;
+
+        private void Awake()
+        {
+            if (_Instance != null && _Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            _Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        public static Transform UP => _Instance.GlobalUpwards;
+    }
 }

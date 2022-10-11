@@ -1,25 +1,28 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-public class MovementPoint : MonoBehaviour
+namespace MovingObjects
 {
-    private const string SpawnTriggerName = "Spawn";
-    private const string DeSpawnTriggerName = "Despawn";
-
-    private Animator animator;
-
-    private void Awake()
+    [RequireComponent(typeof(Animator))]
+    public class MovementPoint : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
-    }
+        private const string SpawnTriggerName = "Spawn";
+        private const string DeSpawnTriggerName = "Despawn";
 
-    public void Spawn()
-    {
-        animator.SetTrigger(SpawnTriggerName);
-    }
+        private Animator animator;
 
-    public void DeSpawn()
-    {
-        animator.SetTrigger(DeSpawnTriggerName);
+        private void Awake()
+        {
+            animator = GetComponent<Animator>();
+        }
+
+        public void Spawn()
+        {
+            animator.SetTrigger(SpawnTriggerName);
+        }
+
+        public void DeSpawn()
+        {
+            animator.SetTrigger(DeSpawnTriggerName);
+        }
     }
 }
