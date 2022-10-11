@@ -18,6 +18,11 @@ namespace ShipSelection
             Channels.OnManagerInitialized += OnManagerInitialize;
         }
 
+        private void OnDisable()
+        {
+            Channels.OnManagerInitialized -= OnManagerInitialize;
+        }
+
         private void OnManagerInitialize(Manager manager)
         {
             if (manager.GetType() == typeof(PartsCollectionManager))

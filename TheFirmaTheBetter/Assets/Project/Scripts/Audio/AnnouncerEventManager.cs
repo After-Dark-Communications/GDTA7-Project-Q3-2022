@@ -35,6 +35,18 @@ public class AnnouncerEventManager : MonoBehaviour
         Channels.Announcer.OnShipSelection += PlayShipSelectionEvent;
     }
 
+    private void OnDisable()
+    {
+        Channels.Announcer.OnGameBoot -= PlayGameStartUpEvent;
+        Channels.Announcer.OnPlayGameStart -= PlayGameStartEvent;
+        Channels.Announcer.OnPlayGameStop -= PlayGameOverEvent;
+        Channels.Announcer.OnPlayFirstBlood -= PlayFirstBloodEvent;
+        Channels.Announcer.OnPlayPlayerEliminated -= PlayPlayerEliminatedEvent;
+        Channels.Announcer.OnPlayEnergyZoneMoved -= PlayEnergyZoneMovedEvent;
+        Channels.Announcer.OnPlayDoubleKill -= PlayDoubleKillEvent;
+        Channels.Announcer.OnShipSelection -= PlayShipSelectionEvent;
+    }
+
     public void PlayEvent(FMODUnity.EventReference fmodEvent) {
         FMODUnity.RuntimeManager.PlayOneShot(fmodEvent);
     }

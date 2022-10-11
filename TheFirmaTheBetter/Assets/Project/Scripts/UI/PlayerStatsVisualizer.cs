@@ -19,6 +19,7 @@ namespace UI
         private void OnDisable()
         {
             Channels.OnPlayerSpawned -= InitializePlayerStats;
+            Channels.OnPlayerBecomesDeath -= HidePlayerStats;
         }
 
         public void InitializePlayerStats(GameObject player, int playerIndex)

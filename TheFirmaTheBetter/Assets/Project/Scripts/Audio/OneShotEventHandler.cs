@@ -17,6 +17,7 @@ public class OneShotEventHandler : MonoBehaviour
     [SerializeField]
     private FMODUnity.EventReference hitmarker;
     private bool energyLowHasPlayed;
+
     private void Start()
     {
         Channels.OnEnergyEmpty += PlayEnergyEmpty;
@@ -24,6 +25,14 @@ public class OneShotEventHandler : MonoBehaviour
         Channels.OnEnergyChanged += CompareEnergy;
         Channels.OnPlayerHit += PlayHitmarker;
         energyLowHasPlayed = false;
+    }
+
+    private void OnDisable()
+    {
+        Channels.OnEnergyEmpty -= PlayEnergyEmpty;
+        Channels.OnWeaponFired -= PlayEvent;
+        Channels.OnEnergyChanged -= CompareEnergy;
+        Channels.OnPlayerHit -= PlayHitmarker;
     }
 
     private void PlayEvent(FMODUnity.EventReference fmodEvent)

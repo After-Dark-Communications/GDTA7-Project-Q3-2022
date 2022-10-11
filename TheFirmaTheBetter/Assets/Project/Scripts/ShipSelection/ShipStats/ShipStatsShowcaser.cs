@@ -48,7 +48,7 @@ public class ShipStatsShowcaser : MonoBehaviour
             default:
                 break;
         }
-        Channels.OnEnabledStatGameObject.Invoke(index,playerNumber);
+        Channels.OnEnabledStatGameObject?.Invoke(index,playerNumber);
 
     }
 

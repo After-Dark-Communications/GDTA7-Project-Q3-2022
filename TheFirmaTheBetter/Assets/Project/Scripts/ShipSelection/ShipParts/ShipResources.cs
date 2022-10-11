@@ -39,6 +39,7 @@ namespace ShipParts
         private void OnDisable()
         {
             shipHealth.Unsubscribe();
+            shipEnergy.Unsubscribe();
             Channels.OnShipPartSelected -= OnShipPartSelected;
             Channels.OnShipCompleted -= OnShipCompleted;
         }

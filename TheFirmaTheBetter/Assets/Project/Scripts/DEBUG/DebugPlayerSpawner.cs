@@ -15,8 +15,8 @@ public class DebugPlayerSpawner : MonoBehaviour
             Channels.OnPlayerSpawned?.Invoke(player, i + 1);
         }
 
-        Channels.OnHealthChanged.Invoke(1, 0.9f);
-        Channels.OnHealthChanged.Invoke(2, 0.5f);
-        Channels.OnHealthChanged.Invoke(3, 0.2f);
+        Channels.OnHealthChanged?.Invoke(1, 0.9f);
+        Channels.OnHealthChanged?.Invoke(2, 0.5f);
+        Channels.OnHealthChanged?.Invoke(3, 0.2f);
     }
 }
