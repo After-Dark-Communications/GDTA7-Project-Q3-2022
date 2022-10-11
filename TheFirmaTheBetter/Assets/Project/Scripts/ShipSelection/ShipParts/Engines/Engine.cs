@@ -168,6 +168,16 @@ namespace ShipParts.Engines
             }
         }
 
+        private void OnDisable()
+        {
+            UnityEngine.InputSystem.Gamepad gamepad = myInputDevice as UnityEngine.InputSystem.Gamepad;
+
+            if (gamepad == null)
+                return;
+
+            gamepad.SetMotorSpeeds(0, 0);
+        }
+
         public override string PartCategoryName => "Engine";
 
         public EngineData EngineData => engineData;

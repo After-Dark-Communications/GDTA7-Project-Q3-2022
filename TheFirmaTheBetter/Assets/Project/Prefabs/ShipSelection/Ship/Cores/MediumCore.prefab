@@ -56,7 +56,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3423122116588513057}
   - component: {fileID: 3723246605526620374}
-  - component: {fileID: 3752801546153203820}
   m_Layer: 0
   m_Name: MediumCore
   m_TagString: Untagged
@@ -97,24 +96,6 @@ MonoBehaviour:
   connectionPoint: {x: 0, y: 0, z: 0}
   connectionPointCollection: {fileID: 4666277928107385656}
   coreData: {fileID: 11400000, guid: 35d2348859beb754d961e7f35c83932f, type: 2}
---- !u!114 &3752801546153203820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7602503678260995921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 1
-  outlineColor: {r: 0.28508362, g: 0.8301887, b: 0.30048582, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1001 &3490306209973560010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -177,6 +158,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f76883668609ea44fadaa57326b38f8d,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f76883668609ea44fadaa57326b38f8d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+    - target: {fileID: -7511558181221131132, guid: f76883668609ea44fadaa57326b38f8d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1044a5c53b09171439c96d2b31781235, type: 2}
     - target: {fileID: 919132149155446097, guid: f76883668609ea44fadaa57326b38f8d,
         type: 3}
       propertyPath: m_Name
@@ -209,6 +205,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 12.49, y: 10.636414, z: 14.018148}
   m_Center: {x: -7.3564e-15, y: 3.1271298, z: 2.1208632}
+--- !u!95 &283033988209299986
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4373389759089565595}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 56fa41124127bce428abdc10c4549c20, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3840957187966955725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4373389759089565595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6813a6918165ae043b8c70cbe3102fcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8216168639909983472
 PrefabInstance:
   m_ObjectHideFlags: 0

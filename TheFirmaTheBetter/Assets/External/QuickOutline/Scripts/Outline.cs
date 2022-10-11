@@ -69,7 +69,7 @@ public class Outline : MonoBehaviour
     [SerializeField]
     private Color outlineColor = Color.white;
 
-    [SerializeField, Range(0f, 10f)]
+    [SerializeField, Range(0f, 100f)]
     private float outlineWidth = 2f;
 
     [Header("Optional")]
@@ -89,6 +89,11 @@ public class Outline : MonoBehaviour
     private Material outlineFillMaterial;
 
     private bool needsUpdate;
+
+    private void OnEnable()
+    {
+        AddRenderersToList(gameObject, 0);
+    }
 
     void Start()
     {
