@@ -387,9 +387,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   center: {x: 0, y: 0, z: 0}
   pickups:
-  - {fileID: 919132149155446097, guid: 1af0b4f49c7e38d42bf9090257d66453, type: 3}
-  spawnAreaSize: {x: 3, y: 0, z: 3}
-  spawnInterval: 2
+  - {fileID: 1532577874546007182, guid: 684373ab3599e104ca3377e2dec9e066, type: 3}
+  - {fileID: 4988517399985563690, guid: c1737e8e4498f224c848ae59c9c420ec, type: 3}
+  spawnAreaSize: {x: 1, y: 0, z: 1}
+  spawnInterval: 0.5
 --- !u!4 &1095891166
 Transform:
   m_ObjectHideFlags: 0
