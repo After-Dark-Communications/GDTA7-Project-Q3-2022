@@ -1,3 +1,5 @@
+using Assets.Project.Scripts.ShipSelection;
+using EventSystem;
 using Helper;
 using ShipParts;
 using System.Collections;
@@ -11,6 +13,9 @@ namespace ShipSelection
 {
     public class Selectionbar : MonoBehaviour
     {
+        [SerializeField]
+        private ButtonSelectionManager buttonSelectionManager;
+
         private PlayerSelectionScreensData selectionScreensData;
 
         private List<SelectableCollection> selectionCollections = new List<SelectableCollection>();
@@ -40,11 +45,14 @@ namespace ShipSelection
             UpdateLabelTexts();
         }
 
+
         public void OnNavigate_Up()
         {
             currentSelectedCollectionIndex = ListLooper.SelectPrevious(selectionCollections, currentSelectedCollectionIndex);
             PlayArrowAnimation(arrowsUI[0]);
             UpdateLabelTexts();
+            buttonSelectionManager.UpdateButtons(this);
+            Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection);
         }
 
         public void OnNavigate_Down()
@@ -52,6 +60,8 @@ namespace ShipSelection
             currentSelectedCollectionIndex = ListLooper.SelectNext(selectionCollections, currentSelectedCollectionIndex);
             PlayArrowAnimation(arrowsUI[1]);
             UpdateLabelTexts();
+            buttonSelectionManager.UpdateButtons(this);
+            Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection);
         }
 
         private void UpdateLabelTexts()
@@ -65,10 +75,12 @@ namespace ShipSelection
         public void SetSelectedOptionIndex(int index)
         {
             CurrentSelectedCollection.CurrentSelectedIndex = index;
+            buttonSelectionManager.UpdateButtons(this);
         }
 
         public Part GetCurrentSelectedPart()
         {
+            buttonSelectionManager.UpdateButtons(this);
             return CurrentSelectedCollection.Selectables[CurrentSelectedCollection.CurrentSelectedIndex].Part;
         }
 
@@ -77,6 +89,7 @@ namespace ShipSelection
             arrow.PlaySelectedAnimation();
         }
 
+        public List<SelectableCollection> SelectionCollections => selectionCollections;
         public SelectableCollection CurrentSelectedCollection => selectionCollections[currentSelectedCollectionIndex];
         public int CurrentSelectedIndex { get => currentSelectedCollectionIndex; }
     }
