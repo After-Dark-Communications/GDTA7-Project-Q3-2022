@@ -7,7 +7,7 @@ namespace Audio
 {
     public class MenuMusicHandler : MonoBehaviour
     {
-        private FMODUnity.StudioEventEmitter fmodEvent;
+        private FMOD.Studio.EventInstance titleTheme;
         private FMOD.Studio.EventInstance buildingTheme;
         private FMOD.Studio.EventInstance battleTheme;
 
@@ -15,7 +15,8 @@ namespace Audio
         void Start()
         {
             DontDestroyOnLoad(gameObject);
-            fmodEvent = GetComponent<FMODUnity.StudioEventEmitter>();
+            titleTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_MainTheme");
+            titleTheme.start();
             buildingTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_BuildTheme");
             battleTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_Battle");
             Channels.OnEveryPlayerReady += LoadBattleScene;
@@ -33,7 +34,7 @@ namespace Audio
 
         public void LoadBuildingScene()
         {
-            fmodEvent.Stop();
+            titleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             buildingTheme.start();
         }
 
@@ -46,7 +47,7 @@ namespace Audio
         public void Replay()
         {
             battleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            fmodEvent.Play();
+            titleTheme.start();
         }
     }
 }
