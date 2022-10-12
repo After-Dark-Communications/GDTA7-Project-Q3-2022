@@ -5,7 +5,7 @@ using Pickups;
 using Collisions;
 using ShipParts.Ship;
 
-public class PickupManager : MonoBehaviour, ICollidable
+public abstract class Pickup : MonoBehaviour, ICollidable
 {
     [SerializeField]
     private float pickupLiveTime;
@@ -19,8 +19,8 @@ public class PickupManager : MonoBehaviour, ICollidable
 
         if (collisionObject != null)
         {
-            if (collisionObject is Ship)
-                return;
+            //if (collisionObject is Ship)
+            //    return;
 
             //impactSpawner.SpawnImpactHitPrefab();
             collisionObject.HandleCollision(this, null);
@@ -29,14 +29,22 @@ public class PickupManager : MonoBehaviour, ICollidable
     }
     public void DestroySelf()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
+        Destroy(this.gameObject);
+        Debug.Log("Destroy called");
     }
 
     public void HandleCollision<T1>(T1 objectThatHit, ShipStats shipStats) where T1 : ICollidable
     {
-        throw new System.NotImplementedException();
+        if (objectThatHit is ShipCollision)
+        {
+            Debug.Log("Ship collision");
+            PickUpAction();
+        }
+        //throw new System.NotImplementedException();
     }
 
+    protected abstract void PickUpAction();
     private void Awake()
     {
         timeTrack = new TimeTracker(pickupLiveTime);
@@ -54,7 +62,8 @@ public class PickupManager : MonoBehaviour, ICollidable
         {
             return;
         }
-        Destroy(this.gameObject);
+       // DestroySelf();
     }
+
 
 }

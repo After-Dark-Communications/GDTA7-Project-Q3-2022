@@ -41,23 +41,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f4e194ded78ac57479f329a6aa02a5fe, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f4e194ded78ac57479f329a6aa02a5fe, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.00000008146034
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f4e194ded78ac57479f329a6aa02a5fe, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f4e194ded78ac57479f329a6aa02a5fe, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f4e194ded78ac57479f329a6aa02a5fe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f4e194ded78ac57479f329a6aa02a5fe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -138,6 +138,26 @@ PrefabInstance:
     - target: {fileID: 7010246694102920486, guid: 912c85f82f88e2c4a9d135f475a27ea2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233794386608959149, guid: 912c85f82f88e2c4a9d135f475a27ea2,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.3724002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233794386608959149, guid: 912c85f82f88e2c4a9d135f475a27ea2,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.4668115
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233794386608959149, guid: 912c85f82f88e2c4a9d135f475a27ea2,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233794386608959149, guid: 912c85f82f88e2c4a9d135f475a27ea2,
+        type: 3}
+      propertyPath: m_Center.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

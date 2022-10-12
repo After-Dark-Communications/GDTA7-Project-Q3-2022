@@ -356,53 +356,72 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!1 &1095891164
-GameObject:
+--- !u!1001 &4285928536061009122
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1095891166}
-  - component: {fileID: 1095891165}
-  m_Layer: 0
-  m_Name: PickupsManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1095891165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1095891164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ffd128fc071e14409808695914c20c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  center: {x: 0, y: 0, z: 0}
-  pickups:
-  - {fileID: 1532577874546007182, guid: 684373ab3599e104ca3377e2dec9e066, type: 3}
-  - {fileID: 4988517399985563690, guid: c1737e8e4498f224c848ae59c9c420ec, type: 3}
-  spawnAreaSize: {x: 1, y: 0, z: 1}
-  spawnInterval: 0.5
---- !u!4 &1095891166
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1095891164}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3009.31, y: 1507.6768, z: 5.2568407}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4285928537156854844, guid: 32073e71f30fd974593460819b93182d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285928537156854844, guid: 32073e71f30fd974593460819b93182d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3009.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285928537156854844, guid: 32073e71f30fd974593460819b93182d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1507.6768
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285928537156854844, guid: 32073e71f30fd974593460819b93182d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.2568407
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285928537156854844, guid: 32073e71f30fd974593460819b93182d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285928537156854844, guid: 32073e71f30fd974593460819b93182d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285928537156854844, guid: 32073e71f30fd974593460819b93182d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285928537156854844, guid: 32073e71f30fd974593460819b93182d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285928537156854844, guid: 32073e71f30fd974593460819b93182d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285928537156854844, guid: 32073e71f30fd974593460819b93182d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285928537156854844, guid: 32073e71f30fd974593460819b93182d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285928537156854846, guid: 32073e71f30fd974593460819b93182d,
+        type: 3}
+      propertyPath: m_Name
+      value: PickupsSpawnerZone
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 32073e71f30fd974593460819b93182d, type: 3}

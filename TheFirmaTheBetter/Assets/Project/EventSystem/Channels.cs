@@ -46,6 +46,8 @@ namespace EventSystem
         public delegate void EnabledStatGameObject(int statGameObjectNumber, int playerNumber);
         public delegate void WeaponFired(FMODUnity.EventReference weaponEventToPlay);
 
+        public delegate void HealthPickupCollected(int playerNumber, float health);
+
         public static ChangeFireMode OnChangeFireMode;
         public static EnergyUsed OnEnergyUsed;
         public static EnergyChanged OnEnergyChanged;
@@ -65,6 +67,7 @@ namespace EventSystem
         public static HealthChanged OnHealthChanged;
         public static EnabledStatGameObject OnEnabledStatGameObject;
         public static WeaponFired OnWeaponFired;
+        public static HealthPickupCollected OnHealthPickupCollected;
     }
 
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using Pickups;
 
 
-    public class PickupZoneSpawner : MonoBehaviour
+    public class PickupZoneSpawnManager: MonoBehaviour
     {
         //private float instantiateTime;
         public Vector3 center;

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5346117133134250371
+--- !u!1 &4285928537156854846
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,54 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7010246694102920486}
-  - component: {fileID: 2866893247300224993}
-  - component: {fileID: 7233794386608959149}
+  - component: {fileID: 4285928537156854844}
+  - component: {fileID: 4285928537156854847}
   m_Layer: 0
-  m_Name: PickupTemplatePrefab
+  m_Name: PickupsSpawnerZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7010246694102920486
+--- !u!4 &4285928537156854844
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5346117133134250371}
+  m_GameObject: {fileID: 4285928537156854846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3009.31, y: 1507.6768, z: 5.2568407}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2866893247300224993
+--- !u!114 &4285928537156854847
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5346117133134250371}
+  m_GameObject: {fileID: 4285928537156854846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5b13b8195075214e915e8ce59a4dff1, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ffd128fc071e14409808695914c20c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupLiveTime: 3
---- !u!65 &7233794386608959149
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5346117133134250371}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  center: {x: 0, y: 0, z: 0}
+  pickups:
+  - {fileID: 1532577874546007182, guid: 684373ab3599e104ca3377e2dec9e066, type: 3}
+  - {fileID: 4988517399985563690, guid: c1737e8e4498f224c848ae59c9c420ec, type: 3}
+  spawnAreaSize: {x: 1, y: 0, z: 1}
+  spawnInterval: 0.5
