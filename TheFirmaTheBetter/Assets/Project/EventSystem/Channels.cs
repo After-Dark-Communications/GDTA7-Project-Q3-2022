@@ -47,6 +47,8 @@ namespace EventSystem
         public delegate void EnabledStatGameObject(int statGameObjectNumber, int playerNumber);
         public delegate void WeaponFired(FMODUnity.EventReference weaponEventToPlay);
         public delegate void SelectedCategoryChanged(SelectableCollection currentSelectedCollection, int playerNumber);
+        public delegate void NavigateUp();
+        public delegate void NavigateDown();
 
         public static ChangeFireMode OnChangeFireMode;
         public static EnergyUsed OnEnergyUsed;
@@ -68,6 +70,8 @@ namespace EventSystem
         public static EnabledStatGameObject OnEnabledStatGameObject;
         public static WeaponFired OnWeaponFired;
         public static SelectedCategoryChanged OnSelectedCategoryChanged;
+        public static NavigateUp OnNavigateUp;
+        public static NavigateDown OnNavigateDown;
     }
 
 }

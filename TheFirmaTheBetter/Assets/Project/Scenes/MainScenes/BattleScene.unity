@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.016316075, g: 0.016170885, b: 0.057872307, a: 1}
+  m_IndirectSpecularColor: {r: 0.0163243, g: 0.016176106, b: 0.05786788, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -219,7 +219,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14932
+  m_Name: pb_Mesh-769306
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -383,7 +383,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14892
+  m_Name: pb_Mesh-769266
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -704,7 +704,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14878
+  m_Name: pb_Mesh-769252
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1093,7 +1093,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14814
+  m_Name: pb_Mesh-769188
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1318,6 +1318,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Ship (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3706519532125869464, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_text
+      value: Player 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564145776788515195, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 330585545}
     - target: {fileID: 5799783348545338952, guid: 44592b494720b214ca002276217b3676,
         type: 3}
       propertyPath: playerNumber
@@ -2458,7 +2468,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14782
+  m_Name: pb_Mesh-769156
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2622,7 +2632,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14830
+  m_Name: pb_Mesh-769204
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2831,7 +2841,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14798
+  m_Name: pb_Mesh-769172
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3255,7 +3265,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14918
+  m_Name: pb_Mesh-769292
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4082,6 +4092,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Ship (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3706519532125869464, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_text
+      value: Player 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564145776788515195, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 330585545}
     - target: {fileID: 5799783348545338952, guid: 44592b494720b214ca002276217b3676,
         type: 3}
       propertyPath: playerNumber
@@ -4162,6 +4182,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Ship
       objectReference: {fileID: 0}
+    - target: {fileID: 5564145776788515195, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 330585545}
     - target: {fileID: 5799783348545338952, guid: 44592b494720b214ca002276217b3676,
         type: 3}
       propertyPath: playerNumber
@@ -4175,6 +4200,32 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1552849513}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1552849515 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6202034357633808954, guid: 44592b494720b214ca002276217b3676,
+    type: 3}
+  m_PrefabInstance: {fileID: 1552849513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1552849516
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552849515}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0a2a5f87bfa256f418e78c10805b2bfb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1564573381
 GameObject:
   m_ObjectHideFlags: 0
@@ -4548,7 +4599,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14850
+  m_Name: pb_Mesh-769224
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4858,6 +4909,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Ship (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3706519532125869464, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_text
+      value: Player 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564145776788515195, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 330585545}
     - target: {fileID: 5799783348545338952, guid: 44592b494720b214ca002276217b3676,
         type: 3}
       propertyPath: playerNumber
@@ -4877,7 +4938,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14864
+  m_Name: pb_Mesh-769238
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

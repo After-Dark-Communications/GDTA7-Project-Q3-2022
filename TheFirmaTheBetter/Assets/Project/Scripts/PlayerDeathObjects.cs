@@ -28,7 +28,7 @@ public class PlayerDeathObjects : MonoBehaviour
         _shipBuilder = transform.GetComponentInChildren<ShipBuilder>();
         if (_shipBuilder == null)
         {
-            Debug.Log($"{transform.name} doesn't have shipBuilder");
+            gameObject.SetActive(false);
             return;
         }
         Channels.OnPlayerBecomesDeath += OnPlayerDeath;

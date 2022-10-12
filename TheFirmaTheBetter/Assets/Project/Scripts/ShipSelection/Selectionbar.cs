@@ -55,19 +55,19 @@ namespace ShipSelection
         public void OnNavigate_Up()
         {
             currentSelectedCollectionIndex = ListLooper.SelectPrevious(selectionCollections, currentSelectedCollectionIndex);
-            PlayArrowAnimation(arrowsUI[0]);
             UpdateLabelTexts();
             buttonSelectionManager.UpdateButtons(this);
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
+            Channels.OnNavigateUp?.Invoke();
         }
 
         public void OnNavigate_Down()
         {
             currentSelectedCollectionIndex = ListLooper.SelectNext(selectionCollections, currentSelectedCollectionIndex);
-            PlayArrowAnimation(arrowsUI[1]);
             UpdateLabelTexts();
             buttonSelectionManager.UpdateButtons(this);
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
+            Channels.OnNavigateDown?.Invoke();
         }
 
         private void UpdateLabelTexts()
@@ -88,11 +88,6 @@ namespace ShipSelection
         {
             buttonSelectionManager.UpdateButtons(this);
             return CurrentSelectedCollection.Selectables[CurrentSelectedCollection.CurrentSelectedIndex].Part;
-        }
-
-        public void PlayArrowAnimation(Arrow arrow)
-        {
-            arrow.PlaySelectedAnimation();
         }
 
         public List<SelectableCollection> SelectionCollections => selectionCollections;
