@@ -9,6 +9,7 @@ namespace Audio
     {
         private FMODUnity.StudioEventEmitter fmodEvent;
         private FMOD.Studio.EventInstance buildingTheme;
+        private FMOD.Studio.EventInstance battleTheme;
 
         // Start is called before the first frame update
         void Start()
@@ -16,12 +17,18 @@ namespace Audio
             DontDestroyOnLoad(gameObject);
             fmodEvent = GetComponent<FMODUnity.StudioEventEmitter>();
             buildingTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_BuildTheme");
+            battleTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_Battle");
             Channels.OnEveryPlayerReady += LoadBattleScene;
         }
 
         // Update is called once per frame
         void Update()
         {
+        }
+
+        private void OnDestroy()
+        {
+            Channels.OnEveryPlayerReady -= LoadBattleScene;
         }
 
         public void LoadBuildingScene()
@@ -32,8 +39,14 @@ namespace Audio
 
         public void LoadBattleScene(int playerCount)
         {
-            //todo: call battle music
             buildingTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            battleTheme.start();
+        }
+
+        public void Replay()
+        {
+            battleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            fmodEvent.Play();
         }
     }
 }
