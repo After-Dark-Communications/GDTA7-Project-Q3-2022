@@ -59,10 +59,10 @@ namespace ShipSelection
 
         private void SetShipStats(List<ShipStat> shipStatsUI, ShipStats changedShipStats)
         {
-            shipStatsUI[0].StatValue.text = changedShipStats.Speed.ToString();
-            shipStatsUI[1].StatValue.text = changedShipStats.MaxHealth.ToString();
-            shipStatsUI[2].StatValue.text = changedShipStats.Handling.ToString();
-            shipStatsUI[3].StatValue.text = changedShipStats.EnergyCapacity.ToString();
+            shipStatsUI[0].SetValueFill(changedShipStats.Speed, 75, 200);
+            shipStatsUI[1].SetValueFill(changedShipStats.MaxHealth, 200, 1000);
+            shipStatsUI[2].SetValueFill(changedShipStats.Handling, 200, 800);
+            shipStatsUI[3].SetValueFill(changedShipStats.EnergyCapacity, 12, 50);
 
         }
 

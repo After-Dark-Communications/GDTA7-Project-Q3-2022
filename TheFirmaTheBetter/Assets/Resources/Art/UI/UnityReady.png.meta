@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -1477,6 +1477,27 @@ TextureImporter:
       bones: []
       spriteID: ad5a47d8242bb8e4ea3811a303e65e4e
       internalID: 450944589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UnityReady_52
+      rect:
+        serializedVersion: 2
+        x: 3009
+        y: 2796
+        width: 884
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b26d0946371e4c47b7c5aff2a930ac2
+      internalID: -44416409
       vertices: []
       indices: 
       edges: []
