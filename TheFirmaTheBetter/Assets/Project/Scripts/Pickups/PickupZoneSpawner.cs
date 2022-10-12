@@ -24,25 +24,10 @@ using Pickups;
 
             timeTrack = new TimeTracker(spawnInterval);
         }
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
 
         // Update is called once per frame
         void Update()
         {
-            //For debug
-            //if (Input.GetKeyDown(KeyCode.Space))
-            //{
-
-            //}
-
-            //if (!isSpawnTime())
-            //{
-            //    return;
-            //}
 
             if (!timeTrack.TimerComplete())
             {
@@ -53,25 +38,13 @@ using Pickups;
             timeTrack.TimeReset();
 
         }
-        //private bool isSpawnTime()
-        //{
-        //    instantiateTime -= Time.deltaTime;
-        //    if (instantiateTime <= 0)
-        //    {
-        //        return true;
-        //    }
-        //    return false;
-        //}
-        //private void TimeReset()
-        //{
-        //    instantiateTime = spawnInterval;
-        //}
         private void Spawn()
         {
             int randomIndex = Random.Range(0, pickups.Length);
             Vector3 randomSpawnPosition = center + new Vector3(Random.Range(-spawnAreaSize.x / 2, spawnAreaSize.x / 2), Random.Range(-spawnAreaSize.y / 2, spawnAreaSize.y / 2), Random.Range(-spawnAreaSize.z / 2, spawnAreaSize.z / 2));
 
-            Instantiate(pickups[randomIndex], randomSpawnPosition, Quaternion.identity);
+            var instantiatedObject = Instantiate(pickups[randomIndex], randomSpawnPosition, Quaternion.identity);
+            instantiatedObject.transform.parent = gameObject.transform;
         }
         private void OnDrawGizmosSelected()
         {
