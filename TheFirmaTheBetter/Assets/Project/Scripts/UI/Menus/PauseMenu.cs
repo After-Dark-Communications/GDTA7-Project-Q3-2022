@@ -1,20 +1,23 @@
 using UnityEngine;
 
-public class PauseMenu : Menu
+namespace UI.Menus
 {
-    public void PauseGame()
+    public class PauseMenu : Menu
     {
-        //gameObject.SetActive(true);
-    }
+        public void PauseGame()
+        {
+            //gameObject.SetActive(true);
+        }
 
-    public void UnpauseGame()
-    {
-        //SceneSwitchManager.UnloadScene(gameObject.scene.buildIndex);
-        //gameObject.SetActive(false);
-    }
+        public void UnpauseGame()
+        {
+            //SceneSwitchManager.UnloadScene(gameObject.scene.buildIndex);
+            //gameObject.SetActive(false);
+        }
 
-    public void QuitGame()
-    {
-        Application.Quit();
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }

@@ -25,8 +25,8 @@ namespace ShipParts
         {
             if (enteredZone is EnergyZone)
             {
-                Channels.OnRefillEnergy.Invoke(playerNumber, shipResources.ShipStats.EnergyCapacity);
-                Channels.OnChangeFireMode.Invoke(false);
+                Channels.OnRefillEnergy?.Invoke(playerNumber, shipResources.ShipStats.EnergyCapacity);
+                Channels.OnChangeFireMode?.Invoke(false);
             }
         }
 
@@ -34,7 +34,7 @@ namespace ShipParts
         {
             if (enteredZone is EnergyZone)
             {
-                Channels.OnChangeFireMode.Invoke(true);
+                Channels.OnChangeFireMode?.Invoke(true);
             }
         }
     }

@@ -1,4 +1,5 @@
 using EventSystem;
+using Managers;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -31,6 +32,11 @@ namespace ShipSelection
             }
 
             joinPlayerScreens[0].gameObject.SetActive(true);
+        }
+
+        private void OnDisable()
+        {
+            Channels.OnManagerInitialized -= OnManagerInitialized;
         }
 
         private void OnManagerInitialized(Manager manager)

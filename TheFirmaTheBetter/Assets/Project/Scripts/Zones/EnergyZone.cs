@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnergyZone : Zone
+namespace Zones
 {
-    /// <summary>Triggers a zone's effect</summary>
-    /// <param name="obj">The player currently in the zone</param>
-    public override void TriggerEffect(GameObject obj)
+    public class EnergyZone : Zone
     {
-        Debug.Log("In trigger");
+        /// <summary>Triggers a zone's effect</summary>
+        /// <param name="obj">The player currently in the zone</param>
+        public override void TriggerEffect(GameObject obj)
+        {
+            Debug.Log("In trigger");
+        }
     }
 }

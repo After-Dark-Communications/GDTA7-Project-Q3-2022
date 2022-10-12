@@ -1,19 +1,22 @@
 using UnityEngine;
 
-public class MenuPanel : MonoBehaviour
+namespace UI.Menus
 {
-    [SerializeField]
-    private GameObject firstSelected;
-
-    public void OpenPanel()
+    public class MenuPanel : MonoBehaviour
     {
-        gameObject.SetActive(true);
-        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(firstSelected);
-    }
+        [SerializeField]
+        private GameObject firstSelected;
 
-    public void ClosePanel()
-    {
-        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
-        gameObject.SetActive(false);
+        public void OpenPanel()
+        {
+            gameObject.SetActive(true);
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(firstSelected);
+        }
+
+        public void ClosePanel()
+        {
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+            gameObject.SetActive(false);
+        }
     }
 }

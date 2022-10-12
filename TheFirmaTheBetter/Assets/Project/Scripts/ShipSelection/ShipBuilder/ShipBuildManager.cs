@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using ShipParts.Ship;
+using Managers;
 
 namespace ShipSelection.ShipBuilders
 {
@@ -40,7 +41,7 @@ namespace ShipSelection.ShipBuilders
 
         private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
         {
-            Channels.OnManagerInitialized.Invoke(this);
+            Channels.OnManagerInitialized?.Invoke(this);
         }
 
         private void OnShipCompleted(ShipBuilder shipBuilder)
@@ -53,7 +54,7 @@ namespace ShipSelection.ShipBuilders
             shipBuilders.Add(shipBuilder);
 
             if (shipBuilders.Count == amountOfPlayersJoined)
-                Channels.OnEveryPlayerReady.Invoke(amountOfPlayersJoined);
+                Channels.OnEveryPlayerReady?.Invoke(amountOfPlayersJoined);
         }
 
         private void OnDisable()

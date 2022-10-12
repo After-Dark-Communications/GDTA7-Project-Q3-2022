@@ -5,42 +5,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-
-public class ShipAnimationManager : MonoBehaviour
+namespace ShipParts
 {
-    private const string trigger = "ShipIdle";
-    private Animator shipAnimator;
-    private ShipBuilder shipBuilder;
-
-    private void Awake()
+    [RequireComponent(typeof(Animator))]
+    public class ShipAnimationManager : MonoBehaviour
     {
-        shipAnimator = GetComponent<Animator>();
-        shipAnimator.SetTrigger(trigger);
+        private const string trigger = "ShipIdle";
+        private Animator shipAnimator;
+        private ShipBuilder shipBuilder;
 
-        shipBuilder = GetComponent<ShipBuilder>();
-    }
-    private void OnEnable()
-    {
-        Channels.OnShipCompleted += OnShipCompleted;
+        private void Awake()
+        {
+            shipAnimator = GetComponent<Animator>();
+            shipAnimator.SetTrigger(trigger);
 
-    }
+            shipBuilder = GetComponent<ShipBuilder>();
+        }
+        private void OnEnable()
+        {
+            Channels.OnShipCompleted += OnShipCompleted;
 
-    private void OnShipCompleted(ShipBuilder obj)
-    {
-        //throw new NotImplementedException();
-        //Debug.Log($"Completed");
-        if (obj.PlayerNumber != shipBuilder.PlayerNumber)
-            return;
+        }
 
-        shipAnimator.SetTrigger(trigger);
-        shipAnimator.enabled = false;
-        this.enabled = false;
+        private void OnShipCompleted(ShipBuilder obj)
+        {
+            //throw new NotImplementedException();
+            //Debug.Log($"Completed");
+            if (obj.PlayerNumber != shipBuilder.PlayerNumber)
+                return;
 
-    }
+            shipAnimator.SetTrigger(trigger);
+            shipAnimator.enabled = false;
+            this.enabled = false;
 
-    private void OnDisable()
-    {
-        Channels.OnShipCompleted -= OnShipCompleted;
+        }
+
+        private void OnDisable()
+        {
+            Channels.OnShipCompleted -= OnShipCompleted;
+        }
     }
 }

@@ -3,79 +3,95 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 
-public class AnnouncerEventManager : MonoBehaviour
+namespace Audio
 {
-    [Header("FMOD Events")]
-    [SerializeField]
-    private FMODUnity.EventReference titleScreenEvent;
-    [SerializeField]
-    private FMODUnity.EventReference gameStartEvent;
-    [SerializeField]
-    private FMODUnity.EventReference firstBloodEvent;
-    [SerializeField]
-    private FMODUnity.EventReference doubleKillEvent;
-    [SerializeField]
-    private FMODUnity.EventReference gameOverEvent;
-    [SerializeField]
-    private FMODUnity.EventReference playerEliminatedEvent;
-    [SerializeField]
-    private FMODUnity.EventReference energyZoneMovedEvent;
-    [SerializeField]
-    private FMODUnity.EventReference createShipEvent;
-
-    private void Start()
+    public class AnnouncerEventManager : MonoBehaviour
     {
-        Channels.Announcer.OnGameBoot += PlayGameStartUpEvent;
-        Channels.Announcer.OnPlayGameStart += PlayGameStartEvent;
-        Channels.Announcer.OnPlayGameStop += PlayGameOverEvent;
-        Channels.Announcer.OnPlayFirstBlood += PlayFirstBloodEvent;
-        Channels.Announcer.OnPlayPlayerEliminated += PlayPlayerEliminatedEvent;
-        Channels.Announcer.OnPlayEnergyZoneMoved += PlayEnergyZoneMovedEvent;
-        Channels.Announcer.OnPlayDoubleKill += PlayDoubleKillEvent;
-        Channels.Announcer.OnShipSelection += PlayShipSelectionEvent;
-    }
+        [Header("FMOD Events")]
+        [SerializeField]
+        private FMODUnity.EventReference titleScreenEvent;
+        [SerializeField]
+        private FMODUnity.EventReference gameStartEvent;
+        [SerializeField]
+        private FMODUnity.EventReference firstBloodEvent;
+        [SerializeField]
+        private FMODUnity.EventReference doubleKillEvent;
+        [SerializeField]
+        private FMODUnity.EventReference gameOverEvent;
+        [SerializeField]
+        private FMODUnity.EventReference playerEliminatedEvent;
+        [SerializeField]
+        private FMODUnity.EventReference energyZoneMovedEvent;
+        [SerializeField]
+        private FMODUnity.EventReference createShipEvent;
 
-    public void PlayEvent(FMODUnity.EventReference fmodEvent) {
-        FMODUnity.RuntimeManager.PlayOneShot(fmodEvent);
-    }
+        private void Start()
+        {
+            Channels.Announcer.OnGameBoot += PlayGameStartUpEvent;
+            Channels.Announcer.OnPlayGameStart += PlayGameStartEvent;
+            Channels.Announcer.OnPlayGameStop += PlayGameOverEvent;
+            Channels.Announcer.OnPlayFirstBlood += PlayFirstBloodEvent;
+            Channels.Announcer.OnPlayPlayerEliminated += PlayPlayerEliminatedEvent;
+            Channels.Announcer.OnPlayEnergyZoneMoved += PlayEnergyZoneMovedEvent;
+            Channels.Announcer.OnPlayDoubleKill += PlayDoubleKillEvent;
+            Channels.Announcer.OnShipSelection += PlayShipSelectionEvent;
+        }
 
-    public void PlayGameStartUpEvent()
-    {
-        PlayEvent(titleScreenEvent);
-    }
+        private void OnDisable()
+        {
+            Channels.Announcer.OnGameBoot -= PlayGameStartUpEvent;
+            Channels.Announcer.OnPlayGameStart -= PlayGameStartEvent;
+            Channels.Announcer.OnPlayGameStop -= PlayGameOverEvent;
+            Channels.Announcer.OnPlayFirstBlood -= PlayFirstBloodEvent;
+            Channels.Announcer.OnPlayPlayerEliminated -= PlayPlayerEliminatedEvent;
+            Channels.Announcer.OnPlayEnergyZoneMoved -= PlayEnergyZoneMovedEvent;
+            Channels.Announcer.OnPlayDoubleKill -= PlayDoubleKillEvent;
+            Channels.Announcer.OnShipSelection -= PlayShipSelectionEvent;
+        }
 
-    public void PlayGameStartEvent()
-    {
-        PlayEvent(gameOverEvent);
-    }
+        public void PlayEvent(FMODUnity.EventReference fmodEvent)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(fmodEvent);
+        }
 
-    public void PlayFirstBloodEvent()
-    {
-        PlayEvent(firstBloodEvent);
-    }
+        public void PlayGameStartUpEvent()
+        {
+            PlayEvent(titleScreenEvent);
+        }
 
-    public void PlayDoubleKillEvent()
-    {
-        PlayEvent(doubleKillEvent);
-    }
+        public void PlayGameStartEvent()
+        {
+            PlayEvent(gameOverEvent);
+        }
 
-    public void PlayGameOverEvent()
-    {
-        PlayEvent(gameOverEvent);
-    }
+        public void PlayFirstBloodEvent()
+        {
+            PlayEvent(firstBloodEvent);
+        }
 
-    public void PlayPlayerEliminatedEvent()
-    {
-        PlayEvent(playerEliminatedEvent);
-    }
+        public void PlayDoubleKillEvent()
+        {
+            PlayEvent(doubleKillEvent);
+        }
 
-    public void PlayEnergyZoneMovedEvent()
-    {
-        PlayEvent(energyZoneMovedEvent);
-    }
+        public void PlayGameOverEvent()
+        {
+            PlayEvent(gameOverEvent);
+        }
 
-    public void PlayShipSelectionEvent()
-    {
-        PlayEvent(createShipEvent);
+        public void PlayPlayerEliminatedEvent()
+        {
+            PlayEvent(playerEliminatedEvent);
+        }
+
+        public void PlayEnergyZoneMovedEvent()
+        {
+            PlayEvent(energyZoneMovedEvent);
+        }
+
+        public void PlayShipSelectionEvent()
+        {
+            PlayEvent(createShipEvent);
+        }
     }
 }

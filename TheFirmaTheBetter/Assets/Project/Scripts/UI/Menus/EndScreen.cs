@@ -1,41 +1,46 @@
+using Managers;
+using ShipSelection;
 using UnityEngine;
 
 
-public class EndScreen : MenuPanel
+namespace UI.Menus
 {
-    [SerializeField]
-    private ShipPreviewCam[] previewCams;
-    [SerializeField]
-    private EndScreenPanel[] panels;
-
-    private void OnEnable()
+    public class EndScreen : MenuPanel
     {
-        OpenPanel();
-        DisplayResults();
-    }
+        [SerializeField]
+        private ShipPreviewCam[] previewCams;
+        [SerializeField]
+        private EndScreenPanel[] panels;
 
-    private void DisplayResults()
-    {
-        foreach (EndScreenPanel panel in panels)
+        private void OnEnable()
         {
-            panel.gameObject.SetActive(false);
+            OpenPanel();
+            DisplayResults();
         }
 
-        PlayerStatistics[] results = ResultsManager.Instance.Results;
-        for (int i = 0; i < results.Length; i++)
+        private void DisplayResults()
         {
-            previewCams[i].PlaceShipPreview(results[i].gameObject);
-            panels[i].gameObject.SetActive(true);
-            panels[i].SetPlayerStats(results[i]);
-        }
-    }
-    public void Rematch()
-    {
-        SceneSwitchManager.LoadFirstScene();
-    }
+            foreach (EndScreenPanel panel in panels)
+            {
+                panel.gameObject.SetActive(false);
+            }
 
-    public void QuitGame()
-    {
-        Application.Quit();
+            PlayerStatistics[] results = ResultsManager.Instance.Results;
+            for (int i = 0; i < results.Length; i++)
+            {
+                previewCams[i].PlaceShipPreview(results[i].gameObject);
+                panels[i].gameObject.SetActive(true);
+                panels[i].SetPlayerStats(results[i]);
+            }
+        }
+        public void Rematch()
+        {
+            SceneSwitchManager.LoadFirstScene();
+        }
+
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }

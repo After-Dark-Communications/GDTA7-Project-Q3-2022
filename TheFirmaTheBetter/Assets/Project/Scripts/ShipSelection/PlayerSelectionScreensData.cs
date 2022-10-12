@@ -1,4 +1,5 @@
 using EventSystem;
+using Managers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,11 @@ namespace ShipSelection
         private void Awake()
         {
             Channels.OnManagerInitialized += OnManagerInitialize;
+        }
+
+        private void OnDisable()
+        {
+            Channels.OnManagerInitialized -= OnManagerInitialize;
         }
 
         private void OnManagerInitialize(Manager manager)

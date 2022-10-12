@@ -2,20 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class VolumeSettingsData
+namespace Data
 {
-    private float musicVolume;
-    private float sfxVolume;
-    private float masterVolume;
-    public VolumeSettingsData(float masterVolume, float musicVolume, float sfxVolume)
+    [System.Serializable]
+    public class VolumeSettingsData
     {
-        this.masterVolume = masterVolume;
-        this.musicVolume = musicVolume;
-        this.sfxVolume = sfxVolume;
-    }
+        private float musicVolume;
+        private float sfxVolume;
+        private float masterVolume;
+        public VolumeSettingsData(float masterVolume, float musicVolume, float sfxVolume)
+        {
+            this.masterVolume = masterVolume;
+            this.musicVolume = musicVolume;
+            this.sfxVolume = sfxVolume;
+        }
 
-    public float MusicVolume { get => musicVolume; }
-    public float SfxVolume { get => sfxVolume; }
-    public float MasterVolume { get => masterVolume; }
+        public float MusicVolume { get => musicVolume; }
+        public float SfxVolume { get => sfxVolume; }
+        public float MasterVolume { get => masterVolume; }
+    }
 }
