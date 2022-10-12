@@ -26,6 +26,8 @@ namespace ShipSelection
 
         private int currentSelectedCollectionIndex = 0;
 
+        private int playerNumber;
+
         private void Awake()
         {
             foreach (Button button in gameObject.GetComponentsInChildren<Button>())
@@ -45,6 +47,10 @@ namespace ShipSelection
             UpdateLabelTexts();
         }
 
+        private void Start()
+        {
+            playerNumber = GetComponentInParent<PlayerSelectionScreen>().PlayerNumber;
+        }
 
         public void OnNavigate_Up()
         {
@@ -52,7 +58,7 @@ namespace ShipSelection
             PlayArrowAnimation(arrowsUI[0]);
             UpdateLabelTexts();
             buttonSelectionManager.UpdateButtons(this);
-            Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection);
+            Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
         }
 
         public void OnNavigate_Down()
@@ -61,7 +67,7 @@ namespace ShipSelection
             PlayArrowAnimation(arrowsUI[1]);
             UpdateLabelTexts();
             buttonSelectionManager.UpdateButtons(this);
-            Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection);
+            Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
         }
 
         private void UpdateLabelTexts()

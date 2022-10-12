@@ -1,59 +1,96 @@
 using EventSystem;
 using ShipParts;
+using ShipParts.Ship;
 using ShipSelection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 public class ShipPartAnimatorManager : MonoBehaviour
 {
     private const string flashBoolName = "Flash";
-    
+ 
+    private List<Animator> animators = new List<Animator>();
+
+    private int playerNumber;
+
     private Part part;
 
-    private Animator animator;
 
-    private void Start()
-    {
-        animator = GetComponent<Animator>();
-        part = GetComponent<Part>();
-    }
-
-    private void OnEnable()
+    private void Awake()
     {
         Channels.OnSelectedCategoryChanged += OnCategoryChanged;
         Channels.OnShipPartSelected += OnPartSelected;
+        Channels.OnPlayerSpawned += OnPlayerSpawned;
+    }
+
+    private void OnDestroy()
+    {
+        Channels.OnSelectedCategoryChanged -= OnCategoryChanged;
+        Channels.OnShipPartSelected -= OnPartSelected;
+        Channels.OnPlayerSpawned -= OnPlayerSpawned;
+    }
+
+    private void Start()
+    {
+        part = GetComponent<Part>();
+        playerNumber = GetComponentInParent<ShipBuilder>().PlayerNumber;
+
+        foreach (Animator animator in GetComponentsInChildren<Animator>())
+        {
+            animators.Add(animator);
+        }
     }
 
     private void OnPartSelected(Part selectedPart, int playerNumber)
     {
-        if (selectedPart.IsMyType(part))
-        {
-            animator.SetBool(flashBoolName, true);
-            return;
-        }
-
-        animator.SetBool(flashBoolName, false);
+        SetBoolsForPart(selectedPart, playerNumber);
     }
 
-    private void OnCategoryChanged(SelectableCollection currentSelectedCollection)
+    private void OnCategoryChanged(SelectableCollection currentSelectedCollection, int playerNumber)
     {
         Part currentSelectedPartFromCategory = currentSelectedCollection.Selectables[currentSelectedCollection.CurrentSelectedIndex].Part;
-        
-        if (currentSelectedPartFromCategory.IsMyType(part))
+        SetBoolsForPart(currentSelectedPartFromCategory, playerNumber);
+    }
+
+    private void OnPlayerSpawned(GameObject spawnedShipBuilderObject, int playerNumber)
+    {
+        if (playerNumber != this.playerNumber)
+            return;
+
+        SetAllFlashingBools(false);
+    }
+
+
+    private void SetBoolsForPart(Part selectedPart, int playerNumber = -1)
+    {
+        if (playerNumber == -1)
         {
-            animator.SetBool(flashBoolName, true);
+            ShipBuilder builder = selectedPart.GetComponentInParent<ShipBuilder>();
+
+            if (builder != null)
+                playerNumber = builder.PlayerNumber;
+        }
+
+        if (this.playerNumber != playerNumber)
+            return;
+
+        if (selectedPart.IsMyType(part))
+        {
+            SetAllFlashingBools(true);
             return;
         }
 
-        animator.SetBool(flashBoolName, false);
+        SetAllFlashingBools(false);
     }
 
-    private void OnDisable()
+    private void SetAllFlashingBools(bool value)
     {
-        Channels.OnSelectedCategoryChanged -= OnCategoryChanged;
-        Channels.OnShipPartSelected -= OnPartSelected;
+        foreach (Animator animator in animators)
+        {
+            animator.SetBool(flashBoolName, value);
+        }
     }
 }

@@ -46,7 +46,7 @@ namespace EventSystem
         /// <param name="playerNumber">The index of the player that got its stat gameobject enabled</param>
         public delegate void EnabledStatGameObject(int statGameObjectNumber, int playerNumber);
         public delegate void WeaponFired(FMODUnity.EventReference weaponEventToPlay);
-        public delegate void SelectedCategoryChanged(SelectableCollection currentSelectedCollection);
+        public delegate void SelectedCategoryChanged(SelectableCollection currentSelectedCollection, int playerNumber);
 
         public static ChangeFireMode OnChangeFireMode;
         public static EnergyUsed OnEnergyUsed;
