@@ -6,6 +6,8 @@
 ![Closed Issues](https://img.shields.io/github/issues-closed-raw/After-Dark-Communications/GDTA7-Project-Q3-2022?style=plastic)
 ![Closed Milestones](https://img.shields.io/github/milestones/closed/After-Dark-Communications/GDTA7-Project-Q3-2022?style=plastic)
 
+[Milestones](https://github.com/After-Dark-Communications/GDTA7-Project-Q3-2022/milestones)
+
 ## Unity Version
 This project uses Unity version [2021.3.9f1 (LTS)](unityhub://2022.1.15f1/42973686a05c)
 
