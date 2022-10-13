@@ -1318,6 +1318,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Ship (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5564145776788515195, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 330585545}
     - target: {fileID: 5799783348545338952, guid: 44592b494720b214ca002276217b3676,
         type: 3}
       propertyPath: playerNumber
@@ -4211,6 +4216,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Ship (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5564145776788515195, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 330585545}
     - target: {fileID: 5799783348545338952, guid: 44592b494720b214ca002276217b3676,
         type: 3}
       propertyPath: playerNumber
@@ -4291,6 +4301,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Ship
       objectReference: {fileID: 0}
+    - target: {fileID: 5564145776788515195, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 330585545}
     - target: {fileID: 5799783348545338952, guid: 44592b494720b214ca002276217b3676,
         type: 3}
       propertyPath: playerNumber
@@ -4987,6 +5002,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Ship (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5564145776788515195, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 330585545}
     - target: {fileID: 5799783348545338952, guid: 44592b494720b214ca002276217b3676,
         type: 3}
       propertyPath: playerNumber
