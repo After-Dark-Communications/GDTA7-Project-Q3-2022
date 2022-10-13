@@ -23,15 +23,11 @@ namespace ShipParts.Ship
 
         private List<Part> selectedParts = new List<Part>();
 
-        private ShipFactory shipFactory;
-
         private void Awake()
         {
             Channels.OnPlayerJoined += OnPlayerJoined;
             Channels.OnShipPartSelected += OnShipPartSelected;
             Channels.Input.OnShipCompletedInput += OnShipCompletedInput;
-
-            shipFactory  = new ShipFactory();
         }
 
         private void OnDestroy()
@@ -47,8 +43,6 @@ namespace ShipParts.Ship
                 return;
 
             this.playerDevice = playerDevice;
-
-            shipFactory.CreateNewShip();
         }
 
         private void OnShipCompletedInput(int playerNumber)

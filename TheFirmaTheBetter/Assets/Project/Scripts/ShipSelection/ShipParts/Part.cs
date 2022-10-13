@@ -1,7 +1,9 @@
 using Collisions;
 using Controls;
+using EventSystem;
 using ShipSelection;
 using ShipSelection.ShipBuilders.ConnectionPoints;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -14,7 +16,6 @@ namespace ShipParts
         private Image partIcon;
         [SerializeField]
         private Vector3 connectionPoint;
-
         [SerializeField]
         private ConnectionPointsCollection connectionPointCollection;
 

@@ -1,6 +1,7 @@
 using Managers;
 using ShipParts;
 using ShipParts.Ship;
+using ShipSelection;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -46,6 +47,10 @@ namespace EventSystem
         /// <param name="playerNumber">The index of the player that got its stat gameobject enabled</param>
         public delegate void EnabledStatGameObject(int statGameObjectNumber, int playerNumber);
         public delegate void WeaponFired(FMODUnity.EventReference weaponEventToPlay);
+        public delegate void SelectedCategoryChanged(SelectableCollection currentSelectedCollection, int playerNumber);
+        public delegate void NavigateUp();
+        public delegate void NavigateDown();
+        public delegate void GameOver();
 
         public delegate void PlayerHealed(int healthIncreaseAmount, int playerNumber);
 
@@ -69,6 +74,10 @@ namespace EventSystem
         public static EnabledStatGameObject OnEnabledStatGameObject;
         public static WeaponFired OnWeaponFired;
         public static PlayerHealed OnPlayerHealed;
+        public static SelectedCategoryChanged OnSelectedCategoryChanged;
+        public static NavigateUp OnNavigateUp;
+        public static NavigateDown OnNavigateDown;
+        public static GameOver OnGameOver;
     }
 
 }
