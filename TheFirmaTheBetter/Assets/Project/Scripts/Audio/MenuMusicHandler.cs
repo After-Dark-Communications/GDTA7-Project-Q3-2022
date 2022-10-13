@@ -12,8 +12,6 @@ namespace Audio
         private FMOD.Studio.EventInstance buildingTheme;
         private FMOD.Studio.EventInstance battleTheme;
         private float playersLeft;
-        private FMOD.GUID battleId;
-        private List<FMOD.Studio.EventInstance> list;
         // Start is called before the first frame update
         void Start()
         {
@@ -25,12 +23,6 @@ namespace Audio
             Channels.OnEveryPlayerReady += LoadBattleScene;
             Channels.OnPlayerBecomesDeath += PlayerDeath;
             Channels.OnGameOver += Replay;
-            list = new List<FMOD.Studio.EventInstance>()
-            {
-                titleTheme,
-                battleTheme,
-                buildingTheme
-            };
         }
 
         // Update is called once per frame
@@ -53,6 +45,10 @@ namespace Audio
         public void LoadBattleScene(int playerCount)
         {
             playersLeft = playerCount;
+            if (playersLeft <= 2)
+            {
+                battleTheme.setParameterByName("Players_Left", float.MaxValue);
+            }
             buildingTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             buildingTheme.release();
             battleTheme.start();
@@ -67,6 +63,7 @@ namespace Audio
         public void PlayerDeath(ShipBuilder builder, int playercount)
         {
             playersLeft -= 1;
+            battleTheme.setParameterByName("Players_Left", playersLeft);
         }
     }
 }
