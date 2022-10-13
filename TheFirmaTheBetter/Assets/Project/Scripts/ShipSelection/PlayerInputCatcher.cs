@@ -14,6 +14,9 @@ namespace ShipSelection
 
         public void OnNavigate(InputAction.CallbackContext callbackContext)
         {
+            if (callbackContext.started == false)
+                return;
+
             Vector2 moveVector = callbackContext.ReadValue<Vector2>();
 
             if (moveVector == Vector2.up)
