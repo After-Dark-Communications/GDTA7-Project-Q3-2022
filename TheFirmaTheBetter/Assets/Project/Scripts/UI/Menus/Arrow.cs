@@ -1,25 +1,46 @@
+using EventSystem;
+using ShipSelection;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace UI.Menus
+public class Arrow : MonoBehaviour
 {
-    public class Arrow : MonoBehaviour
+    private const string triggerName = "SelectArrow";
+
+    private Animator animator;
+
+    //Animator animator;
+
+    //[SerializeField]
+    //const string animationName = "Selected";
+
+    private void Awake()
     {
-        Animator animator;
+        animator = GetComponent<Animator>();   
+    }
 
-        [SerializeField]
-        const string animationName = "Selected";
+    private void OnEnable()
+    {
+        Channels.OnSelectedCategoryChanged += OnCategoryChanged;
+    }
 
-        private void Awake()
-        {
-            animator = GetComponent<Animator>();
-        }
+    private void OnDisable()
+    {
+        Channels.OnSelectedCategoryChanged -= OnCategoryChanged;
+    }
 
-        public void PlaySelectedAnimation()
-        {
-            animator.Play(animationName);
-        }
+    private void OnCategoryChanged(SelectableCollection currentSelectedCollection, int playerNumber)
+    {
+        
+    }
+
+    public void PlaySelectedAnimation()
+    {
+        animator.SetTrigger(triggerName);
+
+        //animator.Play(animationName);
     }
 }
