@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 namespace ShipSelection
 {
@@ -16,6 +17,7 @@ namespace ShipSelection
         private int enabledStatGameObjectIndex;
         [SerializeField]
         private int playerIndex;
+
         private void Awake()
         {
             ShipStatsCollection statsCollection = gameObject.GetComponentInChildren<ShipStatsCollection>();
@@ -54,22 +56,21 @@ namespace ShipSelection
                 default:
                     break;
             }
-
         }
 
         private void SetShipStats(List<ShipStat> shipStatsUI, ShipStats changedShipStats)
         {
-            shipStatsUI[0].SetValueFill(changedShipStats.Speed, 75, 200);
-            shipStatsUI[1].SetValueFill(changedShipStats.MaxHealth, 200, 1000);
-            shipStatsUI[2].SetValueFill(changedShipStats.Handling, 200, 800);
-            shipStatsUI[3].SetValueFill(changedShipStats.EnergyCapacity, 12, 50);
+            shipStatsUI[0].SetValueFill(changedShipStats.Speed, StatBoundries.SPEED_BOUNDRIES);
+            shipStatsUI[1].SetValueFill(changedShipStats.MaxHealth, StatBoundries.HEALTH_BOUNDRIES);
+            shipStatsUI[2].SetValueFill(changedShipStats.Handling, StatBoundries.HANDLING_BOUNDRIES);
+            shipStatsUI[3].SetValueFill(changedShipStats.EnergyCapacity, StatBoundries.ENERGY_CAPACITY_BOUNDRIES);
         }
 
         private void SetWeaponStats(List<WeaponStat> weaponStatsUI, ShipStats changedWeaponStats)
         {
-            weaponStatsUI[0].SetValueFill(changedWeaponStats.Range, 10, 80);
-            weaponStatsUI[1].SetValueFill(changedWeaponStats.FireRate, 1, 10);
-            weaponStatsUI[2].SetValueFill(changedWeaponStats.EnergyCost, 0, 1);
+            weaponStatsUI[0].SetValueFill(changedWeaponStats.Range, StatBoundries.RANGE_BOUNDRIES);
+            weaponStatsUI[1].SetValueFill(changedWeaponStats.FireRate, StatBoundries.FIRE_RATE_BOUNDRIES);
+            weaponStatsUI[2].SetValueFill(changedWeaponStats.EnergyCost, StatBoundries.ENERGY_COST_BOUNDRIES);
         }
 
         private void SetSpecialStats(List<SpecialStat> specialStatsUI, ShipStats changedSpecialStats)
@@ -86,5 +87,7 @@ namespace ShipSelection
             Channels.OnPlayerStatsChanged -= PlayerStatChange;
             Channels.OnEnabledStatGameObject -= SetAsEnableGameObject;
         }
+
+
     }
 }

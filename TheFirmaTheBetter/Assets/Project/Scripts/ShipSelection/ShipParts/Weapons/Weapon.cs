@@ -3,6 +3,7 @@ using Pooling;
 using Projectiles;
 using ShipParts.Ship;
 using ShipSelection.ShipBuilders.ConnectionPoints;
+using System;
 using System.Collections;
 using UnityEngine;
 using Util;
@@ -28,6 +29,11 @@ namespace ShipParts.Weapons
         private bool canShoot;
 
         private ButtonStates currentFireButtonState = ButtonStates.NONE;
+
+        private void Awake()
+        {
+            CalculateHighestAndLowest();
+        }
 
         protected override void Setup()
         {
@@ -55,7 +61,7 @@ namespace ShipParts.Weapons
                 return;
 
             if (currentFireButtonState == ButtonStates.STARTED || currentFireButtonState == ButtonStates.PERFORMED)
-                FireWeapon();    
+                FireWeapon();
         }
 
         private void OnChangeFireMode(bool newValue)
@@ -163,6 +169,14 @@ namespace ShipParts.Weapons
         public override PartData GetData()
         {
             return weaponData;
+        }
+
+        protected override void CalculateHighestAndLowest()
+        {
+            base.CalculateHighestAndLowest();
+            StatBoundries.SetHighestAndLowest(weaponData.FireRate, ref StatBoundries.FIRE_RATE_BOUNDRIES);
+            StatBoundries.SetHighestAndLowest(weaponData.Range, ref StatBoundries.RANGE_BOUNDRIES);
+            StatBoundries.SetHighestAndLowest(weaponData.EnergyCost, ref StatBoundries.ENERGY_COST_BOUNDRIES);
         }
     }
 }

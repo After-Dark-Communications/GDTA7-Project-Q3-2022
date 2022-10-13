@@ -31,6 +31,12 @@ namespace ShipParts
         protected InputDevice myInputDevice { get; private set; }
         protected ShipCollision thisCollision { get; private set; }
 
+        private void Awake()
+        {
+            CalculateHighestAndLowest();
+        }
+
+
         /// <summary>Sets the events and any other things that the part needs</summary>
         protected abstract void Setup();
 
@@ -44,6 +50,8 @@ namespace ShipParts
             thisCollision = shipCollision;
             Setup();
         }
+
+        protected virtual void CalculateHighestAndLowest() { }
 
         public ConnectionPointsCollection ConnectionPointCollection => connectionPointCollection;
     }

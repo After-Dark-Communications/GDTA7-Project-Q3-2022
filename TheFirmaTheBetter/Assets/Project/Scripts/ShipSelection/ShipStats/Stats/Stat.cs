@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Util;
 
 namespace ShipSelection.Stats
 {
@@ -13,11 +14,11 @@ namespace ShipSelection.Stats
         [SerializeField]
         private TMP_Text statName;
 
-        public void SetValueFill(float value, float minValue, float maxValue)
+        public void SetValueFill(float value, float[] boundries)
         {
             if (statValueFill != null)
             {
-                float statPercent = (value - minValue) / (maxValue - minValue);
+                float statPercent = (value - boundries[StatBoundries.lowestIndex]) / (boundries[StatBoundries.higestIndex] - boundries[StatBoundries.lowestIndex]);
                 float divisionPercent = 1f / statBarDivisions;
                 int barsToFill = (int)(statPercent / divisionPercent) + 1;
                 statValueFill.fillAmount = divisionPercent * barsToFill;

@@ -74,7 +74,7 @@ namespace ShipSelection
         {
             for (int i = 0; i <= selectionCollections.Count; i++)
             {
-                buttonLabels[i].SetText(selectionCollections[currentSelectedCollectionIndex].Selectables[i].Part.name);
+                buttonLabels[i].SetText(selectionCollections[currentSelectedCollectionIndex].Selectables[i].Part.GetData().PartName);
             }
         }
 
