@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c6cfbd28a22af44a7461704b0bfe8b, type: 3}
   m_Name: Flamethrower
   m_EditorClassIdentifier: 
+  partName: Flamethrower
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 0
   weaponName: Flamethrower
