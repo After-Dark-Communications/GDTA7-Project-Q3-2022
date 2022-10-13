@@ -177,10 +177,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1532577874546007182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5b13b8195075214e915e8ce59a4dff1, type: 3}
+  m_Script: {fileID: 11500000, guid: e26f2374004e5dc42bebf96a2455b37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupLiveTime: 1
+  pickupLiveTime: 3
+  healthIncreaseAmount: 100
 --- !u!4 &4484618174682411051 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7010246694102920486, guid: 912c85f82f88e2c4a9d135f475a27ea2,

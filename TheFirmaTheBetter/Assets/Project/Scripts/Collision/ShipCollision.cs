@@ -53,11 +53,7 @@ namespace Collisions
             {
                 HandleHitByOtherShip(objectThatHit as ShipCollision, shipStats);
             }
-            
-            if (objectThatHit is Pickup)
-            {
-                HandleHitByPickup(objectThatHit as Pickup);
-            }
+
         }
 
         private void HandleHitByOtherShip(ShipCollision shipCollision, ShipStats collisionShipStats)
@@ -96,10 +92,5 @@ namespace Collisions
             projectileThatHit.DestroySelf();
         }
 
-        private void HandleHitByPickup (Pickup pickupThatHit)
-        {
-            Debug.Log("Pickup was hit");
-            pickupThatHit.DestroySelf();
-        }
     }
 }

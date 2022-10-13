@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7010246694102920486}
-  - component: {fileID: 2866893247300224993}
   - component: {fileID: 7233794386608959149}
   m_Layer: 0
   m_Name: PickupTemplatePrefab
@@ -33,19 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2866893247300224993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5346117133134250371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5b13b8195075214e915e8ce59a4dff1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickupLiveTime: 3
 --- !u!65 &7233794386608959149
 BoxCollider:
   m_ObjectHideFlags: 0

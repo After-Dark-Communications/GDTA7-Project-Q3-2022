@@ -12,20 +12,26 @@ public abstract class Pickup : MonoBehaviour, ICollidable
 
     private TimeTracker timeTrack;
 
-
+    
     private void OnTriggerEnter(Collider other)
     {
         ICollidable collisionObject = other.GetComponentInParent<ICollidable>();
 
-        if (collisionObject != null)
-        {
-            //if (collisionObject is Ship)
-            //    return;
+        if (collisionObject is null)
+            return;
 
-            //impactSpawner.SpawnImpactHitPrefab();
-            collisionObject.HandleCollision(this, null);
+        ShipBuilder shipBuilder = other.GetComponentInParent<ShipBuilder>();
+
+        if (shipBuilder is null)
+            return ;
+
+
+        //impactSpawner.SpawnImpactHitPrefab();
+        //collisionObject.HandleCollision(this, null);
+        // HandleCollision(collisionObject, null);
+        PickUpAction(shipBuilder);
             Debug.Log("Collision");
-        }
+        
     }
     public void DestroySelf()
     {
@@ -34,17 +40,24 @@ public abstract class Pickup : MonoBehaviour, ICollidable
         Debug.Log("Destroy called");
     }
 
+    // to handle collisions with other things
     public void HandleCollision<T1>(T1 objectThatHit, ShipStats shipStats) where T1 : ICollidable
     {
+
         if (objectThatHit is ShipCollision)
         {
             Debug.Log("Ship collision");
-            PickUpAction();
+           
+           
+           // PickUpAction(shipCollision);
         }
         //throw new System.NotImplementedException();
     }
 
-    protected abstract void PickUpAction();
+    public virtual void PickUpAction(ShipBuilder shipBuilder) {
+
+        DestroySelf();
+    }
     private void Awake()
     {
         timeTrack = new TimeTracker(pickupLiveTime);
@@ -62,7 +75,7 @@ public abstract class Pickup : MonoBehaviour, ICollidable
         {
             return;
         }
-       // DestroySelf();
+       //DestroySelf();
     }
 
 

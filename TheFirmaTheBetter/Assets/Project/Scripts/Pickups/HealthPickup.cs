@@ -1,18 +1,16 @@
+using EventSystem;
+using ShipParts.Ship;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class HealthPickup : Pickup
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private int healthIncreaseAmount = 0;
+    public override void PickUpAction(ShipBuilder shipBuilder)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Channels.OnPlayerHealed?.Invoke(healthIncreaseAmount, shipBuilder.PlayerNumber);
+        base.PickUpAction(shipBuilder);
     }
 }
