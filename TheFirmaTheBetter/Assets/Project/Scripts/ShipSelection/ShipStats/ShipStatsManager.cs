@@ -63,14 +63,13 @@ namespace ShipSelection
             shipStatsUI[1].SetValueFill(changedShipStats.MaxHealth, 200, 1000);
             shipStatsUI[2].SetValueFill(changedShipStats.Handling, 200, 800);
             shipStatsUI[3].SetValueFill(changedShipStats.EnergyCapacity, 12, 50);
-
         }
 
         private void SetWeaponStats(List<WeaponStat> weaponStatsUI, ShipStats changedWeaponStats)
         {
-            weaponStatsUI[0].StatValue.text = changedWeaponStats.Range.ToString();
-            weaponStatsUI[1].StatValue.text = changedWeaponStats.FireRate.ToString();
-            weaponStatsUI[2].StatValue.text = changedWeaponStats.EnergyCost.ToString();
+            weaponStatsUI[0].SetValueFill(changedWeaponStats.Range, 10, 80);
+            weaponStatsUI[1].SetValueFill(changedWeaponStats.FireRate, 1, 10);
+            weaponStatsUI[2].SetValueFill(changedWeaponStats.EnergyCost, 0, 1);
         }
 
         private void SetSpecialStats(List<SpecialStat> specialStatsUI, ShipStats changedSpecialStats)
