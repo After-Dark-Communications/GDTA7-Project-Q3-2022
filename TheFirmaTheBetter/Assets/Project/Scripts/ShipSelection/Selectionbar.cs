@@ -1,4 +1,6 @@
-using Util;
+using Assets.Project.Scripts.ShipSelection;
+using EventSystem;
+using Helper;
 using ShipParts;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,12 +8,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UI.Menus;
 
 namespace ShipSelection
 {
     public class Selectionbar : MonoBehaviour
     {
+        [SerializeField]
+        private ButtonSelectionManager buttonSelectionManager;
+
         private PlayerSelectionScreensData selectionScreensData;
 
         private List<SelectableCollection> selectionCollections = new List<SelectableCollection>();
@@ -21,6 +25,8 @@ namespace ShipSelection
         private List<TMP_Text> buttonLabels = new List<TMP_Text>();
 
         private int currentSelectedCollectionIndex = 0;
+
+        private int playerNumber;
 
         private void Awake()
         {
@@ -41,18 +47,27 @@ namespace ShipSelection
             UpdateLabelTexts();
         }
 
+        private void Start()
+        {
+            playerNumber = GetComponentInParent<PlayerSelectionScreen>().PlayerNumber;
+        }
+
         public void OnNavigate_Up()
         {
             currentSelectedCollectionIndex = ListLooper.SelectPrevious(selectionCollections, currentSelectedCollectionIndex);
-            PlayArrowAnimation(arrowsUI[0]);
             UpdateLabelTexts();
+            buttonSelectionManager.UpdateButtons(this);
+            Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
+            Channels.OnNavigateUp?.Invoke();
         }
 
         public void OnNavigate_Down()
         {
             currentSelectedCollectionIndex = ListLooper.SelectNext(selectionCollections, currentSelectedCollectionIndex);
-            PlayArrowAnimation(arrowsUI[1]);
             UpdateLabelTexts();
+            buttonSelectionManager.UpdateButtons(this);
+            Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
+            Channels.OnNavigateDown?.Invoke();
         }
 
         private void UpdateLabelTexts()
@@ -66,18 +81,16 @@ namespace ShipSelection
         public void SetSelectedOptionIndex(int index)
         {
             CurrentSelectedCollection.CurrentSelectedIndex = index;
+            buttonSelectionManager.UpdateButtons(this);
         }
 
         public Part GetCurrentSelectedPart()
         {
+            buttonSelectionManager.UpdateButtons(this);
             return CurrentSelectedCollection.Selectables[CurrentSelectedCollection.CurrentSelectedIndex].Part;
         }
 
-        public void PlayArrowAnimation(Arrow arrow)
-        {
-            arrow.PlaySelectedAnimation();
-        }
-
+        public List<SelectableCollection> SelectionCollections => selectionCollections;
         public SelectableCollection CurrentSelectedCollection => selectionCollections[currentSelectedCollectionIndex];
         public int CurrentSelectedIndex { get => currentSelectedCollectionIndex; }
     }

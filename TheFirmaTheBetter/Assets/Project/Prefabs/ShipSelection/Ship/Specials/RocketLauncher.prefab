@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3756186769032662959}
   - component: {fileID: 4806988313676739314}
   - component: {fileID: 3245390669650987047}
+  - component: {fileID: 8266312031327916527}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -98,6 +99,26 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &8266312031327916527
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7456877875575661198}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 56fa41124127bce428abdc10c4549c20, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1242998446291886379
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -164,6 +185,11 @@ PrefabInstance:
     - target: {fileID: 200863039357339481, guid: 0bbb866e23ccea84eb218df3fad703b9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 306091963918099751, guid: 0bbb866e23ccea84eb218df3fad703b9,
+        type: 3}
+      propertyPath: animators.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1380138949199003646, guid: 0bbb866e23ccea84eb218df3fad703b9,

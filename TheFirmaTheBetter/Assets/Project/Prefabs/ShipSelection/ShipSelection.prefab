@@ -4052,6 +4052,7 @@ GameObject:
   - component: {fileID: 5996761019903992932}
   - component: {fileID: 5996761019903992935}
   - component: {fileID: 5996761019903992934}
+  - component: {fileID: 3943846269499694615}
   m_Layer: 5
   m_Name: SelectionBar
   m_TagString: Untagged
@@ -4121,6 +4122,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0968ef1c504da548925fff830147d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonSelectionManager: {fileID: 3943846269499694615}
+--- !u!114 &3943846269499694615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5996761019903992933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed70b5ed61b3b704ab3659422aa6f97f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5996761021194579262
@@ -4330,7 +4344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SendPointerHoverToParent: 1
   m_MoveRepeatDelay: 0.5
-  m_MoveRepeatRate: 0.1
+  m_MoveRepeatRate: 1
   m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: b2fe8162ea4e15740baa4892024c043b,
     type: 3}
@@ -6078,6 +6092,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 923567717063007068}
+  - component: {fileID: 5916235631186995261}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -6107,6 +6122,18 @@ RectTransform:
   m_AnchoredPosition: {x: 10, y: -7.8}
   m_SizeDelta: {x: 114, y: 25.47}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &5916235631186995261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8524514490847952306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb9bfc4892c93c044bb3fa8f365fff25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8536450761756174491
 GameObject:
   m_ObjectHideFlags: 0
@@ -8097,6 +8124,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SelectableOption1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645492411722385088, guid: e8bfe44930b3ba04581dd5c55a76c2d2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645492411722385088, guid: e8bfe44930b3ba04581dd5c55a76c2d2,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5645492411722385088, guid: e8bfe44930b3ba04581dd5c55a76c2d2,
         type: 3}
