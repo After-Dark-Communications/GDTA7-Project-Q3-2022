@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   projectileSpeed: 60
-  armingTime: 0.2
+  armingTime: 1
   isDoT: 0
   spawnedObjectOnImpact: {fileID: 0}
   amountToSpawn: 0
