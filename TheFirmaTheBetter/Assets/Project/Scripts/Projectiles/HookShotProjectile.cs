@@ -19,7 +19,7 @@ namespace Projectiles
         private Rigidbody _firerer;
 
         private float _desiredSegmentLength = 0.25f;//must be positive
-        private float  _initialSegmentLength = 1f, _currentSegmentLength = 1f;
+        private float _initialSegmentLength = 0.01f, _currentSegmentLength = 0.01f;
         private Vector3 _ropeDirection;
 
         private LineRenderer _lineRenderer;
@@ -50,15 +50,17 @@ namespace Projectiles
             if (armed == false)
                 return;
 
+            //new target got
             ShipBuilder shipBuilder = other.gameObject.GetComponentInParent<ShipBuilder>();
-
             if (shipBuilder == null)
                 return;
-
+            //set up rope
+            transform.parent.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             //joint.connectedBody = _firerer;
             target = shipBuilder;
             Vector3 ropeStart = _firerer.position;
             Vector3 diff = (_firerer.position - target.transform.parent.position);
+            diff.y = 0;//prevent height flaws
             _initialSegmentLength = Mathf.Abs(diff.magnitude) / _segmentCount;
             _currentSegmentLength = _initialSegmentLength;
             for (int i = 0; i < _segmentCount; i++)
@@ -66,6 +68,8 @@ namespace Projectiles
                 _ropeSegments.Add(new RopeSegment(ropeStart));
                 ropeStart -= diff.normalized * _currentSegmentLength;
             }
+            target.transform.parent.position = _ropeSegments[_segmentCount - 1].CurrentPos;
+            transform.parent.GetChild(1)?.gameObject.SetActive(false);
             //_ropeSegments[^1] = new RopeSegment(_firerer.position);
 
         }
@@ -149,7 +153,27 @@ namespace Projectiles
                 ApplyConstraints();
             }
         }
+        private void SimulateUpdate()
+        {
+            _lineRenderer.positionCount = _segmentCount;
 
+            //simulate movements
+            for (int i = 0; i < _segmentCount; i++)
+            {
+                RopeSegment thisSegment = _ropeSegments[i];
+                Vector3 velocity = thisSegment.CurrentPos - thisSegment.OldPos;
+                thisSegment.OldPos = thisSegment.CurrentPos;
+                thisSegment.CurrentPos += velocity;
+                thisSegment.CurrentPos += _ropeDirection * Time.deltaTime;
+                _ropeSegments[i] = thisSegment;
+
+            }
+            //apply constraints
+            for (int i = 0; i < _constraintSimulations; i++)
+            {
+                ApplyConstraints();
+            }
+        }
         private void ApplyConstraints()
         {
             //first segment is always connected to transform
