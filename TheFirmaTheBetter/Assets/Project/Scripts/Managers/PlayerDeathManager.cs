@@ -43,7 +43,7 @@ namespace Managers
                         ResultsManager.Instance.AddResult(playerStatistics);
                     }
                 }
-
+                Channels.OnGameOver?.Invoke();
                 SceneSwitchManager.SwitchToNextScene();
             }
         }
