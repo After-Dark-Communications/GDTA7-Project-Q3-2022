@@ -25,17 +25,12 @@ public abstract class Pickup : MonoBehaviour, ICollidable
         if (shipBuilder is null)
             return ;
 
-
-        //impactSpawner.SpawnImpactHitPrefab();
-        //collisionObject.HandleCollision(this, null);
-        // HandleCollision(collisionObject, null);
         PickUpAction(shipBuilder);
             Debug.Log("Collision");
         
     }
     public void DestroySelf()
     {
-        //throw new System.NotImplementedException();
         Destroy(this.gameObject);
         Debug.Log("Destroy called");
     }
@@ -44,14 +39,12 @@ public abstract class Pickup : MonoBehaviour, ICollidable
     public void HandleCollision<T1>(T1 objectThatHit, ShipStats shipStats) where T1 : ICollidable
     {
 
-        if (objectThatHit is ShipCollision)
-        {
-            Debug.Log("Ship collision");
-           
-           
-           // PickUpAction(shipCollision);
-        }
-        //throw new System.NotImplementedException();
+        //if (objectThatHit is ShipCollision)
+        //{
+        //    Debug.Log("Ship collision");
+
+        //}
+
     }
 
     public virtual void PickUpAction(ShipBuilder shipBuilder) {

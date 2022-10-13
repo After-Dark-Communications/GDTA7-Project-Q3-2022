@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 5346117133134250371, guid: 912c85f82f88e2c4a9d135f475a27ea2,
         type: 3}
       propertyPath: m_Name
-      value: pickup_Shield
+      value: pickup_Energy
       objectReference: {fileID: 0}
     - target: {fileID: 7010246694102920486, guid: 912c85f82f88e2c4a9d135f475a27ea2,
         type: 3}
@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupLiveTime: 5
+  energyIncreaseAmount: 10
 --- !u!4 &7945081097232712847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7010246694102920486, guid: 912c85f82f88e2c4a9d135f475a27ea2,
