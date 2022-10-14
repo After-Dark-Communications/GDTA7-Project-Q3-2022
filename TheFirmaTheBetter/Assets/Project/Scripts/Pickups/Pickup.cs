@@ -4,6 +4,7 @@ using UnityEngine;
 using Pickups;
 using Collisions;
 using ShipParts.Ship;
+using EventSystem;
 
 public abstract class Pickup : MonoBehaviour, ICollidable
 {
@@ -31,21 +32,13 @@ public abstract class Pickup : MonoBehaviour, ICollidable
     }
     public void DestroySelf()
     {
+        Channels.OnPickupDestroyed?.Invoke();
         Destroy(this.gameObject);
         Debug.Log("Destroy called");
     }
 
     // to handle collisions with other things
-    public void HandleCollision<T1>(T1 objectThatHit, ShipStats shipStats) where T1 : ICollidable
-    {
-
-        //if (objectThatHit is ShipCollision)
-        //{
-        //    Debug.Log("Ship collision");
-
-        //}
-
-    }
+    public void HandleCollision<T1>(T1 objectThatHit, ShipStats shipStats) where T1 : ICollidable { }
 
     public virtual void PickUpAction(ShipBuilder shipBuilder) {
 
@@ -64,7 +57,7 @@ public abstract class Pickup : MonoBehaviour, ICollidable
         {
             return;
         }
-       DestroySelf();
+      DestroySelf();
     }
 
 
