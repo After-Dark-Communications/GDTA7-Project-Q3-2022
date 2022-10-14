@@ -51,6 +51,8 @@ namespace EventSystem
         public delegate void NavigateUp();
         public delegate void NavigateDown();
         public delegate void GameOver();
+        public delegate void DisableEngine();
+        public delegate void EnableEngine();
 
         public static ChangeFireMode OnChangeFireMode;
         public static EnergyUsed OnEnergyUsed;
@@ -75,6 +77,8 @@ namespace EventSystem
         public static NavigateUp OnNavigateUp;
         public static NavigateDown OnNavigateDown;
         public static GameOver OnGameOver;
+        public static DisableEngine OnDisableEngine;
+        public static EnableEngine OnEnableEngine;
     }
 
 }

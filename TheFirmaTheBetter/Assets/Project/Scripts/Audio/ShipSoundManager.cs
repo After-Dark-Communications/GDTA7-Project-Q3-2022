@@ -79,5 +79,15 @@ namespace Audio
             }
         }
 
+        private void DisableEngine()
+        {
+            engineEmitter.Stop();
+        }
+
+        private void EnableEngine()
+        {
+            engineEmitter.Play();
+        }
+
     }
 }
