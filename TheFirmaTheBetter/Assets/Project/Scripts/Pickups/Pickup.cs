@@ -55,11 +55,7 @@ public abstract class Pickup : MonoBehaviour, ICollidable
     {
         timeTrack = new TimeTracker(pickupLiveTime);
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()
@@ -68,7 +64,7 @@ public abstract class Pickup : MonoBehaviour, ICollidable
         {
             return;
         }
-       //DestroySelf();
+       DestroySelf();
     }
 
 
