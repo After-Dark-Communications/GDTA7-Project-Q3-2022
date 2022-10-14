@@ -1,4 +1,5 @@
 using Projectiles;
+using ShipParts.Engines;
 using ShipParts.Ship;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,17 +19,18 @@ namespace Projectiles
         //private Rigidbody firerer;
         private Rigidbody _firerer;
 
-        private float _desiredSegmentLength = .25f;//must be positive
+        private const float _desiredSegmentLength = .25f;//must be positive
         private float _initialSegmentLength = 1f, _currentSegmentLength = 1f;
-        private Vector3 _ropeDirection;
+        private Vector3 _ropeGravity;
+
 
         private LineRenderer _lineRenderer;
         public RopeNode[] _ropeSegments;
-        private const float _toDesiredLengthSpeed = 2f;
         private const int _segmentCount = 35;
         private const float _lineWidth = 0.1f;
         private const float _rotateTime = 10f;
-        private const int _constraintSimulations = 50;//higher should get better results
+        private const float _stepTime = 0.01f;
+        private const int _constraintSimulations = 100;//higher should get better results
         private const float _pullDelay = 1f;//should be less than HookConnectedTime
 
         private void Awake()
@@ -65,6 +67,7 @@ namespace Projectiles
             _initialSegmentLength = Mathf.Abs(diff.magnitude) / _segmentCount;
             _currentSegmentLength = _initialSegmentLength;
             //set up ropenodes
+            _lineRenderer.positionCount = _segmentCount;
             _ropeSegments = new RopeNode[_segmentCount];
             for (int i = 0; i < _segmentCount; i++)
             {
@@ -74,9 +77,8 @@ namespace Projectiles
             target.transform.parent.position = _ropeSegments[_segmentCount - 1].position;
             transform.parent.GetChild(1)?.gameObject.SetActive(false);
             //_ropeSegments[^1] = new RopeSegment(_firerer.position);
-            _ropeDirection = -(_firerer.position - target.transform.parent.position).normalized;
-            _ropeDirection.y = 0;
-
+            _ropeGravity = -(_firerer.position - target.transform.parent.position).normalized;
+            _ropeGravity.y = 0;
         }
 
         private void Update()
@@ -107,6 +109,13 @@ namespace Projectiles
                 ApplyVerletConstraints();
             }
             DrawRope();
+            Vector3 lookPos = _firerer.position;//_ropeSegments[_segmentCount - 2].CurrentPos;
+            lookPos.y = 0;
+            Rigidbody targetRigidbody = target.transform.parent.GetComponent<Rigidbody>();
+            target.transform.parent.rotation = Quaternion.Lerp(target.transform.parent.rotation, Quaternion.LookRotation(lookPos), _rotateTime * Time.deltaTime);
+            //adjust position of attached object
+            //TODO: change this to use rigidbody for collisions
+            target.transform.parent.position = _ropeSegments[^1].position;
         }
 
         private void LateUpdate()
@@ -115,12 +124,6 @@ namespace Projectiles
             { return; }
 
             //lerp rotation of attached object
-            Vector3 lookPos = _firerer.position;//_ropeSegments[_segmentCount - 2].CurrentPos;
-            lookPos.y = 0;
-            target.transform.parent.rotation = Quaternion.Lerp(target.transform.parent.rotation, Quaternion.LookRotation(lookPos), _rotateTime * Time.deltaTime);
-            //adjust position of attached object
-            //TODO: change this to use rigidbody for collisions
-            target.transform.parent.position = _ropeSegments[^1].position;
         }
 
         public void ArmHook()
@@ -136,36 +139,21 @@ namespace Projectiles
             armed = true;
         }
 
-        //private void FollowHookShotWithTarget()
-        //{
-        //    if (target == null)
-        //        return;
-        //
-        //    //Vector3 dir = (_firerer.position - target.transform.parent.position).normalized;//-_firerer.transform.forward;//
-        //    //dir.y = 0;
-        //    //Debug.Break();
-        //    //Debug.DrawLine(_firerer.position, (_firerer.position + dir)*10, Color.red);
-        //    Debug.DrawRay(_firerer.position, _ropeDirection * 10, Color.red);
-        //    DrawRope();
-        //}
-
-
         private void SimulateVerlet()
         {
+            //original source https://toqoz.fyi/game-rope.html
             for (int i = 0; i < _ropeSegments.Length; i++)
             {
                 RopeNode node = _ropeSegments[i];
-                Debug.Log($"node[{i}] prev{node.prevPosition}, cur{node.position}");
                 StepVerlet(node);
             }
-            Debug.Log("----------");
 
             void StepVerlet(RopeNode node)
             {
                 // NOTE: cur_pos - old_pos is not actual velocity.  To calculate real velocity, use (cur_pos - old_pos) / dt
-                float deltaTime = Time.fixedDeltaTime;
+                float deltaTime = _stepTime;//Time.fixedDeltaTime;
                 Vector3 temp = node.position;
-                node.position += (node.position - node.prevPosition) + _ropeDirection * deltaTime * deltaTime;
+                node.position += (node.position - node.prevPosition) + _ropeGravity * (deltaTime * deltaTime);
                 //Debug.DrawRay(node.position, (node.position - node.prevPosition).normalized * 2f, Color.green);
                 node.prevPosition = temp;
             }
@@ -208,61 +196,7 @@ namespace Projectiles
                 node2.position -= translate;
             }
         }
-        /*
-        private void Simulate()
-        {
-            _lineRenderer.positionCount = _segmentCount;
 
-            //simulate movements
-            for (int i = 0; i < _segmentCount; i++)
-            {
-                RopeNode thisSegment = _ropeSegments[i];
-                Vector3 velocity = thisSegment.position - thisSegment.prevPosition;
-                thisSegment.prevPosition = thisSegment.position;
-                thisSegment.position += velocity;
-                thisSegment.position += _ropeDirection * Time.fixedDeltaTime;
-                _ropeSegments[i] = thisSegment;
-
-            }
-            //apply constraints
-            for (int i = 0; i < _constraintSimulations; i++)
-            {
-                ApplyConstraints();
-            }
-        }
-        private void ApplyConstraints()
-        {
-            //first segment is always connected to transform
-            RopeNode firstSegment = _ropeSegments[0];
-            firstSegment.position = _firerer.position;
-            _ropeSegments[0] = firstSegment;
-
-            //all other segments will be within a certain distance to it
-            for (int i = 0; i < _segmentCount - 1; i++)
-            {
-                RopeNode segmentStart = _ropeSegments[i];
-                RopeNode segmentEnd = _ropeSegments[i + 1];
-
-                float dist = (segmentStart.position - segmentEnd.position).magnitude;
-                float error = dist - _currentSegmentLength;
-                Vector3 changeDir = (firstSegment.position - segmentEnd.position).normalized;
-                Vector3 changeAmount = changeDir * error;
-
-                if (i != 0)
-                {
-                    segmentStart.position -= changeAmount * 0.5f;
-                    _ropeSegments[i] = segmentStart;
-                    segmentEnd.position += changeAmount * 0.5f;
-                    _ropeSegments[i + 1] = segmentEnd;
-                }
-                else
-                {
-                    segmentEnd.position += changeAmount;
-                    _ropeSegments[i + 1] = segmentEnd;
-                }
-            }
-        }
-        */
         private void DrawRope()
         {
             Vector3[] ropePositions = new Vector3[_segmentCount];
@@ -274,6 +208,7 @@ namespace Projectiles
             //Debug.Break();
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             if (!Application.isPlaying)
@@ -294,17 +229,16 @@ namespace Projectiles
                 Gizmos.DrawLine(_ropeSegments[i].position, _ropeSegments[i + 1].position);
             }
         }
+#endif
+    }
+    public class RopeNode
+    {
+        public Vector3 position, prevPosition;
 
-        public class RopeNode
+        public RopeNode(Vector3 pos)
         {
-            //original source https://toqoz.fyi/game-rope.html
-            public Vector3 position, prevPosition;
-
-            public RopeNode(Vector3 pos)
-            {
-                position = pos;
-                prevPosition = pos;
-            }
+            position = pos;
+            prevPosition = pos;
         }
     }
 }
