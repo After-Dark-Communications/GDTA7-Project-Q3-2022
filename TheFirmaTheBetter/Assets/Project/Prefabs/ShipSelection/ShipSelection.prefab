@@ -4256,6 +4256,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5996761019903992932}
     m_Modifications:
+    - target: {fileID: 1623654251352389688, guid: e8bfe44930b3ba04581dd5c55a76c2d2,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3247694841142472717, guid: e8bfe44930b3ba04581dd5c55a76c2d2,
         type: 3}
       propertyPath: m_Pivot.x

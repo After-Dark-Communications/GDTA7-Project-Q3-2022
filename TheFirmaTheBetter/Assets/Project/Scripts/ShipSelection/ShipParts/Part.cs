@@ -13,7 +13,7 @@ namespace ShipParts
     public abstract class Part : MonoBehaviour
     {
         [SerializeField]
-        private Image partIcon;
+        private Sprite partIcon;
         [SerializeField]
         private Vector3 connectionPoint;
         [SerializeField]
@@ -54,5 +54,7 @@ namespace ShipParts
         protected virtual void CalculateHighestAndLowest() { }
 
         public ConnectionPointsCollection ConnectionPointCollection => connectionPointCollection;
+
+        public Sprite PartIcon { get => partIcon; set => partIcon = value; }
     }
 }

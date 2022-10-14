@@ -37,6 +37,8 @@ namespace ShipParts.Engines
                 rootInputHandler.OnPlayerMoveUp.AddListener(MoveUp);
                 rootInputHandler.OnPlayerMoveDown.AddListener(MoveDown);
             }
+            shipRigidBody.drag = thisCollision.GetComponent<ShipResources>().ShipStats.Drag;
+
             //determine unaltered max speed
             _maxSpeed = engineData.Speed / shipRigidBody.drag;
 

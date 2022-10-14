@@ -14,6 +14,8 @@ namespace ShipParts.Ship
 {
     public class ShipStats
     {
+        private const float liniarFactor = 0.06f;
+
         //movement
         private float _speed;
         private float _handling;
@@ -37,7 +39,6 @@ namespace ShipParts.Ship
         private string _specialDescription;
         //body
         private int _totalWeight;
-
         private readonly List<float> _speedModifier;
         private readonly List<float> _handlingModifier;
         private readonly List<float> _dragModifier;
@@ -120,7 +121,15 @@ namespace ShipParts.Ship
             {
                 _totalWeight += weight;
             }
+
+            UpdateDragWithWeight();
+
             Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, this);
+        }
+
+        private void UpdateDragWithWeight()
+        {
+            _drag = _totalWeight * liniarFactor;
         }
 
         /// <summary>Adds to the weight modifier list.</summary>

@@ -219,7 +219,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14932
+  m_Name: pb_Mesh-2728
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -383,7 +383,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14892
+  m_Name: pb_Mesh-2688
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -704,7 +704,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14878
+  m_Name: pb_Mesh-2674
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -931,7 +931,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   m_LocalRotation: {x: 0.60876137, y: 0, z: 0, w: 0.7933534}
-  m_LocalPosition: {x: 0, y: 43.1, z: -13.6}
+  m_LocalPosition: {x: 0, y: 61.2, z: -18.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1093,7 +1093,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14814
+  m_Name: pb_Mesh-2610
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1317,6 +1317,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player Ship (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3459444363550364846, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5564145776788515195, guid: 44592b494720b214ca002276217b3676,
         type: 3}
@@ -2592,7 +2597,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-157134
+  m_Name: pb_Mesh-2578
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2756,7 +2761,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14830
+  m_Name: pb_Mesh-2626
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2965,7 +2970,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14798
+  m_Name: pb_Mesh-2594
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3389,7 +3394,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14918
+  m_Name: pb_Mesh-2714
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4216,6 +4221,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Ship (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3459444363550364846, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5564145776788515195, guid: 44592b494720b214ca002276217b3676,
         type: 3}
       propertyPath: cam
@@ -4241,6 +4251,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1629919157}
     m_Modifications:
+    - target: {fileID: 1235507435968844259, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457565411113786097, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099476112275032889, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099476112275032889, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -23.523
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099476112275032889, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099476112275032889, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099476112275032889, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 7.337
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099476112275032889, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3459444363550364845, guid: 44592b494720b214ca002276217b3676,
         type: 3}
       propertyPath: m_RootOrder
@@ -4300,6 +4350,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player Ship
+      objectReference: {fileID: 0}
+    - target: {fileID: 3459444363550364846, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706519532125869464, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706519532125869464, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 5564145776788515195, guid: 44592b494720b214ca002276217b3676,
         type: 3}
@@ -4692,7 +4757,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14850
+  m_Name: pb_Mesh-2646
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5002,6 +5067,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Ship (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3459444363550364846, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5564145776788515195, guid: 44592b494720b214ca002276217b3676,
         type: 3}
       propertyPath: cam
@@ -5026,7 +5096,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14864
+  m_Name: pb_Mesh-2660
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
