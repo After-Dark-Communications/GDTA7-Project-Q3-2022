@@ -47,7 +47,7 @@ namespace Projectiles
 
         private void OnTriggerEnter(Collider other)
         {
-            if (armed)
+            if (armed == false)
                 return;
 
             ShipBuilder shipBuilder = other.gameObject.GetComponentInParent<ShipBuilder>();
@@ -72,6 +72,7 @@ namespace Projectiles
 
         private void Update()
         {
+            ArmHook();
             if (target == null)
                 return;
             _currentSegmentLength = Mathf.Lerp(_initialSegmentLength, _desiredSegmentLength, -_pullDelay + currentConnectedTime);
