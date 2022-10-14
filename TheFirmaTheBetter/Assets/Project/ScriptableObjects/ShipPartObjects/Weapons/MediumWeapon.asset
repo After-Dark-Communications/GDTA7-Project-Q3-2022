@@ -15,13 +15,14 @@ MonoBehaviour:
   partName: Medium weapon
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 0
-  weaponName: Medium
-  projectilePrefab: {fileID: 8795236707980728124, guid: cffc0c60e9c1c5c4282f1e1ce8ad4a65,
+  projectilePrefab: {fileID: 3994246806297512443, guid: cffc0c60e9c1c5c4282f1e1ce8ad4a65,
     type: 3}
-  armingTime: 0
   fireRate: 4
   amountOfBullets: 1
   energyCost: 1
+  sideSpreadAngle: 5
+  range: 30
+  armingTime: 0
   weaponFireEvent:
     Guid:
       Data1: -689092268
@@ -29,5 +30,3 @@ MonoBehaviour:
       Data3: -363564145
       Data4: -661582402
     Path: event:/Weapons/Weap_Laser
-  sideSpreadAngle: 5
-  range: 30

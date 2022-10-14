@@ -69,7 +69,6 @@ namespace ShipParts
             {
                 shipStats.UpdateStats(selectedPart.GetData() as EngineData, shipBuilder);
             }
-
             if (selectedPart is Core)
             {
                 shipStats.UpdateStats(selectedPart.GetData() as CoreData, shipBuilder);

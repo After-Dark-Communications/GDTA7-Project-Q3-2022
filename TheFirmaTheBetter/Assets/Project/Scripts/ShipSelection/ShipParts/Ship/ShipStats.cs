@@ -31,6 +31,7 @@ namespace ShipParts.Ship
         private float _range;
         private float _fireRate;
         private float _energyCost;
+        private float _dps;
         //special
         private string _specialName;
         private string _specialDescription;
@@ -147,6 +148,7 @@ namespace ShipParts.Ship
             _range = weaponData.Range;
             _fireRate = weaponData.FireRate;
             _energyCost = weaponData.EnergyCost;
+            _dps = weaponData.DPS;
         }
 
         public void UpdateStats(SpecialData specialData)
@@ -165,6 +167,7 @@ namespace ShipParts.Ship
         public float Range { get => _range; }
         public float FireRate { get => _fireRate; }
         public float EnergyCost { get => _energyCost; }
+        public float DPS { get => _dps; }
         public string SpecialName { get => _specialName; }
         public string SpecialDescription { get => _specialDescription; }
         public int TotalWeight { get => _totalWeight; }
