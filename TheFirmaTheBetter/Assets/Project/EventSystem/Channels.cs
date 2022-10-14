@@ -50,6 +50,7 @@ namespace EventSystem
         public delegate void SelectedCategoryChanged(SelectableCollection currentSelectedCollection, int playerNumber);
         public delegate void NavigateUp();
         public delegate void NavigateDown();
+        public delegate void GameOver();
 
         public static ChangeFireMode OnChangeFireMode;
         public static EnergyUsed OnEnergyUsed;
@@ -73,6 +74,7 @@ namespace EventSystem
         public static SelectedCategoryChanged OnSelectedCategoryChanged;
         public static NavigateUp OnNavigateUp;
         public static NavigateDown OnNavigateDown;
+        public static GameOver OnGameOver;
     }
 
 }

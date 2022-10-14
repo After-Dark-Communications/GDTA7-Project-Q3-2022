@@ -1,6 +1,5 @@
 using Assets.Project.Scripts.ShipSelection;
 using EventSystem;
-using Util;
 using ShipParts;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Util;
 
 namespace ShipSelection
 {
@@ -74,7 +74,7 @@ namespace ShipSelection
         {
             for (int i = 0; i <= selectionCollections.Count; i++)
             {
-                buttonLabels[i].SetText(selectionCollections[currentSelectedCollectionIndex].Selectables[i].Part.name);
+                buttonLabels[i].SetText(selectionCollections[currentSelectedCollectionIndex].Selectables[i].Part.GetData().PartName);
             }
         }
 

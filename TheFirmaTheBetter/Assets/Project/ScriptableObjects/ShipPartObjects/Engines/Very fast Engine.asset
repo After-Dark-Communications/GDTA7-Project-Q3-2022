@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4868702006e477a49a667467b553e1f3, type: 3}
   m_Name: Very fast Engine
   m_EditorClassIdentifier: 
+  partName: Very fast engine
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 40
   speed: 200

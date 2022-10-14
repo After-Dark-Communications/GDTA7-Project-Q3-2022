@@ -11,12 +11,14 @@ namespace Audio
         private FMOD.Studio.VCA Master;
         private FMOD.Studio.VCA Music;
         private FMOD.Studio.VCA SFX;
+        private FMOD.Studio.VCA Voice;
 
         private void Awake()
         {
             Master = RuntimeManager.GetVCA("vca:/Master");
             Music = RuntimeManager.GetVCA("vca:/Music");
             SFX = RuntimeManager.GetVCA("vca:/SFX");
+            Voice = RuntimeManager.GetVCA("vca:/Voice");
         }
 
         // Start is called before the first frame update
@@ -25,7 +27,7 @@ namespace Audio
             VolumeSettingsData data = SaveManager.Load<VolumeSettingsData>("volumesettings.aa");
             if (data == null)
             {
-                data = new VolumeSettingsData(1f, 1f, 1f);
+                data = new VolumeSettingsData(1f, 1f, 1f, 1f);
                 SaveManager.Save(data, "volumesettings");
             }
             SetAudioLevels(data);
@@ -36,6 +38,7 @@ namespace Audio
             Master.setVolume(data.MasterVolume);
             Music.setVolume(data.MusicVolume);
             SFX.setVolume(data.SfxVolume);
+            Voice.setVolume(data.VoiceVolume);
         }
     }
 }

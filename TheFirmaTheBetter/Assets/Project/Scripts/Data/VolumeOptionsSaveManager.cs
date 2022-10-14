@@ -11,6 +11,8 @@ namespace Data
         private Slider MusicVolume;
         [SerializeField]
         private Slider SFXVolume;
+        [SerializeField]
+        private Slider VoiceVolume;
 
         private void OnEnable()
         {
@@ -19,7 +21,7 @@ namespace Data
 
         public void SaveSettings()
         {
-            SaveManager.Save(new VolumeSettingsData(MasterVolume.value, MusicVolume.value, SFXVolume.value), "volumesettings");
+            SaveManager.Save(new VolumeSettingsData(MasterVolume.value, MusicVolume.value, SFXVolume.value, VoiceVolume.value), "volumesettings");
         }
 
         public void LoadSettings()
@@ -36,6 +38,7 @@ namespace Data
             MasterVolume.value = volumeSettings.MasterVolume;
             MusicVolume.value = volumeSettings.MusicVolume;
             SFXVolume.value = volumeSettings.SfxVolume;
+            VoiceVolume.value = volumeSettings.VoiceVolume;
         }
     }
 }
