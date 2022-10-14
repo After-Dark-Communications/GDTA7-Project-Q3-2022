@@ -12,11 +12,14 @@ EditorBuildSettings:
     path: Assets/Project/Scenes/MainScenes/ShipSelection.unity
     guid: 47acfe5d1ec8b344884cfdada0a9d5d0
   - enabled: 1
-    path: Assets/Project/Scenes/MainScenes/BattleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Project/Scenes/MainScenes/KOTHScene.unity
+    guid: 7c6cdd3090868ed4d9f59c82b7639e3b
   - enabled: 1
     path: Assets/Project/Scenes/MainScenes/EndScreen.unity
     guid: 5bb2ebf43fed1fc4aa6660145b774187
+  - enabled: 1
+    path: Assets/Project/Scenes/MainScenes/BattleScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: a56b432666ca7e44f9f01db4dc51a606,
       type: 2}
