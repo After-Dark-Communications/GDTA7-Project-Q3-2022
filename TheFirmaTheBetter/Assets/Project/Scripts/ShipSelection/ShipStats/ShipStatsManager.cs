@@ -42,20 +42,10 @@ namespace ShipSelection
             if (playerIndex != shipBuilder.PlayerNumber)
                 return;
 
-            switch (enabledStatGameObjectIndex)
-            {
-                case 0:
-                    SetShipStats(stats.ShipStats, changedShipStats);
-                    break;
-                case 1:
-                    SetWeaponStats(stats.WeaponStats, changedShipStats);
-                    break;
-                case 2:
-                    SetSpecialStats(stats.SpecialStats, changedShipStats);
-                    break;
-                default:
-                    break;
-            }
+            SetShipStats(stats.ShipStats, changedShipStats);
+            SetWeaponStats(stats.WeaponStats, changedShipStats);
+            SetSpecialStats(stats.SpecialStats, changedShipStats);
+
         }
 
         private void SetShipStats(List<ShipStat> shipStatsUI, ShipStats changedShipStats)
@@ -82,13 +72,10 @@ namespace ShipSelection
 
         public int PlayerIndex { get { return playerIndex; } set { playerIndex = value; } }
 
-
-        public void OnDisable()
+        private void OnDestroy()
         {
             Channels.OnPlayerStatsChanged -= PlayerStatChange;
             Channels.OnEnabledStatGameObject -= SetAsEnableGameObject;
         }
-
-
     }
 }
