@@ -18,7 +18,7 @@ namespace Projectiles
         //private Rigidbody firerer;
         private Rigidbody _firerer;
 
-        private float _desiredSegmentLength = 0.25f;//must be positive
+        private float _desiredSegmentLength = .25f;//must be positive
         private float _initialSegmentLength = 1f, _currentSegmentLength = 1f;
         private Vector3 _ropeDirection;
 
@@ -119,7 +119,8 @@ namespace Projectiles
             lookPos.y = 0;
             target.transform.parent.rotation = Quaternion.Lerp(target.transform.parent.rotation, Quaternion.LookRotation(lookPos), _rotateTime * Time.deltaTime);
             //adjust position of attached object
-            target.transform.parent.position = _ropeSegments[_segmentCount - 1].position;
+            //TODO: change this to use rigidbody for collisions
+            target.transform.parent.position = _ropeSegments[^1].position;
         }
 
         public void ArmHook()
@@ -173,7 +174,6 @@ namespace Projectiles
 
         private void ApplyVerletConstraints()
         {
-            //TODO: try without this
             // Distance constraint which reduces iterations, but doesn't handle stretchyness in a natural way.
             RopeNode firstNode = _ropeSegments[0];
             RopeNode lastNode = _ropeSegments[^1];
