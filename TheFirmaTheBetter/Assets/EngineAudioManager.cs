@@ -13,11 +13,10 @@ public class EngineAudioManager : MonoBehaviour
         {
             if (child.GetComponentInChildren<ShipBuilder>())
             {
-                Channels.OnEnableEngine?.Invoke();
             }
             else
             {
-                Channels.OnDisableEngine?.Invoke();
+                Destroy(child.gameObject);
             }
         }
     }
