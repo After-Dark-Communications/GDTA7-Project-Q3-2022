@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90f529c60d49fc4eb422f0393ad8290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partIcon: {fileID: 0}
+  partIcon: {fileID: 21300000, guid: 9921c1871b711d844be43f40234bdcdc, type: 3}
   connectionPoint: {x: 0, y: 0, z: 0}
   connectionPointCollection: {fileID: 5713863767095502496}
   specialData: {fileID: 11400000, guid: 8ce54c5461959264f915ac758bfaf197, type: 2}
@@ -249,8 +249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6813a6918165ae043b8c70cbe3102fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animators:
-  - {fileID: 6210375462286163152}
 --- !u!1001 &9047725084653662568
 PrefabInstance:
   m_ObjectHideFlags: 0
