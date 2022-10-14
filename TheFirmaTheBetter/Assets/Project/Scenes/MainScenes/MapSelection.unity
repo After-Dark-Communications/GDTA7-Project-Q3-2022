@@ -260,6 +260,36 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnRight
       value: 
       objectReference: {fileID: 4798002471896807751}
+    - target: {fileID: 6588761299507713533, guid: d4cadf5c52480a3459f467d9344c8308,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588761299507713533, guid: d4cadf5c52480a3459f467d9344c8308,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2082729765}
+    - target: {fileID: 6588761299507713533, guid: d4cadf5c52480a3459f467d9344c8308,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SwitchToSceneWithIndex
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588761299507713533, guid: d4cadf5c52480a3459f467d9344c8308,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DEBUGSceneSwitcher, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588761299507713533, guid: d4cadf5c52480a3459f467d9344c8308,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588761299507713533, guid: d4cadf5c52480a3459f467d9344c8308,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4cadf5c52480a3459f467d9344c8308, type: 3}
 --- !u!224 &84055842 stripped
@@ -1191,6 +1221,36 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnRight
       value: 
       objectReference: {fileID: 84055843}
+    - target: {fileID: 6588761299507713533, guid: d4cadf5c52480a3459f467d9344c8308,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588761299507713533, guid: d4cadf5c52480a3459f467d9344c8308,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2082729765}
+    - target: {fileID: 6588761299507713533, guid: d4cadf5c52480a3459f467d9344c8308,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SwitchToSceneWithIndex
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588761299507713533, guid: d4cadf5c52480a3459f467d9344c8308,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DEBUGSceneSwitcher, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588761299507713533, guid: d4cadf5c52480a3459f467d9344c8308,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588761299507713533, guid: d4cadf5c52480a3459f467d9344c8308,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4cadf5c52480a3459f467d9344c8308, type: 3}
 --- !u!224 &2440702493358870410 stripped
