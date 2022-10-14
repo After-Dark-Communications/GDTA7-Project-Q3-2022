@@ -20,6 +20,7 @@ namespace Util
         public static float[] FIRE_RATE_BOUNDRIES = new float[2] { defaultValue, defaultValue };
         public static float[] ENERGY_COST_BOUNDRIES = new float[2] { defaultValue, defaultValue };
         public static float[] RANGE_BOUNDRIES = new float[2] { defaultValue, defaultValue };
+        public static float[] DPS_BOUNDRIES = new float[2] { defaultValue, defaultValue };
 
         public static void SetHighestAndLowest(float value, ref float[] currentBoundries)
         {

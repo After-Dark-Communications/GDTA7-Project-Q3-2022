@@ -71,6 +71,7 @@ namespace ShipSelection
             weaponStatsUI[0].SetValueFill(changedWeaponStats.Range, StatBoundries.RANGE_BOUNDRIES);
             weaponStatsUI[1].SetValueFill(changedWeaponStats.FireRate, StatBoundries.FIRE_RATE_BOUNDRIES);
             weaponStatsUI[2].SetValueFill(changedWeaponStats.EnergyCost, StatBoundries.ENERGY_COST_BOUNDRIES);
+            weaponStatsUI[3].SetValueFill(changedWeaponStats.DPS, StatBoundries.DPS_BOUNDRIES);
         }
 
         private void SetSpecialStats(List<SpecialStat> specialStatsUI, ShipStats changedSpecialStats)

@@ -51,7 +51,7 @@ namespace ShipParts.Weapons
 
             if (weaponData != null)
             {
-                projectilesPool = new ObjectPool(weaponData.ProjectilePrefab, 10);
+                projectilesPool = new ObjectPool(weaponData.ProjectilePrefab.gameObject, 10);
             }
         }
 
@@ -177,6 +177,7 @@ namespace ShipParts.Weapons
             StatBoundries.SetHighestAndLowest(weaponData.FireRate, ref StatBoundries.FIRE_RATE_BOUNDRIES);
             StatBoundries.SetHighestAndLowest(weaponData.Range, ref StatBoundries.RANGE_BOUNDRIES);
             StatBoundries.SetHighestAndLowest(weaponData.EnergyCost, ref StatBoundries.ENERGY_COST_BOUNDRIES);
+            StatBoundries.SetHighestAndLowest(weaponData.DPS, ref StatBoundries.DPS_BOUNDRIES);
         }
     }
 }
