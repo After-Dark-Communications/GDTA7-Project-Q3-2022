@@ -44,7 +44,8 @@ namespace Managers
                     }
                 }
                 Channels.OnGameOver?.Invoke();
-                SceneSwitchManager.SwitchToNextScene();
+                // SceneSwitchManager.SwitchToNextScene();
+                SceneSwitchManager.SwitchToSceneWithIndex(5);
             }
         }
 

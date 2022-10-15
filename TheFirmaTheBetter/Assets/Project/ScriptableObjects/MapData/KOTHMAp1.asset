@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f14301244174ea4cb09eb58edf90fec, type: 3}
-  m_Name: SlowBullet
+  m_Script: {fileID: 11500000, guid: 0360a2cb076ce604eaf5a0d1bca5b139, type: 3}
+  m_Name: KOTHMAp1
   m_EditorClassIdentifier: 
-  damage: 150
-  projectileSpeed: 50
-  armingTime: 1
-  isDoT: 0
-  spawnedObjectOnImpact: {fileID: 0}
-  amountToSpawn: 1
+  mapName: Moon Town
+  mapPicture: {fileID: 0}
+  gameMode: KOTH
+  mapSceneIndex: 0
