@@ -54,7 +54,7 @@ namespace Managers
                     timeSinceStart -= Time.deltaTime;
                     if (timeSinceStart == 0)
                     {
-                        // end game
+                        Channels.KingOfTheHill.OnKingOfTheHillEnd?.Invoke();
                     }
                 }
                 else
