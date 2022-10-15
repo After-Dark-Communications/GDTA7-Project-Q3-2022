@@ -13,6 +13,7 @@ namespace EventSystem
         public static InputChannel Input = new InputChannel();
         public static MovementChannel Movement = new MovementChannel();
         public static AnnouncerChannel Announcer = new AnnouncerChannel();
+        public static KingOfTheHillChannel KingOfTheHill = new KingOfTheHillChannel();
 
         public delegate void ChangeFireMode(bool newFireModeValue);
         public delegate void EnergyUsed(int playerNumber, int amount);
@@ -50,7 +51,7 @@ namespace EventSystem
         public delegate void SelectedCategoryChanged(SelectableCollection currentSelectedCollection, int playerNumber);
         public delegate void NavigateUp();
         public delegate void NavigateDown();
-        public delegate void GameOver();;
+        public delegate void GameOver();
 
         public static ChangeFireMode OnChangeFireMode;
         public static EnergyUsed OnEnergyUsed;
