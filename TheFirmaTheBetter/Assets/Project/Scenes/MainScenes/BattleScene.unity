@@ -4376,6 +4376,11 @@ PrefabInstance:
       propertyPath: playerNumber
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8506073912017806675, guid: 44592b494720b214ca002276217b3676,
+        type: 3}
+      propertyPath: PlayEvent
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44592b494720b214ca002276217b3676, type: 3}
 --- !u!4 &1552849514 stripped
@@ -4505,6 +4510,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1629919157}
   - component: {fileID: 1629919156}
+  - component: {fileID: 1629919158}
   m_Layer: 0
   m_Name: ShipSpawner
   m_TagString: Untagged
@@ -4550,6 +4556,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1629919158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629919155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ca588d2e5f4d694eb725ab11563d5fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1642949945
 GameObject:
   m_ObjectHideFlags: 0

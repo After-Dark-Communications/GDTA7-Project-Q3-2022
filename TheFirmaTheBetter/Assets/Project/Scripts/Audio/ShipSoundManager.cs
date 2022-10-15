@@ -41,6 +41,8 @@ namespace Audio
             }
             Channels.Movement.OnShipMove += SetRPM;
             Channels.OnHealthChanged += SetHealth;
+            Channels.OnEnableEngine += EnableEngine;
+            Channels.OnDisableEngine += DisableEngine;
             healthEmitter.SetParameter("Player_Health", 100f);
         }
 
@@ -48,6 +50,8 @@ namespace Audio
         {
             Channels.Movement.OnShipMove -= SetRPM;
             Channels.OnHealthChanged -= SetHealth;
+            Channels.OnEnableEngine -= EnableEngine; 
+            Channels.OnDisableEngine -= DisableEngine;
         }
 
         private void SetRPM(Vector2 movement, int playerNumber)
@@ -59,7 +63,10 @@ namespace Audio
                 {
                     rpm = rpm * -1;
                 }
-                engineEmitter.SetParameter("RPM", rpm * RPMSpeed);
+                if (engineEmitter.IsPlaying())
+                {
+                    engineEmitter.SetParameter("RPM", rpm * RPMSpeed);
+                }
             }
         }
 
@@ -77,6 +84,16 @@ namespace Audio
                     }
                 }
             }
+        }
+
+        private void DisableEngine()
+        {
+            engineEmitter.Stop();
+        }
+
+        private void EnableEngine()
+        {
+            engineEmitter.Play();
         }
 
     }
