@@ -1,3 +1,4 @@
+using Projectiles;
 using UnityEngine;
 
 namespace ShipParts.Weapons
@@ -5,29 +6,25 @@ namespace ShipParts.Weapons
     [CreateAssetMenu(fileName = "Weapon", menuName = "Ship Parts/Weapon")]
     public class WeaponData : PartData
     {
-        [SerializeField]
-        private string weaponName;
+        [Header("Weapon stats")]
 
         [SerializeField]
-        private GameObject projectilePrefab;
-        [SerializeField]
-        private float armingTime;
-        [Header("Weapon stats")]
+        private Projectile projectilePrefab;
+
         [SerializeField]
         [Range(0, 10)]
         [Tooltip("Bullets per second")]
         private float fireRate;
+
         [Range(1, 20)]
         [Tooltip("amountOfBullets")]
         [SerializeField]
-        private float amountOfBullets = 1f;
+        private int amountOfBullets = 1;
+
         [SerializeField]
         [Range(1, 10)]
         [Tooltip("Cost in energy to fire weapon")]
         private int energyCost;
-        [Tooltip("FMOD Event to call when fired")]
-        [SerializeField]
-        private FMODUnity.EventReference weaponFireEvent;
 
         [SerializeField]
         [Range(0, 45)]
@@ -37,17 +34,23 @@ namespace ShipParts.Weapons
         [Range(0, 100)]
         private float range;
 
-        public string WeaponName { get { return weaponName; } }
-        public GameObject ProjectilePrefab { get { return projectilePrefab; } }
+        [SerializeField]
+        private float armingTime;
+
+        [Header("Audio")]
+
+        [Tooltip("FMOD Event to call when fired")]
+        [SerializeField]
+        private FMODUnity.EventReference weaponFireEvent;
+
+        public Projectile ProjectilePrefab { get { return projectilePrefab; } }
         public float FireRate { get { return fireRate; } }
         public float SideSpreadAngle { get { return sideSpreadAngle; } }
         public float Range { get { return range; } }
-
-        public float ArmingTime => armingTime;
-
-        public int EnergyCost => energyCost;
-
-        public float AmountOfBullets => amountOfBullets;
+        public float ArmingTime { get { return armingTime; } }
+        public int EnergyCost { get { return energyCost; } }
+        public int AmountOfBullets{ get { return amountOfBullets; } }
+        public float DPS { get { return ProjectilePrefab.ProjectileData.Damage * FireRate * AmountOfBullets; } }
 
         public FMODUnity.EventReference WeaponFireEvent => weaponFireEvent;
     }

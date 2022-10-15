@@ -376,7 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d771c4318b8b7348887f9b1ab3ab89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partIcon: {fileID: 0}
+  partIcon: {fileID: 21300000, guid: 7a09b74cd6c31a545b174723701cb7c7, type: 3}
   connectionPoint: {x: 0, y: 0, z: 0}
   connectionPointCollection: {fileID: 1983982080160213692}
   weaponData: {fileID: 11400000, guid: 10747bce72c1c3c4bbd84a3ada0dab61, type: 2}

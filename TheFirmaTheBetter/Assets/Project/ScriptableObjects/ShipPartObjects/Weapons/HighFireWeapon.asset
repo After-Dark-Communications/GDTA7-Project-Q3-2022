@@ -15,13 +15,14 @@ MonoBehaviour:
   partName: High fire weapon
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 1
-  weaponName: High fire rate
-  projectilePrefab: {fileID: 8795236707980728124, guid: 1d73750356c4a964f9ed2346c1e9b299,
+  projectilePrefab: {fileID: 3994246806297512443, guid: 1d73750356c4a964f9ed2346c1e9b299,
     type: 3}
-  armingTime: 0
   fireRate: 9
   amountOfBullets: 1
   energyCost: 1
+  sideSpreadAngle: 20
+  range: 40
+  armingTime: 0
   weaponFireEvent:
     Guid:
       Data1: 0
@@ -29,5 +30,3 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  sideSpreadAngle: 20
-  range: 40

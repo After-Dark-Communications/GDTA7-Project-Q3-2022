@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b55b6625c13d0469aa4384c236316c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partIcon: {fileID: 0}
+  partIcon: {fileID: 21300000, guid: 42d29cc69ef655546bb66b77e848e23a, type: 3}
   connectionPoint: {x: 0, y: 0, z: 0}
   connectionPointCollection: {fileID: 8755802607308576700}
   coreData: {fileID: 11400000, guid: e94c3719a5b4ac0488a5c786d77ef053, type: 2}

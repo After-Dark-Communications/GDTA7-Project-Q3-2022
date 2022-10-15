@@ -18,11 +18,33 @@ namespace ShipSelection.Stats
         {
             if (statValueFill != null)
             {
-                float statPercent = (value - boundries[StatBoundries.lowestIndex]) / (boundries[StatBoundries.higestIndex] - boundries[StatBoundries.lowestIndex]);
-                float divisionPercent = 1f / statBarDivisions;
-                int barsToFill = (int)(statPercent / divisionPercent) + 1;
-                statValueFill.fillAmount = divisionPercent * barsToFill;
+                float minValue = boundries[StatBoundries.LowestIndex];
+                float maxValue = boundries[StatBoundries.HigestIndex];
+
+                if (minValue == StatBoundries.DefaultValue || maxValue == StatBoundries.DefaultValue)
+                {
+                    Debug.LogWarning("The highest or lowest values of " + gameObject.name + " weren't calculated");
+                    return;
+                }
+
+                statValueFill.fillAmount = CalculateFillAmount(value, minValue, maxValue);
             }
+        }
+
+        private float CalculateFillAmount(float value,  float minValue, float maxValue)
+        {
+            if (minValue == maxValue && value == minValue)
+            {
+                return 1;
+            }
+
+            float statPercent = (value - minValue) / (maxValue - minValue);
+
+            float divisionPercent = 1f / statBarDivisions;
+            int barsToFill = (int)(statPercent / divisionPercent) + 1;
+
+            return divisionPercent * barsToFill;
+
         }
 
         public TMP_Text StatName { get { return statName; } set { statName = value; } }
