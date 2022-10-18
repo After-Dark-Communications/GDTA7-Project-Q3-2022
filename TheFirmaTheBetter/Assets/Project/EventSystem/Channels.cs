@@ -51,6 +51,8 @@ namespace EventSystem
         public delegate void NavigateUp();
         public delegate void NavigateDown();
         public delegate void GameOver();
+        public delegate void ControllerShemeHidden();
+        public delegate void ControllerShemeShowing();
 
         public delegate void PlayerHealed(int healthIncreaseAmount, int playerNumber);
         public delegate void PickupDestroyed();
@@ -80,6 +82,9 @@ namespace EventSystem
         public static NavigateDown OnNavigateDown;
         public static GameOver OnGameOver;
         public static PickupDestroyed OnPickupDestroyed;
+        public static ControllerShemeShowing OnControllerShemeShowing;
+        public static ControllerShemeHidden OnControllerShemeHidden;
+
     }
 
 }

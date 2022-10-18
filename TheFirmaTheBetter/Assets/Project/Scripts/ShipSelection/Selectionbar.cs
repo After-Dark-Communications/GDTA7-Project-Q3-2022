@@ -1,6 +1,5 @@
 using Assets.Project.Scripts.ShipSelection;
 using EventSystem;
-using Util;
 using ShipParts;
 using System.Collections;
 using System.Collections.Generic;
@@ -97,5 +96,7 @@ namespace ShipSelection
         public List<SelectableCollection> SelectionCollections => selectionCollections;
         public SelectableCollection CurrentSelectedCollection => selectionCollections[currentSelectedCollectionIndex];
         public int CurrentSelectedIndex { get => currentSelectedCollectionIndex; }
+
+        public string CurrentCategoryName => CurrentSelectedCollection.CategoryName;
     }
 }
