@@ -191,6 +191,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1826909774743024754, guid: 0bbb866e23ccea84eb218df3fad703b9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1998868363125186201, guid: 0bbb866e23ccea84eb218df3fad703b9,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -205,6 +210,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Icon
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511957426117066425, guid: 0bbb866e23ccea84eb218df3fad703b9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7637314625727188403, guid: 0bbb866e23ccea84eb218df3fad703b9,
         type: 3}
