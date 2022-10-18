@@ -381,7 +381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e26f2374004e5dc42bebf96a2455b37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupLiveTime: 3
   healthIncreaseAmount: 10
   particleExplosion: {fileID: 0}
 --- !u!4 &4484618174682411051 stripped

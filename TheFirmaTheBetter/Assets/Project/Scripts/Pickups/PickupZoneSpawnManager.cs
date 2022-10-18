@@ -31,14 +31,14 @@ public class PickupZoneSpawnManager: MonoBehaviour
         timeTrack = new TimeTracker(spawnInterval);
         SetSpawnCount(0);
 
-        Channels.OnPickupDestroyed += AdjustSpawnedCoun;
+       // Channels.OnPickupDestroyed += AdjustSpawnedCoun;
     }
     private void OnDisable()
     {
-        Channels.OnPickupDestroyed -= AdjustSpawnedCoun;
+       // Channels.OnPickupDestroyed -= AdjustSpawnedCoun;
     }
 
-    private void AdjustSpawnedCoun()
+    public void AdjustSpawnedCount()
     {
         SetSpawnCount(currentSpawnedCount - 1);
     }

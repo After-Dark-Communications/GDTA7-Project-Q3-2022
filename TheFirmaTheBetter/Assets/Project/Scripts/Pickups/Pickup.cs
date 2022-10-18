@@ -8,12 +8,14 @@ using EventSystem;
 
 public abstract class Pickup : MonoBehaviour, ICollidable
 {
-    [SerializeField]
-    private float pickupLiveTime;
+    // --> if destroying pickups
+    //[SerializeField]
+    //private float pickupLiveTime;
 
-    private TimeTracker timeTrack;
+    //private TimeTracker timeTrack;
 
-    
+    private PickupZoneSpawnManager manager;
+   
     private void OnTriggerEnter(Collider other)
     {
         ICollidable collisionObject = other.GetComponentInParent<ICollidable>();
@@ -32,7 +34,9 @@ public abstract class Pickup : MonoBehaviour, ICollidable
     }
     public void DestroySelf()
     {
+        manager = GetComponentInParent<PickupZoneSpawnManager>();
         Channels.OnPickupDestroyed?.Invoke();
+        manager.AdjustSpawnedCount();
         Destroy(this.gameObject);
         Debug.Log("Destroy called");
     }
@@ -46,18 +50,21 @@ public abstract class Pickup : MonoBehaviour, ICollidable
     }
     private void Awake()
     {
-        timeTrack = new TimeTracker(pickupLiveTime);
+        // --> if destroying pickups
+        // timeTrack = new TimeTracker(pickupLiveTime);
+
+       
+
     }
 
-
-    // Update is called once per frame
     void Update()
     {
-        if (!timeTrack.TimerComplete())
-        {
-            return;
-        }
-      DestroySelf();
+        // --> if destroying pickups
+        //if (!timeTrack.TimerComplete())
+        //{
+        //    return;
+        //}
+        //DestroySelf();
     }
 
 
