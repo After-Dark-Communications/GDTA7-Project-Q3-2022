@@ -51,11 +51,9 @@ namespace EventSystem
         public delegate void NavigateUp();
         public delegate void NavigateDown();
         public delegate void GameOver();
-        public delegate void ControllerShemeHidden();
-        public delegate void ControllerShemeShowing();
 
         public delegate void PlayerHealed(int healthIncreaseAmount, int playerNumber);
-        public delegate void PickupDestroyed();
+        public delegate void PickupDestoryed();
 
         public static ChangeFireMode OnChangeFireMode;
         public static EnergyUsed OnEnergyUsed;
@@ -81,10 +79,7 @@ namespace EventSystem
         public static NavigateUp OnNavigateUp;
         public static NavigateDown OnNavigateDown;
         public static GameOver OnGameOver;
-        public static PickupDestroyed OnPickupDestroyed;
-        public static ControllerShemeShowing OnControllerShemeShowing;
-        public static ControllerShemeHidden OnControllerShemeHidden;
-
+        public static PickupDestoryed OnPickupDestroyed;
     }
 
 }

@@ -30,11 +30,11 @@ namespace ShipParts
         private void Heal(int healthIncreaseAmount, int playerNumber)
         {
             //check pl number
-            //increse health by persentage
+            //increse health
             if (this.playerNumber != playerNumber)
                 return;
 
-            currentShipHealth += (float)healthIncreaseAmount/100*maxHealth;
+            currentShipHealth += healthIncreaseAmount;
 
             if (currentShipHealth >= maxHealth)
                 currentShipHealth = maxHealth;

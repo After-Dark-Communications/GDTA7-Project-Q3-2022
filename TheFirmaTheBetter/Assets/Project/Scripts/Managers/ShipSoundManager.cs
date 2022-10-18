@@ -34,7 +34,6 @@ namespace Managers
             try
             {
                 playerNumber = GetComponent<ShipInfo>().PlayerNumber;
-                engineEmitter.Play();
             }
             catch
             {

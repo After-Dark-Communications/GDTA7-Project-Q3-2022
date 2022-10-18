@@ -7,7 +7,7 @@ using UnityEngine;
 public class EnergyPickup : Pickup
 {
     [SerializeField]
-    [Range(10, 100)]
+    [Range(10, 500)]
     private int energyIncreaseAmount;
     public override void PickUpAction(ShipBuilder shipBuilder)
     {

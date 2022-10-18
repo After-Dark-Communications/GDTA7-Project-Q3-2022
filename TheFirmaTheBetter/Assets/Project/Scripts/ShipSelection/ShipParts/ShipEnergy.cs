@@ -5,14 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityEngine;
 
 namespace ShipParts
 {
     public class ShipEnergy
     {
         private int playerNumber;
-        private float currentEnergyAmount;
+        private int currentEnergyAmount;
         private int maxEnergyAmount;
 
         public ShipEnergy(int playerNumber, ShipStats shipStats)
@@ -43,13 +42,14 @@ namespace ShipParts
             if (IsThisNotMe(playerNumber))
                 return;
 
-            currentEnergyAmount += (float)refillAmount / 100 * maxEnergyAmount;
+            currentEnergyAmount += refillAmount;
 
             if (currentEnergyAmount > maxEnergyAmount)
             {
                 currentEnergyAmount = maxEnergyAmount;
             }
-            Channels.OnEnergyChanged(playerNumber, (float)currentEnergyAmount / maxEnergyAmount);
+
+            Channels.OnEnergyChanged(playerNumber, currentEnergyAmount / maxEnergyAmount);
         }
 
         public void UpdateEnergy(ShipStats shipStats)
@@ -77,6 +77,6 @@ namespace ShipParts
             return false;
         }
 
-        public float CurrentEnergyAmount => currentEnergyAmount;
+        public int CurrentEnergyAmount => currentEnergyAmount;
     }
 }

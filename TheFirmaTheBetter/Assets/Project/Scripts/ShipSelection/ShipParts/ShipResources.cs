@@ -92,7 +92,7 @@ namespace ShipParts
             Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, shipStats);
         }
 
-        public float CurrentEnergyAmount => shipEnergy.CurrentEnergyAmount;
+        public int CurrentEnergyAmount => shipEnergy.CurrentEnergyAmount;
 
         public ShipStats ShipStats => shipStats;
 

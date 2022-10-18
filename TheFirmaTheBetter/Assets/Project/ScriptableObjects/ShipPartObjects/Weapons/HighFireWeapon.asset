@@ -25,8 +25,8 @@ MonoBehaviour:
   armingTime: 0
   weaponFireEvent:
     Guid:
-      Data1: -1271766063
-      Data2: 1330553464
-      Data3: 64305580
-      Data4: -1831207665
-    Path: event:/Weapons/Weap_HighFireRate
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 

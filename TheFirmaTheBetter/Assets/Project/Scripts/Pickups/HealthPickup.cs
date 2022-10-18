@@ -7,7 +7,7 @@ using UnityEngine;
 public class HealthPickup : Pickup
 {
     [SerializeField]
-    [Range(10,100)]
+    [Range(10,500)]
     private int healthIncreaseAmount;
 
     [SerializeField]

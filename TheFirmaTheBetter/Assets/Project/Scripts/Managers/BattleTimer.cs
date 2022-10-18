@@ -1,4 +1,3 @@
-using EventSystem;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -14,14 +13,9 @@ namespace Managers
         private float timeSinceStart;
         private bool timerRunning;
 
-        private void Awake()
+        private void OnEnable()
         {
-            Channels.OnControllerShemeHidden += StartTimer;
-        }
-
-        private void OnDestroy()
-        {
-            Channels.OnControllerShemeHidden -= StartTimer;
+            StartTimer();
         }
 
         public void StartTimer()
