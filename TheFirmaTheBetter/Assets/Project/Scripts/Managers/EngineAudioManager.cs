@@ -4,19 +4,22 @@ using UnityEngine;
 using ShipParts.Ship;
 using EventSystem;
 
-public class EngineAudioManager : MonoBehaviour
+namespace Managers
 {
-    // Start is called before the first frame update
-    void Start()
+    public class EngineAudioManager : MonoBehaviour
     {
-        foreach (Transform child in transform)
+        // Start is called before the first frame update
+        void Start()
         {
-            if (child.GetComponentInChildren<ShipBuilder>())
+            foreach (Transform child in transform)
             {
-            }
-            else
-            {
-                Destroy(child.gameObject);
+                if (child.GetComponentInChildren<ShipBuilder>())
+                {
+                }
+                else
+                {
+                    Destroy(child.gameObject);
+                }
             }
         }
     }

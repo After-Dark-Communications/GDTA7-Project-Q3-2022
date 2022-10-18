@@ -5,60 +5,63 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyThroughHazard : Hazard
+namespace Hazards
 {
-    private List<ICollidable> shipsCollidersThatEntered = new List<ICollidable>();
-
-    private float timer;
-    [SerializeField]
-    private float timeToTakeDamage = 30;
-
-
-    private void Update()
+    public class FlyThroughHazard : Hazard
     {
-        if (shipsCollidersThatEntered.Count == 0)
-            return;
-        timer += Time.deltaTime;
-        if(timer >= timeToTakeDamage)
-        {
-            doDamageToAllShips(shipsCollidersThatEntered);
-            timer = 0;
-        }
-    }
+        private List<ICollidable> shipsCollidersThatEntered = new List<ICollidable>();
 
-    void doDamageToAllShips(List<ICollidable> ships)
-    {
-        foreach (ICollidable collidableShip in ships)
-        {
-            collidableShip.HandleCollision(this, null);
-        }
-    }
+        private float timer;
+        [SerializeField]
+        private float timeToTakeDamage = 30;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        ICollidable collisionObject = other.GetComponentInParent<ICollidable>();
-        if (collisionObject != null)
+
+        private void Update()
         {
-            if (collisionObject is ShipCollision)
+            if (shipsCollidersThatEntered.Count == 0)
+                return;
+            timer += Time.deltaTime;
+            if (timer >= timeToTakeDamage)
             {
-                if (shipsCollidersThatEntered.Contains(collisionObject))
-                    return;
-                shipsCollidersThatEntered.Add(collisionObject);
+                doDamageToAllShips(shipsCollidersThatEntered);
+                timer = 0;
             }
-            
         }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        ICollidable collisionObject = other.GetComponentInParent<ICollidable>();
-        if (collisionObject != null)
-        {
-            if (collisionObject is ShipCollision)
-            {
-                if (shipsCollidersThatEntered.Contains(collisionObject))
-                    shipsCollidersThatEntered.Remove(collisionObject);
-            }
 
+        void doDamageToAllShips(List<ICollidable> ships)
+        {
+            foreach (ICollidable collidableShip in ships)
+            {
+                collidableShip.HandleCollision(this, null);
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            ICollidable collisionObject = other.GetComponentInParent<ICollidable>();
+            if (collisionObject != null)
+            {
+                if (collisionObject is ShipCollision)
+                {
+                    if (shipsCollidersThatEntered.Contains(collisionObject))
+                        return;
+                    shipsCollidersThatEntered.Add(collisionObject);
+                }
+
+            }
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            ICollidable collisionObject = other.GetComponentInParent<ICollidable>();
+            if (collisionObject != null)
+            {
+                if (collisionObject is ShipCollision)
+                {
+                    if (shipsCollidersThatEntered.Contains(collisionObject))
+                        shipsCollidersThatEntered.Remove(collisionObject);
+                }
+
+            }
         }
     }
 }

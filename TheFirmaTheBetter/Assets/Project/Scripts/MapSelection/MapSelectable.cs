@@ -4,16 +4,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MapSelectable : MonoBehaviour
+namespace MapSelection
 {
-    [SerializeField]
-    private TMP_Text mapSelectableName;
-    [SerializeField]
-    private Image mapSelectableImage;
-    [SerializeField]
-    private TMP_Text mapSelectableGameMode;
+    public class MapSelectable : MonoBehaviour
+    {
+        [SerializeField]
+        private TMP_Text mapSelectableName;
+        [SerializeField]
+        private Image mapSelectableImage;
+        [SerializeField]
+        private TMP_Text mapSelectableGameMode;
 
-    public TMP_Text MapSelectableName { get { return mapSelectableName; } }
-    public Image MapSelectableImage { get { return mapSelectableImage; } }
-    public TMP_Text MapSelectableGameMode { get { return mapSelectableGameMode; } }
+        public TMP_Text MapSelectableName { get { return mapSelectableName; } }
+        public Image MapSelectableImage { get { return mapSelectableImage; } }
+        public TMP_Text MapSelectableGameMode { get { return mapSelectableGameMode; } }
+    }
 }

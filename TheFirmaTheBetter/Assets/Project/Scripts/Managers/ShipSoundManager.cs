@@ -6,7 +6,7 @@ using ShipParts.Ship;
 using ShipSelection;
 using EventSystem;
 
-namespace Audio
+namespace Managers
 {
     public class ShipSoundManager : MonoBehaviour
     {

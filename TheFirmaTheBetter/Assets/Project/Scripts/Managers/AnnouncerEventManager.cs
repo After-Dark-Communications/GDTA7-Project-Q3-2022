@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 
-namespace Audio
+namespace Managers
 {
     public class AnnouncerEventManager : MonoBehaviour
     {

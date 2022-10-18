@@ -4,21 +4,24 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectableOption : MonoBehaviour
+namespace UI
 {
-    [SerializeField]
-    private Image selectableOptionIcon;
-
-    [SerializeField]
-    private TMP_Text tmpTextField;
-
-    public void SetSprite(Sprite sprite)
+    public class SelectableOption : MonoBehaviour
     {
-        selectableOptionIcon.sprite = sprite;
-    }
+        [SerializeField]
+        private Image selectableOptionIcon;
 
-    public void SetText(string text)
-    {
-        tmpTextField.SetText(text);
+        [SerializeField]
+        private TMP_Text tmpTextField;
+
+        public void SetSprite(Sprite sprite)
+        {
+            selectableOptionIcon.sprite = sprite;
+        }
+
+        public void SetText(string text)
+        {
+            tmpTextField.SetText(text);
+        }
     }
 }

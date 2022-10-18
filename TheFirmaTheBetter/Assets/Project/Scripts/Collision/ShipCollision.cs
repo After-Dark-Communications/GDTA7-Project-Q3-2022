@@ -1,4 +1,5 @@
 using EventSystem;
+using Hazards;
 using Projectiles;
 using ShipParts;
 using ShipParts.Ship;
