@@ -34,6 +34,7 @@ namespace Audio
             try
             {
                 playerNumber = GetComponent<ShipInfo>().PlayerNumber;
+                engineEmitter.Play();
             }
             catch
             {
@@ -81,16 +82,5 @@ namespace Audio
                 }
             }
         }
-
-        private void DisableEngine()
-        {
-            engineEmitter.Stop();
-        }
-
-        private void EnableEngine()
-        {
-            engineEmitter.Play();
-        }
-
     }
 }
