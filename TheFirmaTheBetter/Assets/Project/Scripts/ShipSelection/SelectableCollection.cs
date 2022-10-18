@@ -14,7 +14,10 @@ namespace  ShipSelection
 
         private int currentSelectedIndex = 0;
 
+        private string categoryName;
+
         public List<Selectable> Selectables { get => selectables; }
         public int CurrentSelectedIndex { get => currentSelectedIndex; set => currentSelectedIndex = value; }
+        public string CategoryName { get => categoryName; set => categoryName = value; }
     }
 }
