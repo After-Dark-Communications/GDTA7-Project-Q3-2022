@@ -43,8 +43,9 @@ namespace Managers
                         ResultsManager.Instance.AddResult(playerStatistics);
                     }
                 }
-
-                SceneSwitchManager.SwitchToNextScene();
+                Channels.OnGameOver?.Invoke();
+                // SceneSwitchManager.SwitchToNextScene();
+                SceneSwitchManager.SwitchToSceneWithIndex(5);
             }
         }
 

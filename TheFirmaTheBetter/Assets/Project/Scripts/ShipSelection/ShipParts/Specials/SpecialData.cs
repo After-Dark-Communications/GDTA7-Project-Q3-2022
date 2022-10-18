@@ -4,17 +4,22 @@ using UnityEngine;
 
 namespace ShipParts.Specials
 {
-        [CreateAssetMenu(fileName = "NewSpecialData", menuName = "Part/Create new SpecialData")]
-        public class SpecialData : PartData
-        {
-            [Header("SpecialStats")]
-            [SerializeField]
-            private string description;
-            [SerializeField]
-            private int abilityCooldown;
+    [CreateAssetMenu(fileName = "NewSpecialData", menuName = "Part/Create new SpecialData")]
+    public class SpecialData : PartData
+    {
+        [Header("SpecialStats")]
 
-            public string Description => description;
+        [SerializeField]
+        [TextArea(2, 5)]
+        private string description;
 
-            public int AbilityCooldown => abilityCooldown;
-        }
+        [SerializeField]
+        [Range(0, 20)]
+        [Tooltip("Seconds between usage")]
+        private int abilityCooldown;
+
+        public string Description => description;
+
+        public int AbilityCooldown => abilityCooldown;
+    }
 }

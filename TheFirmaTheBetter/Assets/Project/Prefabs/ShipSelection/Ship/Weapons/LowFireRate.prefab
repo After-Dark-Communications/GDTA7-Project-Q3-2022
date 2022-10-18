@@ -466,9 +466,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9deb0e6e367ef7e4883354c989e000b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partIcon: {fileID: 0}
+  partIcon: {fileID: 21300000, guid: 228caafa5567a3042ab2f2cb58db8212, type: 3}
   connectionPoint: {x: 0, y: 0, z: 0}
   connectionPointCollection: {fileID: 2049874288216349817}
   weaponData: {fileID: 11400000, guid: f85416699c5ce0a45b617ba6edb3790a, type: 2}
   projectileStartingPoints:
-  - {fileID: 0}
+  - {fileID: 8046249741295496022}
+--- !u!4 &8046249741295496022 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5783336456037566136, guid: 39c0fa98dbce26b478a4a61e50531f2c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4605084961946512878}
+  m_PrefabAsset: {fileID: 0}

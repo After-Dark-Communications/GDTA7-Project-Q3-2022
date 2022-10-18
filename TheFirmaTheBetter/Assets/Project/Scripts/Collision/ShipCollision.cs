@@ -53,6 +53,7 @@ namespace Collisions
             {
                 HandleHitByOtherShip(objectThatHit as ShipCollision, shipStats);
             }
+
             if (objectThatHit is Hazard)
             {
                 HandleHitByHazard(objectThatHit as Hazard);

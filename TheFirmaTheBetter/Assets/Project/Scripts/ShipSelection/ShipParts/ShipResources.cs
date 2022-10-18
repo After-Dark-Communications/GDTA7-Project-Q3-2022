@@ -52,6 +52,11 @@ namespace ShipParts
             shipHealth.UpdateHealth(shipStats);
             shipEnergy.UpdateEnergy(shipStats);
 
+            UpdateTotalWeight();
+        }
+
+        private void UpdateTotalWeight()
+        {
             int[] partWeights = new int[shipBuilder.SelectedParts.Count];
             for (int i = 0; i < partWeights.Length; i++)
             {
@@ -65,11 +70,12 @@ namespace ShipParts
             if (shipBuilder.PlayerNumber != playerNumber)
                 return;
 
+            UpdateTotalWeight();
+
             if (selectedPart is Engine)
             {
                 shipStats.UpdateStats(selectedPart.GetData() as EngineData, shipBuilder);
             }
-
             if (selectedPart is Core)
             {
                 shipStats.UpdateStats(selectedPart.GetData() as CoreData, shipBuilder);
