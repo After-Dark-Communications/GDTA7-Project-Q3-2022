@@ -27,6 +27,7 @@ namespace Audio
 
         private void Start()
         {
+            DontDestroyOnLoad(gameObject);
             Channels.Announcer.OnGameBoot += PlayGameStartUpEvent;
             Channels.Announcer.OnPlayGameStart += PlayGameStartEvent;
             Channels.Announcer.OnPlayGameStop += PlayGameOverEvent;

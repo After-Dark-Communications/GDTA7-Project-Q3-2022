@@ -81,18 +81,18 @@ MonoBehaviour:
     Path: 
   playerEliminatedEvent:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1508144240
+      Data2: 1120430951
+      Data3: 735109009
+      Data4: 1685833508
+    Path: event:/Announcer/Ann_PlayerKill
   energyZoneMovedEvent:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -1348815876
+      Data2: 1186023973
+      Data3: -1702276943
+      Data4: 1482062628
+    Path: event:/Announcer/Ann_EnergyZone
   createShipEvent:
     Guid:
       Data1: 0
