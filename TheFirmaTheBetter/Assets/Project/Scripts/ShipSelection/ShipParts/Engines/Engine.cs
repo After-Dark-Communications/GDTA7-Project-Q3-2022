@@ -37,10 +37,14 @@ namespace ShipParts.Engines
                 rootInputHandler.OnPlayerMoveUp.AddListener(MoveUp);
                 rootInputHandler.OnPlayerMoveDown.AddListener(MoveDown);
             }
+            shipRigidBody.drag = thisCollision.GetComponent<ShipResources>().ShipStats.Drag;
+
             //determine unaltered max speed
             _maxSpeed = engineData.Speed / shipRigidBody.drag;
 
             _lastPosition = shipRigidBody.position;
+
+            CalculateHighestAndLowest();
         }
 
         private void Update()
@@ -177,6 +181,13 @@ namespace ShipParts.Engines
                 return;
 
             gamepad.SetMotorSpeeds(0, 0);
+        }
+
+        protected override void CalculateHighestAndLowest()
+        {
+            base.CalculateHighestAndLowest();
+            StatBoundries.SetHighestAndLowest(engineData.Speed, ref StatBoundries.SPEED_BOUNDRIES);
+            StatBoundries.SetHighestAndLowest(engineData.Handling, ref StatBoundries.HANDLING_BOUNDRIES);
         }
 
         public override string PartCategoryName => "Engine";

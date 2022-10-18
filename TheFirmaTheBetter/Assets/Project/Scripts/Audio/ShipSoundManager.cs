@@ -59,7 +59,10 @@ namespace Audio
                 {
                     rpm = rpm * -1;
                 }
-                engineEmitter.SetParameter("RPM", rpm * RPMSpeed);
+                if (engineEmitter.IsPlaying())
+                {
+                    engineEmitter.SetParameter("RPM", rpm * RPMSpeed);
+                }
             }
         }
 
@@ -77,6 +80,16 @@ namespace Audio
                     }
                 }
             }
+        }
+
+        private void DisableEngine()
+        {
+            engineEmitter.Stop();
+        }
+
+        private void EnableEngine()
+        {
+            engineEmitter.Play();
         }
 
     }

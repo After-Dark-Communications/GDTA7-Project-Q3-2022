@@ -24,6 +24,11 @@ namespace Managers
             SceneManager.LoadScene(currentLoadedSceneIndex + 1);
         }
 
+        public static void SwitchToSceneWithIndex(int index)
+        {
+            SceneManager.LoadScene(index);
+        }
+
         // Additive loading
         //public static void LoadScene(string sceneName)
         //{

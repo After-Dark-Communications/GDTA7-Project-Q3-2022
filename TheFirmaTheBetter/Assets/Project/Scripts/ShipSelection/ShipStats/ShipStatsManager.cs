@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 namespace ShipSelection
 {
@@ -16,6 +17,7 @@ namespace ShipSelection
         private int enabledStatGameObjectIndex;
         [SerializeField]
         private int playerIndex;
+
         private void Awake()
         {
             ShipStatsCollection statsCollection = gameObject.GetComponentInChildren<ShipStatsCollection>();
@@ -40,37 +42,26 @@ namespace ShipSelection
             if (playerIndex != shipBuilder.PlayerNumber)
                 return;
 
-            switch (enabledStatGameObjectIndex)
-            {
-                case 0:
-                    SetShipStats(stats.ShipStats, changedShipStats);
-                    break;
-                case 1:
-                    SetWeaponStats(stats.WeaponStats, changedShipStats);
-                    break;
-                case 2:
-                    SetSpecialStats(stats.SpecialStats, changedShipStats);
-                    break;
-                default:
-                    break;
-            }
+            SetShipStats(stats.ShipStats, changedShipStats);
+            SetWeaponStats(stats.WeaponStats, changedShipStats);
+            SetSpecialStats(stats.SpecialStats, changedShipStats);
 
         }
 
         private void SetShipStats(List<ShipStat> shipStatsUI, ShipStats changedShipStats)
         {
-            shipStatsUI[0].StatValue.text = changedShipStats.Speed.ToString();
-            shipStatsUI[1].StatValue.text = changedShipStats.MaxHealth.ToString();
-            shipStatsUI[2].StatValue.text = changedShipStats.Handling.ToString();
-            shipStatsUI[3].StatValue.text = changedShipStats.EnergyCapacity.ToString();
-
+            shipStatsUI[0].SetValueFill(changedShipStats.Speed, StatBoundries.SPEED_BOUNDRIES);
+            shipStatsUI[1].SetValueFill(changedShipStats.MaxHealth, StatBoundries.HEALTH_BOUNDRIES);
+            shipStatsUI[2].SetValueFill(changedShipStats.Handling, StatBoundries.HANDLING_BOUNDRIES);
+            shipStatsUI[3].SetValueFill(changedShipStats.EnergyCapacity, StatBoundries.ENERGY_CAPACITY_BOUNDRIES);
         }
 
         private void SetWeaponStats(List<WeaponStat> weaponStatsUI, ShipStats changedWeaponStats)
         {
-            weaponStatsUI[0].StatValue.text = changedWeaponStats.Range.ToString();
-            weaponStatsUI[1].StatValue.text = changedWeaponStats.FireRate.ToString();
-            weaponStatsUI[2].StatValue.text = changedWeaponStats.EnergyCost.ToString();
+            weaponStatsUI[0].SetValueFill(changedWeaponStats.Range, StatBoundries.RANGE_BOUNDRIES);
+            weaponStatsUI[1].SetValueFill(changedWeaponStats.FireRate, StatBoundries.FIRE_RATE_BOUNDRIES);
+            weaponStatsUI[2].SetValueFill(changedWeaponStats.EnergyCost, StatBoundries.ENERGY_COST_BOUNDRIES);
+            weaponStatsUI[3].SetValueFill(changedWeaponStats.DPS, StatBoundries.DPS_BOUNDRIES);
         }
 
         private void SetSpecialStats(List<SpecialStat> specialStatsUI, ShipStats changedSpecialStats)
@@ -81,8 +72,7 @@ namespace ShipSelection
 
         public int PlayerIndex { get { return playerIndex; } set { playerIndex = value; } }
 
-
-        public void OnDisable()
+        private void OnDestroy()
         {
             Channels.OnPlayerStatsChanged -= PlayerStatChange;
             Channels.OnEnabledStatGameObject -= SetAsEnableGameObject;

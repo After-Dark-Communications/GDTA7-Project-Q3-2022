@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 079fd4a3f41539b499dbe47d57e8bb0c, type: 3}
   m_Name: Gunrunner Core
   m_EditorClassIdentifier: 
+  partName: Gun-runner core
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 30
   health: 200
