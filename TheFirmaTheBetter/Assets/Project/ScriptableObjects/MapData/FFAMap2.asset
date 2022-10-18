@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38798a26d514c414889329a823e2869a, type: 3}
-  m_Name: FFAMap1
+  m_Name: FFAMap2
   m_EditorClassIdentifier: 
-  mapName: Asteroid Field
+  mapName: Obscure Grotto
   mapPicture: {fileID: 0}
   gameMode: FFA
-  mapSceneIndex: 3
+  mapSceneIndex: 5

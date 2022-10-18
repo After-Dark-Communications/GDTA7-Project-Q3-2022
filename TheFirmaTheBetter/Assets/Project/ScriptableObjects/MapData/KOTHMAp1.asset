@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0360a2cb076ce604eaf5a0d1bca5b139, type: 3}
   m_Name: KOTHMAp1
   m_EditorClassIdentifier: 
-  mapName: Moon Town
+  mapName: Moon Town USA
   mapPicture: {fileID: 0}
   gameMode: KOTH
-  mapSceneIndex: 0
+  mapSceneIndex: 4
