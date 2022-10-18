@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91172d90a16bbc648b9098b8ff7383d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partIcon: {fileID: 0}
+  partIcon: {fileID: 21300000, guid: 6b642e43a097b2747920f202c0280ea5, type: 3}
   connectionPoint: {x: 0, y: 0, z: 0}
   connectionPointCollection: {fileID: 6776717128627439499}
   specialData: {fileID: 11400000, guid: 6dc40c47a8ac9a249ad6d65c7ba271c5, type: 2}

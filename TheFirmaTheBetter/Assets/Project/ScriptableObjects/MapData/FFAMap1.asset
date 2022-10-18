@@ -9,6 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Medium
+  m_Script: {fileID: 11500000, guid: 38798a26d514c414889329a823e2869a, type: 3}
+  m_Name: FFAMap1
   m_EditorClassIdentifier: 
+  mapName: Asteroid Field
+  mapPicture: {fileID: 0}
+  gameMode: FFA
+  mapSceneIndex: 0

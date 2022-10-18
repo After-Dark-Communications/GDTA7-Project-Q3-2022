@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523d7573796a58147a3cb963776df436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partIcon: {fileID: 0}
+  partIcon: {fileID: 21300000, guid: e7e63f0272f0c3749b3b95d4ef723eaf, type: 3}
   connectionPoint: {x: 0, y: 0, z: 0}
   connectionPointCollection: {fileID: 6776717128627439499}
   specialData: {fileID: 11400000, guid: 87b6b1dfcbb88a6418758b90e453d72a, type: 2}

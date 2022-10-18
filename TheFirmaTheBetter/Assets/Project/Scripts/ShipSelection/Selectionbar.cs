@@ -1,9 +1,11 @@
 using Assets.Project.Scripts.ShipSelection;
 using EventSystem;
+using Util;
 using ShipParts;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -22,7 +24,7 @@ namespace ShipSelection
 
         private List<Arrow> arrowsUI = new List<Arrow>();
 
-        private List<TMP_Text> buttonLabels = new List<TMP_Text>();
+        private List<SelectableOption> selectableOptions = new List<SelectableOption>();
 
         private int currentSelectedCollectionIndex = 0;
 
@@ -30,9 +32,9 @@ namespace ShipSelection
 
         private void Awake()
         {
-            foreach (Button button in gameObject.GetComponentsInChildren<Button>())
+            foreach (SelectableOption selectableOption in gameObject.GetComponentsInChildren<SelectableOption>())
             {
-                buttonLabels.Add(button.GetComponentInChildren<TMP_Text>());
+                selectableOptions.Add(selectableOption);
             }
             foreach (Arrow arrow in GetComponentsInChildren<Arrow>())
             {
@@ -74,7 +76,9 @@ namespace ShipSelection
         {
             for (int i = 0; i <= selectionCollections.Count; i++)
             {
-                buttonLabels[i].SetText(selectionCollections[currentSelectedCollectionIndex].Selectables[i].Part.name);
+                //TODO: Make this an icon with text
+                selectableOptions[i].SetSprite(selectionCollections[currentSelectedCollectionIndex].Selectables[i].Part.PartIcon);
+                selectableOptions[i].SetText(selectionCollections[currentSelectedCollectionIndex].Selectables[i].Part.GetData().PartName);
             }
         }
 

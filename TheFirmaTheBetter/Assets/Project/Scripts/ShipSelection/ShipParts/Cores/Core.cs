@@ -3,6 +3,7 @@ using ShipParts.Ship;
 using ShipSelection.ShipBuilders.ConnectionPoints;
 using System;
 using UnityEngine;
+using Util;
 
 namespace ShipParts.Cores
 {
@@ -43,6 +44,8 @@ namespace ShipParts.Cores
             {
                 shipRoot.GetComponent<ShipBody>().OnPlayerCrash.AddListener(CrashShip);
             }
+
+            CalculateHighestAndLowest();
         }
 
         private void CrashShip(Vector3 Velocity, GameObject other)
@@ -52,6 +55,13 @@ namespace ShipParts.Cores
             {//bump ship
                 collisionObject.HandleCollision(thisCollision, shipResources.ShipStats);
             }
+        }
+
+        protected override void CalculateHighestAndLowest()
+        {
+            base.CalculateHighestAndLowest();
+            StatBoundries.SetHighestAndLowest(coreData.Health, ref StatBoundries.HEALTH_BOUNDRIES);
+            StatBoundries.SetHighestAndLowest(coreData.EnergyCapacity, ref StatBoundries.ENERGY_CAPACITY_BOUNDRIES);
         }
     }
 }
