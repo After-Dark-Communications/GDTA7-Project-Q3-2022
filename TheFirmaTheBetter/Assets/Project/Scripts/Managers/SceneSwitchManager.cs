@@ -8,7 +8,7 @@ namespace Managers
 {
     public static class SceneSwitchManager
     {
-        public static void LoadFirstScene()
+        public static void SwitchToFirstScene()
         {
             SceneManager.LoadScene(0);
         }
@@ -27,6 +27,11 @@ namespace Managers
         public static void SwitchToSceneWithIndex(int index)
         {
             SceneManager.LoadScene(index);
+        }
+
+        public static void SwitchToLastScene()
+        {
+            SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
         }
 
         // Additive loading

@@ -1,5 +1,6 @@
 using EventSystem;
 using ShipSelection.ShipBuilders;
+using System.Collections.Generic;
 using UnityEngine;
 namespace Managers
 {
@@ -8,9 +9,7 @@ namespace Managers
         public static ResultsManager Instance;
 
         [SerializeField]
-        private PlayerStatistics[] results;
-
-        private int lastEmptyPosition;
+        private List<PlayerResult> results;
 
         void Awake()
         {
@@ -26,34 +25,36 @@ namespace Managers
                 return;
             }
 
-            SetupResults(ShipBuildManager.Instance.AmountOfPlayersJoined);
         }
 
         private void OnEnable()
         {
-            Channels.OnEveryPlayerReady += SetupResults;
+            SetupResults(ShipBuildManager.Instance.AmountOfPlayersJoined);
+            Channels.OnPlayerSpawned += AddPlayerResult;
         }
-
         private void OnDisable()
         {
-            Channels.OnEveryPlayerReady -= SetupResults;
+            Channels.OnPlayerSpawned -= AddPlayerResult;
         }
 
         public void SetupResults(int numberOfPlayers)
         {
-            results = new PlayerStatistics[numberOfPlayers];
-            lastEmptyPosition = numberOfPlayers - 1;
+            results = new List<PlayerResult>();
         }
 
-        public void AddResult(PlayerStatistics result)
+        private void AddPlayerResult(GameObject spawnedShipBuilderObject, int playerNumber)
         {
-            if (lastEmptyPosition >= 0)
+            PlayerResult playerResult = spawnedShipBuilderObject.GetComponent<PlayerResult>();
+            results.Add(playerResult);
+        }
+
+        public PlayerResult[] Results
+        {
+            get
             {
-                results[lastEmptyPosition] = result;
-                lastEmptyPosition--;
+                results.Sort();
+                return results.ToArray();
             }
         }
-
-        public PlayerStatistics[] Results { get { return results; } }
     }
 }
