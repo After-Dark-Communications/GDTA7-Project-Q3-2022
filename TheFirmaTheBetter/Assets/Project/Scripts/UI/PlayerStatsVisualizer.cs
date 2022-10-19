@@ -13,13 +13,15 @@ namespace UI
         private void OnEnable()
         {
             Channels.OnPlayerSpawned += InitializePlayerStats;
-            Channels.OnPlayerBecomesDeath += HidePlayerStats;
+            Channels.OnPlayerBecomesDeath += OnPlayerDied;
+            Channels.OnPlayerRespawned += OnPlayerRespawned;
         }
 
         private void OnDisable()
         {
             Channels.OnPlayerSpawned -= InitializePlayerStats;
-            Channels.OnPlayerBecomesDeath -= HidePlayerStats;
+            Channels.OnPlayerBecomesDeath -= OnPlayerDied;
+            Channels.OnPlayerRespawned -= OnPlayerRespawned;
         }
 
         public void InitializePlayerStats(GameObject player, int playerIndex)
@@ -37,19 +39,26 @@ namespace UI
             }
         }
 
-        private void HidePlayerStats(ShipBuilder ship, int killerIndex)
+        private void OnPlayerDied(ShipBuilder ship, int playerIndexOfKiller)
         {
-            // Get the stats panel
-            FloatingStatsPanel statPanel = statPanels[ship.PlayerNumber];
-            statPanel.ObjectToFollow = null;
-            statPanel.gameObject.SetActive(false);
+            HidePlayerStats(ship.PlayerNumber);
+        }
 
-            // Remove the player index from all stat bars
-            foreach (ShipStatBar statBar in statPanel.StatBars)
-            {
-                statBar.PlayerIndex = -1;
-                statBar.gameObject.SetActive(false);
-            }
+        private void OnPlayerRespawned(GameObject respawnedShipBuilderObject, int playerNumber)
+        {
+            ShowPlayerStats(playerNumber);
+        }
+
+        private void HidePlayerStats(int playerIndex)
+        {
+            FloatingStatsPanel statPanel = statPanels[playerIndex];
+            statPanel.gameObject.SetActive(false);
+        }
+
+        private void ShowPlayerStats(int playerIndex)
+        {
+            FloatingStatsPanel statPanel = statPanels[playerIndex];
+            statPanel.gameObject.SetActive(true);
         }
     }
 }
