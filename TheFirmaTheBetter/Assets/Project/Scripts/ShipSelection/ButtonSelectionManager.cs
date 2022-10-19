@@ -32,21 +32,18 @@ namespace Assets.Project.Scripts.ShipSelection
 
         internal void UpdateButtons(Selectionbar selectionBar)
         {
+            Button currentSelectedButton = buttons[selectionBar.CurrentSelectedCollection.CurrentSelectedIndex];
+            Animator animatorSelectedButton = currentSelectedButton.GetComponent<Animator>();
+            animatorSelectedButton.SetBool("Disabled", true);
+        }
+
+        public void ResetButtons()
+        {
             foreach (Button button in buttons)
             {
-                ColorBlock normalBlock = button.colors;
-                normalBlock.normalColor = normalColor;
-                button.colors = normalBlock;
+                Animator animator = button.GetComponent<Animator>();
+                animator.SetBool("Disabled", false);
             }
-
-            int nextIndex = GetNextIndex(selectionBar.CurrentSelectedCollection.CurrentSelectedIndex);
-
-            //buttons[nextIndex].Select();
-
-            Button currentSelectedButton = buttons[selectionBar.CurrentSelectedCollection.CurrentSelectedIndex];
-            ColorBlock block = currentSelectedButton.colors;
-            block.normalColor = selectedColor;
-            currentSelectedButton.colors = block;
         }
 
         private int GetNextIndex(int currentIndex)
