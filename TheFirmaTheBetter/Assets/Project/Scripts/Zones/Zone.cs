@@ -31,6 +31,16 @@ namespace Zones
             zoneInteractor.HandleZoneExitInteraction(this);
         }
 
+        private void OnTriggerStay(Collider other)
+        {
+            IHaveZoneInteraction zoneInteractor = other.GetComponentInParent<IHaveZoneInteraction>();
+
+            if (zoneInteractor == null)
+                return;
+
+            zoneInteractor.HandleZoneStayInteraction(this);
+        }
+
         /// <summary>
         /// Triggers a zone's effect
         /// </summary>

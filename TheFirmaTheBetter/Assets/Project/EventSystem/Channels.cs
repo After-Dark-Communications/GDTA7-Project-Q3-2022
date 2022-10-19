@@ -13,6 +13,7 @@ namespace EventSystem
         public static InputChannel Input = new InputChannel();
         public static MovementChannel Movement = new MovementChannel();
         public static AnnouncerChannel Announcer = new AnnouncerChannel();
+        public static KingOfTheHillChannel KingOfTheHill = new KingOfTheHillChannel();
 
         public delegate void ChangeFireMode(bool newFireModeValue);
         public delegate void EnergyUsed(int playerNumber, int amount);

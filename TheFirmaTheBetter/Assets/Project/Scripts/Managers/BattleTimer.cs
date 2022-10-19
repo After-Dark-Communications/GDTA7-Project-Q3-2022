@@ -2,6 +2,7 @@ using EventSystem;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using EventSystem;
 using UnityEngine;
 
 namespace Managers
@@ -10,9 +11,12 @@ namespace Managers
     {
         [SerializeField]
         private TextMeshProUGUI timerText;
+        [SerializeField]
+        private float kothTimeInSec;
 
         private float timeSinceStart;
         private bool timerRunning;
+        private bool isKingOfTheHill;
 
         private void Awake()
         {
@@ -26,8 +30,20 @@ namespace Managers
 
         public void StartTimer()
         {
-            timeSinceStart = 0;
+            if (isKingOfTheHill)
+            {
+                timeSinceStart = 0;
+            }
+            else
+            {
+                timeSinceStart = kothTimeInSec;
+            }
             timerRunning = true;
+        }
+
+        public void StartKoth(List<int> ints)
+        {
+            isKingOfTheHill = true;
         }
 
         public void PauseUnpauseTimer()
@@ -39,7 +55,18 @@ namespace Managers
         {
             if (timerRunning)
             {
-                timeSinceStart += Time.deltaTime;
+                if (isKingOfTheHill)
+                {
+                    timeSinceStart -= Time.deltaTime;
+                    if (timeSinceStart == 0)
+                    {
+                        Channels.KingOfTheHill.OnKingOfTheHillEnd?.Invoke();
+                    }
+                }
+                else
+                {
+                    timeSinceStart += Time.deltaTime;
+                }
                 DisplayTime(timeSinceStart);
             }
         }
