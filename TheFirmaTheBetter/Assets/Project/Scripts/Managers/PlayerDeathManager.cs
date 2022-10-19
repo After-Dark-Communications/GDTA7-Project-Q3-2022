@@ -39,11 +39,30 @@ namespace Managers
 
             if (playersAlive <= 1)
             {
-                ShipBuilder lastShip = ShipBuildManager.Instance.ShipBuilders[killerIndex];
-                playerResult = lastShip.GetComponent<PlayerResult>();
-                KillShip(lastShip, playerResult);
+                ShipBuilder winner = shipBuilderThatDied;
 
-                Channels.OnRoundOver?.Invoke(roundManager.CurrentRoundIndex, lastShip.PlayerNumber);
+                if (killerIndex >= 0 && killerIndex < totalNumberOfPlayers)
+                {
+                    winner = ShipBuildManager.Instance.ShipBuilders[killerIndex];
+                }
+                else
+                {
+                    foreach (ShipBuilder ship in ShipBuildManager.Instance.ShipBuilders)
+                    {
+                        if (ship.gameObject.activeInHierarchy)
+                        {
+                            winner = ship;
+                        }
+                    }
+                }
+
+                if (winner != shipBuilderThatDied)
+                {
+                    playerResult = winner.GetComponent<PlayerResult>();
+                    KillShip(winner, playerResult);
+                }
+
+                Channels.OnRoundOver?.Invoke(roundManager.CurrentRoundIndex, winner.PlayerNumber);
             }
         }
 
