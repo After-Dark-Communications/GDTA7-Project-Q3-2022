@@ -28,10 +28,6 @@ namespace ShipParts
                 Channels.OnRefillEnergy?.Invoke(playerNumber, shipResources.ShipStats.EnergyCapacity);
                 Channels.OnChangeFireMode?.Invoke(false);
             }
-            else if (enteredZone is ScoringZone)
-            {
-                Channels.KingOfTheHill.OnKingOfTheHillScore?.Invoke(playerNumber, 10);
-            }
         }
 
         public void HandleZoneExitInteraction(Zone enteredZone)
@@ -40,18 +36,10 @@ namespace ShipParts
             {
                 Channels.OnChangeFireMode?.Invoke(true);
             }
-            else if (enteredZone is ScoringZone)
-            {
-                Channels.KingOfTheHill.OnKingOfTheHillLeaveZone?.Invoke(playerNumber);
-            }
         }
 
         public void HandleZoneStayInteraction(Zone enteredZone)
         {
-            if (enteredZone is ScoringZone)
-            {
-                Channels.KingOfTheHill.OnKingOfTheHillEnterZone?.Invoke(playerNumber);
-            }
         }
     }
 }

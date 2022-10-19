@@ -18,7 +18,7 @@ namespace EventSystem
         /// <param name="playerNumber">Player entering the score zone</param>
         public delegate void KingOfTheHillEnterScoreZone(int playerNumber);
         /// <summary>
-        /// Call when a player enters the score zone
+        /// Call when a player leaves the score zone
         /// </summary>
         /// <param name="playerNumber">Player leaving the score zone</param>
         public delegate void KingOfTheHillLeaveScoreZone(int playerNumber);

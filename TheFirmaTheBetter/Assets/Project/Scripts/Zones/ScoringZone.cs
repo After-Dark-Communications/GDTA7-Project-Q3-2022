@@ -3,31 +3,58 @@ using System.Collections.Generic;
 using UnityEngine;
 using ShipSelection;
 using EventSystem;
-using Zones;
+using Collisions;
+using ShipParts.Ship;
 
-public class ScoringZone : Zone
+public class ScoringZone : MonoBehaviour
 {
+    List<ShipBuilder> shipsEntered = new List<ShipBuilder>();
     [SerializeField]
-    [Range(0, 100)]
+    float timeInBetweenGivingPoint = 2f;
+    float timer;
+    [SerializeField]
+    [Range(1, 3)]
     private int ScoreAmount;
 
-    private void Start()
+    private void Update()
     {
-        Channels.KingOfTheHill.OnKingOfTheHillEnterZone += PlayerEnterZone;
+        if (shipsEntered.Count == 0)
+            return;
+        timer += Time.deltaTime;
+        if(timer >= timeInBetweenGivingPoint)
+        {
+            GiveShipInZonePoint();
+            timer = 0;
+        }
     }
 
-    private void OnDestroy()
+    void GiveShipInZonePoint()
     {
-        Channels.KingOfTheHill.OnKingOfTheHillEnterZone -= PlayerEnterZone;
+        foreach (ShipBuilder shipsThatEntered in shipsEntered)
+        {
+            int enteredShipPlayerNumber = shipsThatEntered.PlayerNumber;
+            Channels.KingOfTheHill.OnKingOfTheHillScore?.Invoke(enteredShipPlayerNumber, ScoreAmount);
+        }
     }
 
-    public override void TriggerEffect(GameObject obj)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"{obj.name} has entered");
+        ShipBuilder enteredShip = other.GetComponentInParent<ShipBuilder>();
+        if (enteredShip != null)
+        {
+            if (shipsEntered.Contains(enteredShip))
+                return;
+            shipsEntered.Add(enteredShip);
+        }
     }
 
-    public void PlayerEnterZone(int playerNumber)
+    private void OnTriggerExit(Collider other)
     {
-        Channels.KingOfTheHill.OnKingOfTheHillScore?.Invoke(playerNumber, ScoreAmount);
+        ShipBuilder enteredShip = other.GetComponentInParent<ShipBuilder>();
+        if (enteredShip != null)
+        {
+            if (shipsEntered.Contains(enteredShip))
+                shipsEntered.Remove(enteredShip);
+        }
     }
 }

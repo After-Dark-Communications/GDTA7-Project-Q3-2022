@@ -51,4 +51,5 @@ public class ScoreHandler : MonoBehaviour
             orderedScores.Add(0);
         }
     }
+
 }
