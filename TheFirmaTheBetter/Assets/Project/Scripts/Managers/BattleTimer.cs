@@ -16,6 +16,7 @@ namespace Managers
 
         private float timeSinceStart;
         private bool timerRunning;
+        private bool isKingOfTheHill;
 
         private void Awake()
         {
