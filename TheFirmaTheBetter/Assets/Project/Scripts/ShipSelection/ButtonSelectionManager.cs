@@ -26,29 +26,36 @@ namespace Assets.Project.Scripts.ShipSelection
             if (buttons.Count <= 0)
                 return;
 
-            selectedColor = buttons[0].colors.disabledColor;
-            normalColor = buttons[0].colors.normalColor;
+            //selectedColor = buttons[0].colors.disabledColor;
+           // normalColor = buttons[0].colors.normalColor;
         }
 
         internal void UpdateButtons(Selectionbar selectionBar)
         {
-            foreach (Button button in buttons)
-            {
-                ColorBlock normalBlock = button.colors;
-                normalBlock.normalColor = normalColor;
-                button.colors = normalBlock;
-            }
-
-            int nextIndex = GetNextIndex(selectionBar.CurrentSelectedCollection.CurrentSelectedIndex);
-
-            //buttons[nextIndex].Select();
 
             Button currentSelectedButton = buttons[selectionBar.CurrentSelectedCollection.CurrentSelectedIndex];
-            ColorBlock block = currentSelectedButton.colors;
-            block.normalColor = selectedColor;
-            currentSelectedButton.colors = block;
+            Animator animatorSelectedButton = currentSelectedButton.GetComponent<Animator>();
+            animatorSelectedButton.SetBool("Disabled", true);
+            Debug.Log("Update Button " + selectionBar.CurrentSelectedCollection.CurrentSelectedIndex + " TRUE");
+            animatorSelectedButton.SetTrigger("Selected");
         }
 
+        public void ResetButtons()
+        {
+            foreach (Button button in buttons)
+            {
+                Animator animator = button.GetComponent<Animator>();
+                animator.SetBool("Disabled", false);
+            }
+        }
+
+        public void ResetButtonAt(int index)
+        {
+            Button currentSelectedButton = buttons[index];
+            Animator animatorSelectedButton = currentSelectedButton.GetComponent<Animator>();
+            animatorSelectedButton.SetBool("Disabled", false);
+            Debug.Log("Reset Button " + index + " FALSE");
+        }
         private int GetNextIndex(int currentIndex)
         {
             int toReturn = currentIndex + 1;

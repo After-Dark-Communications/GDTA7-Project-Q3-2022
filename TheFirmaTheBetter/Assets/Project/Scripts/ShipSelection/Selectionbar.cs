@@ -57,6 +57,7 @@ namespace ShipSelection
         {
             currentSelectedCollectionIndex = ListLooper.SelectPrevious(selectionCollections, currentSelectedCollectionIndex);
             UpdateLabelTexts();
+            buttonSelectionManager.ResetButtons();
             buttonSelectionManager.UpdateButtons(this);
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
             Channels.OnNavigateUp?.Invoke();
@@ -66,6 +67,7 @@ namespace ShipSelection
         {
             currentSelectedCollectionIndex = ListLooper.SelectNext(selectionCollections, currentSelectedCollectionIndex);
             UpdateLabelTexts();
+            buttonSelectionManager.ResetButtons();
             buttonSelectionManager.UpdateButtons(this);
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
             Channels.OnNavigateDown?.Invoke();
@@ -83,13 +85,18 @@ namespace ShipSelection
 
         public void SetSelectedOptionIndex(int index)
         {
+            buttonSelectionManager.ResetButtonAt(CurrentSelectedCollection.CurrentSelectedIndex);
+
             CurrentSelectedCollection.CurrentSelectedIndex = index;
+           
             buttonSelectionManager.UpdateButtons(this);
         }
 
         public Part GetCurrentSelectedPart()
         {
-            buttonSelectionManager.UpdateButtons(this);
+            
+
+           // buttonSelectionManager.UpdateButtons(this);
             return CurrentSelectedCollection.Selectables[CurrentSelectedCollection.CurrentSelectedIndex].Part;
         }
 
