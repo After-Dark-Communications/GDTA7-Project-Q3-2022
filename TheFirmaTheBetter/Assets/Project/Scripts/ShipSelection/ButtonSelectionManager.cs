@@ -45,6 +45,13 @@ namespace ShipSelection
                 animator.SetBool("Disabled", false);
             }
         }
+        public void ResetButtonAt(int index)
+        {
+            Button currentSelectedButton = buttons[index];
+            Animator animatorSelectedButton = currentSelectedButton.GetComponent<Animator>();
+            animatorSelectedButton.SetBool("Disabled", false);
+            Debug.Log("Reset Button " + index + " FALSE");
+        }
 
         private int GetNextIndex(int currentIndex)
         {
