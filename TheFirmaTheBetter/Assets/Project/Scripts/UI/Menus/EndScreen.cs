@@ -25,7 +25,8 @@ namespace UI.Menus
                 panel.gameObject.SetActive(false);
             }
 
-            PlayerStatistics[] results = ResultsManager.Instance.Results;
+            PlayerResult[] results = ResultsManager.Instance.Results;
+
             for (int i = 0; i < results.Length; i++)
             {
                 previewCams[i].PlaceShipPreview(results[i].gameObject);
@@ -35,7 +36,7 @@ namespace UI.Menus
         }
         public void Rematch()
         {
-            SceneSwitchManager.LoadFirstScene();
+            SceneSwitchManager.SwitchToFirstScene();
         }
 
         public void QuitGame()

@@ -1,20 +1,18 @@
 using EventSystem;
 using ShipParts.Ship;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+
 namespace Managers
 {
-    public class PlayerStatistics : MonoBehaviour
+    public class PlayerResult : MonoBehaviour, IComparable<PlayerResult>
     {
-        [SerializeField]
         private int playerIndex;
-        [SerializeField]
-        private bool isAlive;
-        [SerializeField]
         private float timeSurvived;
-        [SerializeField]
         private int playersKilled;
-        [SerializeField]
         private float distanceTravelled;
+        private List<int> roundsWonIndices;
 
         private void Awake()
         {
@@ -24,11 +22,13 @@ namespace Managers
         private void OnEnable()
         {
             Channels.OnPlayerBecomesDeath += OnPlayerKilled;
+            Channels.OnRoundOver += OnRoundWon;
         }
 
         private void OnDisable()
         {
             Channels.OnPlayerBecomesDeath -= OnPlayerKilled;
+            Channels.OnRoundOver -= OnRoundWon;
         }
 
         private void Setup()
@@ -37,7 +37,7 @@ namespace Managers
             playersKilled = 0;
             timeSurvived = 0;
             distanceTravelled = 0;
-            isAlive = true;
+            roundsWonIndices = new List<int>();
         }
 
         private void OnPlayerKilled(ShipBuilder shipThatDied, int killerIndex)
@@ -48,10 +48,28 @@ namespace Managers
             }
         }
 
-        public bool IsAlive
+        private void OnRoundWon(int roundIndex, int winnerIndex)
         {
-            get { return isAlive; }
-            set { isAlive = value; }
+            if (winnerIndex == playerIndex)
+            {
+                roundsWonIndices.Add(roundIndex);
+            }
+        }
+
+        public int CompareTo(PlayerResult other)
+        {
+            if (PlayersKilled != other.PlayersKilled)
+            {
+                return PlayersKilled.CompareTo(other.PlayersKilled) * -1;
+            }
+
+            if (RoundsWon != other.RoundsWon)
+            {
+                return RoundsWon.CompareTo(other.RoundsWon) * -1;
+            }
+
+            return LastWonRoundIndex.CompareTo(other.LastWonRoundIndex) * -1;
+
         }
 
         public float TimeSurvived
@@ -69,6 +87,23 @@ namespace Managers
         {
             get { return distanceTravelled; }
             set { distanceTravelled = value; }
+        }
+
+        public int RoundsWon
+        {
+            get { return roundsWonIndices.Count; }
+        }
+
+        public int LastWonRoundIndex
+        {
+            get
+            {
+                if (roundsWonIndices.Count > 0)
+                {
+                    return roundsWonIndices[roundsWonIndices.Count - 1];
+                }
+                return -1;
+            }
         }
     }
 }

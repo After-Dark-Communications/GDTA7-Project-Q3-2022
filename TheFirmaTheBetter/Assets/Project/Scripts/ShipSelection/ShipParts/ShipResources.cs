@@ -34,14 +34,16 @@ namespace ShipParts
         {
             Channels.OnShipPartSelected += OnShipPartSelected;
             Channels.OnShipCompleted += OnShipCompleted;
+            Channels.OnPlayerRespawned += OnPlayerRespawned;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             shipHealth.Unsubscribe();
             shipEnergy.Unsubscribe();
             Channels.OnShipPartSelected -= OnShipPartSelected;
             Channels.OnShipCompleted -= OnShipCompleted;
+            Channels.OnPlayerRespawned -= OnPlayerRespawned;
         }
 
         private void OnShipCompleted(ShipBuilder completedShipBuilder)
@@ -49,8 +51,7 @@ namespace ShipParts
             if (shipBuilder.PlayerNumber != completedShipBuilder.PlayerNumber)
                 return;
 
-            shipHealth.UpdateHealth(shipStats);
-            shipEnergy.UpdateEnergy(shipStats);
+            ResetRescources();
 
             UpdateTotalWeight();
         }
@@ -90,6 +91,20 @@ namespace ShipParts
             }
 
             Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, shipStats);
+        }
+
+        private void OnPlayerRespawned(GameObject respawnedShipBuilderObject, int playerNumber)
+        {
+            if (shipBuilder.PlayerNumber != playerNumber)
+                return;
+
+            ResetRescources();
+        }
+
+        public void ResetRescources()
+        {
+            shipHealth.UpdateHealth(shipStats);
+            shipEnergy.UpdateEnergy(shipStats);
         }
 
         public float CurrentEnergyAmount => shipEnergy.CurrentEnergyAmount;

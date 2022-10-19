@@ -33,6 +33,7 @@ namespace Audio
         private void OnDestroy()
         {
             Channels.OnEveryPlayerReady -= LoadBattleScene;
+            Channels.OnGameOver -= Replay;
         }
 
         public void LoadBuildingScene()
