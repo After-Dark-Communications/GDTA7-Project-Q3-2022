@@ -53,6 +53,11 @@ namespace EventSystem
         public delegate void GameOver();
         public delegate void RoundOver(int roundIndex, int winnerIndex);
         public delegate void RoundStarted(int roundIndex);
+        public delegate void ControllerShemeHidden();
+        public delegate void ControllerShemeShowing();
+
+        public delegate void PlayerHealed(int healthIncreaseAmount, int playerNumber);
+        public delegate void PickupDestroyed();
 
         public static ChangeFireMode OnChangeFireMode;
         public static EnergyUsed OnEnergyUsed;
@@ -73,12 +78,17 @@ namespace EventSystem
         public static HealthChanged OnHealthChanged;
         public static EnabledStatGameObject OnEnabledStatGameObject;
         public static WeaponFired OnWeaponFired;
+        public static PlayerHealed OnPlayerHealed;
         public static SelectedCategoryChanged OnSelectedCategoryChanged;
         public static NavigateUp OnNavigateUp;
         public static NavigateDown OnNavigateDown;
         public static GameOver OnGameOver;
         public static RoundOver OnRoundOver;
         public static RoundStarted OnRoundStarted;
+        public static PickupDestroyed OnPickupDestroyed;
+        public static ControllerShemeShowing OnControllerShemeShowing;
+        public static ControllerShemeHidden OnControllerShemeHidden;
+
     }
 
 }
