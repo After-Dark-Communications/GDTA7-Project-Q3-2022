@@ -10,8 +10,7 @@ namespace Pickups
         public float _timeLeft;
         public TimeTracker(float timeInterval)
         {
-            _timeInterval = timeInterval;
-            _timeLeft = _timeInterval;
+            ResetTimeTracker(timeInterval);
         }
 
         public void TimeReset()
@@ -26,6 +25,12 @@ namespace Pickups
                 return true;
             }
             return false;
+        }
+
+        public void ResetTimeTracker (float timeInterval)
+        {
+            _timeInterval = timeInterval;
+            _timeLeft = _timeInterval;
         }
     }
 }
