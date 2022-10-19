@@ -6,29 +6,28 @@ using EventSystem;
 
 public class PickupZoneSpawnManager: MonoBehaviour
 {
-    //private float instantiateTime;
+    TimeTracker timeTrack;
     public Vector3 center;
+    private int currentSpawnedCount;
+
     [SerializeField]
     private GameObject[] pickups;
     [SerializeField]
     private Vector3 spawnAreaSize;
-
-    TimeTracker timeTrack;
-
     [SerializeField]
-    private float spawnInterval;
-
+    [Range(1, 20)]
+    private float minSpawnInterval;
+    [SerializeField]
+    [Range(1, 20)]
+    private float maxSpawnInterval;
     [SerializeField]
     private int maximumSpawnCount;
-
-    private int currentSpawnedCount;
-
 
     private void Awake()
     {
         center = this.gameObject.transform.position;
 
-        timeTrack = new TimeTracker(spawnInterval);
+        timeTrack = new TimeTracker(SetRandomSpawnInterval());
         SetSpawnCount(0);
 
        // Channels.OnPickupDestroyed += AdjustSpawnedCoun;
@@ -53,8 +52,6 @@ public class PickupZoneSpawnManager: MonoBehaviour
         }
 
         Spawn();
-        timeTrack.TimeReset();
-
     }
 
     private void Spawn()
@@ -75,18 +72,42 @@ public class PickupZoneSpawnManager: MonoBehaviour
         instantiatedObject.transform.parent = gameObject.transform;
 
         SetSpawnCount(currentSpawnedCount + 1);
+        timeTrack.ResetTimeTracker(SetRandomSpawnInterval());
     }
 
+    /// <summary>
+    /// Set a spawn time interval at random between a max and min time intervals given from the Serialize fields
+    /// </summary>
+    /// <returns></returns>
+    private float SetRandomSpawnInterval()
+    {
+        float randSpawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
+        //Debug.Log("Next spawn in: " + randSpawnInterval);
+        return randSpawnInterval;
+      
+    }
 
     private bool CanSpawnAtPosition(Vector3 newPosition)
     {
+        // Check box checks if the pickup has collided with anything //walls
         if (Physics.CheckBox(newPosition, new Vector3(2.0f, 2.0f, 2.0f), Quaternion.identity))
         {
-
             return false;
         }
 
-        return true;
+        // Overlap Box to check if the collision is with anotherPickup
+        Collider[] hitColliders = Physics.OverlapBox(newPosition, new Vector3(7.0f, 7.0f, 7.0f), Quaternion.identity);
+        for (int i = 0; i < hitColliders.Length; i++)
+        {
+
+            if (hitColliders[i].GetComponentInParent<Pickup>() != null)
+            {
+               
+                return false;
+            }
+         
+        }
+               return true;
     }
 
     private bool IsSpawnCount()
