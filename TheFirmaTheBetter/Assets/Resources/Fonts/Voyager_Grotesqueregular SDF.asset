@@ -39,7 +39,7 @@ MonoBehaviour:
     m_SubscriptSize: 0.5
     m_UnderlineOffset: -10.2
     m_UnderlineThickness: 5.1
-    m_StrikethroughOffset: 0
+    m_StrikethroughOffset: 30
     m_StrikethroughThickness: 5.1
     m_TabWidth: 28
   m_GlyphTable:
@@ -1734,7 +1734,7 @@ Material:
     - _ColorMask: 15
     - _CullMode: 0
     - _Diffuse: 0.5
-    - _FaceDilate: 0
+    - _FaceDilate: 0.095
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
     - _GlowInner: 0.05
@@ -1752,8 +1752,8 @@ Material:
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.9
-    - _ScaleRatioB: 0.73125
-    - _ScaleRatioC: 0.73125
+    - _ScaleRatioB: 0.64575
+    - _ScaleRatioC: 0.64575
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
