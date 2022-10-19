@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4222228179947330299}
-  - component: {fileID: 7687088332693986812}
   m_Layer: 0
   m_Name: FlyThroughHazard
   m_TagString: Untagged
@@ -35,20 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7687088332693986812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4222228179947330289}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d896cdb099f6fe47a78f8293ba7615d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amount: 2
-  damageParticle: {fileID: 8311527145002070203}
 --- !u!1 &8682541038862598941
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,12 +376,6 @@ PrefabInstance:
 --- !u!4 &1947841090521886414 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 347816576214678848, guid: 63e636ff53701024981e6704b8086130,
-    type: 3}
-  m_PrefabInstance: {fileID: 2295620246288192398}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &8311527145002070203 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7819330414839767861, guid: 63e636ff53701024981e6704b8086130,
     type: 3}
   m_PrefabInstance: {fileID: 2295620246288192398}
   m_PrefabAsset: {fileID: 0}
