@@ -190,6 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38527f78cd7e298428f420665b3c2f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickedUpParticle: {fileID: 1232804221357758, guid: b1ede0eef436590479b9282c69418d53,
+    type: 3}
   energyIncreaseAmount: 10
 --- !u!4 &6518981864437047937 stripped
 Transform:

@@ -14,6 +14,9 @@ public abstract class Pickup : MonoBehaviour, ICollidable
 
     //private TimeTracker timeTrack;
 
+    [SerializeField]
+    private GameObject pickedUpParticle;
+
     private PickupZoneSpawnManager manager;
    
     private void OnTriggerEnter(Collider other)
@@ -46,6 +49,7 @@ public abstract class Pickup : MonoBehaviour, ICollidable
 
     public virtual void PickUpAction(ShipBuilder shipBuilder) {
 
+        Instantiate(pickedUpParticle,transform.position,Quaternion.identity);
         DestroySelf();
     }
     private void Awake()
