@@ -15,8 +15,18 @@ namespace MapSelection
         [SerializeField]
         private TMP_Text mapSelectableGameMode;
 
-        public TMP_Text MapSelectableName { get { return mapSelectableName; } }
-        public Image MapSelectableImage { get { return mapSelectableImage; } }
-        public TMP_Text MapSelectableGameMode { get { return mapSelectableGameMode; } }
+    private int mapSelectableIndex;
+
+    public void Setup(MapData mapData)
+    {
+        mapSelectableName.text = mapData.MapName;
+        mapSelectableImage = mapData.MapPicture;
+        mapSelectableGameMode.text = mapData.GameMode;
+        mapSelectableIndex = mapData.MapSceneIndex;
     }
+
+    public TMP_Text MapSelectableName { get { return mapSelectableName; } }
+    public Image MapSelectableImage { get { return mapSelectableImage; } }
+    public TMP_Text MapSelectableGameMode { get { return mapSelectableGameMode; } }
+    public int MapSelectableIndex { get { return mapSelectableIndex; } }
 }

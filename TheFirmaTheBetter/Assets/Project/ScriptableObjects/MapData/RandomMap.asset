@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0360a2cb076ce604eaf5a0d1bca5b139, type: 3}
-  m_Name: KOTHMap1
+  m_Script: {fileID: 11500000, guid: 8106df2e00bf00f468f3b32c65cc6ea8, type: 3}
+  m_Name: RandomMap
   m_EditorClassIdentifier: 
-  mapName: Moon Town USA
+  mapName: Random
   mapPicture: {fileID: 0}
-  gameMode: KOTH
-  mapSceneIndex: 4
+  gameMode: ???
+  mapSceneIndex: 0
