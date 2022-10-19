@@ -29,7 +29,7 @@ namespace Managers
         private void OnDisable()
         {
             Channels.OnPlayerBecomesDeath -= OnPlayerDeath;
-            Channels.OnRoundStarted += ReviveShips;
+            Channels.OnRoundStarted -= ReviveShips;
         }
 
         private void OnPlayerDeath(ShipBuilder shipBuilderThatDied, int killerIndex)
@@ -61,12 +61,11 @@ namespace Managers
 
         private void RemoveShipFromScene(ShipBuilder ship)
         {
-            ship.gameObject.SetActive(false);
             ship.transform.parent = null;
             DontDestroyOnLoad(ship);
         }
 
-        private void ReviveShips(int roundIndex)
+        private void ReviveShips(int roundIndex, int numberofRounds)
         {
             foreach (ShipBuilder ship in ShipBuildManager.Instance.ShipBuilders)
             {

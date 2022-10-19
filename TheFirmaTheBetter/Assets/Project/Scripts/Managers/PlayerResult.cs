@@ -60,15 +60,15 @@ namespace Managers
         {
             if (PlayersKilled != other.PlayersKilled)
             {
-                return PlayersKilled.CompareTo(other.PlayersKilled);
+                return PlayersKilled.CompareTo(other.PlayersKilled) * -1;
             }
 
             if (RoundsWon != other.RoundsWon)
             {
-                return RoundsWon.CompareTo(other.RoundsWon);
+                return RoundsWon.CompareTo(other.RoundsWon) * -1;
             }
 
-            return LastWonRoundIndex.CompareTo(other.LastWonRoundIndex);
+            return LastWonRoundIndex.CompareTo(other.LastWonRoundIndex) * -1;
 
         }
 

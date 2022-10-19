@@ -28,6 +28,7 @@ namespace EventSystem
         public delegate void PlayerTakeDamage(ShipBuilder hittedBuilder, int damageAmount, int indexOfPlayerThatShotTheBullet);
         public delegate void EveryPlayerReady(int playersInGameCount);
         public delegate void PlayerSpawned(GameObject spawnedShipBuilderObject, int playerNumber);
+        public delegate void PlayerRespawned(GameObject respawnedShipBuilderObject, int playerNumber);
         /// <summary>
         ///     Called when firing the gun while not having enough ammo
         /// </summary>
@@ -52,7 +53,7 @@ namespace EventSystem
         public delegate void NavigateDown();
         public delegate void GameOver();
         public delegate void RoundOver(int roundIndex, int winnerIndex);
-        public delegate void RoundStarted(int roundIndex);
+        public delegate void RoundStarted(int roundIndex, int numberOfRounds);
         public delegate void ControllerShemeHidden();
         public delegate void ControllerShemeShowing();
 
@@ -73,6 +74,7 @@ namespace EventSystem
         public static PlayerTakeDamage OnPlayerTakeDamage;
         public static EveryPlayerReady OnEveryPlayerReady;
         public static PlayerSpawned OnPlayerSpawned;
+        public static PlayerRespawned OnPlayerRespawned;
         public static EnergyEmpty OnEnergyEmpty;
         public static PlayerHit OnPlayerHit;
         public static HealthChanged OnHealthChanged;

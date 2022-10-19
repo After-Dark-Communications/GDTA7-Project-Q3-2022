@@ -1,20 +1,16 @@
 using EventSystem;
 using Managers;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RoundManager : MonoBehaviour
 {
-    private int numberOfRounds;
+    public int DebugNumberOfRounds = 3;
 
+    private int numberOfRounds;
     private int currentRoundIndex = -1;
 
     private void OnEnable()
     {
-        SetRounds(3);
-
         Channels.OnRoundOver += RoundOver;
     }
 
@@ -23,11 +19,16 @@ public class RoundManager : MonoBehaviour
         Channels.OnRoundOver -= RoundOver;
     }
 
-    public void SetRounds(int numRounds)
+    private void Start()
     {
-        this.numberOfRounds = numRounds;
+        SetRounds(DebugNumberOfRounds);
+    }
+
+    public void SetRounds(int numberOfRounds)
+    {
+        this.numberOfRounds = numberOfRounds;
         currentRoundIndex = 1;
-        Channels.OnRoundStarted?.Invoke(currentRoundIndex);
+        Channels.OnRoundStarted?.Invoke(currentRoundIndex, this.numberOfRounds);
     }
 
     private void RoundOver(int roundIndex, int winnerIndex)
@@ -37,15 +38,15 @@ public class RoundManager : MonoBehaviour
 
     private void NextRound()
     {
-        if (IsLastRound)
+        if (!IsLastRound)
         {
             currentRoundIndex++;
-            Channels.OnRoundStarted?.Invoke(currentRoundIndex);
+            Channels.OnRoundStarted?.Invoke(currentRoundIndex, numberOfRounds);
         }
         else
         {
             Channels.OnGameOver?.Invoke();
-            SceneSwitchManager.SwitchToSceneWithIndex(5);
+            SceneSwitchManager.SwitchToLastScene();
         }
     }
 
