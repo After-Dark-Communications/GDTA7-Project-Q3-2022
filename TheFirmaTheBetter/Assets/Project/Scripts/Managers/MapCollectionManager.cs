@@ -13,6 +13,8 @@ namespace Managers
         List<FFAMapData> fFAMaps = new List<FFAMapData>();
         [SerializeField]
         List<KOTHMapData> kOTHMaps = new List<KOTHMapData>();
+        [SerializeField]
+        List<RandomMapData> randomMaps = new List<RandomMapData>();
 
         private void Awake()
         {
@@ -20,10 +22,12 @@ namespace Managers
 
             allMaps.AddRange(fFAMaps);
             allMaps.AddRange(kOTHMaps);
+            allMaps.AddRange(randomMaps);
         }
 
         public List<MapData> AllMaps { get { return allMaps; } }
         public List<FFAMapData> FFAMaps { get { return fFAMaps; } }
         public List<KOTHMapData> KOTHMaps { get { return kOTHMaps; } }
+        public List<RandomMapData> RandomMaps { get { return randomMaps; } }
     }
 }

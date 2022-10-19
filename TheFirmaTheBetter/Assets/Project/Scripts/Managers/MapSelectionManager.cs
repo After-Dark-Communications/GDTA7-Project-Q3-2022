@@ -1,9 +1,11 @@
 using Managers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -34,8 +36,21 @@ namespace Managers
 
         public void SelectMap(int indexFromList)
         {
-            MapSelectable selectedMapSelectable = mapSelectables[indexFromList];
-            int selectedMapIndex = selectedMapSelectable.MapSelectableIndex;
+            int lastIndex = mapSelectables.Count - 1;
+            int selectedMapIndex;
+
+            if(indexFromList == lastIndex) //The last index should always be the random map.
+            {
+                int randomSelectedMap = Random.Range(0, lastIndex);
+                MapSelectable selectedRandomMapSelectable = mapSelectables[randomSelectedMap];
+                selectedMapIndex = selectedRandomMapSelectable.MapSelectableIndex;
+            }
+            else
+            {
+                MapSelectable selectedMapSelectable = mapSelectables[indexFromList];
+                selectedMapIndex = selectedMapSelectable.MapSelectableIndex;
+            }
+
             SceneSwitchManager.SwitchToSceneWithIndex(selectedMapIndex);
         }
     }
