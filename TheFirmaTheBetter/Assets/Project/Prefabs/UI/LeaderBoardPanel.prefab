@@ -358,6 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7190641514404212604}
   - component: {fileID: 4874322080722281341}
+  - component: {fileID: 8619071986307356062}
   m_Layer: 5
   m_Name: LeaderBoardPanel
   m_TagString: Untagged
@@ -395,10 +396,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9152784977779686056}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeb98166b1cdc554aab54d128adaa181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndexUI: {fileID: 5197577793442666498}
   playerPointsUI: {fileID: 329728235556765668}
+--- !u!114 &8619071986307356062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9152784977779686056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb4cc63a445c4d45b7d39ce354d610a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNumberTextField: {fileID: 5197577793442666498}
+  scoreTextField: {fileID: 329728235556765668}

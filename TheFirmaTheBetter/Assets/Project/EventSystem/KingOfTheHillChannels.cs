@@ -10,8 +10,8 @@ namespace EventSystem
         /// Gives a player score
         /// </summary>
         /// <param name="playerNumber">The player number to give points</param>
-        /// <param name="score">Amount of points to give</param>
-        public delegate void KingOfTheHillScore(int playerNumber, int score);
+        /// <param name="scoreToAdd">Amount of points to give</param>
+        public delegate void KingOfTheHillScore(int playerNumber, int scoreToAdd);
         /// <summary>
         /// Call when a player enters the scoring zone
         /// </summary>

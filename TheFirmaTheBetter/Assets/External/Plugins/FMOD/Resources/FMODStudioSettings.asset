@@ -55,9 +55,7 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler:
-      Value: {fileID: 0}
-      HasValue: 0
+    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
   OutputTypeName: 
   threadAffinities:
     Value: []
