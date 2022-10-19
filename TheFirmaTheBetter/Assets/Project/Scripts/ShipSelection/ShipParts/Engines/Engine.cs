@@ -71,7 +71,7 @@ namespace ShipParts.Engines
             shipRigidBody.AddForce(forward.normalized * _throttle * (engineData.Speed * Time.fixedDeltaTime), ForceMode.Impulse);
         }
 
-        private void MoveShip(Vector2 move)
+        public void MoveShip(Vector2 move)
         {//when starting to move, increase T and lerp towards top speed
          //when stopping, decrease T and lerp towards 0 speed
             _throttle = new Vector3(move.x, 0, move.y).magnitude;

@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Project/Scenes/MainScenes/KOTHScene.unity
     guid: 7c6cdd3090868ed4d9f59c82b7639e3b
   - enabled: 1
+    path: Assets/Project/Scenes/MainScenes/FFAScene.unity
+    guid: 190bf658643575d42a0c308a89d95e8d
+  - enabled: 1
     path: Assets/Project/Scenes/MainScenes/EndScreen.unity
     guid: 5bb2ebf43fed1fc4aa6660145b774187
   m_configObjects:

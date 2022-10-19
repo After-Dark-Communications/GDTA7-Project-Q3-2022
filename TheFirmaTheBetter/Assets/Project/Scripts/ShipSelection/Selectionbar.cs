@@ -1,10 +1,10 @@
-using Assets.Project.Scripts.ShipSelection;
+using ShipSelection;
 using EventSystem;
-using Util;
 using ShipParts;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UI;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;

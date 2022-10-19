@@ -15,4 +15,4 @@ MonoBehaviour:
   mapName: Asteroid Field
   mapPicture: {fileID: 0}
   gameMode: FFA
-  mapSceneIndex: 0
+  mapSceneIndex: 3

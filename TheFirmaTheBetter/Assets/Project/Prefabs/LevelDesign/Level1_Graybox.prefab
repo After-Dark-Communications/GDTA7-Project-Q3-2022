@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3907797707684469361}
   - component: {fileID: 3907797707684469360}
   - component: {fileID: 3907797707684469367}
+  - component: {fileID: 5212652626246720409}
   m_Layer: 0
   m_Name: OutsideRock
   m_TagString: Untagged
@@ -569,9 +570,21 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &5212652626246720409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907797707684469365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d85977b23a1ec468228d779480844d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3907797707833948384
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,6 +939,7 @@ GameObject:
   - component: {fileID: 3907797707839974720}
   - component: {fileID: 3907797707839974727}
   - component: {fileID: 3907797707839974726}
+  - component: {fileID: 2300268888744678628}
   m_Layer: 0
   m_Name: OutsideRock_3
   m_TagString: Untagged
@@ -1481,9 +1495,21 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &2300268888744678628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907797707839974724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d85977b23a1ec468228d779480844d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3907797707911111412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1498,6 +1524,7 @@ GameObject:
   - component: {fileID: 3907797707911111408}
   - component: {fileID: 3907797707911111415}
   - component: {fileID: 3907797707911111414}
+  - component: {fileID: 5329567378058182759}
   m_Layer: 0
   m_Name: Cave_Wall_1
   m_TagString: Untagged
@@ -2566,9 +2593,21 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &5329567378058182759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907797707911111412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d85977b23a1ec468228d779480844d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3907797707986317084
 GameObject:
   m_ObjectHideFlags: 0
@@ -2583,6 +2622,7 @@ GameObject:
   - component: {fileID: 3907797707986317080}
   - component: {fileID: 3907797707986317087}
   - component: {fileID: 3907797707986317086}
+  - component: {fileID: 5850543570650065485}
   m_Layer: 0
   m_Name: OutsideRock_2
   m_TagString: Untagged
@@ -3138,9 +3178,21 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &5850543570650065485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907797707986317084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d85977b23a1ec468228d779480844d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3907797708381540904
 GameObject:
   m_ObjectHideFlags: 0
@@ -3155,6 +3207,7 @@ GameObject:
   - component: {fileID: 3907797708381540948}
   - component: {fileID: 3907797708381540907}
   - component: {fileID: 3907797708381540906}
+  - component: {fileID: 8762354905087750615}
   m_Layer: 0
   m_Name: Cave_Wall
   m_TagString: Untagged
@@ -4223,9 +4276,21 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &8762354905087750615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907797708381540904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d85977b23a1ec468228d779480844d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3907797708567986138
 GameObject:
   m_ObjectHideFlags: 0
@@ -4274,6 +4339,7 @@ GameObject:
   - component: {fileID: 3907797708937563111}
   - component: {fileID: 3907797708937563110}
   - component: {fileID: 3907797708937563109}
+  - component: {fileID: 579300306075647281}
   m_Layer: 0
   m_Name: OutsideRock_1
   m_TagString: Untagged
@@ -4829,9 +4895,21 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &579300306075647281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907797708937563131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d85977b23a1ec468228d779480844d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3907797709333982513
 GameObject:
   m_ObjectHideFlags: 0
@@ -4846,6 +4924,7 @@ GameObject:
   - component: {fileID: 3907797709333982525}
   - component: {fileID: 3907797709333982524}
   - component: {fileID: 3907797709333982515}
+  - component: {fileID: 7925000735464153038}
   m_Layer: 0
   m_Name: Cave_Wall_3
   m_TagString: Untagged
@@ -5914,9 +5993,21 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &7925000735464153038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907797709333982513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d85977b23a1ec468228d779480844d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3907797709485151273
 GameObject:
   m_ObjectHideFlags: 0
@@ -5931,6 +6022,7 @@ GameObject:
   - component: {fileID: 3907797709485151317}
   - component: {fileID: 3907797709485151316}
   - component: {fileID: 3907797709485151275}
+  - component: {fileID: 3423653867389057443}
   m_Layer: 0
   m_Name: Cave_Wall_2
   m_TagString: Untagged
@@ -6999,9 +7091,21 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &3423653867389057443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907797709485151273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d85977b23a1ec468228d779480844d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3907797709508434764
 GameObject:
   m_ObjectHideFlags: 0
@@ -7050,7 +7154,8 @@ GameObject:
   - component: {fileID: 3907797709528290982}
   - component: {fileID: 3907797709528290981}
   - component: {fileID: 3907797709528290980}
-  - component: {fileID: 3907797709528291003}
+  - component: {fileID: 6811456201305599194}
+  - component: {fileID: 514089486322944015}
   m_Layer: 0
   m_Name: MiddlePillar
   m_TagString: Untagged
@@ -7847,8 +7952,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3907797709528291001}
   m_Mesh: {fileID: 0}
---- !u!64 &3907797709528291003
-MeshCollider:
+--- !u!65 &6811456201305599194
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -7857,10 +7962,21 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 3.3492417, y: 13.603124, z: 3.856679}
+  m_Center: {x: 4.599927, y: 6.801562, z: -4.176683}
+--- !u!114 &514089486322944015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907797709528291001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d85977b23a1ec468228d779480844d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3907797709533817532
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using EventSystem;
+using Hazards;
 using Projectiles;
 using ShipParts;
 using ShipParts.Ship;
@@ -53,6 +54,7 @@ namespace Collisions
             {
                 HandleHitByOtherShip(objectThatHit as ShipCollision, shipStats);
             }
+
             if (objectThatHit is Hazard)
             {
                 HandleHitByHazard(objectThatHit as Hazard);

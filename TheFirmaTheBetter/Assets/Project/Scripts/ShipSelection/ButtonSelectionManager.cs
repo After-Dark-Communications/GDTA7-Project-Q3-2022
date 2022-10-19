@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Project.Scripts.ShipSelection
+namespace ShipSelection
 {
     public class ButtonSelectionManager : MonoBehaviour
     {

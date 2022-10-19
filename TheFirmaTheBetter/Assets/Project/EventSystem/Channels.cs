@@ -53,6 +53,9 @@ namespace EventSystem
         public delegate void NavigateDown();
         public delegate void GameOver();
 
+        public delegate void PlayerHealed(int healthIncreaseAmount, int playerNumber);
+        public delegate void PickupDestoryed();
+
         public static ChangeFireMode OnChangeFireMode;
         public static EnergyUsed OnEnergyUsed;
         public static EnergyChanged OnEnergyChanged;
@@ -72,10 +75,12 @@ namespace EventSystem
         public static HealthChanged OnHealthChanged;
         public static EnabledStatGameObject OnEnabledStatGameObject;
         public static WeaponFired OnWeaponFired;
+        public static PlayerHealed OnPlayerHealed;
         public static SelectedCategoryChanged OnSelectedCategoryChanged;
         public static NavigateUp OnNavigateUp;
         public static NavigateDown OnNavigateDown;
         public static GameOver OnGameOver;
+        public static PickupDestoryed OnPickupDestroyed;
     }
 
 }
