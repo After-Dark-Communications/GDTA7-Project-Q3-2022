@@ -62,7 +62,7 @@ namespace Audio
 
         public void PlayGameStartEvent()
         {
-            PlayEvent(gameOverEvent);
+            PlayEvent(gameStartEvent);
         }
 
         public void PlayFirstBloodEvent()

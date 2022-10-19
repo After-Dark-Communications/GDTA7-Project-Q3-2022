@@ -19,5 +19,12 @@ public class EngineAudioManager : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
+        Channels.OnControllerShemeHidden += StartGame;
+    }
+
+    void StartGame()
+    {
+        Channels.OnGameStart?.Invoke();
+        Channels.Announcer.OnPlayGameStart?.Invoke();
     }
 }
