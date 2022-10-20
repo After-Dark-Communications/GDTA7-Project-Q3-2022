@@ -5,6 +5,7 @@ using ShipSelection;
 using EventSystem;
 using Collisions;
 using ShipParts.Ship;
+using System;
 
 public class ScoringZone : MonoBehaviour
 {
@@ -15,6 +16,18 @@ public class ScoringZone : MonoBehaviour
     [SerializeField]
     [Range(1, 3)]
     private int ScoreAmount;
+    private void OnEnable()
+    {
+        Channels.OnPlayerBecomesDeath += CheckToRemoveShip; 
+    }
+
+    private void CheckToRemoveShip(ShipBuilder shipBuilderThatNeedsDying, int playerIndexOfKiller)
+    {
+        if(shipsEntered.Contains(shipBuilderThatNeedsDying))
+        {
+            shipsEntered.Remove(shipBuilderThatNeedsDying);
+        }
+    }
 
     private void Update()
     {
@@ -56,5 +69,10 @@ public class ScoringZone : MonoBehaviour
             if (shipsEntered.Contains(enteredShip))
                 shipsEntered.Remove(enteredShip);
         }
+    }
+
+    private void OnDisable()
+    {
+        Channels.OnPlayerBecomesDeath -= CheckToRemoveShip;
     }
 }
