@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace ShipParts
 {
@@ -23,6 +24,28 @@ namespace ShipParts
             ResetHealth(shipStats);
 
             Channels.OnPlayerTakeDamage += TakeDamage;
+            Channels.OnPlayerHealed += Heal;
+        }
+
+        private void Heal(int healthIncreaseAmount, int playerNumber)
+        {
+            //check pl number
+            //increse health by persentage
+            if (this.playerNumber != playerNumber)
+                return;
+
+            currentShipHealth += (float)healthIncreaseAmount/100*maxHealth;
+
+            if (currentShipHealth >= maxHealth)
+                currentShipHealth = maxHealth;
+
+            UpdateHealthBar(playerNumber);
+
+        }
+
+        private void UpdateHealthBar(int playerNumber)
+        {
+            Channels.OnHealthChanged(playerNumber, currentShipHealth / maxHealth);
         }
 
         private void ResetHealth(ShipStats shipStats)
@@ -46,7 +69,7 @@ namespace ShipParts
                 Channels.OnPlayerBecomesDeath?.Invoke(shipBuilder, damagerIndex);
             }
 
-            Channels.OnHealthChanged(playerNumber, currentShipHealth / maxHealth);
+            UpdateHealthBar(playerNumber);
         }
 
         public void UpdateHealth(ShipStats shipStats)
@@ -57,6 +80,7 @@ namespace ShipParts
         public void Unsubscribe()
         {
             Channels.OnPlayerTakeDamage -= TakeDamage;
+            Channels.OnPlayerHealed -= Heal;
         }
 
         public float MaxHealth { get => maxHealth; set => maxHealth = value; }

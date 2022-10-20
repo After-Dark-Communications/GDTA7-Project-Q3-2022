@@ -1,29 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EventSystem;
 
-public class EnergyZoneSpawner : MonoBehaviour
+namespace MovingObjects
 {
-    [SerializeField]
-    private float spawnInterval;
-
-    private float timeSinceLastSpawned;
-
-    private ObjectMover objectMover;
-
-    private void Start()
+    public class EnergyZoneSpawner : MonoBehaviour
     {
-        objectMover = GetComponentInChildren<ObjectMover>();
-    }
+        [SerializeField]
+        private float spawnInterval;
 
-    private void Update()
-    {
-        timeSinceLastSpawned += Time.deltaTime;
+        private float timeSinceLastSpawned;
 
-        if (timeSinceLastSpawned < spawnInterval)
-            return;
+        private ObjectMover objectMover;
 
-        timeSinceLastSpawned = 0;
-        objectMover.StartCorountineMovePoint();
+        private void Start()
+        {
+            objectMover = GetComponentInChildren<ObjectMover>();
+        }
+
+        private void Update()
+        {
+            timeSinceLastSpawned += Time.deltaTime;
+
+            if (timeSinceLastSpawned < spawnInterval)
+                return;
+
+            timeSinceLastSpawned = 0;
+            objectMover.StartCorountineMovePoint();
+            Channels.Announcer.OnPlayEnergyZoneMoved?.Invoke();
+        }
     }
 }

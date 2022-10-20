@@ -1,14 +1,18 @@
+using Managers;
 using UnityEngine;
 
-public class MainMenu : Menu
+namespace UI.Menus
 {
-    public void StartGame()
+    public class MainMenu : Menu
     {
-        SceneSwitchManager.SwitchToNextScene();
-    }
+        public void StartGame()
+        {
+            SceneSwitchManager.SwitchToNextScene();
+        }
 
-    public void QuitGame()
-    {
-        Application.Quit();
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }

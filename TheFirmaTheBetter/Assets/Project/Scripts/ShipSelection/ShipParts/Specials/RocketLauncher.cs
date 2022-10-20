@@ -1,5 +1,4 @@
-﻿using Assets.Project.Scripts.ShipParts.Specials;
-using EventSystem;
+﻿using EventSystem;
 using Projectiles;
 using ShipParts.Weapons;
 using UnityEngine;

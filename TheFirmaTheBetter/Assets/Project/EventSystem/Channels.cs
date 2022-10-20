@@ -1,8 +1,11 @@
+using Managers;
 using ShipParts;
 using ShipParts.Ship;
+using ShipSelection;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static EventSystem.Channels;
 
 namespace EventSystem
 {
@@ -11,6 +14,7 @@ namespace EventSystem
         public static InputChannel Input = new InputChannel();
         public static MovementChannel Movement = new MovementChannel();
         public static AnnouncerChannel Announcer = new AnnouncerChannel();
+        public static KingOfTheHillChannel KingOfTheHill = new KingOfTheHillChannel();
 
         public delegate void ChangeFireMode(bool newFireModeValue);
         public delegate void EnergyUsed(int playerNumber, int amount);
@@ -26,6 +30,7 @@ namespace EventSystem
         public delegate void PlayerTakeDamage(ShipBuilder hittedBuilder, int damageAmount, int indexOfPlayerThatShotTheBullet);
         public delegate void EveryPlayerReady(int playersInGameCount);
         public delegate void PlayerSpawned(GameObject spawnedShipBuilderObject, int playerNumber);
+        public delegate void PlayerRespawned(GameObject respawnedShipBuilderObject, int playerNumber);
         /// <summary>
         ///     Called when firing the gun while not having enough ammo
         /// </summary>
@@ -45,6 +50,18 @@ namespace EventSystem
         /// <param name="playerNumber">The index of the player that got its stat gameobject enabled</param>
         public delegate void EnabledStatGameObject(int statGameObjectNumber, int playerNumber);
         public delegate void WeaponFired(FMODUnity.EventReference weaponEventToPlay);
+        public delegate void SelectedCategoryChanged(SelectableCollection currentSelectedCollection, int playerNumber);
+        public delegate void NavigateUp();
+        public delegate void NavigateDown();
+        public delegate void GameOver();
+        public delegate void RoundOver(int roundIndex, int winnerIndex);
+        public delegate void RoundStarted(int roundIndex, int numberOfRounds);
+        public delegate void GameStart();
+        public delegate void ControllerShemeHidden();
+        public delegate void ControllerShemeShowing();
+
+        public delegate void PlayerHealed(int healthIncreaseAmount, int playerNumber);
+        public delegate void PickupDestroyed();
 
         public static ChangeFireMode OnChangeFireMode;
         public static EnergyUsed OnEnergyUsed;
@@ -60,11 +77,24 @@ namespace EventSystem
         public static PlayerTakeDamage OnPlayerTakeDamage;
         public static EveryPlayerReady OnEveryPlayerReady;
         public static PlayerSpawned OnPlayerSpawned;
+        public static PlayerRespawned OnPlayerRespawned;
         public static EnergyEmpty OnEnergyEmpty;
         public static PlayerHit OnPlayerHit;
         public static HealthChanged OnHealthChanged;
         public static EnabledStatGameObject OnEnabledStatGameObject;
         public static WeaponFired OnWeaponFired;
+        public static PlayerHealed OnPlayerHealed;
+        public static SelectedCategoryChanged OnSelectedCategoryChanged;
+        public static NavigateUp OnNavigateUp;
+        public static NavigateDown OnNavigateDown;
+        public static GameOver OnGameOver;
+        public static RoundOver OnRoundOver;
+        public static RoundStarted OnRoundStarted;
+        public static PickupDestroyed OnPickupDestroyed;
+        public static GameStart OnGameStart;
+        public static ControllerShemeShowing OnControllerShemeShowing;
+        public static ControllerShemeHidden OnControllerShemeHidden;
+
     }
 
 }

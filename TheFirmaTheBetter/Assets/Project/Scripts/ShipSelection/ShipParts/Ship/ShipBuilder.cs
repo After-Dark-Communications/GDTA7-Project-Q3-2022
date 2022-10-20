@@ -16,6 +16,7 @@ namespace ShipParts.Ship
         private PartsCollectionManager collectionManager;
 
         private InputDevice playerDevice;
+        private ShipBuilderInput shipBuilderInput;
 
         private List<Part> availablePlayerParts = new List<Part>();
 
@@ -23,15 +24,12 @@ namespace ShipParts.Ship
 
         private List<Part> selectedParts = new List<Part>();
 
-        private ShipFactory shipFactory;
-
         private void Awake()
         {
             Channels.OnPlayerJoined += OnPlayerJoined;
             Channels.OnShipPartSelected += OnShipPartSelected;
             Channels.Input.OnShipCompletedInput += OnShipCompletedInput;
 
-            shipFactory  = new ShipFactory();
         }
 
         private void OnDestroy()
@@ -39,6 +37,11 @@ namespace ShipParts.Ship
             Channels.OnPlayerJoined -= OnPlayerJoined;
             Channels.OnShipPartSelected -= OnShipPartSelected;
             Channels.Input.OnShipCompletedInput -= OnShipCompletedInput;
+
+            if (shipBuilderInput == null)
+                return;
+
+            shipBuilderInput.UnSubscribeToEvents();
         }
 
         private void OnPlayerJoined(int playerNumber, InputDevice playerDevice)
@@ -48,7 +51,7 @@ namespace ShipParts.Ship
 
             this.playerDevice = playerDevice;
 
-            shipFactory.CreateNewShip();
+            shipBuilderInput = new ShipBuilderInput(playerDevice, playerNumber);
         }
 
         private void OnShipCompletedInput(int playerNumber)
@@ -154,6 +157,7 @@ namespace ShipParts.Ship
                 selectedCore.ConnectionPointCollection.ConnectPartToCorrectPoint(selectedPart);
             }
         }
+
 
         public int PlayerNumber => playerNumber;
         public List<Part> SelectedParts => selectedParts;

@@ -37,5 +37,9 @@ namespace ShipParts
                 Channels.OnChangeFireMode?.Invoke(true);
             }
         }
+
+        public void HandleZoneStayInteraction(Zone enteredZone)
+        {
+        }
     }
 }

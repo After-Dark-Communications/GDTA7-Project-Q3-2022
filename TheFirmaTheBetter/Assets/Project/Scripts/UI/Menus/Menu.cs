@@ -1,36 +1,39 @@
 using UnityEngine;
 
-public abstract class Menu : MonoBehaviour
+namespace UI.Menus
 {
-    [Tooltip("The default panel should be the first in the list")]
-    [SerializeField]
-    private MenuPanel[] menuPanels;
-
-    protected MenuPanel currentPanel;
-
-    private void OnEnable()
+    public abstract class Menu : MonoBehaviour
     {
-        CloseAllPanles();
-        OpenDefaultPanel();
-    }
+        [Tooltip("The default panel should be the first in the list")]
+        [SerializeField]
+        private MenuPanel[] menuPanels;
 
-    public void OpenMenuPanel(MenuPanel menuPanel)
-    {
-        if (currentPanel != null) currentPanel.ClosePanel();
-        menuPanel.OpenPanel();
-        currentPanel = menuPanel;
-    }
+        protected MenuPanel currentPanel;
 
-    public void OpenDefaultPanel()
-    {
-        OpenMenuPanel(menuPanels[0]);
-    }
-
-    private void CloseAllPanles()
-    {
-        foreach (MenuPanel menuPanel in menuPanels)
+        private void OnEnable()
         {
-            menuPanel.ClosePanel();
+            CloseAllPanles();
+            OpenDefaultPanel();
+        }
+
+        public void OpenMenuPanel(MenuPanel menuPanel)
+        {
+            if (currentPanel != null) currentPanel.ClosePanel();
+            menuPanel.OpenPanel();
+            currentPanel = menuPanel;
+        }
+
+        public void OpenDefaultPanel()
+        {
+            OpenMenuPanel(menuPanels[0]);
+        }
+
+        private void CloseAllPanles()
+        {
+            foreach (MenuPanel menuPanel in menuPanels)
+            {
+                menuPanel.ClosePanel();
+            }
         }
     }
 }

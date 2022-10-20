@@ -3,6 +3,7 @@ using Pooling;
 using Projectiles;
 using ShipParts.Ship;
 using ShipSelection.ShipBuilders.ConnectionPoints;
+using System;
 using System.Collections;
 using UnityEngine;
 using Util;
@@ -29,6 +30,11 @@ namespace ShipParts.Weapons
 
         private ButtonStates currentFireButtonState = ButtonStates.NONE;
 
+        private void Awake()
+        {
+            CalculateHighestAndLowest();
+        }
+
         protected override void Setup()
         {
             shipResources = GetComponentInParent<ShipResources>();
@@ -45,7 +51,7 @@ namespace ShipParts.Weapons
 
             if (weaponData != null)
             {
-                projectilesPool = new ObjectPool(weaponData.ProjectilePrefab, 10);
+                projectilesPool = new ObjectPool(weaponData.ProjectilePrefab.gameObject, 10);
             }
         }
 
@@ -55,7 +61,7 @@ namespace ShipParts.Weapons
                 return;
 
             if (currentFireButtonState == ButtonStates.STARTED || currentFireButtonState == ButtonStates.PERFORMED)
-                FireWeapon();    
+                FireWeapon();
         }
 
         private void OnChangeFireMode(bool newValue)
@@ -134,6 +140,7 @@ namespace ShipParts.Weapons
 
             void FireProjectile(GameObject projectileObject, Vector3 direction, Projectile projectile)
             {
+                projectile.FirerId = shipResources.GetComponent<ShipBuilder>().PlayerNumber;
                 projectileObject.GetComponent<Rigidbody>().AddForce(direction * projectile.ProjectileSpeed, ForceMode.Impulse);
                 Channels.OnEnergyUsed?.Invoke(playerNumber, weaponData.EnergyCost);
             }
@@ -163,6 +170,15 @@ namespace ShipParts.Weapons
         public override PartData GetData()
         {
             return weaponData;
+        }
+
+        protected override void CalculateHighestAndLowest()
+        {
+            base.CalculateHighestAndLowest();
+            StatBoundries.SetHighestAndLowest(weaponData.FireRate, ref StatBoundries.FIRE_RATE_BOUNDRIES);
+            StatBoundries.SetHighestAndLowest(weaponData.Range, ref StatBoundries.RANGE_BOUNDRIES);
+            StatBoundries.SetHighestAndLowest(weaponData.EnergyCost, ref StatBoundries.ENERGY_COST_BOUNDRIES);
+            StatBoundries.SetHighestAndLowest(weaponData.DPS, ref StatBoundries.DPS_BOUNDRIES);
         }
     }
 }

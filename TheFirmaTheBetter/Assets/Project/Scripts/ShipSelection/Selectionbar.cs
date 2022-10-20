@@ -1,31 +1,40 @@
-using Helper;
+using ShipSelection;
+using EventSystem;
 using ShipParts;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UI;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Util;
 
 namespace ShipSelection
 {
     public class Selectionbar : MonoBehaviour
     {
+        [SerializeField]
+        private ButtonSelectionManager buttonSelectionManager;
+
         private PlayerSelectionScreensData selectionScreensData;
 
         private List<SelectableCollection> selectionCollections = new List<SelectableCollection>();
 
         private List<Arrow> arrowsUI = new List<Arrow>();
 
-        private List<TMP_Text> buttonLabels = new List<TMP_Text>();
+        private List<SelectableOption> selectableOptions = new List<SelectableOption>();
 
         private int currentSelectedCollectionIndex = 0;
 
+        private int playerNumber;
+
         private void Awake()
         {
-            foreach (Button button in gameObject.GetComponentsInChildren<Button>())
+            foreach (SelectableOption selectableOption in gameObject.GetComponentsInChildren<SelectableOption>())
             {
-                buttonLabels.Add(button.GetComponentInChildren<TMP_Text>());
+                selectableOptions.Add(selectableOption);
             }
             foreach (Arrow arrow in GetComponentsInChildren<Arrow>())
             {
@@ -40,44 +49,62 @@ namespace ShipSelection
             UpdateLabelTexts();
         }
 
+        private void Start()
+        {
+            playerNumber = GetComponentInParent<PlayerSelectionScreen>().PlayerNumber;
+        }
+
         public void OnNavigate_Up()
         {
             currentSelectedCollectionIndex = ListLooper.SelectPrevious(selectionCollections, currentSelectedCollectionIndex);
-            PlayArrowAnimation(arrowsUI[0]);
             UpdateLabelTexts();
+            buttonSelectionManager.ResetButtons();
+            buttonSelectionManager.UpdateButtons(this);
+            Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
+            Channels.OnNavigateUp?.Invoke();
         }
 
         public void OnNavigate_Down()
         {
             currentSelectedCollectionIndex = ListLooper.SelectNext(selectionCollections, currentSelectedCollectionIndex);
-            PlayArrowAnimation(arrowsUI[1]);
             UpdateLabelTexts();
+            buttonSelectionManager.ResetButtons();
+            buttonSelectionManager.UpdateButtons(this);
+            Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
+            Channels.OnNavigateDown?.Invoke();
         }
 
         private void UpdateLabelTexts()
         {
             for (int i = 0; i <= selectionCollections.Count; i++)
             {
-                buttonLabels[i].SetText(selectionCollections[currentSelectedCollectionIndex].Selectables[i].Part.name);
+                //TODO: Make this an icon with text
+                selectableOptions[i].SetSprite(selectionCollections[currentSelectedCollectionIndex].Selectables[i].Part.PartIcon);
+                selectableOptions[i].SetText(selectionCollections[currentSelectedCollectionIndex].Selectables[i].Part.GetData().PartName);
             }
         }
 
         public void SetSelectedOptionIndex(int index)
         {
+            buttonSelectionManager.ResetButtonAt(CurrentSelectedCollection.CurrentSelectedIndex);
+
             CurrentSelectedCollection.CurrentSelectedIndex = index;
+           
+            buttonSelectionManager.UpdateButtons(this);
         }
 
         public Part GetCurrentSelectedPart()
         {
+            
+
+           // buttonSelectionManager.UpdateButtons(this);
             return CurrentSelectedCollection.Selectables[CurrentSelectedCollection.CurrentSelectedIndex].Part;
         }
 
-        public void PlayArrowAnimation(Arrow arrow)
-        {
-            arrow.PlaySelectedAnimation();
-        }
-
+        public List<SelectableCollection> SelectionCollections => selectionCollections;
         public SelectableCollection CurrentSelectedCollection => selectionCollections[currentSelectedCollectionIndex];
         public int CurrentSelectedIndex { get => currentSelectedCollectionIndex; }
+
+        public string CurrentCategoryName => CurrentSelectedCollection.CategoryName;
     }
 }

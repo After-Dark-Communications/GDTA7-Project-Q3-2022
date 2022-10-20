@@ -1,4 +1,5 @@
 using EventSystem;
+using Hazards;
 using Projectiles;
 using ShipParts;
 using ShipParts.Ship;
@@ -42,7 +43,7 @@ namespace Collisions
         }
 
         public void HandleCollision<T1>(T1 objectThatHit, ShipStats shipStats) where T1 : ICollidable
-        {//objectThatHit and shipStats are BOTH from the object that hit this one
+       {//objectThatHit and shipStats are BOTH from the object that hit this one
 
             if (objectThatHit is Projectile)
             {
@@ -52,6 +53,11 @@ namespace Collisions
             if (objectThatHit is ShipCollision)
             {
                 HandleHitByOtherShip(objectThatHit as ShipCollision, shipStats);
+            }
+
+            if (objectThatHit is Hazard)
+            {
+                HandleHitByHazard(objectThatHit as Hazard);
             }
         }
 
@@ -89,6 +95,13 @@ namespace Collisions
             Channels.OnPlayerTakeDamage?.Invoke(shipBuilder, projectileThatHit.ProjectileDamage, projectileThatHit.PlayerIndex);
             Channels.OnPlayerHit?.Invoke();
             projectileThatHit.DestroySelf();
+        }
+
+        private void HandleHitByHazard(Hazard hazardThatHit)
+        {
+            //Since none of the players shot the current shipbuilder, we make playerindex -1, since it can't be null.
+            Channels.OnPlayerTakeDamage?.Invoke(shipBuilder, hazardThatHit.Damage, -1);
+            Channels.OnPlayerHit?.Invoke();
         }
     }
 }

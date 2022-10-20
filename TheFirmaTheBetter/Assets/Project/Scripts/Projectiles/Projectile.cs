@@ -28,6 +28,8 @@ namespace Projectiles
 
         private ImpactSpawner impactSpawner;
 
+        private int firerId;
+
         private void OnEnable()
         {
             projectileDamage = projectileData.Damage;
@@ -86,9 +88,20 @@ namespace Projectiles
             ICollidable collisionObject = other.GetComponentInParent<ICollidable>();
 
             if (collisionObject != null)
-            {
+            { 
                 if (collisionObject is Projectile)
                     return;
+                
+                if(collisionObject is ShipCollision)
+                {
+                    ShipCollision collidedShip = collisionObject as ShipCollision;
+                    ShipBuilder builder = collidedShip.GetComponent<ShipBuilder>();
+
+                    if (builder.PlayerNumber == firerId)
+                    {
+                        return;
+                    }
+                }    
 
                 impactSpawner.SpawnImpactHitPrefab();
                 collisionObject.HandleCollision(this, null);
@@ -109,7 +122,7 @@ namespace Projectiles
         public float ArmingTime { get { return armingTime; } }
         public int AmountToSpawn { get { return amountToSpawn; } }
         public int PlayerIndex { get { return playerIndex; } }
-
+        public int FirerId { get { return firerId; } set { firerId = value; } }
         public ProjectileData ProjectileData => projectileData;
     }
 }

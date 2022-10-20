@@ -4,34 +4,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Zone : MonoBehaviour
+namespace Zones
 {
-
-    public virtual void OnTriggerEnter(Collider other)
+    public abstract class Zone : MonoBehaviour
     {
-        IHaveZoneInteraction zoneInteractor = other.GetComponentInParent<IHaveZoneInteraction>();
 
-        if (zoneInteractor == null)
-            return;
+        public virtual void OnTriggerEnter(Collider other)
+        {
+            IHaveZoneInteraction zoneInteractor = other.GetComponentInParent<IHaveZoneInteraction>();
 
-        zoneInteractor.HandleZoneEnterInteraction(this);
+            if (zoneInteractor == null)
+                return;
 
-        Channels.OnZoneEntered?.Invoke(other.gameObject);
+            zoneInteractor.HandleZoneEnterInteraction(this);
+
+            Channels.OnZoneEntered?.Invoke(other.gameObject);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            IHaveZoneInteraction zoneInteractor = other.GetComponentInParent<IHaveZoneInteraction>();
+
+            if (zoneInteractor == null)
+                return;
+
+            zoneInteractor.HandleZoneExitInteraction(this);
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            IHaveZoneInteraction zoneInteractor = other.GetComponentInParent<IHaveZoneInteraction>();
+
+            if (zoneInteractor == null)
+                return;
+
+            zoneInteractor.HandleZoneStayInteraction(this);
+        }
+
+        /// <summary>
+        /// Triggers a zone's effect
+        /// </summary>
+        /// <param name="obj">The player currently in the zone</param>
+        public abstract void TriggerEffect(GameObject obj);
     }
-
-    private void OnTriggerExit(Collider other)
-    {
-        IHaveZoneInteraction zoneInteractor = other.GetComponentInParent<IHaveZoneInteraction>();
-
-        if (zoneInteractor == null)
-            return;
-
-        zoneInteractor.HandleZoneExitInteraction(this);
-    }
-
-    /// <summary>
-    /// Triggers a zone's effect
-    /// </summary>
-    /// <param name="obj">The player currently in the zone</param>
-    public abstract void TriggerEffect(GameObject obj);
 }

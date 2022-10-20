@@ -74,6 +74,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 173843600b4e31b468fb849dbaaf9b79, type: 3}
+--- !u!1 &1599744079751842797 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 173843600b4e31b468fb849dbaaf9b79,
+    type: 3}
+  m_PrefabInstance: {fileID: 1941622163797292732}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3226745001649154708
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599744079751842797}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 56fa41124127bce428abdc10c4549c20, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &4126193471176782980
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -307,6 +333,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: GunRunner
       objectReference: {fileID: 0}
+    - target: {fileID: 8949787637657314788, guid: 2eb1c8875f351f14aaba4d6f4bf748bd,
+        type: 3}
+      propertyPath: animators.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949787637657314788, guid: 2eb1c8875f351f14aaba4d6f4bf748bd,
+        type: 3}
+      propertyPath: animators.Array.data[0]
+      value: 
+      objectReference: {fileID: 3226745001649154708}
     m_RemovedComponents:
     - {fileID: 3723246605526620374, guid: 2eb1c8875f351f14aaba4d6f4bf748bd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2eb1c8875f351f14aaba4d6f4bf748bd, type: 3}
@@ -328,7 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fae64628f062ee9488568445d2ecb239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partIcon: {fileID: 0}
+  partIcon: {fileID: 21300000, guid: 1140e3edcd3a42e41bfb6dad3614f9a8, type: 3}
   connectionPoint: {x: 0, y: 0, z: 0}
   connectionPointCollection: {fileID: 8755802607308576700}
   coreData: {fileID: 11400000, guid: e348c341eb3632b42b87ab8206486497, type: 2}

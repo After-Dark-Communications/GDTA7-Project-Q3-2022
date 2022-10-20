@@ -1,7 +1,9 @@
 using Collisions;
 using Controls;
+using EventSystem;
 using ShipSelection;
 using ShipSelection.ShipBuilders.ConnectionPoints;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -11,10 +13,9 @@ namespace ShipParts
     public abstract class Part : MonoBehaviour
     {
         [SerializeField]
-        private Image partIcon;
+        private Sprite partIcon;
         [SerializeField]
         private Vector3 connectionPoint;
-
         [SerializeField]
         private ConnectionPointsCollection connectionPointCollection;
 
@@ -30,6 +31,12 @@ namespace ShipParts
         protected InputDevice myInputDevice { get; private set; }
         protected ShipCollision thisCollision { get; private set; }
 
+        private void Awake()
+        {
+            CalculateHighestAndLowest();
+        }
+
+
         /// <summary>Sets the events and any other things that the part needs</summary>
         protected abstract void Setup();
 
@@ -44,6 +51,10 @@ namespace ShipParts
             Setup();
         }
 
+        protected virtual void CalculateHighestAndLowest() { }
+
         public ConnectionPointsCollection ConnectionPointCollection => connectionPointCollection;
+
+        public Sprite PartIcon { get => partIcon; set => partIcon = value; }
     }
 }

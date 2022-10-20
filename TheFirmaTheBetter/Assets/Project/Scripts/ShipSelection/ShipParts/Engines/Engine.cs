@@ -1,5 +1,6 @@
 using Collisions;
 using EventSystem;
+using Managers;
 using ShipParts.Ship;
 using ShipSelection.ShipBuilders.ConnectionPoints;
 using System.Collections;
@@ -36,10 +37,14 @@ namespace ShipParts.Engines
                 rootInputHandler.OnPlayerMoveUp.AddListener(MoveUp);
                 rootInputHandler.OnPlayerMoveDown.AddListener(MoveDown);
             }
+            shipRigidBody.drag = thisCollision.GetComponent<ShipResources>().ShipStats.Drag;
+
             //determine unaltered max speed
             _maxSpeed = engineData.Speed / shipRigidBody.drag;
 
             _lastPosition = shipRigidBody.position;
+
+            CalculateHighestAndLowest();
         }
 
         private void Update()
@@ -52,7 +57,7 @@ namespace ShipParts.Engines
                 Quaternion toRotation = Quaternion.LookRotation(new Vector3(_moveValue.x, 0, _moveValue.y), GlobalUp.UP.up);
                 shipRoot.rotation = Quaternion.RotateTowards(shipRoot.rotation, toRotation, engineData.Handling * Time.deltaTime);
 
-                GetComponentInParent<PlayerStatistics>().DistanceTravelled += shipRigidBody.velocity.magnitude * Time.deltaTime;
+                GetComponentInParent<PlayerResult>().DistanceTravelled += shipRigidBody.velocity.magnitude * Time.deltaTime;
             }
         }
 
@@ -66,7 +71,7 @@ namespace ShipParts.Engines
             shipRigidBody.AddForce(forward.normalized * _throttle * (engineData.Speed * Time.fixedDeltaTime), ForceMode.Impulse);
         }
 
-        private void MoveShip(Vector2 move)
+        public void MoveShip(Vector2 move)
         {//when starting to move, increase T and lerp towards top speed
          //when stopping, decrease T and lerp towards 0 speed
             _throttle = new Vector3(move.x, 0, move.y).magnitude;
@@ -166,6 +171,23 @@ namespace ShipParts.Engines
                 shipRoot.transform.position = new Vector3(shipRoot.transform.position.x, posy, shipRoot.transform.position.z);
                 t += (Time.deltaTime * speed) * TimeMultiplier;
             }
+        }
+
+        private void OnDisable()
+        {
+            UnityEngine.InputSystem.Gamepad gamepad = myInputDevice as UnityEngine.InputSystem.Gamepad;
+
+            if (gamepad == null)
+                return;
+
+            gamepad.SetMotorSpeeds(0, 0);
+        }
+
+        protected override void CalculateHighestAndLowest()
+        {
+            base.CalculateHighestAndLowest();
+            StatBoundries.SetHighestAndLowest(engineData.Speed, ref StatBoundries.SPEED_BOUNDRIES);
+            StatBoundries.SetHighestAndLowest(engineData.Handling, ref StatBoundries.HANDLING_BOUNDRIES);
         }
 
         public override string PartCategoryName => "Engine";

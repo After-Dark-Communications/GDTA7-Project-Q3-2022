@@ -3,45 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ObjectMover : MonoBehaviour
+namespace MovingObjects
 {
-    private List<MovementPoint> movementPoints = new List<MovementPoint>();
-
-    private int currentMovementPointIndex = 0;
-
-    private MovementPoint currentMovementPoint => movementPoints[currentMovementPointIndex];
-
-    private MovementPoint nextMovementPoint;
-
-    private void Start()
+    public class ObjectMover : MonoBehaviour
     {
-        MovementPoint[] movementPoints = transform.GetComponentsInChildren<MovementPoint>();
+        private List<MovementPoint> movementPoints = new List<MovementPoint>();
 
-        foreach (MovementPoint point in movementPoints)
+        private int currentMovementPointIndex = 0;
+
+        private MovementPoint currentMovementPoint => movementPoints[currentMovementPointIndex];
+
+        private MovementPoint nextMovementPoint;
+
+        private void Start()
         {
-            this.movementPoints.Add(point);
+            MovementPoint[] movementPoints = transform.GetComponentsInChildren<MovementPoint>();
+
+            foreach (MovementPoint point in movementPoints)
+            {
+                this.movementPoints.Add(point);
+            }
+            StartCorountineMovePoint();
         }
-        StartCorountineMovePoint();
-    }
 
-    public void StartCorountineMovePoint()
-    {
-        StartCoroutine(MoveToNextPoint());
-    }
+        public void StartCorountineMovePoint()
+        {
+            StartCoroutine(MoveToNextPoint());
+        }
 
-    IEnumerator MoveToNextPoint()
-    {
-        MovementPoint oldPoint = currentMovementPoint;
+        IEnumerator MoveToNextPoint()
+        {
+            MovementPoint oldPoint = currentMovementPoint;
 
-        ChangeIndex();
+            ChangeIndex();
 
-        nextMovementPoint = currentMovementPoint;
+            nextMovementPoint = currentMovementPoint;
 
-        oldPoint.DeSpawn();
-        yield return new WaitForSeconds(10f);
-        nextMovementPoint.Spawn();
+            oldPoint.DeSpawn();
+            yield return new WaitForSeconds(10f);
+            nextMovementPoint.Spawn();
 
-    }
+        }
 
         void IncrementIndex()
         {
@@ -56,6 +58,7 @@ public class ObjectMover : MonoBehaviour
             currentMovementPointIndex = Random.Range(0, movementPoints.Count);
         }
 
-    public MovementPoint NextMovementPoint { get { return nextMovementPoint; } }
+        public MovementPoint NextMovementPoint { get { return nextMovementPoint; } }
 
+    }
 }

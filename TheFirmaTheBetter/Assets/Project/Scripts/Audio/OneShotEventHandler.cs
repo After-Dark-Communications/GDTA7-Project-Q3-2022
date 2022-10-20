@@ -3,68 +3,71 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OneShotEventHandler : MonoBehaviour
+namespace Audio
 {
-    [Header("Variables")]
-    [Tooltip("The energy percentage at which the event should be played")]
-    [SerializeField]
-    private float energyPercentage;
-    [Header("FMOD Events")]
-    [SerializeField]
-    private FMODUnity.EventReference fuelEmptyEvent;
-    [SerializeField]
-    private FMODUnity.EventReference fuelAlmostEmptyEvent;
-    [SerializeField]
-    private FMODUnity.EventReference hitmarker;
-    private bool energyLowHasPlayed;
-
-    private void Start()
+    public class OneShotEventHandler : MonoBehaviour
     {
-        Channels.OnEnergyEmpty += PlayEnergyEmpty;
-        Channels.OnWeaponFired += PlayEvent;
-        Channels.OnEnergyChanged += CompareEnergy;
-        Channels.OnPlayerHit += PlayHitmarker;
-        energyLowHasPlayed = false;
-    }
+        [Header("Variables")]
+        [Tooltip("The energy percentage at which the event should be played")]
+        [SerializeField]
+        private float energyPercentage;
+        [Header("FMOD Events")]
+        [SerializeField]
+        private FMODUnity.EventReference fuelEmptyEvent;
+        [SerializeField]
+        private FMODUnity.EventReference fuelAlmostEmptyEvent;
+        [SerializeField]
+        private FMODUnity.EventReference hitmarker;
+        private bool energyLowHasPlayed;
 
-    private void OnDisable()
-    {
-        Channels.OnEnergyEmpty -= PlayEnergyEmpty;
-        Channels.OnWeaponFired -= PlayEvent;
-        Channels.OnEnergyChanged -= CompareEnergy;
-        Channels.OnPlayerHit -= PlayHitmarker;
-    }
-
-    private void PlayEvent(FMODUnity.EventReference fmodEvent)
-    {
-        FMODUnity.RuntimeManager.PlayOneShot(fmodEvent, transform.position);
-    }
-
-    private void PlayEnergyEmpty()
-    {
-        FMODUnity.RuntimeManager.PlayOneShot(fuelEmptyEvent, transform.position);
-    }
-
-    private void CompareEnergy(int playerNumber, float energy)
-    {
-        energy *= 100;
-        if (energy <= energyPercentage && energy >= 0 && !energyLowHasPlayed)
+        private void Start()
         {
-            PlayEnergyAlert();
-            energyLowHasPlayed = true;
+            Channels.OnEnergyEmpty += PlayEnergyEmpty;
+            Channels.OnWeaponFired += PlayEvent;
+            Channels.OnEnergyChanged += CompareEnergy;
+            Channels.OnPlayerHit += PlayHitmarker;
+            energyLowHasPlayed = false;
         }
 
-        else if (energy == 100)
-            energyLowHasPlayed = false;
-    }
+        private void OnDisable()
+        {
+            Channels.OnEnergyEmpty -= PlayEnergyEmpty;
+            Channels.OnWeaponFired -= PlayEvent;
+            Channels.OnEnergyChanged -= CompareEnergy;
+            Channels.OnPlayerHit -= PlayHitmarker;
+        }
 
-    private void PlayEnergyAlert()
-    {
-        FMODUnity.RuntimeManager.PlayOneShot(fuelAlmostEmptyEvent, transform.position);
-    }
+        private void PlayEvent(FMODUnity.EventReference fmodEvent)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(fmodEvent, transform.position);
+        }
 
-    private void PlayHitmarker()
-    {
-        FMODUnity.RuntimeManager.PlayOneShot(hitmarker, transform.position);
+        private void PlayEnergyEmpty()
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(fuelEmptyEvent, transform.position);
+        }
+
+        private void CompareEnergy(int playerNumber, float energy)
+        {
+            energy *= 100;
+            if (energy <= energyPercentage && energy >= 0 && !energyLowHasPlayed)
+            {
+                PlayEnergyAlert();
+                energyLowHasPlayed = true;
+            }
+
+            else if (energy == 100)
+                energyLowHasPlayed = false;
+        }
+
+        private void PlayEnergyAlert()
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(fuelAlmostEmptyEvent, transform.position);
+        }
+
+        private void PlayHitmarker()
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(hitmarker, transform.position);
+        }
     }
 }

@@ -12,22 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c6cfbd28a22af44a7461704b0bfe8b, type: 3}
   m_Name: SlowFireWeapon
   m_EditorClassIdentifier: 
-  partName: part
+  partName: Slow fire rate
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 0
-  weaponName: Slow fire rate
-  projectilePrefab: {fileID: 8795236707980728124, guid: 995e68a81b3330c4693b73faf018f767,
+  projectilePrefab: {fileID: 3994246806297512443, guid: 995e68a81b3330c4693b73faf018f767,
     type: 3}
-  armingTime: 0
   fireRate: 3
   amountOfBullets: 1
   energyCost: 1
-  weaponFireEvent:
-    Guid:
-      Data1: -1523842194
-      Data2: 1084725929
-      Data3: -1189224023
-      Data4: -1307751479
-    Path: event:/Weapons/Weap_Shotgun
   sideSpreadAngle: 6
   range: 80
+  armingTime: 0
+  weaponFireEvent:
+    Guid:
+      Data1: -2125358925
+      Data2: 1324075078
+      Data3: 111648152
+      Data4: 794917210
+    Path: event:/Weapons/Weap_LowFireRate

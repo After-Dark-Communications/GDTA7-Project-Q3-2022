@@ -6,68 +6,71 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketProjectile : Projectile
+namespace Projectiles
 {
-    [SerializeField]
-    private float maxLifeTime;
-
-    private float currentTime = 0;
-
-    private float currentArmingTime = 0;
-
-    private bool armed = false;
-
-    private void OnTriggerEnter(Collider other)
+    public class RocketProjectile : Projectile
     {
-        if (armed == false)
-            return;
+        [SerializeField]
+        private float maxLifeTime;
 
-        ShipBuilder otherBuilder = other.GetComponentInParent<ShipBuilder>();
+        private float currentTime = 0;
 
-        if (otherBuilder == null)
+        private float currentArmingTime = 0;
+
+        private bool armed = false;
+
+        private void OnTriggerEnter(Collider other)
         {
-            ICollidable collidable = other.GetComponentInParent<ICollidable>();
+            if (armed == false)
+                return;
 
-            if (collidable != null)
-                Explode();
+            ShipBuilder otherBuilder = other.GetComponentInParent<ShipBuilder>();
 
-            return;
+            if (otherBuilder == null)
+            {
+                ICollidable collidable = other.GetComponentInParent<ICollidable>();
+
+                if (collidable != null)
+                    Explode();
+
+                return;
+            }
+
+            Explode();
+            Channels.OnPlayerTakeDamage?.Invoke(otherBuilder, ProjectileData.Damage, PlayerIndex);
         }
 
-        Explode();
-        Channels.OnPlayerTakeDamage?.Invoke(otherBuilder, ProjectileData.Damage, PlayerIndex);
-    }
+        private void Update()
+        {
+            ArmRocket();
 
-    private void Update()
-    {
-        ArmRocket();
+            currentTime += Time.deltaTime;
 
-        currentTime += Time.deltaTime;
+            if (currentTime < maxLifeTime)
+                return;
 
-        if (currentTime < maxLifeTime)
-            return;
+            Explode();
+        }
 
-        Explode();
-    }
+        private void Explode()
+        {
+            GameObject spawned = Instantiate(this.ProjectileData.SpawnedObjectOnImpact);
+            spawned.transform.position = transform.position;
 
-    private void Explode()
-    {
-        GameObject spawned = Instantiate(this.ProjectileData.SpawnedObjectOnImpact);
-        spawned.transform.position = transform.position;
+            Destroy(gameObject);
+        }
 
-        Destroy(gameObject);
-    }
+        private void ArmRocket()
+        {
+            if (armed)
+                return;
 
-    private void ArmRocket()
-    {
-        if (armed)
-            return;
+            currentArmingTime += Time.deltaTime;
 
-        currentArmingTime += Time.deltaTime;
+            if (currentArmingTime < ProjectileData.ArmingTime)
+                return;
 
-        if (currentArmingTime < ProjectileData.ArmingTime)
-            return;
-
-        armed = true;
+            armed = true;
+        }
     }
 }
