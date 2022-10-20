@@ -37,7 +37,6 @@ namespace Managers
 
         private void Start()
         {
-            Debug.Log($"Animator START");
             part = GetComponent<Part>();
             playerNumber = GetComponentInParent<ShipBuilder>().PlayerNumber;
 
