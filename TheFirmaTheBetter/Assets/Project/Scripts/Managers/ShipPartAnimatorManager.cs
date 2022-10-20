@@ -25,6 +25,7 @@ namespace Managers
             Channels.OnSelectedCategoryChanged += OnCategoryChanged;
             Channels.OnShipPartSelected += OnPartSelected;
             Channels.OnPlayerSpawned += OnPlayerSpawned;
+          
         }
 
         private void OnDestroy()
@@ -36,6 +37,7 @@ namespace Managers
 
         private void Start()
         {
+            Debug.Log($"Animator START");
             part = GetComponent<Part>();
             playerNumber = GetComponentInParent<ShipBuilder>().PlayerNumber;
 
@@ -43,6 +45,8 @@ namespace Managers
             {
                 animators.Add(animator);
             }
+
+            Channels.OnShipAnimationManagerLoaded?.Invoke();
         }
 
         private void OnPartSelected(Part selectedPart, int playerNumber)

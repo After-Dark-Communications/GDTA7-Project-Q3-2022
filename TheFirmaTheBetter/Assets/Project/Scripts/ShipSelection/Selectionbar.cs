@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Util;
+using System;
 
 namespace ShipSelection
 {
@@ -47,11 +48,35 @@ namespace ShipSelection
             selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(selectionScreensData.CollectionManager.WeaponList));
             selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(selectionScreensData.CollectionManager.SpecialList));
             UpdateLabelTexts();
+
+            Channels.OnShipAnimationManagerLoaded += SetUpSelectionBar;
+        }
+        private void OnDestroy()
+        {
+            Channels.OnShipAnimationManagerLoaded -= SetUpSelectionBar;
+        }
+        
+        private void SetUpSelectionBar()
+        {
+
+            //OnNavigate_Up();
+            // OnNavigate_Down();
+            buttonSelectionManager.ResetButtons();
+            buttonSelectionManager.UpdateButtons(this);
+            Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
+            SetSelectedOptionIndex(CurrentSelectedCollection.CurrentSelectedIndex);
         }
 
         private void Start()
         {
             playerNumber = GetComponentInParent<PlayerSelectionScreen>().PlayerNumber;
+
+            //Update
+            //buttonSelectionManager.ResetButtons();
+            //buttonSelectionManager.UpdateButtons(this);
+
+          
+
         }
 
         public void OnNavigate_Up()
