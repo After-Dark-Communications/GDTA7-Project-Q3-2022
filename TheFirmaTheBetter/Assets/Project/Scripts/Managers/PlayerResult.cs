@@ -17,15 +17,12 @@ namespace Managers
         private void Awake()
         {
             Setup();
-        }
 
-        private void OnEnable()
-        {
             Channels.OnPlayerBecomesDeath += OnPlayerKilled;
             Channels.OnRoundOver += OnRoundWon;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             Channels.OnPlayerBecomesDeath -= OnPlayerKilled;
             Channels.OnRoundOver -= OnRoundWon;
