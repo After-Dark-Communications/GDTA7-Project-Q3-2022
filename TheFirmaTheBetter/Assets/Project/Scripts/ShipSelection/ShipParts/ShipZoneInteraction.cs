@@ -23,7 +23,9 @@ namespace ShipParts
         private void Awake()
         {
             shipResources = GetComponent<ShipResources>();
-            playerNumber = GetComponent<ShipBuilder>().PlayerNumber;
+
+            ShipBuilder shipBuilder = GetComponent<ShipBuilder>();
+            playerNumber = shipBuilder.PlayerNumber;
         }
 
         public void HandleZoneEnterInteraction(Zone enteredZone)
