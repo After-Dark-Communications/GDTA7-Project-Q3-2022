@@ -56,7 +56,7 @@ namespace Managers
                     }
                 }
 
-                if (winner != shipBuilderThatDied)
+                if (winner.PlayerNumber != shipBuilderThatDied.PlayerNumber)
                 {
                     playerResult = winner.GetComponent<PlayerResult>();
                     KillShip(winner, playerResult);
