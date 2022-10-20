@@ -1860,6 +1860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 543847958}
+  kothTimeInSec: 0
 --- !u!4 &1051875133
 Transform:
   m_ObjectHideFlags: 0
