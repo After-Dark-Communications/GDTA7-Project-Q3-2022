@@ -43,7 +43,7 @@ namespace ShipParts
             if (IsThisNotMe(playerNumber))
                 return;
 
-            currentEnergyAmount += (float)refillAmount / 100 * maxEnergyAmount;
+            currentEnergyAmount += refillAmount;
 
             if (currentEnergyAmount > maxEnergyAmount)
             {

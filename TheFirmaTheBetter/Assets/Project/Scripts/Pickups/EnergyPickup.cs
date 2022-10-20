@@ -1,4 +1,5 @@
 using EventSystem;
+using ShipParts;
 using ShipParts.Ship;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +12,11 @@ public class EnergyPickup : Pickup
     private int energyIncreaseAmount;
     public override void PickUpAction(ShipBuilder shipBuilder)
     {
-        Channels.OnRefillEnergy?.Invoke(shipBuilder.PlayerNumber, energyIncreaseAmount);
+        ShipResources resources = shipBuilder.GetComponent<ShipResources>();
+
+        float amount =  (float)resources.ShipStats.EnergyCapacity / 100 * energyIncreaseAmount;
+
+        Channels.OnRefillEnergy?.Invoke(shipBuilder.PlayerNumber, (int)amount);
         base.PickUpAction(shipBuilder);
     }
 }
