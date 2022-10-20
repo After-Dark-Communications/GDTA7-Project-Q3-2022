@@ -5,6 +5,7 @@ using ShipSelection;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static EventSystem.Channels;
 
 namespace EventSystem
 {
@@ -91,7 +92,6 @@ namespace EventSystem
         public static RoundStarted OnRoundStarted;
         public static PickupDestroyed OnPickupDestroyed;
         public static GameStart OnGameStart;
-        public static PickupDestoryed OnPickupDestroyed;
         public static ControllerShemeShowing OnControllerShemeShowing;
         public static ControllerShemeHidden OnControllerShemeHidden;
 
