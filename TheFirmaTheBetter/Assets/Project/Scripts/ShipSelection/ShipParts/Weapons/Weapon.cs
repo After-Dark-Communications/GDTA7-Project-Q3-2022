@@ -140,6 +140,7 @@ namespace ShipParts.Weapons
 
             void FireProjectile(GameObject projectileObject, Vector3 direction, Projectile projectile)
             {
+                projectile.FirerId = shipResources.GetComponent<ShipBuilder>().PlayerNumber;
                 projectileObject.GetComponent<Rigidbody>().AddForce(direction * projectile.ProjectileSpeed, ForceMode.Impulse);
                 Channels.OnEnergyUsed?.Invoke(playerNumber, weaponData.EnergyCost);
             }

@@ -1,66 +1,100 @@
 using EventSystem;
 using ShipParts.Ship;
 using ShipSelection.ShipBuilders;
+using System;
 using UnityEngine;
 
 namespace Managers
 {
     public class PlayerDeathManager : MonoBehaviour
     {
+        private int totalNumberOfPlayers;
         private int playersAlive;
 
         [SerializeField]
         private BattleTimer battleTimer;
 
+        [SerializeField]
+        private RoundManager roundManager;
+
         private void OnEnable()
         {
             Channels.OnPlayerBecomesDeath += OnPlayerDeath;
+            Channels.OnRoundStarted += ReviveShips;
 
-            playersAlive = ShipBuildManager.Instance.AmountOfPlayersJoined;
+            totalNumberOfPlayers = ShipBuildManager.Instance.AmountOfPlayersJoined;
+            playersAlive = totalNumberOfPlayers;
         }
 
         private void OnDisable()
         {
             Channels.OnPlayerBecomesDeath -= OnPlayerDeath;
+            Channels.OnRoundStarted -= ReviveShips;
         }
 
         private void OnPlayerDeath(ShipBuilder shipBuilderThatDied, int killerIndex)
         {
-            PlayerStatistics playerStatistics = shipBuilderThatDied.GetComponent<PlayerStatistics>();
-            RemoveShipFromScene(shipBuilderThatDied);
-            SetKillStats(playerStatistics);
-            ResultsManager.Instance.AddResult(playerStatistics);
-            
+            PlayerResult playerResult = shipBuilderThatDied.GetComponent<PlayerResult>();
+            KillShip(shipBuilderThatDied, playerResult);
+
             if (playersAlive <= 1)
             {
-                foreach (ShipBuilder ship in ShipBuildManager.Instance.ShipBuilders)
+                ShipBuilder winner = shipBuilderThatDied;
+
+                if (killerIndex >= 0 && killerIndex < totalNumberOfPlayers)
                 {
-                    playerStatistics = ship.GetComponent<PlayerStatistics>();
-                    if (playerStatistics.IsAlive)
+                    winner = ShipBuildManager.Instance.ShipBuilders[killerIndex];
+                }
+                else
+                {
+                    foreach (ShipBuilder ship in ShipBuildManager.Instance.ShipBuilders)
                     {
-                        RemoveShipFromScene(ship);
-                        SetKillStats(playerStatistics);
-                        ResultsManager.Instance.AddResult(playerStatistics);
+                        if (ship.gameObject.activeInHierarchy)
+                        {
+                            winner = ship;
+                        }
                     }
                 }
-                Channels.OnGameOver?.Invoke();
-                // SceneSwitchManager.SwitchToNextScene();
-                SceneSwitchManager.SwitchToSceneWithIndex(5);
+
+                if (winner != shipBuilderThatDied)
+                {
+                    playerResult = winner.GetComponent<PlayerResult>();
+                    KillShip(winner, playerResult);
+                }
+
+                Channels.OnRoundOver?.Invoke(roundManager.CurrentRoundIndex, winner.PlayerNumber);
+            }
+            else
+            {
+                Channels.Announcer.OnPlayPlayerEliminated?.Invoke();
+            }
+        }
+
+
+        private void KillShip(ShipBuilder ship, PlayerResult playerResult)
+        {
+            ship.gameObject.SetActive(false);
+            playerResult.TimeSurvived += battleTimer.TimeSinceStart;
+            playersAlive--;
+            if (roundManager.IsLastRound)
+            {
+                RemoveShipFromScene(ship);
             }
         }
 
         private void RemoveShipFromScene(ShipBuilder ship)
         {
-            ship.gameObject.SetActive(false);
             ship.transform.parent = null;
             DontDestroyOnLoad(ship);
         }
 
-        private void SetKillStats(PlayerStatistics playerStatistics)
+        private void ReviveShips(int roundIndex, int numberofRounds)
         {
-            playerStatistics.TimeSurvived = battleTimer.TimeSinceStart;
-            playerStatistics.IsAlive = false;
-            playersAlive--;
+            foreach (ShipBuilder ship in ShipBuildManager.Instance.ShipBuilders)
+            {
+                ship.gameObject.SetActive(true);
+            }
+            playersAlive = totalNumberOfPlayers;
         }
     }
 }

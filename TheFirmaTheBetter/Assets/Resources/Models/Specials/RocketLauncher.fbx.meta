@@ -3,7 +3,17 @@ guid: 4a5b363e5df76894084ca827e7aeb36f
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rocket
+    second: {fileID: 2100000, guid: b4733ecb0ebe58c468130b5abecaed09, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RocketLauncher
+    second: {fileID: 2100000, guid: 11bd0c6db2cf924478ee89f386fa8088, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -397,8 +397,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 17.894, y: 190.17}
-  m_SizeDelta: {x: 856.9678, y: 88.085}
+  m_AnchoredPosition: {x: -0.00049877, y: 190.17}
+  m_SizeDelta: {x: 923.76, y: 88.085}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &451336045
 MonoBehaviour:
@@ -455,8 +455,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1146,7 +1146,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Navigation.m_SelectOnRight
       value: 
-      objectReference: {fileID: 4798002471896807751}
+      objectReference: {fileID: 2000110808}
     - target: {fileID: 6588761299507713533, guid: d4cadf5c52480a3459f467d9344c8308,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1229,8 +1229,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.7510986, y: -56.839996}
-  m_SizeDelta: {x: -15.741821, y: -114.063995}
+  m_AnchoredPosition: {x: 0.059936523, y: -56.839966}
+  m_SizeDelta: {x: -0.11981, y: -114.064}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1898219169
 MonoBehaviour:
@@ -1387,7 +1387,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Navigation.m_SelectOnLeft
       value: 
-      objectReference: {fileID: 84055843}
+      objectReference: {fileID: 1623403951}
     - target: {fileID: 6588761299507713533, guid: d4cadf5c52480a3459f467d9344c8308,
         type: 3}
       propertyPath: m_Navigation.m_SelectOnRight
@@ -1431,6 +1431,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2000110806}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2000110808 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6588761299507713533, guid: d4cadf5c52480a3459f467d9344c8308,
+    type: 3}
+  m_PrefabInstance: {fileID: 2000110806}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2012336571 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4045652285084508976, guid: d4cadf5c52480a3459f467d9344c8308,

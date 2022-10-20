@@ -5,6 +5,7 @@ using ShipSelection;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static EventSystem.Channels;
 
 namespace EventSystem
 {
@@ -29,6 +30,7 @@ namespace EventSystem
         public delegate void PlayerTakeDamage(ShipBuilder hittedBuilder, int damageAmount, int indexOfPlayerThatShotTheBullet);
         public delegate void EveryPlayerReady(int playersInGameCount);
         public delegate void PlayerSpawned(GameObject spawnedShipBuilderObject, int playerNumber);
+        public delegate void PlayerRespawned(GameObject respawnedShipBuilderObject, int playerNumber);
         /// <summary>
         ///     Called when firing the gun while not having enough ammo
         /// </summary>
@@ -52,9 +54,14 @@ namespace EventSystem
         public delegate void NavigateUp();
         public delegate void NavigateDown();
         public delegate void GameOver();
+        public delegate void RoundOver(int roundIndex, int winnerIndex);
+        public delegate void RoundStarted(int roundIndex, int numberOfRounds);
+        public delegate void GameStart();
+        public delegate void ControllerShemeHidden();
+        public delegate void ControllerShemeShowing();
 
         public delegate void PlayerHealed(int healthIncreaseAmount, int playerNumber);
-        public delegate void PickupDestoryed();
+        public delegate void PickupDestroyed();
 
         public static ChangeFireMode OnChangeFireMode;
         public static EnergyUsed OnEnergyUsed;
@@ -70,6 +77,7 @@ namespace EventSystem
         public static PlayerTakeDamage OnPlayerTakeDamage;
         public static EveryPlayerReady OnEveryPlayerReady;
         public static PlayerSpawned OnPlayerSpawned;
+        public static PlayerRespawned OnPlayerRespawned;
         public static EnergyEmpty OnEnergyEmpty;
         public static PlayerHit OnPlayerHit;
         public static HealthChanged OnHealthChanged;
@@ -80,7 +88,13 @@ namespace EventSystem
         public static NavigateUp OnNavigateUp;
         public static NavigateDown OnNavigateDown;
         public static GameOver OnGameOver;
-        public static PickupDestoryed OnPickupDestroyed;
+        public static RoundOver OnRoundOver;
+        public static RoundStarted OnRoundStarted;
+        public static PickupDestroyed OnPickupDestroyed;
+        public static GameStart OnGameStart;
+        public static ControllerShemeShowing OnControllerShemeShowing;
+        public static ControllerShemeHidden OnControllerShemeHidden;
+
     }
 
 }

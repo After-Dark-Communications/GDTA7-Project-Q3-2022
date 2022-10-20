@@ -14,7 +14,7 @@ namespace UI.Menus
         [SerializeField]
         private TextMeshProUGUI distanceTravelled;
 
-        public void SetPlayerStats(PlayerStatistics playerStatistics)
+        public void SetPlayerStats(PlayerResult playerStatistics)
         {
             playersKilledValue.text = playerStatistics.PlayersKilled.ToString();
 

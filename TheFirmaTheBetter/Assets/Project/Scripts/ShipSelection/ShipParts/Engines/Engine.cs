@@ -57,7 +57,7 @@ namespace ShipParts.Engines
                 Quaternion toRotation = Quaternion.LookRotation(new Vector3(_moveValue.x, 0, _moveValue.y), GlobalUp.UP.up);
                 shipRoot.rotation = Quaternion.RotateTowards(shipRoot.rotation, toRotation, engineData.Handling * Time.deltaTime);
 
-                GetComponentInParent<PlayerStatistics>().DistanceTravelled += shipRigidBody.velocity.magnitude * Time.deltaTime;
+                GetComponentInParent<PlayerResult>().DistanceTravelled += shipRigidBody.velocity.magnitude * Time.deltaTime;
             }
         }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EventSystem;
 
 namespace MovingObjects
 {
@@ -27,6 +28,7 @@ namespace MovingObjects
 
             timeSinceLastSpawned = 0;
             objectMover.StartCorountineMovePoint();
+            Channels.Announcer.OnPlayEnergyZoneMoved?.Invoke();
         }
     }
 }

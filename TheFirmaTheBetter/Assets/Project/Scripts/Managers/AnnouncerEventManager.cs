@@ -27,6 +27,7 @@ namespace Managers
 
         private void Start()
         {
+            DontDestroyOnLoad(gameObject);
             Channels.Announcer.OnGameBoot += PlayGameStartUpEvent;
             Channels.Announcer.OnPlayGameStart += PlayGameStartEvent;
             Channels.Announcer.OnPlayGameStop += PlayGameOverEvent;
@@ -61,7 +62,7 @@ namespace Managers
 
         public void PlayGameStartEvent()
         {
-            PlayEvent(gameOverEvent);
+            PlayEvent(gameStartEvent);
         }
 
         public void PlayFirstBloodEvent()

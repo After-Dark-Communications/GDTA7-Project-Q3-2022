@@ -48,5 +48,7 @@ MonoBehaviour:
   pickups:
   - {fileID: 1532577874546007182, guid: 684373ab3599e104ca3377e2dec9e066, type: 3}
   - {fileID: 4988517399985563690, guid: c1737e8e4498f224c848ae59c9c420ec, type: 3}
-  spawnAreaSize: {x: 1, y: 0, z: 1}
-  spawnInterval: 0.5
+  spawnAreaSize: {x: 60, y: 0, z: 60}
+  minSpawnInterval: 5
+  maxSpawnInterval: 10
+  maximumSpawnCount: 3
