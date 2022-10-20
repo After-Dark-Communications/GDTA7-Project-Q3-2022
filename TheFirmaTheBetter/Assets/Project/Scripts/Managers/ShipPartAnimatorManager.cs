@@ -26,7 +26,9 @@ namespace Managers
             Channels.OnSelectedCategoryChanged += OnCategoryChanged;
             Channels.OnShipPartSelected += OnPartSelected;
             Channels.OnPlayerSpawned += OnPlayerSpawned;
+
             //Channels.OnEveryPlayerReady += OnEveryPlayerReady;
+
         }
 
         //private void OnEveryPlayerReady(int playersInGameCount)
@@ -58,6 +60,8 @@ namespace Managers
             {
                 animators.Add(animator);
             }
+
+            Channels.OnShipAnimationManagerLoaded?.Invoke();
         }
 
         private void OnPartSelected(Part selectedPart, int playerNumber)

@@ -63,6 +63,8 @@ namespace EventSystem
         public delegate void PlayerHealed(int healthIncreaseAmount, int playerNumber);
         public delegate void PickupDestroyed();
 
+        public delegate void ShipAnimationManagerLoaded();
+
         public static ChangeFireMode OnChangeFireMode;
         public static EnergyUsed OnEnergyUsed;
         public static EnergyChanged OnEnergyChanged;
@@ -94,6 +96,7 @@ namespace EventSystem
         public static GameStart OnGameStart;
         public static ControllerShemeShowing OnControllerShemeShowing;
         public static ControllerShemeHidden OnControllerShemeHidden;
+        public static ShipAnimationManagerLoaded OnShipAnimationManagerLoaded;
 
     }
 
