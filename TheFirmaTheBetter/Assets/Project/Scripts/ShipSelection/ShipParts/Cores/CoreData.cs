@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShipParts.Cores
 {
-    [CreateAssetMenu(fileName = "NewCoreData", menuName = "Part/Create new CoreData")]
+    [CreateAssetMenu(fileName = "NewCoreData", menuName = "Astrofire/Part/Create new CoreData")]
     public class CoreData : PartData
     {
         [Header("CoreStats")]

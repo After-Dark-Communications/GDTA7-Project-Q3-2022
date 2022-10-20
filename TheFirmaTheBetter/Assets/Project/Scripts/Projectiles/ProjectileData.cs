@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Projectiles
 {
-    [CreateAssetMenu(fileName = "ProjectileData", menuName = "Projectiles/Create new ProjectileData")]
+    [CreateAssetMenu(fileName = "ProjectileData", menuName = "Astrofire/Projectiles/Create new ProjectileData")]
     public class ProjectileData : ScriptableObject
     {
         [SerializeField]

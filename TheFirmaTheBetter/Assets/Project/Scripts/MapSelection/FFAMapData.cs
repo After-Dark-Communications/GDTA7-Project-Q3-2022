@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MapSelection
 {
-    [CreateAssetMenu(fileName = "NewFFAMapData", menuName = "Map/Create new FFAMapData")]
+    [CreateAssetMenu(fileName = "NewFFAMapData", menuName = "Astrofire/Map/Create new FFAMapData")]
     public class FFAMapData : MapData
     {
 

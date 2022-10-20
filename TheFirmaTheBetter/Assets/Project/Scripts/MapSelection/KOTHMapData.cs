@@ -5,7 +5,7 @@ using MapSelection;
 
 namespace MapSelection
 {
-    [CreateAssetMenu(fileName = "NewKOTHMapData", menuName = "Map/Create new KOTHMapData")]
+    [CreateAssetMenu(fileName = "NewKOTHMapData", menuName = "Astrofire/Map/Create new KOTHMapData")]
     public class KOTHMapData : MapData
     {
     }

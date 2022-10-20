@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Projectiles
 {
-    [CreateAssetMenu(fileName = "HomingProjectileData", menuName = "Projectiles/Create new HomingProjectileData")]
+    [CreateAssetMenu(fileName = "HomingProjectileData", menuName = "Astrofire/Projectiles/Create new HomingProjectileData")]
     public class HomingProjectileData : ProjectileData
     {
         private float homingRange;
