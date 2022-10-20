@@ -64,6 +64,10 @@ namespace Managers
 
                 Channels.OnRoundOver?.Invoke(roundManager.CurrentRoundIndex, winner.PlayerNumber);
             }
+            else
+            {
+                Channels.Announcer.OnPlayPlayerEliminated?.Invoke();
+            }
         }
 
 

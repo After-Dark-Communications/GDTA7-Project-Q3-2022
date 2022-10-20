@@ -55,6 +55,7 @@ namespace EventSystem
         public delegate void GameOver();
         public delegate void RoundOver(int roundIndex, int winnerIndex);
         public delegate void RoundStarted(int roundIndex, int numberOfRounds);
+        public delegate void GameStart();
         public delegate void ControllerShemeHidden();
         public delegate void ControllerShemeShowing();
 
@@ -89,6 +90,8 @@ namespace EventSystem
         public static RoundOver OnRoundOver;
         public static RoundStarted OnRoundStarted;
         public static PickupDestroyed OnPickupDestroyed;
+        public static GameStart OnGameStart;
+        public static PickupDestoryed OnPickupDestroyed;
         public static ControllerShemeShowing OnControllerShemeShowing;
         public static ControllerShemeHidden OnControllerShemeHidden;
 
