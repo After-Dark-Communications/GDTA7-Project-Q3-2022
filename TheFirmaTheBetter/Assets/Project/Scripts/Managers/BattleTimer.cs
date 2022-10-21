@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using EventSystem;
 using UnityEngine;
+using System;
 
 namespace Managers
 {
@@ -20,12 +21,17 @@ namespace Managers
 
         private void Awake()
         {
-            Channels.OnControllerShemeHidden += StartTimer;
+            Channels.OnCountdownDone += OnCountdownDone;
         }
 
         private void OnDestroy()
         {
-            Channels.OnControllerShemeHidden -= StartTimer;
+            Channels.OnCountdownDone -= OnCountdownDone;
+        }
+
+        private void OnCountdownDone()
+        {
+            StartTimer();
         }
 
         public void StartTimer()

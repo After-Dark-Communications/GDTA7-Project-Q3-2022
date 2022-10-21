@@ -1,5 +1,6 @@
 ﻿using EventSystem;
 using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ShipBuilderInput
@@ -18,14 +19,30 @@ public class ShipBuilderInput
 
     public void UnSubscribeToEvents()
     {
-        Channels.OnControllerShemeShowing -= DisableInput;
-        Channels.OnControllerShemeHidden -= EnableInput;
+        Channels.OnPlayerSpawned -= DisableInput;
+        Channels.OnRoundOver -= DisableInput;
+
+        Channels.OnCountdownDone -= EnableInput;
+        Channels.OnGameOver -= EnableInput;
+    }
+
+    private void DisableInput(GameObject spawnedShipBuilderObject, int playerNumber)
+    {
+        DisableInput();
     }
 
     private void SubScribeToEvents()
     {
-        Channels.OnControllerShemeShowing += DisableInput;
-        Channels.OnControllerShemeHidden += EnableInput;
+        Channels.OnPlayerSpawned += DisableInput;
+        Channels.OnRoundOver += DisableInput;
+
+        Channels.OnCountdownDone += EnableInput;
+        Channels.OnGameOver += EnableInput;
+    }
+
+    private void DisableInput(int roundIndex, int winnerIndex)
+    {
+        DisableInput();
     }
 
     private void DisableInput()
@@ -40,9 +57,6 @@ public class ShipBuilderInput
 
     private void DisableInput(int playerNumber)
     {
-        if (this.playerNumber != playerNumber)
-            return;
-
        DisableInput();
     }
 

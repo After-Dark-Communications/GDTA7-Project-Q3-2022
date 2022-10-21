@@ -10,19 +10,23 @@ namespace UI.Menus
         [SerializeField]
         private TextMeshProUGUI playersKilledValue;
         [SerializeField]
+        private TextMeshProUGUI roundsWonValue;
+        [SerializeField]
         private TextMeshProUGUI timeSurvivedVlaue;
         [SerializeField]
         private TextMeshProUGUI distanceTravelled;
 
-        public void SetPlayerStats(PlayerResult playerStatistics)
+        public void SetPlayerStats(PlayerResult playerResult)
         {
-            playersKilledValue.text = playerStatistics.PlayersKilled.ToString();
+            playersKilledValue.text = playerResult.PlayersKilled.ToString();
 
-            float minutes = Mathf.FloorToInt(playerStatistics.TimeSurvived / 60);
-            float seconds = Mathf.FloorToInt(playerStatistics.TimeSurvived % 60);
+            roundsWonValue.text = playerResult.RoundsWon.ToString();
+
+            float minutes = Mathf.FloorToInt(playerResult.TimeSurvived / 60);
+            float seconds = Mathf.FloorToInt(playerResult.TimeSurvived % 60);
             timeSurvivedVlaue.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-            distanceTravelled.text = playerStatistics.DistanceTravelled.ToString("N0");
+            distanceTravelled.text = playerResult.DistanceTravelled.ToString("N0");
         }
     }
 }

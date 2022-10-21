@@ -11,45 +11,38 @@ namespace ShipSelection
 {
     public class ButtonSelectionManager : MonoBehaviour
     {
+        private const string DisabledBooleanName = "Disabled";
+        private const string IsHoveredBooleanName  = "IsHovered";
         private Color selectedColor;
         private Color normalColor;
 
-        private List<Button> buttons = new List<Button>();
+        private List<Animator> buttonAnimators = new List<Animator>();
 
         private void Awake()
         {
             foreach (Button button in transform.GetComponentsInChildren<Button>())
             {
-                buttons.Add(button);
+                buttonAnimators.Add(button.GetComponent<Animator>());
             }
-
-            if (buttons.Count <= 0)
-                return;
-
-            selectedColor = buttons[0].colors.disabledColor;
-            normalColor = buttons[0].colors.normalColor;
         }
 
         internal void UpdateButtons(Selectionbar selectionBar)
         {
-            Button currentSelectedButton = buttons[selectionBar.CurrentSelectedCollection.CurrentSelectedIndex];
-            Animator animatorSelectedButton = currentSelectedButton.GetComponent<Animator>();
-            animatorSelectedButton.SetBool("Disabled", true);
+            Animator animatorSelectedButton = buttonAnimators[selectionBar.CurrentSelectedCollection.CurrentSelectedIndex];
+            animatorSelectedButton.SetBool(DisabledBooleanName, true);
         }
 
         public void ResetButtons()
         {
-            foreach (Button button in buttons)
+            foreach (Animator buttonAnimator in buttonAnimators)
             {
-                Animator animator = button.GetComponent<Animator>();
-                animator.SetBool("Disabled", false);
+                buttonAnimator.SetBool(DisabledBooleanName, false);
             }
         }
         public void ResetButtonAt(int index)
         {
-            Button currentSelectedButton = buttons[index];
-            Animator animatorSelectedButton = currentSelectedButton.GetComponent<Animator>();
-            animatorSelectedButton.SetBool("Disabled", false);
+            Animator currentButtonAnimator = buttonAnimators[index];
+            currentButtonAnimator.SetBool(DisabledBooleanName, false);
             Debug.Log("Reset Button " + index + " FALSE");
         }
 
@@ -57,13 +50,19 @@ namespace ShipSelection
         {
             int toReturn = currentIndex + 1;
 
-            if (toReturn >= buttons.Count)
+            if (toReturn >= buttonAnimators.Count)
                 toReturn = 0;
 
             if (toReturn < 0)
-                toReturn = buttons.Count - 1;
+                toReturn = buttonAnimators.Count - 1;
 
             return toReturn;
+        }
+
+        internal void UpdateHoverEffectAt(int index, bool state)
+        {
+            Animator currentButtonAnimator = buttonAnimators[index];
+            currentButtonAnimator.SetBool(IsHoveredBooleanName, state);
         }
     }
 }
