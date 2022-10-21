@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class RoundTextChanger : MonoBehaviour
 {
-    private const string RoundText = "Round: ";
+    private const string RoundText = "Round";
 
     [SerializeField]
     private TMP_Text tmpTextField;
