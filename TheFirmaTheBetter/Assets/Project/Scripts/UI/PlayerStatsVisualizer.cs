@@ -15,6 +15,11 @@ namespace UI
             Channels.OnPlayerSpawned += InitializePlayerStats;
             Channels.OnPlayerBecomesDeath += OnPlayerDied;
             Channels.OnPlayerRespawned += OnPlayerRespawned;
+
+            foreach (FloatingStatsPanel statPanel in statPanels)
+            {
+                statPanel.gameObject.SetActive(false);
+            }
         }
 
         private void OnDisable()
