@@ -49,7 +49,7 @@ namespace ShipParts
             {
                 currentEnergyAmount = maxEnergyAmount;
             }
-            Channels.OnEnergyChanged(playerNumber, (float)currentEnergyAmount / maxEnergyAmount);
+            Channels.OnEnergyChanged?.Invoke(playerNumber, (float)currentEnergyAmount / maxEnergyAmount);
         }
 
         public void UpdateEnergy(ShipStats shipStats)

@@ -21,15 +21,15 @@ namespace Managers
 
         private void Awake()
         {
-            Channels.OnRoundStarted += RoundStarted;
+            Channels.OnCountdownDone += OnCountdownDone;
         }
 
         private void OnDestroy()
         {
-            Channels.OnRoundStarted -= RoundStarted;
+            Channels.OnCountdownDone -= OnCountdownDone;
         }
 
-        private void RoundStarted(int roundIndex, int numberOfRounds)
+        private void OnCountdownDone()
         {
             StartTimer();
         }

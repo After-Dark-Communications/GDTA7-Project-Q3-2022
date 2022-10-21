@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ShipParts.Weapons
 {
-    [CreateAssetMenu(fileName = "Weapon", menuName = "Ship Parts/Weapon")]
+    [CreateAssetMenu(fileName = "Weapon", menuName = "Astrofire/Ship Parts/Weapon")]
     public class WeaponData : PartData
     {
         [Header("Weapon stats")]

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShipParts.Specials
 {
-    [CreateAssetMenu(fileName = "NewSpecialData", menuName = "Part/Create new SpecialData")]
+    [CreateAssetMenu(fileName = "NewSpecialData", menuName = "Astrofire/Part/Create new SpecialData")]
     public class SpecialData : PartData
     {
         [Header("SpecialStats")]
