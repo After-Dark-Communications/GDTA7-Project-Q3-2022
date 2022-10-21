@@ -8,7 +8,7 @@ namespace Util.PrefabUtil
 {
     public static class CreatePrefabInAssets
     {
-        private const string PREFAB_FOLDER = "Assets/Project/Prefabs";
+        private const string PREFAB_FOLDER = "Assets/Project/Prefabs";//Replace this with desired folder for the prefabs to be created in
         private const string PREFAB_EXTENSION = ".prefab";
         private const string MENU_ITEM_PATH = "Prefabs/";
         private const int HIERARCHY_PRIORITY = 0;
@@ -55,22 +55,31 @@ namespace Util.PrefabUtil
         //Figure out a way to either combine selected gameobjects into one object then make them all instances of the prefab
         //Make a prefab of the first selected object, then make all others an instance of that prefab (adjusted for scale and position n stuff)
         //check if selected gameobjects are the same enough to make them into a single prefab
-        //[MenuItem(MENU_ITEM_PATH + "Create Single Prefab And Convert All To Instance", false, HIERARCHY_PRIORITY)]
-        //[MenuItem("GameObject/Prefabs/Create Single Prefab And Convert All To Instance", false, HIERARCHY_PRIORITY)]
-        //static void MakeSelectionIntoPrefabsInstances()
-        //{//create SINGLE prefab from selected objects, then set objects as instances of that prefab
-        //    //GameObject[] objectArray = Selection.gameObjects;
-        //    //
-        //    //GameObject parentObj = new GameObject(objectArray[0].name);
-        //    //
-        //    //foreach (GameObject gameObject in objectArray)
-        //    //{
-        //    //    //add selected objects as children
-        //    //    gameObject.transform.parent = parentObj.transform;
-        //    //}
-        //    //CreatePrefabFile(parentObj, true);
-        //    //implement
-        //}
+        [MenuItem(MENU_ITEM_PATH + "Create Single Prefab And Convert All To Instance", false, HIERARCHY_PRIORITY)]
+        [MenuItem("GameObject/Prefabs/Create Single Prefab And Convert All To Instance", false, HIERARCHY_PRIORITY)]
+        static void MakeSelectionIntoPrefabsInstances()
+        {//create SINGLE prefab from selected objects, then set objects as instances of that prefab
+
+            GameObject[] objectArray = Selection.gameObjects;
+
+            //create base object for prefabbing
+            GameObject parentObj = CreatePrefabFile(objectArray[0], PREFAB_FOLDER, true);
+
+            foreach (GameObject gameObject in objectArray)
+            {
+                //make objects instance of prefab, storing transform
+                Transform originalTransform = gameObject.transform;
+                GameObject prefabInstance = (GameObject)PrefabUtility.InstantiatePrefab(parentObj);
+                //set newly instanced prefab's transform to the original object's transform
+                prefabInstance.transform.position = originalTransform.position;
+                prefabInstance.transform.rotation = originalTransform.rotation;
+                prefabInstance.transform.localScale = originalTransform.localScale;
+                prefabInstance.transform.parent = originalTransform.parent;
+                //destroy original object
+                GameObject.DestroyImmediate(gameObject);
+            }
+            //implement
+        }
         #endregion
 
         #region Validations
@@ -95,14 +104,14 @@ namespace Util.PrefabUtil
             return Selection.activeGameObject != null && !EditorUtility.IsPersistent(Selection.activeGameObject) && Selection.gameObjects.Length > 1;
         }
         #endregion
-     
+
         /// <summary>
         /// creates ".prefab" file in the prefab folder specified by given folder path
         /// </summary>
         /// <param name="obj">object to create prefab of</param>
         /// <param name="prefabFolder">folder to put prefab in. this folder will be created in <see cref="PREFAB_FOLDER"/> if it doesn't exist yet</param>
         /// <param name="makeIntoInstance">whether to make the given object into an instance of the created prefab.</param>
-        private static void CreatePrefabFile(GameObject obj, string prefabFolder, bool makeIntoInstance)
+        private static GameObject CreatePrefabFile(GameObject obj, string prefabFolder, bool makeIntoInstance)
         {
             // Create folder Prefabs and set the path as within the Prefabs folder,
             if (!Directory.Exists(prefabFolder))
@@ -138,6 +147,7 @@ namespace Util.PrefabUtil
             {
                 EditorGUIUtility.PingObject(prefabObject);
             }
+            return prefabObject;
         }
 
 
