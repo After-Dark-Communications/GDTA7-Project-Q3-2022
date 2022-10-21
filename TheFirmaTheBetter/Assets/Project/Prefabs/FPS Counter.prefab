@@ -69,8 +69,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: <i>FPS:</i>000000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b0dd7e4e73a32a145ab4f0ecc6c14f86, type: 2}
-  m_sharedMaterial: {fileID: 7750496519216389089, guid: b0dd7e4e73a32a145ab4f0ecc6c14f86,
+  m_fontAsset: {fileID: 11400000, guid: 63b5a94b2dcbc104cba0553ee26db493, type: 2}
+  m_sharedMaterial: {fileID: -2037874718788767937, guid: 63b5a94b2dcbc104cba0553ee26db493,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 48
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
