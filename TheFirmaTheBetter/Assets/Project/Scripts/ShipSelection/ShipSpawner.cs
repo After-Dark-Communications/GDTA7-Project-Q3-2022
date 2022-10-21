@@ -76,17 +76,22 @@ namespace ShipSelection
         {
             foreach (ShipBuilder shipBuilder in ShipBuildManager.Instance.ShipBuilders)
             {
-                int playerIndex = shipBuilder.PlayerNumber;
-
-                Transform spawnPointTransform = playerSpawnPoints[playerIndex];
-                GameObject playerShipObject = playerShipObjects[playerIndex];
-                if (spawnPointTransform == null || playerShipObject == null)
-                    continue;
-
-                SpawnShip(playerShipObject, spawnPointTransform);
-
-                Channels.OnPlayerRespawned?.Invoke(shipBuilder.gameObject, playerIndex);
+                RespawnShip(shipBuilder);
             }
+        }
+
+        public void RespawnShip(ShipBuilder shipBuilder)
+        {
+            int playerIndex = shipBuilder.PlayerNumber;
+
+            Transform spawnPointTransform = playerSpawnPoints[playerIndex];
+            GameObject playerShipObject = playerShipObjects[playerIndex];
+            if (spawnPointTransform == null || playerShipObject == null) 
+
+
+            SpawnShip(playerShipObject, spawnPointTransform);
+
+            Channels.OnPlayerRespawned?.Invoke(shipBuilder.gameObject, playerIndex);
         }
 
         private void SpawnShip(GameObject playerShip, Transform spawnPoint)
