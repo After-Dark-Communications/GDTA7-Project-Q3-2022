@@ -141,7 +141,7 @@ namespace Util.PrefabUtil
             }
             if (prefabSuccess == false)
             {
-                Debug.Log("Prefab failed to save" + prefabSuccess);
+                Debug.LogError("Prefab failed to save" + prefabSuccess);
             }
             else
             {
