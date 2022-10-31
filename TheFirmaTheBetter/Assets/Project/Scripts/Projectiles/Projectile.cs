@@ -1,7 +1,9 @@
 
 using Collisions;
+using EventSystem;
 using Pooling;
 using ShipParts.Ship;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -32,12 +34,19 @@ namespace Projectiles
 
         private void OnEnable()
         {
+            Channels.OnRoundOver += OnRoundOver;
+
             projectileDamage = projectileData.Damage;
             projectileSpeed = projectileData.ProjectileSpeed;
             armingTime = projectileData.ArmingTime;
             amountToSpawn = projectileData.AmountToSpawn;
             currentLifeTime = 0;
             impactSpawner = GetComponent<ImpactSpawner>();
+        }
+
+        private void OnDisable()
+        {
+            Channels.OnRoundOver -= OnRoundOver;
         }
 
         private void Update()
@@ -115,6 +124,11 @@ namespace Projectiles
             if (projectilesPool == null)
                 return;
             projectilesPool.ReturnToPool(gameObject);
+        }
+
+        private void OnRoundOver(int roundIndex, int winnerIndex)
+        {
+            DestroySelf();
         }
 
         public int ProjectileDamage { get { return projectileDamage; } }
