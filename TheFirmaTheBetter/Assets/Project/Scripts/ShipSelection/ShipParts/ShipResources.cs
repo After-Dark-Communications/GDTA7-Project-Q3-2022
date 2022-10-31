@@ -28,10 +28,7 @@ namespace ShipParts
             shipStats = new ShipStats();
             shipHealth = new ShipHealth(shipBuilder.PlayerNumber, shipStats);
             shipEnergy = new ShipEnergy(shipBuilder.PlayerNumber, shipStats);
-        }
 
-        private void Start()
-        {
             Channels.OnShipPartSelected += OnShipPartSelected;
             Channels.OnShipCompleted += OnShipCompleted;
             Channels.OnPlayerRespawned += OnPlayerRespawned;
@@ -93,7 +90,7 @@ namespace ShipParts
             Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, shipStats);
         }
 
-        private void OnPlayerRespawned(GameObject respawnedShipBuilderObject, int playerNumber)
+        private void OnPlayerRespawned(int playerNumber)
         {
             if (shipBuilder.PlayerNumber != playerNumber)
                 return;
@@ -103,8 +100,8 @@ namespace ShipParts
 
         public void ResetRescources()
         {
-            shipHealth.UpdateHealth(shipStats);
-            shipEnergy.UpdateEnergy(shipStats);
+            shipHealth.ResetHealth(shipStats);
+            shipEnergy.ResetEnergy(shipStats);
         }
 
         public float CurrentEnergyAmount => shipEnergy.CurrentEnergyAmount;

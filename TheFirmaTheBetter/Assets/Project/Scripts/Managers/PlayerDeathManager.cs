@@ -80,6 +80,7 @@ namespace Managers
             {
                 RemoveShipFromScene(ship);
             }
+            Channels.OnPlayerDespawned?.Invoke(ship.PlayerNumber);
         }
 
         private void RemoveShipFromScene(ShipBuilder ship)
