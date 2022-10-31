@@ -17,6 +17,7 @@ namespace Managers
 
         private float timeSinceStart;
         private bool timerRunning;
+        [SerializeField]
         private bool isKingOfTheHill;
 
         private void Awake()
@@ -38,18 +39,14 @@ namespace Managers
         {
             if (isKingOfTheHill)
             {
-                timeSinceStart = 0;
+                timeSinceStart = kothTimeInSec;
             }
             else
             {
-                timeSinceStart = kothTimeInSec;
+                timeSinceStart = 0;
             }
             timerRunning = true;
-        }
-
-        public void StartKoth(List<int> ints)
-        {
-            isKingOfTheHill = true;
+            DisplayTime(timeSinceStart);
         }
 
         public void PauseUnpauseTimer()
