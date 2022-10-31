@@ -23,6 +23,11 @@ namespace ShipParts
             this.playerNumber = playerNumber;
             ResetHealth(shipStats);
 
+            Subscribe();
+        }
+
+        public void Subscribe()
+        {
             Channels.OnPlayerTakeDamage += TakeDamage;
             Channels.OnPlayerHealed += Heal;
         }

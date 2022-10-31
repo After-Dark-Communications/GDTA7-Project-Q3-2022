@@ -22,6 +22,10 @@ namespace ShipSelection
         [SerializeField]
         private GameObject joinprefab;
 
+        [SerializeField]
+        [Tooltip("Required only for King of the Hill")]
+        private GameObject respawnIndicatorPrefab;
+
         private void OnEnable()
         {
             Channels.OnRoundStarted += OnRoundStared;
@@ -88,8 +92,10 @@ namespace ShipSelection
 
             Transform spawnPointTransform = playerSpawnPoints[playerIndex];
             GameObject playerShipObject = playerShipObjects[playerIndex];
-            if (spawnPointTransform == null || playerShipObject == null) 
+            if (spawnPointTransform == null || playerShipObject == null)
+                return;
 
+            shipBuilder.gameObject.SetActive(true);
 
             SpawnShip(playerShipObject, spawnPointTransform);
 
@@ -112,5 +118,6 @@ namespace ShipSelection
                 }
             }
         }
+
     }
 }
