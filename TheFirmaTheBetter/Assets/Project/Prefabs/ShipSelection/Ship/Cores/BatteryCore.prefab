@@ -89,6 +89,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8162b2d8958dd394095bd7e587c283bd, type: 3}
+<<<<<<< Updated upstream
 --- !u!1 &1324857329803640457 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6442241401276870336, guid: 8162b2d8958dd394095bd7e587c283bd,
@@ -193,6 +194,8 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+=======
+>>>>>>> Stashed changes
 --- !u!1001 &4126193471176782980
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -331,6 +334,7 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.7
       objectReference: {fileID: 0}
+<<<<<<< Updated upstream
     - target: {fileID: 7581699718429586793, guid: 2eb1c8875f351f14aaba4d6f4bf748bd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -346,6 +350,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+=======
+>>>>>>> Stashed changes
     - target: {fileID: 7602503678260995921, guid: 2eb1c8875f351f14aaba4d6f4bf748bd,
         type: 3}
       propertyPath: m_Name
@@ -397,7 +403,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0b8920555001f45b9fa14d290b3ec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   partIcon: {fileID: 21300000, guid: 55c71d1c17f387442a55a61dd606cb75, type: 3}
+=======
+  partIcon: {fileID: 0}
+>>>>>>> Stashed changes
   connectionPoint: {x: 0, y: 0, z: 0}
   connectionPointCollection: {fileID: 8755802607308576700}
   coreData: {fileID: 11400000, guid: e805001b7bbf77b44a077a9c1d1c1a7b, type: 2}
