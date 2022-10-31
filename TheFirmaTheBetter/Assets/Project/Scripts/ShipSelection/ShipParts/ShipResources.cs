@@ -28,10 +28,7 @@ namespace ShipParts
             shipStats = new ShipStats();
             shipHealth = new ShipHealth(shipBuilder.PlayerNumber, shipStats);
             shipEnergy = new ShipEnergy(shipBuilder.PlayerNumber, shipStats);
-        }
 
-        private void Start()
-        {
             Channels.OnShipPartSelected += OnShipPartSelected;
             Channels.OnShipCompleted += OnShipCompleted;
             Channels.OnPlayerRespawned += OnPlayerRespawned;

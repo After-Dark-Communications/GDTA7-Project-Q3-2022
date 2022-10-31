@@ -22,7 +22,7 @@ namespace ShipParts
             Channels.OnEnergyUsed += OnEnergyUsed;
             Channels.OnRefillEnergy += OnEnergyRefilled;
 
-            SetEnergy(shipStats);
+            ResetEnergy(shipStats);
         }
 
         public void Unsubscribe()
@@ -31,10 +31,11 @@ namespace ShipParts
             Channels.OnRefillEnergy -= OnEnergyRefilled;
         }
 
-        private void SetEnergy(ShipStats shipStats)
+        public void ResetEnergy(ShipStats shipStats)
         {
             maxEnergyAmount = shipStats.EnergyCapacity;
             currentEnergyAmount = maxEnergyAmount;
+            UpdateEnergy();
         }
 
         private void OnEnergyRefilled(int playerNumber, int refillAmount)
@@ -58,12 +59,6 @@ namespace ShipParts
 
             currentEnergyAmount -= usedAmount;
 
-            UpdateEnergy();
-        }
-
-        public void ResetEnergy(ShipStats shipStats)
-        {
-            SetEnergy(shipStats);
             UpdateEnergy();
         }
 
