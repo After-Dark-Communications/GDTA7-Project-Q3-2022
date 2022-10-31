@@ -8,6 +8,8 @@ namespace UI.Menus
     {
         [Header("Stats")]
         [SerializeField]
+        private TextMeshProUGUI pointsScoredValue;
+        [SerializeField]
         private TextMeshProUGUI playersKilledValue;
         [SerializeField]
         private TextMeshProUGUI roundsWonValue;
@@ -18,6 +20,8 @@ namespace UI.Menus
 
         public void SetPlayerStats(PlayerResult playerResult)
         {
+            pointsScoredValue.text = playerResult.PointsScored.ToString();
+
             playersKilledValue.text = playerResult.PlayersKilled.ToString();
 
             roundsWonValue.text = playerResult.RoundsWon.ToString();

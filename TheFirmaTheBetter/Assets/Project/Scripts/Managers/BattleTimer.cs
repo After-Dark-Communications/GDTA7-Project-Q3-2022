@@ -56,14 +56,15 @@ namespace Managers
 
         private void Update()
         {
-            if (timerRunning)
-            {
+            if (!timerRunning) return;
                 if (isKingOfTheHill)
                 {
                     timeSinceStart -= Time.deltaTime;
-                    if (timeSinceStart == 0)
+                    if (timeSinceStart <= 0)
                     {
+                    timerRunning=false;
                         Channels.KingOfTheHill.OnKingOfTheHillEnd?.Invoke();
+                        SceneSwitchManager.SwitchToLastScene();
                     }
                 }
                 else
@@ -71,7 +72,6 @@ namespace Managers
                     timeSinceStart += Time.deltaTime;
                 }
                 DisplayTime(timeSinceStart);
-            }
         }
         private void DisplayTime(float timeToDisplay)
         {

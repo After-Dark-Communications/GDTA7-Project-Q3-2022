@@ -18159,7 +18159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 2025170073}
-  kothTimeInSec: 600
+  kothTimeInSec: 30
   isKingOfTheHill: 1
 --- !u!4 &573015443
 Transform:
