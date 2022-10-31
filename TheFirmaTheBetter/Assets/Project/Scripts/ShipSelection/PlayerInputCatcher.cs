@@ -23,15 +23,23 @@ namespace ShipSelection
             {
                 selectionBar.OnNavigate_Up();
             }
-            else if (moveVector == Vector2.down)
+            if (moveVector == Vector2.down)
             {
                 selectionBar.OnNavigate_Down();
             }
-        
-        int selectionBarIndex = selectionBar.CurrentSelectedIndex;
-        int playerNumber = playerSelectionScreen.PlayerNumber;
+            if (moveVector == Vector2.left)
+            {
+                selectionBar.OnNavigate_Left();
+            }
+            if (moveVector == Vector2.right)
+            {
+                selectionBar.OnNavigate_Right();
+            }
 
-        Channels.Input.OnSelectionBarUpAndDownNaviagtedInput?.Invoke(playerNumber,selectionBarIndex);
+            int selectionBarIndex = selectionBar.CurrentSelectedIndex;
+            int playerNumber = playerSelectionScreen.PlayerNumber;
+
+            Channels.Input.OnSelectionBarUpAndDownNaviagtedInput?.Invoke(playerNumber, selectionBarIndex);
         }
 
         public void OnInputConfirmShip(InputAction.CallbackContext callbackContext)

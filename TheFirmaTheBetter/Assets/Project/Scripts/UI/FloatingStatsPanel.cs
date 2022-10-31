@@ -32,7 +32,7 @@ namespace UI
             }
         }
 
-        private void OnDrawGizmosSelected()
+        private void OnDrawGizmos()
         {
             // Creates an outline for where the player will be placed compared to the panel
             Vector3 reverseOffset = new Vector3(transform.position.x - xOffsetPixels, transform.position.y - yOffsetPixels);

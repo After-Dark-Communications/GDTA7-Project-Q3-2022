@@ -5,6 +5,7 @@ using ShipSelection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace Managers
@@ -25,13 +26,29 @@ namespace Managers
             Channels.OnSelectedCategoryChanged += OnCategoryChanged;
             Channels.OnShipPartSelected += OnPartSelected;
             Channels.OnPlayerSpawned += OnPlayerSpawned;
+
+            //Channels.OnEveryPlayerReady += OnEveryPlayerReady;
+
         }
+
+        //private void OnEveryPlayerReady(int playersInGameCount)
+        //{
+        //    SetAllFlashingBools(false);
+
+        //    foreach (Animator animator in animators)
+        //    {
+        //        animator.enabled = false;
+        //    }
+
+        //    enabled = false;
+        //}
 
         private void OnDestroy()
         {
             Channels.OnSelectedCategoryChanged -= OnCategoryChanged;
             Channels.OnShipPartSelected -= OnPartSelected;
             Channels.OnPlayerSpawned -= OnPlayerSpawned;
+            //Channels.OnEveryPlayerReady -= OnEveryPlayerReady;
         }
 
         private void Start()
@@ -43,6 +60,8 @@ namespace Managers
             {
                 animators.Add(animator);
             }
+
+            Channels.OnShipAnimationManagerLoaded?.Invoke();
         }
 
         private void OnPartSelected(Part selectedPart, int playerNumber)

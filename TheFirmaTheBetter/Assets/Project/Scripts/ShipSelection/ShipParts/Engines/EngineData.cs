@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ShipParts.Engines
 {
-    [CreateAssetMenu(fileName = "NewEngineData", menuName = "Part/Create new EngineData")]
+    [CreateAssetMenu(fileName = "NewEngineData", menuName = "Astrofire/Part/Create new EngineData")]
     public class EngineData : PartData
     {
         [Header("EngineStats")]
