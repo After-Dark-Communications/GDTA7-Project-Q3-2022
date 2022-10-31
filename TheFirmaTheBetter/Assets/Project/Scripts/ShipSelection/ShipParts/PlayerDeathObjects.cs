@@ -13,6 +13,9 @@ namespace ShipParts
         private Transform DeathHolder;
         private GameObject[] _OnDeathChildren;
         private ShipBuilder _shipBuilder;
+
+        [SerializeField]
+        private ParticleSystem deathExplosion;
         private void OnEnable()
         {
             Channels.OnPlayerSpawned += setup;
@@ -53,6 +56,9 @@ namespace ShipParts
                     _OnDeathChildren[i].SetActive(true);
                 }
             }
+            deathExplosion.Play();
+            deathExplosion.Emit(14);
+
         }
     }
 }

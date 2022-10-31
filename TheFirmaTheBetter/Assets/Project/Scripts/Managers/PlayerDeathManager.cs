@@ -4,6 +4,8 @@ using ShipSelection.ShipBuilders;
 using System;
 using UnityEngine;
 using EZCameraShake;
+using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -23,6 +25,7 @@ namespace Managers
         private float camShakeMagnitude;
         [SerializeField]
         private float camShakeRoughness;
+
 
         private void OnEnable()
         {

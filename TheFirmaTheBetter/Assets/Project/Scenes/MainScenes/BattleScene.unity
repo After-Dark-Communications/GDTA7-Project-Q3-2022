@@ -369,6 +369,8 @@ MonoBehaviour:
   roundManager: {fileID: 1002420599}
   camShakeMagnitude: 5
   camShakeRoughness: 3.5
+  deathExplosion: {fileID: 198665507610156730, guid: f0a16e9518a94334880d5ce664be0ded,
+    type: 3}
 --- !u!1 &289552742 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3459444363550364846, guid: 44592b494720b214ca002276217b3676,
