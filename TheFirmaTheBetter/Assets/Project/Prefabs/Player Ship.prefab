@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DeathHolder: {fileID: 8559059832325360877}
-  deathExplosion: {fileID: 198665507610156730, guid: 156b5155cd2b0e3469377bac36f848e8,
+  DeathPrefab: {fileID: 1963794456310454, guid: da420a91596617b4ab0f8941677b52e2,
     type: 3}
 --- !u!1001 &5770254523004341457
 PrefabInstance:

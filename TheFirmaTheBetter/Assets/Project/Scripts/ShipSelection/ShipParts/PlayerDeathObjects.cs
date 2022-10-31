@@ -15,7 +15,8 @@ namespace ShipParts
         private ShipBuilder _shipBuilder;
 
         [SerializeField]
-        private ParticleSystem deathExplosion;
+        private GameObject DeathPrefab;
+
         private void OnEnable()
         {
             Channels.OnPlayerSpawned += setup;
@@ -51,14 +52,14 @@ namespace ShipParts
             { return; }
             if (shipBuilder.PlayerNumber == _shipBuilder.PlayerNumber)
             {
+                GameObject gObject = Instantiate(DeathPrefab);
+                gObject.transform.parent = _shipBuilder.transform.parent;
+                gObject.transform.position = _shipBuilder.transform.position;
                 for (int i = 0; i < _OnDeathChildren.Length; i++)
                 {
                     _OnDeathChildren[i].SetActive(true);
                 }
             }
-            deathExplosion.Play();
-            deathExplosion.Emit(14);
-
         }
     }
 }
