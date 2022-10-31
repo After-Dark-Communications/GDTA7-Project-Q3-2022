@@ -93,7 +93,7 @@ namespace ShipParts
             Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, shipStats);
         }
 
-        private void OnPlayerRespawned(GameObject respawnedShipBuilderObject, int playerNumber)
+        private void OnPlayerRespawned(int playerNumber)
         {
             if (shipBuilder.PlayerNumber != playerNumber)
                 return;
