@@ -10,7 +10,7 @@ namespace UI
         [SerializeField]
         private List<FloatingStatsPanel> statPanels;
 
-        private void OnEnable()
+        private void Awake()
         {
             Channels.OnPlayerSpawned += InitializePlayerStats;
             Channels.OnPlayerDespawned += HidePlayerStats;
@@ -22,7 +22,7 @@ namespace UI
             }
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             Channels.OnPlayerSpawned -= InitializePlayerStats;
             Channels.OnPlayerDespawned -= HidePlayerStats;

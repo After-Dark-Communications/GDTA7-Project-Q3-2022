@@ -103,8 +103,8 @@ namespace ShipParts
 
         public void ResetRescources()
         {
-            shipHealth.UpdateHealth(shipStats);
-            shipEnergy.UpdateEnergy(shipStats);
+            shipHealth.ResetHealth(shipStats);
+            shipEnergy.ResetEnergy(shipStats);
         }
 
         public float CurrentEnergyAmount => shipEnergy.CurrentEnergyAmount;

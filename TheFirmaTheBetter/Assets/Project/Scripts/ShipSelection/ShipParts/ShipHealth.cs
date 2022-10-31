@@ -45,13 +45,14 @@ namespace ShipParts
 
         private void UpdateHealthBar(int playerNumber)
         {
-            Channels.OnHealthChanged(playerNumber, currentShipHealth / maxHealth);
+            Channels.OnHealthChanged?.Invoke(playerNumber, currentShipHealth / maxHealth);
         }
 
-        private void ResetHealth(ShipStats shipStats)
+        public void ResetHealth(ShipStats shipStats)
         {
             maxHealth = shipStats.MaxHealth;
             currentShipHealth = maxHealth;
+            UpdateHealthBar(playerNumber);
         }
 
         public void TakeDamage(ShipBuilder shipBuilder, int amount, int damagerIndex)
@@ -70,11 +71,6 @@ namespace ShipParts
             }
 
             UpdateHealthBar(playerNumber);
-        }
-
-        public void UpdateHealth(ShipStats shipStats)
-        {
-            ResetHealth(shipStats);
         }
 
         public void Unsubscribe()
