@@ -1,4 +1,5 @@
 using EventSystem;
+using ShipParts.Ship;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,17 +11,19 @@ namespace Managers
     {
         private void OnEnable()
         {
-            Channels.OnPlayerRespawned += OnPlayerRespawned;
+            Channels.OnPlayerBecomesDeath += KillShip;
+        }
+
+        private void KillShip(ShipBuilder shipBuilderThatNeedsDying, int playerIndexOfKiller)
+        {
+            Channels.KingOfTheHill.OnKingOfTheHillPlayerRespawn.Invoke(shipBuilderThatNeedsDying);
         }
 
         private void OnDisable()
         {
-            
+            Channels.OnPlayerBecomesDeath -= KillShip;
         }
 
-        private void OnPlayerRespawned(GameObject respawnedShipBuilderObject, int playerNumber)
-        {
-            
-        }
+
     }
 }

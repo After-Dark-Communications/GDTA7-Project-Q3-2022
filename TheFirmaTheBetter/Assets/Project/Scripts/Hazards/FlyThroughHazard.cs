@@ -1,8 +1,11 @@
 using Collisions;
+using EventSystem;
 using Projectiles;
 using ShipParts.Ship;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Hazards
@@ -15,6 +18,22 @@ namespace Hazards
         [SerializeField]
         private float timeToTakeDamage = 30;
 
+        private void OnEnable()
+        {
+            Channels.OnPlayerBecomesDeath += RemoveShipFromList;
+        }
+
+        private void RemoveShipFromList(ShipBuilder shipBuilderThatNeedsDying, int playerIndexOfKiller)
+        {
+            ICollidable shipsThatDied = shipBuilderThatNeedsDying.GetComponentInChildren<ICollidable>();
+            if (shipsThatDied != null)
+            {
+                if(shipsCollidersThatEntered.Contains(shipsThatDied))
+                {
+                    shipsCollidersThatEntered.Remove(shipsThatDied);
+                }
+            }
+        }
 
         private void Update()
         {
@@ -62,6 +81,11 @@ namespace Hazards
                 }
 
             }
+        }
+
+        private void OnDisable()
+        {
+            Channels.OnPlayerBecomesDeath -= RemoveShipFromList;
         }
     }
 }

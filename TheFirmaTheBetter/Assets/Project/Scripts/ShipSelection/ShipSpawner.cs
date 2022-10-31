@@ -25,11 +25,13 @@ namespace ShipSelection
         private void OnEnable()
         {
             Channels.OnRoundStarted += OnRoundStared;
+            Channels.KingOfTheHill.OnKingOfTheHillPlayerRespawn += RespawnShip;
         }
 
         private void OnDisable()
         {
             Channels.OnRoundStarted -= OnRoundStared;
+            Channels.KingOfTheHill.OnKingOfTheHillPlayerRespawn -= RespawnShip;
         }
 
         private void OnRoundStared(int roundIndex, int numberOfRounds)
