@@ -46,6 +46,7 @@ namespace Managers
 
         public void StartTimer()
         {
+            ResetTimer();
             if (isKingOfTheHill)
             {
                 timeSinceStart = kothTimeInSec;
@@ -54,7 +55,6 @@ namespace Managers
             {
                 timeSinceStart = 0;
             }
-            ResetTimer();
             timerRunning = true;
             DisplayTime(timeSinceStart);
         }
