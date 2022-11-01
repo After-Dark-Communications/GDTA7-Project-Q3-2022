@@ -5525,6 +5525,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleTimer: {fileID: 1051875132}
   roundManager: {fileID: 1139791681}
+  camShakeMagnitude: 0
+  camShakeRoughness: 0
 --- !u!43 &286344863
 Mesh:
   m_ObjectHideFlags: 0
@@ -17440,6 +17442,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &841361022
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3956671212015672338, guid: 81e7026a11e54e64d9098aa000aedd4d,
+        type: 3}
+      propertyPath: m_Name
+      value: GameModeManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3956671212015672364, guid: 81e7026a11e54e64d9098aa000aedd4d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3956671212015672364, guid: 81e7026a11e54e64d9098aa000aedd4d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.4774437
+      objectReference: {fileID: 0}
+    - target: {fileID: 3956671212015672364, guid: 81e7026a11e54e64d9098aa000aedd4d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -34.62156
+      objectReference: {fileID: 0}
+    - target: {fileID: 3956671212015672364, guid: 81e7026a11e54e64d9098aa000aedd4d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 43.50357
+      objectReference: {fileID: 0}
+    - target: {fileID: 3956671212015672364, guid: 81e7026a11e54e64d9098aa000aedd4d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3956671212015672364, guid: 81e7026a11e54e64d9098aa000aedd4d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3956671212015672364, guid: 81e7026a11e54e64d9098aa000aedd4d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3956671212015672364, guid: 81e7026a11e54e64d9098aa000aedd4d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3956671212015672364, guid: 81e7026a11e54e64d9098aa000aedd4d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3956671212015672364, guid: 81e7026a11e54e64d9098aa000aedd4d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3956671212015672364, guid: 81e7026a11e54e64d9098aa000aedd4d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 81e7026a11e54e64d9098aa000aedd4d, type: 3}
 --- !u!1 &881219357
 GameObject:
   m_ObjectHideFlags: 0
@@ -22835,6 +22906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 543847958}
   kothTimeInSec: 0
+  isKingOfTheHill: 0
 --- !u!4 &1051875133
 Transform:
   m_ObjectHideFlags: 0
@@ -29414,6 +29486,7 @@ MonoBehaviour:
   - {fileID: 1542867592}
   joinprefab: {fileID: 846610134800189666, guid: 6b98d335af0d8f84b927e64ac03cc741,
     type: 3}
+  respawnIndicatorPrefab: {fileID: 0}
 --- !u!4 &1629919157
 Transform:
   m_ObjectHideFlags: 0

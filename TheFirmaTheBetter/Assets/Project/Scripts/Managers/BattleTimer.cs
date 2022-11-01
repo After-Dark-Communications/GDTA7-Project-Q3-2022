@@ -63,8 +63,8 @@ namespace Managers
                     if (timeSinceStart <= 0)
                     {
                     timerRunning=false;
-                        Channels.KingOfTheHill.OnKingOfTheHillEnd?.Invoke();
-                        SceneSwitchManager.SwitchToLastScene();
+                    Channels.KingOfTheHill.OnKingOfTheHillEnd?.Invoke();
+                    SceneSwitchManager.SwitchToLastScene();
                     }
                 }
                 else

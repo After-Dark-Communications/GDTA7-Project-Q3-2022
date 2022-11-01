@@ -1,5 +1,6 @@
 using EventSystem;
 using ShipParts.Ship;
+using ShipSelection.ShipBuilders;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,16 @@ namespace Managers
         {
             Channels.OnPlayerBecomesDeath += KillShip;
             Channels.KingOfTheHill.OnKingOfTheHillPlayerRespawn += DisableRespawnIndicator;
+            Channels.KingOfTheHill.OnKingOfTheHillEnd += SendShipToResults;
+        }
+
+        private void SendShipToResults()
+        {
+            foreach (ShipBuilder ship in ShipBuildManager.Instance.ShipBuilders)
+            {
+                ship.transform.parent = null;
+                DontDestroyOnLoad(ship);
+            }
         }
 
         private void DisableRespawnIndicator(ShipBuilder shipsThatNeedsToRespawn)
@@ -38,6 +49,8 @@ namespace Managers
         private void OnDisable()
         {
             Channels.OnPlayerBecomesDeath -= KillShip;
+            Channels.KingOfTheHill.OnKingOfTheHillPlayerRespawn -= DisableRespawnIndicator;
+            Channels.KingOfTheHill.OnKingOfTheHillEnd -= SendShipToResults;
         }
 
 

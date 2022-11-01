@@ -92,6 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c69ac715a0c336d4896dd842ecdfbb97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointsScoredStats: {fileID: 539842476723354022}
+  roundsWonStats: {fileID: 3566243374240455163}
   pointsScoredValue: {fileID: 539842476058733370}
   playersKilledValue: {fileID: 56359911101918161}
   roundsWonValue: {fileID: 3566243374234569575}
@@ -883,6 +885,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6419954561049344503}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3566243374240455163 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7522583528699060236, guid: f3b360233c5ffb84c8f72fefc0b3e5c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 6419954561049344503}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7542877189128345921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1228,6 +1236,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &539842476723354022 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7522583528699060236, guid: f3b360233c5ffb84c8f72fefc0b3e5c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 8005273698058426794}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &539842476723354023 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7522583528699060237, guid: f3b360233c5ffb84c8f72fefc0b3e5c9,

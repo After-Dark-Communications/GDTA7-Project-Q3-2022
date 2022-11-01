@@ -6,6 +6,12 @@ namespace UI.Menus
 {
     public class EndScreenPanel : MonoBehaviour
     {
+        [Header("Optional Stats")]
+        [SerializeField]
+        private GameObject pointsScoredStats;
+        [SerializeField]
+        private GameObject roundsWonStats;
+
         [Header("Stats")]
         [SerializeField]
         private TextMeshProUGUI pointsScoredValue;
@@ -20,11 +26,19 @@ namespace UI.Menus
 
         public void SetPlayerStats(PlayerResult playerResult)
         {
-            pointsScoredValue.text = playerResult.PointsScored.ToString();
-
+            if (GameModeManager.Instance.GameModeType == "FFA")
+            {
+                pointsScoredStats.SetActive(false);
+                roundsWonStats.SetActive(true);
+                roundsWonValue.text = playerResult.RoundsWon.ToString();
+            }
+            else
+            {
+                roundsWonStats.SetActive(false);
+                pointsScoredStats.SetActive(true);
+                pointsScoredValue.text = playerResult.PointsScored.ToString();
+            }
             playersKilledValue.text = playerResult.PlayersKilled.ToString();
-
-            roundsWonValue.text = playerResult.RoundsWon.ToString();
 
             float minutes = Mathf.FloorToInt(playerResult.TimeSurvived / 60);
             float seconds = Mathf.FloorToInt(playerResult.TimeSurvived % 60);
