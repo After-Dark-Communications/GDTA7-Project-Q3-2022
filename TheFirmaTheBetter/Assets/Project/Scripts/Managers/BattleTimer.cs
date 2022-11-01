@@ -21,12 +21,21 @@ namespace Managers
 
         private void Awake()
         {
+            Channels.OnRoundOver += OnRoundOver;
             Channels.OnCountdownDone += OnCountdownDone;
         }
 
         private void OnDestroy()
         {
+            Channels.OnRoundOver -= OnRoundOver;
             Channels.OnCountdownDone -= OnCountdownDone;
+        }
+
+        private void OnRoundOver(int roundIndex, int winnerIndex)
+        {
+            StopTimer();
+            ResetTimer();
+            DisplayTime(timeSinceStart);
         }
 
         private void OnCountdownDone()
@@ -36,14 +45,7 @@ namespace Managers
 
         public void StartTimer()
         {
-            if (isKingOfTheHill)
-            {
-                timeSinceStart = 0;
-            }
-            else
-            {
-                timeSinceStart = kothTimeInSec;
-            }
+            ResetTimer();
             timerRunning = true;
         }
 
@@ -55,6 +57,24 @@ namespace Managers
         public void PauseUnpauseTimer()
         {
             timerRunning = !timerRunning;
+        }
+
+        public void StopTimer()
+        {
+            timerRunning = false;
+        }
+
+        public void ResetTimer()
+        {
+            if (isKingOfTheHill)
+            {
+                timeSinceStart = 0;
+            }
+            else
+            {
+                timeSinceStart = kothTimeInSec;
+            }
+
         }
 
         private void Update()
