@@ -1,3 +1,4 @@
+using ShipParts.Ship;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,11 +33,16 @@ namespace EventSystem
         /// </summary>
         public delegate void KingOfTheHillEnd();
 
+        public delegate void KingOfTheHillPlayerDied(int playerNumber);
+        public delegate void KingOfTheHillPlayerRespawn(ShipBuilder shipsThatNeedsToRespawn);
+
         public KingOfTheHillScore OnKingOfTheHillScore;
         public KingOfTheHillStart OnKingOfTheHillStart;
         public KingOfTheHillEnd OnKingOfTheHillEnd;
         public KingOfTheHillEnterScoreZone OnKingOfTheHillEnterZone;
         public KingOfTheHillLeaveScoreZone OnKingOfTheHillLeaveZone;
+        public KingOfTheHillPlayerRespawn OnKingOfTheHillPlayerRespawn;
+        public KingOfTheHillPlayerDied OnKingOfTheHillPlayerDied;
 
     }
 }
