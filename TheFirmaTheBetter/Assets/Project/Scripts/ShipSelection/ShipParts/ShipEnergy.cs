@@ -19,10 +19,15 @@ namespace ShipParts
         {
             this.playerNumber = playerNumber;
 
-            Channels.OnEnergyUsed += OnEnergyUsed;
-            Channels.OnRefillEnergy += OnEnergyRefilled;
+            Subscribe();
 
             ResetEnergy(shipStats);
+        }
+
+        public void Subscribe()
+        {
+            Channels.OnEnergyUsed += OnEnergyUsed;
+            Channels.OnRefillEnergy += OnEnergyRefilled;
         }
 
         public void Unsubscribe()

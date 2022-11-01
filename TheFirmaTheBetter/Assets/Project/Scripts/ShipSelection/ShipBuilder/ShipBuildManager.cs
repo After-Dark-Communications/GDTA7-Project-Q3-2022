@@ -74,6 +74,18 @@ namespace ShipSelection.ShipBuilders
             amountOfPlayersJoined = playerNumber + 1;
         }
 
+        public ShipBuilder GetShipBuilder(int playerIndex)
+        {
+            foreach (ShipBuilder shipBuilder in shipBuilders)
+            {
+                if (shipBuilder.PlayerNumber == playerIndex)
+                {
+                    return shipBuilder;
+                }
+            }
+            return null;
+        }
+
         public List<ShipBuilder> ShipBuilders => shipBuilders;
 
         public int AmountOfPlayersJoined => amountOfPlayersJoined;

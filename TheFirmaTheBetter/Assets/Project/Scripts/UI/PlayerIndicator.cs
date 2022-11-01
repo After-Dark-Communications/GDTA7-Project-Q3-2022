@@ -1,4 +1,6 @@
+using EventSystem;
 using ShipSelection;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,6 +13,7 @@ namespace UI
         private Camera cam;
         private TMP_Text tmpTextField;
         private ShipInfo shipInfo;
+
         private void Awake()
         {
             shipInfo = GetComponentInParent<ShipInfo>();
@@ -18,7 +21,21 @@ namespace UI
             cam = Camera.main;
 
             tmpTextField.SetText($"Player {shipInfo.PlayerNumber + 1}");
+
+            Channels.OnControllerShemeHidden += ShowIndicator;
         }
+
+        private void OnDestroy()
+        {
+            Channels.OnControllerShemeHidden -= ShowIndicator;
+        }
+
+        private void ShowIndicator()
+        {
+            Animator animator = GetComponent<Animator>();
+            animator.Play(0);
+        }
+
         void Update()
         {
             //transform.LookAt(cam.transform.position);
