@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6960c3954c7667d46a69d7963bf16f95
+guid: c4d535660c9c7d140b1ed7c252b6ff7c
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,10 +9,8 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Titillium
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: 0735c6baa8dcbc849a7d6d8f25b6f6e4, type: 3}
-  - {fileID: 12800000, guid: 723b484abd42f9f45a56bca5480cb9d3, type: 3}
+  - Square
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

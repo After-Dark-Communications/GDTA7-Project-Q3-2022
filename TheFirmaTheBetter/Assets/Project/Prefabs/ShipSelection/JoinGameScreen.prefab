@@ -262,8 +262,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press [A] to join
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 63b5a94b2dcbc104cba0553ee26db493, type: 2}
-  m_sharedMaterial: {fileID: -2037874718788767937, guid: 63b5a94b2dcbc104cba0553ee26db493,
+  m_fontAsset: {fileID: 11400000, guid: dd5c1bafc7475d448b265283a4bf9f76, type: 2}
+  m_sharedMaterial: {fileID: 4193380936708699798, guid: dd5c1bafc7475d448b265283a4bf9f76,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
