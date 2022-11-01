@@ -269,6 +269,58 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb1d867226dc84e44b3d9ffd21b9e330, type: 3}
+--- !u!1 &4094385593585424061 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1350272993715204046, guid: eb1d867226dc84e44b3d9ffd21b9e330,
+    type: 3}
+  m_PrefabInstance: {fileID: 3057676017059527027}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1351022785271777489
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4094385593585424061}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 56fa41124127bce428abdc10c4549c20, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &5012381859403548701 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8061586946822779246, guid: eb1d867226dc84e44b3d9ffd21b9e330,
+    type: 3}
+  m_PrefabInstance: {fileID: 3057676017059527027}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2908142952398778046
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5012381859403548701}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 56fa41124127bce428abdc10c4549c20, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8377679904107758656 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6785925591562845491, guid: eb1d867226dc84e44b3d9ffd21b9e330,

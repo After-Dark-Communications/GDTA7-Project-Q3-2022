@@ -3,7 +3,12 @@ guid: 173843600b4e31b468fb849dbaaf9b79
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GunrunnerShip
+    second: {fileID: 2100000, guid: 83862e6b481550b499ffb6f081053efc, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
