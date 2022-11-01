@@ -369,8 +369,6 @@ MonoBehaviour:
   roundManager: {fileID: 1002420599}
   camShakeMagnitude: 5
   camShakeRoughness: 3.5
-  deathExplosion: {fileID: 198665507610156730, guid: f0a16e9518a94334880d5ce664be0ded,
-    type: 3}
 --- !u!1 &289552742 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3459444363550364846, guid: 44592b494720b214ca002276217b3676,
@@ -3512,41 +3510,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1166630968658414926, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1166630968658414926, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1166630968658414926, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1166630968658414926, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1754220364326257896, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1754220364326257896, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1754220364326257896, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2622443995163119585, guid: 3ca85efab18a2d74490b6d5d1e935869,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3656,21 +3619,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StartControllerScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 7275045520509519773, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7275045520509519773, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7275045520509519773, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca85efab18a2d74490b6d5d1e935869, type: 3}
