@@ -47,6 +47,10 @@ namespace Audio
         {
         }
 
+        private void OnApplicationQuit()
+        {
+            Channels.OnQuitGame?.Invoke();
+        }
         private void OnDestroy()
         {
             Channels.OnEveryPlayerReady -= LoadBattleScene;
