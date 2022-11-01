@@ -369,8 +369,6 @@ MonoBehaviour:
   roundManager: {fileID: 1002420599}
   camShakeMagnitude: 5
   camShakeRoughness: 3.5
-  deathExplosion: {fileID: 198665507610156730, guid: f0a16e9518a94334880d5ce664be0ded,
-    type: 3}
 --- !u!1 &289552742 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3459444363550364846, guid: 44592b494720b214ca002276217b3676,
@@ -1711,7 +1709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6307c4c7397bc14e8ccda1368707b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugNumberOfRounds: 3
+  DebugNumberOfRounds: 1
 --- !u!4 &1002420600
 Transform:
   m_ObjectHideFlags: 0
@@ -1758,6 +1756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 543847958}
   kothTimeInSec: 0
+  isKingOfTheHill: 0
 --- !u!4 &1051875133
 Transform:
   m_ObjectHideFlags: 0
@@ -2531,6 +2530,7 @@ MonoBehaviour:
   - {fileID: 1569947723}
   joinprefab: {fileID: 846610134800189666, guid: 6b98d335af0d8f84b927e64ac03cc741,
     type: 3}
+  respawnIndicatorPrefab: {fileID: 0}
 --- !u!4 &1629919157
 Transform:
   m_ObjectHideFlags: 0

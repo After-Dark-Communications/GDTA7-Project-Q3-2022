@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c69ac715a0c336d4896dd842ecdfbb97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointsScoredValue: {fileID: 539842476058733370}
   playersKilledValue: {fileID: 56359911101918161}
   roundsWonValue: {fileID: 3566243374234569575}
   timeSurvivedVlaue: {fileID: 7542877187558795307}
@@ -1215,6 +1216,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3b360233c5ffb84c8f72fefc0b3e5c9, type: 3}
+--- !u!114 &539842476058733370 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7522583527178187408, guid: f3b360233c5ffb84c8f72fefc0b3e5c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 8005273698058426794}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &539842476723354023 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7522583528699060237, guid: f3b360233c5ffb84c8f72fefc0b3e5c9,
