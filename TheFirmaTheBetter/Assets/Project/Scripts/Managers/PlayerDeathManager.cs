@@ -54,7 +54,7 @@ namespace Managers
 
                 if (killerIndex >= 0 && killerIndex < totalNumberOfPlayers)
                 {
-                    winner = ShipBuildManager.Instance.ShipBuilders[killerIndex];
+                    winner = ShipBuildManager.Instance.GetShipBuilder(killerIndex);
                 }
                 else
                 {
