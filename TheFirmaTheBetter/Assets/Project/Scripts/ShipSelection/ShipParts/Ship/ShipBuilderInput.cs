@@ -21,43 +21,58 @@ public class ShipBuilderInput
     {
         Channels.OnPlayerSpawned -= DisableInput;
         Channels.OnRoundOver -= DisableInput;
+        Channels.Input.OnShipCompletedInput -= DisableInput;
 
-        Channels.OnCountdownDone -= EnableInput;
-        Channels.OnGameOver -= EnableInput;
+        Channels.OnEveryPlayerReady -= EnableInputHard;
+        Channels.OnCountdownDone -= EnableInputHard;
+        Channels.OnGameOver -= EnableInputHard;
     }
 
     private void DisableInput(GameObject spawnedShipBuilderObject, int playerNumber)
     {
-        DisableInput();
+        DisableInputHard();
     }
 
     private void SubScribeToEvents()
     {
         Channels.OnPlayerSpawned += DisableInput;
         Channels.OnRoundOver += DisableInput;
+        Channels.Input.OnShipCompletedInput += DisableInput;
 
-        Channels.OnCountdownDone += EnableInput;
-        Channels.OnGameOver += EnableInput;
+        Channels.OnEveryPlayerReady += EnableInputHard;
+        Channels.OnCountdownDone += EnableInputHard;
+        Channels.OnGameOver += EnableInputHard;
     }
 
     private void DisableInput(int roundIndex, int winnerIndex)
     {
-        DisableInput();
+        DisableInputHard();
     }
 
-    private void DisableInput()
+    private void DisableInputHard()
+    {
+        InputSystem.DisableDevice(playerDevice);
+    }
+    private void DisableInputHard(int number)
     {
         InputSystem.DisableDevice(playerDevice);
     }
 
-    private void EnableInput()
+    private void EnableInputHard()
+    {
+        InputSystem.EnableDevice(playerDevice);
+    }
+    private void EnableInputHard(int number)
     {
         InputSystem.EnableDevice(playerDevice);
     }
 
     private void DisableInput(int playerNumber)
     {
-       DisableInput();
+        if (this.playerNumber != playerNumber)
+            return;
+
+        DisableInputHard();
     }
 
     private void EnableInput(int playerNumber)
@@ -65,6 +80,6 @@ public class ShipBuilderInput
         if (this.playerNumber != playerNumber)
             return;
 
-        EnableInput();
+        EnableInputHard();
     }
 }
