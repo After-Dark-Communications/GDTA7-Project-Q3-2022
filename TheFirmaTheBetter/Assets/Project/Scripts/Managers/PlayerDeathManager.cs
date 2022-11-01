@@ -3,6 +3,9 @@ using ShipParts.Ship;
 using ShipSelection.ShipBuilders;
 using System;
 using UnityEngine;
+using EZCameraShake;
+using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -16,6 +19,13 @@ namespace Managers
 
         [SerializeField]
         private RoundManager roundManager;
+
+        [Header("Camera shake settings")]
+        [SerializeField]
+        private float camShakeMagnitude;
+        [SerializeField]
+        private float camShakeRoughness;
+
 
         private void OnEnable()
         {
@@ -67,6 +77,7 @@ namespace Managers
             else
             {
                 Channels.Announcer.OnPlayPlayerEliminated?.Invoke();
+                CameraShaker.Instance.ShakeOnce(camShakeMagnitude, camShakeRoughness, 1f, 1f);
             }
         }
 
@@ -80,6 +91,7 @@ namespace Managers
             {
                 RemoveShipFromScene(ship);
             }
+            Channels.OnPlayerDespawned?.Invoke(ship.PlayerNumber);
         }
 
         private void RemoveShipFromScene(ShipBuilder ship)

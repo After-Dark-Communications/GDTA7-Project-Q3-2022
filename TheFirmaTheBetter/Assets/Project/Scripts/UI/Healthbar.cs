@@ -8,12 +8,12 @@ namespace UI
         [SerializeField]
         private Gradient colorGradient;
 
-        private void OnEnable()
+        private void Awake()
         {
             Channels.OnHealthChanged += UpdateStatbar;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             Channels.OnHealthChanged -= UpdateStatbar;
         }

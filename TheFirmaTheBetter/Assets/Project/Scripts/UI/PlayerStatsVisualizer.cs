@@ -10,11 +10,11 @@ namespace UI
         [SerializeField]
         private List<FloatingStatsPanel> statPanels;
 
-        private void OnEnable()
+        private void Awake()
         {
             Channels.OnPlayerSpawned += InitializePlayerStats;
-            Channels.OnPlayerBecomesDeath += OnPlayerDied;
-            Channels.OnPlayerRespawned += OnPlayerRespawned;
+            Channels.OnPlayerDespawned += HidePlayerStats;
+            Channels.OnPlayerRespawned += ShowPlayerStats;
 
             foreach (FloatingStatsPanel statPanel in statPanels)
             {
@@ -22,11 +22,11 @@ namespace UI
             }
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             Channels.OnPlayerSpawned -= InitializePlayerStats;
-            Channels.OnPlayerBecomesDeath -= OnPlayerDied;
-            Channels.OnPlayerRespawned -= OnPlayerRespawned;
+            Channels.OnPlayerDespawned -= HidePlayerStats;
+            Channels.OnPlayerRespawned -= ShowPlayerStats;
         }
 
         public void InitializePlayerStats(GameObject player, int playerIndex)
@@ -42,16 +42,6 @@ namespace UI
                 statBar.PlayerIndex = playerIndex;
                 statBar.gameObject.SetActive(true);
             }
-        }
-
-        private void OnPlayerDied(ShipBuilder ship, int playerIndexOfKiller)
-        {
-            HidePlayerStats(ship.PlayerNumber);
-        }
-
-        private void OnPlayerRespawned(GameObject respawnedShipBuilderObject, int playerNumber)
-        {
-            ShowPlayerStats(playerNumber);
         }
 
         private void HidePlayerStats(int playerIndex)
