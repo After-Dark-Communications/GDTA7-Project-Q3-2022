@@ -357,6 +357,18 @@ PrefabInstance:
       propertyPath: m_text
       value: Master Volume
       objectReference: {fileID: 0}
+    - target: {fileID: 2663187993241300148, guid: fde5b382928d5a343aa18f97f6f625ae,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: dd5c1bafc7475d448b265283a4bf9f76,
+        type: 2}
+    - target: {fileID: 2663187993241300148, guid: fde5b382928d5a343aa18f97f6f625ae,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4193380936708699798, guid: dd5c1bafc7475d448b265283a4bf9f76,
+        type: 2}
     - target: {fileID: 2663187993241300298, guid: fde5b382928d5a343aa18f97f6f625ae,
         type: 3}
       propertyPath: m_Name
@@ -528,6 +540,7 @@ MonoBehaviour:
   MasterVolume: {fileID: 4005732601052728180}
   MusicVolume: {fileID: 2048354240080106787}
   SFXVolume: {fileID: 4078216217094269531}
+  VoiceVolume: {fileID: 0}
 --- !u!224 &6990059291464854239 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9037768633633168622, guid: dd3a19ee605996344af98797f8a81c3b,
@@ -621,6 +634,18 @@ PrefabInstance:
       propertyPath: m_text
       value: Sounds
       objectReference: {fileID: 0}
+    - target: {fileID: 2663187993241300148, guid: fde5b382928d5a343aa18f97f6f625ae,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: dd5c1bafc7475d448b265283a4bf9f76,
+        type: 2}
+    - target: {fileID: 2663187993241300148, guid: fde5b382928d5a343aa18f97f6f625ae,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4193380936708699798, guid: dd5c1bafc7475d448b265283a4bf9f76,
+        type: 2}
     - target: {fileID: 2663187993241300298, guid: fde5b382928d5a343aa18f97f6f625ae,
         type: 3}
       propertyPath: m_Name
@@ -770,9 +795,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2663187993241300148, guid: fde5b382928d5a343aa18f97f6f625ae,
         type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: dd5c1bafc7475d448b265283a4bf9f76,
+        type: 2}
+    - target: {fileID: 2663187993241300148, guid: fde5b382928d5a343aa18f97f6f625ae,
+        type: 3}
       propertyPath: m_fontSizeBase
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 2663187993241300148, guid: fde5b382928d5a343aa18f97f6f625ae,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4193380936708699798, guid: dd5c1bafc7475d448b265283a4bf9f76,
+        type: 2}
     - target: {fileID: 2663187993241300298, guid: fde5b382928d5a343aa18f97f6f625ae,
         type: 3}
       propertyPath: m_Name

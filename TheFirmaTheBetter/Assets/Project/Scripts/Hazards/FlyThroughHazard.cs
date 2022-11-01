@@ -1,8 +1,11 @@
 using Collisions;
+using EventSystem;
 using Projectiles;
 using ShipParts.Ship;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using EventSystem;
 
@@ -15,7 +18,6 @@ namespace Hazards
         private float timer;
         [SerializeField]
         private float timeToTakeDamage = 30;
-
 
         private void Start()
         {

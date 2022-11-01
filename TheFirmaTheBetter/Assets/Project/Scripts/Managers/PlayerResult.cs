@@ -13,6 +13,7 @@ namespace Managers
         private int playersKilled;
         private float distanceTravelled;
         private List<int> roundsWonIndices;
+        private int pointsScored;
 
         private void Awake()
         {
@@ -20,6 +21,15 @@ namespace Managers
 
             Channels.OnPlayerBecomesDeath += OnPlayerKilled;
             Channels.OnRoundOver += OnRoundWon;
+            Channels.KingOfTheHill.OnKingOfTheHillScore += OnPlayerScored;
+        }
+
+        private void OnPlayerScored(int playerNumber, int scoreToAdd)
+        {
+            if(playerNumber == playerIndex)
+            {
+                pointsScored += scoreToAdd;
+            }
         }
 
         private void OnDestroy()
@@ -35,6 +45,7 @@ namespace Managers
             timeSurvived = 0;
             distanceTravelled = 0;
             roundsWonIndices = new List<int>();
+            pointsScored = 0;
         }
 
         private void OnPlayerKilled(ShipBuilder shipThatDied, int killerIndex)
@@ -55,6 +66,10 @@ namespace Managers
 
         public int CompareTo(PlayerResult other)
         {
+            if (pointsScored != other.pointsScored)
+            {
+                return PointsScored.CompareTo(other.PointsScored) * -1;
+            }
             if (PlayersKilled != other.PlayersKilled)
             {
                 return PlayersKilled.CompareTo(other.PlayersKilled) * -1;
@@ -101,6 +116,12 @@ namespace Managers
                 }
                 return -1;
             }
+        }
+
+        public int PointsScored
+        {
+            get { return pointsScored; }
+            set { pointsScored = value; }
         }
     }
 }

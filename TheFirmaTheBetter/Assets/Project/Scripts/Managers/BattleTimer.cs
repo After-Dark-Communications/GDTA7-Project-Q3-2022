@@ -17,6 +17,7 @@ namespace Managers
 
         private float timeSinceStart;
         private bool timerRunning;
+        [SerializeField]
         private bool isKingOfTheHill;
 
         private void Awake()
@@ -46,12 +47,16 @@ namespace Managers
         public void StartTimer()
         {
             ResetTimer();
+            if (isKingOfTheHill)
+            {
+                timeSinceStart = kothTimeInSec;
+            }
+            else
+            {
+                timeSinceStart = 0;
+            }
             timerRunning = true;
-        }
-
-        public void StartKoth(List<int> ints)
-        {
-            isKingOfTheHill = true;
+            DisplayTime(timeSinceStart);
         }
 
         public void PauseUnpauseTimer()
@@ -79,14 +84,15 @@ namespace Managers
 
         private void Update()
         {
-            if (timerRunning)
-            {
+            if (!timerRunning) return;
                 if (isKingOfTheHill)
                 {
                     timeSinceStart -= Time.deltaTime;
-                    if (timeSinceStart == 0)
+                    if (timeSinceStart <= 0)
                     {
-                        Channels.KingOfTheHill.OnKingOfTheHillEnd?.Invoke();
+                    timerRunning=false;
+                    Channels.KingOfTheHill.OnKingOfTheHillEnd?.Invoke();
+                    SceneSwitchManager.SwitchToLastScene();
                     }
                 }
                 else
@@ -94,7 +100,6 @@ namespace Managers
                     timeSinceStart += Time.deltaTime;
                 }
                 DisplayTime(timeSinceStart);
-            }
         }
         private void DisplayTime(float timeToDisplay)
         {

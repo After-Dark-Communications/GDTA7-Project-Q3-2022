@@ -32,6 +32,8 @@ namespace ShipParts
             Channels.OnShipPartSelected += OnShipPartSelected;
             Channels.OnShipCompleted += OnShipCompleted;
             Channels.OnPlayerRespawned += OnPlayerRespawned;
+            shipHealth.Subscribe();
+            shipEnergy.Subscribe();
         }
 
         private void OnDestroy()
