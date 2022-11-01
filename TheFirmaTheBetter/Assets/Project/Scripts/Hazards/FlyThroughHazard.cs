@@ -19,11 +19,6 @@ namespace Hazards
         [SerializeField]
         private float timeToTakeDamage = 30;
 
-        private void OnEnable()
-        {
-            Channels.OnPlayerBecomesDeath += RemoveShipFromList;
-        }
-
         private void Start()
         {
             Channels.OnPlayerBecomesDeath += RemoveDeadPlayerFromTrigger;

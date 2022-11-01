@@ -97,8 +97,8 @@ namespace ShipSelection
 
             shipBuilder.gameObject.SetActive(true);
             SpawnShip(playerShipObject, spawnPointTransform);
-                Channels.OnPlayerRespawned?.Invoke(playerIndex);
-            }
+            Channels.OnPlayerRespawned?.Invoke(playerIndex);
+        
         }
 
         private void SpawnShip(GameObject playerShip, Transform spawnPoint)
