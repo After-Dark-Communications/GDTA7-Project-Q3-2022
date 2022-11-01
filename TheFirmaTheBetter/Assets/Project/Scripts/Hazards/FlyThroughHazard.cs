@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using EventSystem;
 
 namespace Hazards
 {
@@ -23,18 +24,15 @@ namespace Hazards
             Channels.OnPlayerBecomesDeath += RemoveShipFromList;
         }
 
-        private void RemoveShipFromList(ShipBuilder shipBuilderThatNeedsDying, int playerIndexOfKiller)
+        private void Start()
         {
-            ICollidable shipsThatDied = shipBuilderThatNeedsDying.GetComponentInChildren<ICollidable>();
-            if (shipsThatDied != null)
-            {
-                if(shipsCollidersThatEntered.Contains(shipsThatDied))
-                {
-                    shipsCollidersThatEntered.Remove(shipsThatDied);
-                }
-            }
+            Channels.OnPlayerBecomesDeath += RemoveDeadPlayerFromTrigger;
         }
 
+        private void OnDestroy()
+        {
+            Channels.OnPlayerBecomesDeath -= RemoveDeadPlayerFromTrigger;
+        }
         private void Update()
         {
             if (shipsCollidersThatEntered.Count == 0)
@@ -83,9 +81,19 @@ namespace Hazards
             }
         }
 
-        private void OnDisable()
+        void RemoveDeadPlayerFromTrigger(ShipBuilder deadPlayer, int playerNumber)
         {
-            Channels.OnPlayerBecomesDeath -= RemoveShipFromList;
+            foreach (ICollidable collidable in shipsCollidersThatEntered)
+            {
+                if (collidable is ShipCollision)
+                {
+                    ShipCollision shipCollision = collidable as ShipCollision;
+                    if (shipCollision.ShipBuilder == deadPlayer)
+                    {
+                        shipsCollidersThatEntered.Remove(collidable);
+                    }
+                }
+            }
         }
     }
 }
