@@ -1,5 +1,6 @@
 using EventSystem;
 using ShipParts.Ship;
+using ShipParts;
 using ShipSelection.ShipBuilders;
 using System;
 using UnityEngine;
@@ -78,6 +79,8 @@ namespace Managers
             {
                 Channels.Announcer.OnPlayPlayerEliminated?.Invoke();
                 CameraShaker.Instance.ShakeOnce(camShakeMagnitude, camShakeRoughness, 1f, 1f);
+                Transform ship = shipBuilderThatDied.transform.parent;
+                ship.GetComponent<PlayerDeathObjects>().SpawnExplosion();
             }
         }
 
