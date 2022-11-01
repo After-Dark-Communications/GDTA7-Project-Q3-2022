@@ -8,6 +8,24 @@ namespace Audio
 {
     public class MenuMusicHandler : MonoBehaviour
     {
+        #region Singleton
+        public static MenuMusicHandler Instance;
+
+        void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            if (Instance != this)
+            {
+                Destroy(Instance.gameObject);
+                return;
+            }
+        }
+        #endregion
+
         private FMOD.Studio.EventInstance titleTheme;
         private FMOD.Studio.EventInstance buildingTheme;
         private FMOD.Studio.EventInstance battleTheme;
@@ -16,7 +34,6 @@ namespace Audio
         void Start()
         {
             battleTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_Battle");
-            DontDestroyOnLoad(gameObject);
             titleTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_MainTheme");
             titleTheme.start();
             buildingTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_BuildTheme");

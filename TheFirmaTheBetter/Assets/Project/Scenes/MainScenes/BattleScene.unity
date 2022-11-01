@@ -3581,41 +3581,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1166630968658414926, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1166630968658414926, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1166630968658414926, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1166630968658414926, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1754220364326257896, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1754220364326257896, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1754220364326257896, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2622443995163119585, guid: 3ca85efab18a2d74490b6d5d1e935869,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3725,21 +3690,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StartControllerScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 7275045520509519773, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7275045520509519773, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7275045520509519773, guid: 3ca85efab18a2d74490b6d5d1e935869,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca85efab18a2d74490b6d5d1e935869, type: 3}
