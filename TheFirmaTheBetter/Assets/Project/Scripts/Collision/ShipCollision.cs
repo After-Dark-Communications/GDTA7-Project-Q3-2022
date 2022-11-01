@@ -16,6 +16,8 @@ namespace Collisions
 
         private const float _collisionWeightImpactMultiplier = 0.5f, _bumpForceClamp = 25f;//adjust to get different feel (used to prevent "random" spikes to 500+ bumpforce)
 
+        public ShipBuilder ShipBuilder { get => shipBuilder;}
+
         private void Awake()
         {
             shipBuilder = GetComponent<ShipBuilder>();

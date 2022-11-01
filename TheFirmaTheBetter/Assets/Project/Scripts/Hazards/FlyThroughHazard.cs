@@ -1,9 +1,13 @@
 using Collisions;
+using EventSystem;
 using Projectiles;
 using ShipParts.Ship;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using EventSystem;
 
 namespace Hazards
 {
@@ -15,7 +19,15 @@ namespace Hazards
         [SerializeField]
         private float timeToTakeDamage = 30;
 
+        private void Start()
+        {
+            Channels.OnPlayerBecomesDeath += RemoveDeadPlayerFromTrigger;
+        }
 
+        private void OnDestroy()
+        {
+            Channels.OnPlayerBecomesDeath -= RemoveDeadPlayerFromTrigger;
+        }
         private void Update()
         {
             if (shipsCollidersThatEntered.Count == 0)
@@ -61,6 +73,21 @@ namespace Hazards
                         shipsCollidersThatEntered.Remove(collisionObject);
                 }
 
+            }
+        }
+
+        void RemoveDeadPlayerFromTrigger(ShipBuilder deadPlayer, int playerNumber)
+        {
+            foreach (ICollidable collidable in shipsCollidersThatEntered)
+            {
+                if (collidable is ShipCollision)
+                {
+                    ShipCollision shipCollision = collidable as ShipCollision;
+                    if (shipCollision.ShipBuilder == deadPlayer)
+                    {
+                        shipsCollidersThatEntered.Remove(collidable);
+                    }
+                }
             }
         }
     }

@@ -22,14 +22,20 @@ namespace ShipSelection
         [SerializeField]
         private GameObject joinprefab;
 
+        [SerializeField]
+        [Tooltip("Required only for King of the Hill")]
+        private GameObject respawnIndicatorPrefab;
+
         private void OnEnable()
         {
             Channels.OnRoundStarted += OnRoundStared;
+            Channels.KingOfTheHill.OnKingOfTheHillPlayerRespawn += RespawnShip;
         }
 
         private void OnDisable()
         {
             Channels.OnRoundStarted -= OnRoundStared;
+            Channels.KingOfTheHill.OnKingOfTheHillPlayerRespawn -= RespawnShip;
         }
 
         private void OnRoundStared(int roundIndex, int numberOfRounds)
@@ -69,6 +75,7 @@ namespace ShipSelection
                 inp.transform.parent = playerShipObject.transform;
 
                 Channels.OnPlayerSpawned?.Invoke(shipBuilder.gameObject, playerIndex);
+                Channels.OnChangeFireMode?.Invoke(true);
             }
         }
 
@@ -76,17 +83,23 @@ namespace ShipSelection
         {
             foreach (ShipBuilder shipBuilder in ShipBuildManager.Instance.ShipBuilders)
             {
-                int playerIndex = shipBuilder.PlayerNumber;
-
-                Transform spawnPointTransform = playerSpawnPoints[playerIndex];
-                GameObject playerShipObject = playerShipObjects[playerIndex];
-                if (spawnPointTransform == null || playerShipObject == null)
-                    continue;
-
-                SpawnShip(playerShipObject, spawnPointTransform);
-
-                Channels.OnPlayerRespawned?.Invoke(playerIndex);
+                RespawnShip(shipBuilder);
             }
+        }
+
+        public void RespawnShip(ShipBuilder shipBuilder)
+        {
+            int playerIndex = shipBuilder.PlayerNumber;
+
+            Transform spawnPointTransform = playerSpawnPoints[playerIndex];
+            GameObject playerShipObject = playerShipObjects[playerIndex];
+            if (spawnPointTransform == null || playerShipObject == null)
+                return;
+
+            shipBuilder.gameObject.SetActive(true);
+            SpawnShip(playerShipObject, spawnPointTransform);
+            Channels.OnPlayerRespawned?.Invoke(playerIndex);
+        
         }
 
         private void SpawnShip(GameObject playerShip, Transform spawnPoint)
@@ -105,5 +118,6 @@ namespace ShipSelection
                 }
             }
         }
+
     }
 }
