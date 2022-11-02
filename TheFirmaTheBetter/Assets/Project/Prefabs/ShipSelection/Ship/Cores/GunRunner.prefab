@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8914613353925101945}
     m_Modifications:
+    - target: {fileID: -8700617353114198275, guid: 173843600b4e31b468fb849dbaaf9b79,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 173843600b4e31b468fb849dbaaf9b79,
         type: 3}
       propertyPath: m_RootOrder
@@ -65,6 +70,11 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 173843600b4e31b468fb849dbaaf9b79,
         type: 3}
       propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65702495048144492, guid: 173843600b4e31b468fb849dbaaf9b79,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 173843600b4e31b468fb849dbaaf9b79,
