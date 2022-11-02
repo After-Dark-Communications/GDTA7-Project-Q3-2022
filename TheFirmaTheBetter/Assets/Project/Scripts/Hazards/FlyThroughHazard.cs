@@ -78,17 +78,7 @@ namespace Hazards
 
         void RemoveDeadPlayerFromTrigger(ShipBuilder deadPlayer, int playerNumber)
         {
-            foreach (ICollidable collidable in shipsCollidersThatEntered)
-            {
-                if (collidable is ShipCollision)
-                {
-                    ShipCollision shipCollision = collidable as ShipCollision;
-                    if (shipCollision.ShipBuilder == deadPlayer)
-                    {
-                        shipsCollidersThatEntered.Remove(collidable);
-                    }
-                }
-            }
+            shipsCollidersThatEntered.Clear();
         }
     }
 }
