@@ -26,6 +26,7 @@ public class ShipBuilderInput
         Channels.OnEveryPlayerReady -= EnableInputHard;
         Channels.OnCountdownDone -= EnableInputHard;
         Channels.OnGameOver -= EnableInputHard;
+        Channels.OnQuitGame -= Quit;
     }
 
     private void DisableInput(GameObject spawnedShipBuilderObject, int playerNumber)
@@ -42,6 +43,12 @@ public class ShipBuilderInput
         Channels.OnEveryPlayerReady += EnableInputHard;
         Channels.OnCountdownDone += EnableInputHard;
         Channels.OnGameOver += EnableInputHard;
+        Channels.OnQuitGame += Quit;
+    }
+
+    void Quit()
+    {
+        EnableInputHard();
     }
 
     private void DisableInput(int roundIndex, int winnerIndex)
