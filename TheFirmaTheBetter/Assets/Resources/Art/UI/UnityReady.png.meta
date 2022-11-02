@@ -1423,7 +1423,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 77
-        y: 1441
+        y: 1439
         width: 1023
         height: 429
       alignment: 0
@@ -1513,7 +1513,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ProgressBars: -378547324
+      UnityReady_48: 759839647
       UnityReady_34: 1163243439
       UnityReady_37: 60661471
       UnityReady_41: -286898679
@@ -1582,7 +1582,7 @@ TextureImporter:
       UnityReady_33: 986766791
       UnityReady_53: -1507129727
       UnityReady_9: -2022614792
-      UnityReady_48: 759839647
+      ProgressBars: -378547324
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
