@@ -67,6 +67,8 @@ namespace EventSystem
         public delegate void ShipAnimationManagerLoaded();
         public delegate void CountdownDone();
 
+        public delegate void QuitGame();
+
         public static ChangeFireMode OnChangeFireMode;
         public static EnergyUsed OnEnergyUsed;
         public static EnergyChanged OnEnergyChanged;
@@ -101,6 +103,7 @@ namespace EventSystem
         public static ControllerShemeHidden OnControllerShemeHidden;
         public static ShipAnimationManagerLoaded OnShipAnimationManagerLoaded;
         public static CountdownDone OnCountdownDone;
+        public static QuitGame OnQuitGame;
     }
 
 }
