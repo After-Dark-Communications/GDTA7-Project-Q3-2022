@@ -28,7 +28,6 @@ namespace MovingObjects
 
             timeSinceLastSpawned = 0;
             objectMover.StartCorountineMovePoint();
-            Channels.Announcer.OnPlayEnergyZoneMoved?.Invoke();
         }
     }
 }
