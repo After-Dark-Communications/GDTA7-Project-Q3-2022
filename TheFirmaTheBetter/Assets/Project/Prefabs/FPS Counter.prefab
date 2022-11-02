@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 5, y: -5}
-  m_SizeDelta: {x: 100, y: 12}
+  m_SizeDelta: {x: 320.3944, y: 52.2565}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2363185373732539766
 CanvasRenderer:
@@ -69,8 +69,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: <i>FPS:</i>000000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b0dd7e4e73a32a145ab4f0ecc6c14f86, type: 2}
-  m_sharedMaterial: {fileID: 7750496519216389089, guid: b0dd7e4e73a32a145ab4f0ecc6c14f86,
+  m_fontAsset: {fileID: 11400000, guid: dd5c1bafc7475d448b265283a4bf9f76, type: 2}
+  m_sharedMaterial: {fileID: 4193380936708699798, guid: dd5c1bafc7475d448b265283a4bf9f76,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}

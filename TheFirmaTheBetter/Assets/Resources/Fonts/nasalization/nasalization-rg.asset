@@ -59,9 +59,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: nasalization-rg
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -390178809
   material: {fileID: 4193380936708699798}
-  materialHashCode: 0
+  materialHashCode: 1586753607
   m_Version: 1.1.0
   m_SourceFontFileGUID: e2db0ac281207dc40b1ef6d0e606aaed
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: e2db0ac281207dc40b1ef6d0e606aaed,

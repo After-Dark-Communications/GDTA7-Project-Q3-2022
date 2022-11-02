@@ -10,7 +10,7 @@ namespace Util.PrefabUtil
     {
         private const string PREFAB_FOLDER = "Assets/Project/Prefabs";//Replace this with desired folder for the prefabs to be created in
         private const string PREFAB_EXTENSION = ".prefab";
-        private const string MENU_ITEM_PATH = "Prefabs/";
+        private const string MENU_ITEM_PATH = "Prefab Utility/";
         private const int HIERARCHY_PRIORITY = 0;
 
         #region Menu Items
@@ -19,20 +19,20 @@ namespace Util.PrefabUtil
         static void CreatePrefab(MenuCommand menuCommand)
         {//create blank prefab file
 
-                GameObject obj = new GameObject("new Prefab");
-                CreatePrefabFile(obj, PREFAB_FOLDER, false);
-                GameObject.DestroyImmediate(obj);
+            GameObject obj = new GameObject("new Prefab");
+            CreatePrefabFile(obj, PREFAB_FOLDER, false);
+            GameObject.DestroyImmediate(obj);
         }
 
-        [MenuItem("GameObject/Prefabs/Create Prefab(s) From Selection(s)", false, HIERARCHY_PRIORITY)]
+        [MenuItem("GameObject/Prefab Utility/Create Prefab(s) From Selection(s)", false, HIERARCHY_PRIORITY)]
         static void CreateMultiplePrefabsFromSelection(MenuCommand menuCommand)
         {//create INDIVIDUAL prefabs from selected objects, making them unique assets
-            if (Selection.objects.Length > 1)
+            if (IsMultipleAndFirstInContextMenu(menuCommand))
             {
-                if (menuCommand.context != Selection.objects[0])
-                {
-                    return;
-                }
+                CreateMultiplePrefabsFromSelectionMenu();
+            }
+            else if (Selection.count == 1)
+            {
                 CreateMultiplePrefabsFromSelectionMenu();
             }
         }
@@ -48,15 +48,11 @@ namespace Util.PrefabUtil
             }
         }
 
-        [MenuItem("GameObject/Prefabs/Create Single Prefab From Selections", false, HIERARCHY_PRIORITY)]
+        [MenuItem("GameObject/Prefab Utility/Create Single Prefab From Selections", false, HIERARCHY_PRIORITY)]
         static void CreatePrefabFromSelection(MenuCommand menuCommand)
         {//create SINGLE prefab from selected objects, settings those as children
-            if (Selection.objects.Length > 1)
+            if (IsMultipleAndFirstInContextMenu(menuCommand))
             {
-                if (menuCommand.context != Selection.objects[0])
-                {
-                    return;
-                }
                 CreatePrefabFromSelectionMenu();
             }
         }
@@ -79,15 +75,12 @@ namespace Util.PrefabUtil
         //Figure out a way to either combine selected gameobjects into one object then make them all instances of the prefab
         //Make a prefab of the first selected object, then make all others an instance of that prefab (adjusted for scale and position n stuff)
         //check if selected gameobjects are the same enough to make them into a single prefab
-        [MenuItem("GameObject/Prefabs/Create Single Prefab And Convert All To Instance", false, HIERARCHY_PRIORITY)]
+        [MenuItem("GameObject/Prefab Utility/Create Single Prefab And Convert All To Instance", false, HIERARCHY_PRIORITY)]
         static void MakeSelectionIntoPrefabsInstances(MenuCommand menuCommand)
         {//create SINGLE prefab from selected objects, then set objects as instances of that prefab
-            if (Selection.objects.Length > 1)
+
+            if (IsMultipleAndFirstInContextMenu(menuCommand))
             {
-                if (menuCommand.context != Selection.objects[0])
-                {
-                    return;
-                }
                 MakeSelectionIntoPrefabsInstancesMenu();
             }
         }
@@ -117,21 +110,21 @@ namespace Util.PrefabUtil
 
         #region Validations
         [MenuItem(MENU_ITEM_PATH + "Create Prefab(s) From Selection(s)", true, HIERARCHY_PRIORITY)]
-        [MenuItem("GameObject/Prefabs/Create Prefab(s) From Selection(s)", true, HIERARCHY_PRIORITY)]
+        [MenuItem("GameObject/Prefab Utility/Create Prefab(s) From Selection(s)", true, HIERARCHY_PRIORITY)]
         static bool ValidateCreateMultiplePrefabsFromSelection()
         {
             return Selection.activeGameObject != null && !EditorUtility.IsPersistent(Selection.activeGameObject);
         }
 
         [MenuItem(MENU_ITEM_PATH + "Create Single Prefab From Selections", true, HIERARCHY_PRIORITY)]
-        [MenuItem("GameObject/Prefabs/Create Single Prefab From Selections", true, HIERARCHY_PRIORITY)]
+        [MenuItem("GameObject/Prefab Utility/Create Single Prefab From Selections", true, HIERARCHY_PRIORITY)]
         static bool ValidateCreatePrefabFromSelection()
         {
             return Selection.activeGameObject != null && !EditorUtility.IsPersistent(Selection.activeGameObject) && Selection.gameObjects.Length > 1;
         }
 
         [MenuItem(MENU_ITEM_PATH + "Create Single Prefab And Convert All To Instance", true, HIERARCHY_PRIORITY)]
-        [MenuItem("GameObject/Prefabs/Create Single Prefab And Convert All To Instance", true, HIERARCHY_PRIORITY)]
+        [MenuItem("GameObject/Prefab Utility/Create Single Prefab And Convert All To Instance", true, HIERARCHY_PRIORITY)]
         static bool ValidateCreateSelectionIntoPrefabInstance()
         {
             return Selection.activeGameObject != null && !EditorUtility.IsPersistent(Selection.activeGameObject) && Selection.gameObjects.Length > 1;
@@ -154,6 +147,10 @@ namespace Util.PrefabUtil
             string localPath = prefabFolder + "/" + obj.name + PREFAB_EXTENSION;
 
             // Make sure the file name is unique, in case an existing Prefab has the same name.
+            if (!AssetDatabase.IsValidFolder(prefabFolder))
+            {
+                Debug.LogError($"No folder at path\"{prefabFolder}\", creating...");
+            }
             localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
 
             //focus on project window 
@@ -180,6 +177,18 @@ namespace Util.PrefabUtil
                 EditorGUIUtility.PingObject(prefabObject);
             }
             return prefabObject;
+        }
+
+        private static bool IsMultipleAndFirstInContextMenu(MenuCommand menuCommand)
+        {
+            if (Selection.count > 1)
+            {
+                if (menuCommand.context == Selection.objects[0])
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
 

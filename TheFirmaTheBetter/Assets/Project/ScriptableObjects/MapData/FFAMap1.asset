@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapName: Asteroid Field
   mapPicture: {fileID: 0}
-  gameMode: FFA
+  gameMode: Free for all
   mapSceneIndex: 3

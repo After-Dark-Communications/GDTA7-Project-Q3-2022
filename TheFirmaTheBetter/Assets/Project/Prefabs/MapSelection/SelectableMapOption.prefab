@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 4045652285084508978}
   - component: {fileID: 6588761299507713533}
   - component: {fileID: 7865702575546084941}
+  - component: {fileID: 3513649872286246364}
   m_Layer: 5
   m_Name: SelectableMapOption
   m_TagString: Untagged
@@ -146,7 +147,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 0.11372549, g: 0.99607843, b: 0.99607843, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -165,7 +166,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
+    m_DisabledTrigger: Pressed
   m_Interactable: 1
   m_TargetGraphic: {fileID: 4045652286485745224}
   m_OnClick:
@@ -198,6 +199,26 @@ MonoBehaviour:
   mapSelectableName: {fileID: 270016835610913541}
   mapSelectableImage: {fileID: 4045652286485745224}
   mapSelectableGameMode: {fileID: 4183253197357030870}
+--- !u!95 &3513649872286246364
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4045652285084508975}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0a7b056227d1ebf49a4ca94d7e4995b4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4045652286485745222
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,8 +363,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Game Mode
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b0dd7e4e73a32a145ab4f0ecc6c14f86, type: 2}
-  m_sharedMaterial: {fileID: 7750496519216389089, guid: b0dd7e4e73a32a145ab4f0ecc6c14f86,
+  m_fontAsset: {fileID: 11400000, guid: dd5c1bafc7475d448b265283a4bf9f76, type: 2}
+  m_sharedMaterial: {fileID: 4193380936708699798, guid: dd5c1bafc7475d448b265283a4bf9f76,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -368,13 +389,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 19
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -478,8 +499,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Map Name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b0dd7e4e73a32a145ab4f0ecc6c14f86, type: 2}
-  m_sharedMaterial: {fileID: 7750496519216389089, guid: b0dd7e4e73a32a145ab4f0ecc6c14f86,
+  m_fontAsset: {fileID: 11400000, guid: 3a2214d2d4242174fb4f80ff0ac5a387, type: 2}
+  m_sharedMaterial: {fileID: -631680312614876557, guid: 3a2214d2d4242174fb4f80ff0ac5a387,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -504,19 +525,19 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 13
+  m_fontSizeBase: 13
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 19
+  m_fontStyle: 17
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_wordSpacing: -63
+  m_lineSpacing: 20
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

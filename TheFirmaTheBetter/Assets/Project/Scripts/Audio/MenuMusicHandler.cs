@@ -16,13 +16,14 @@ namespace Audio
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
+                DontDestroyOnLoad(gameObject);  
             }
             if (Instance != this)
             {
-                Destroy(Instance.gameObject);
+                Destroy(gameObject);
                 return;
             }
+            SubscribeToEvents();
         }
         #endregion
 
@@ -37,6 +38,10 @@ namespace Audio
             titleTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_MainTheme");
             titleTheme.start();
             buildingTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_BuildTheme");
+        }
+
+        void SubscribeToEvents()
+        {
             Channels.OnEveryPlayerReady += LoadBattleScene;
             Channels.OnPlayerBecomesDeath += PlayerDeath;
             Channels.OnGameOver += Replay;
@@ -51,9 +56,10 @@ namespace Audio
         {
             Channels.OnQuitGame?.Invoke();
         }
-        private void OnDestroy()
+        private void OnDisable()
         {
             Channels.OnEveryPlayerReady -= LoadBattleScene;
+            Channels.OnPlayerBecomesDeath -= PlayerDeath;
             Channels.OnGameOver -= Replay;
         }
 
@@ -71,6 +77,10 @@ namespace Audio
             {
                 battleTheme.setParameterByName("Players_Left", float.MaxValue);
             }
+            else
+            {
+                battleTheme.setParameterByName("Players_Left", playersLeft);
+            }
             buildingTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             buildingTheme.release();
             battleTheme.start();
@@ -85,7 +95,8 @@ namespace Audio
         public void PlayerDeath(ShipBuilder builder, int playercount)
         {
             playersLeft -= 1;
-            battleTheme.setParameterByName("Players_Left", playersLeft);
+            if (playersLeft! <= 1)
+                battleTheme.setParameterByName("Players_Left", playersLeft);
         }
     }
 }

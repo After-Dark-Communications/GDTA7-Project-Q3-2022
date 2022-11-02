@@ -52,6 +52,7 @@ public class RespawnIndicator : MonoBehaviour
         {
             Channels.KingOfTheHill.OnKingOfTheHillPlayerRespawn?.Invoke(shipThatWillRespawn);
             this.gameObject.SetActive(false);
+            timer = timeToRespawn;
         }
     }
 
