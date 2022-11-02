@@ -14,7 +14,7 @@ namespace Collisions
         private Rigidbody rigidbody;
         private ShipStats shipStats;
 
-        private const float _collisionWeightImpactMultiplier = 0.5f, _bumpForceClamp = 25f;//adjust to get different feel (used to prevent "random" spikes to 500+ bumpforce)
+        private const float _collisionWeightImpactMultiplier = 0.5f, _bumpForceClamp = 12f;//adjust to get different feel (used to prevent "random" spikes to 500+ bumpforce)
 
         public ShipBuilder ShipBuilder { get => shipBuilder;}
 

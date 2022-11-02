@@ -37,10 +37,10 @@ namespace ShipParts.Engines
                 rootInputHandler.OnPlayerMoveUp.AddListener(MoveUp);
                 rootInputHandler.OnPlayerMoveDown.AddListener(MoveDown);
             }
-            shipRigidBody.drag = thisCollision.GetComponent<ShipResources>().ShipStats.Drag;
+            shipRigidBody.drag = Stats.Drag;
 
             //determine unaltered max speed
-            _maxSpeed = engineData.Speed / shipRigidBody.drag;
+            _maxSpeed = Stats.Speed / Stats.Drag;
 
             _lastPosition = shipRigidBody.position;
 
@@ -55,7 +55,7 @@ namespace ShipParts.Engines
             if (_moveValue != Vector2.zero)
             {
                 Quaternion toRotation = Quaternion.LookRotation(new Vector3(_moveValue.x, 0, _moveValue.y), GlobalUp.UP.up);
-                shipRoot.rotation = Quaternion.RotateTowards(shipRoot.rotation, toRotation, engineData.Handling * Time.deltaTime);
+                shipRoot.rotation = Quaternion.RotateTowards(shipRoot.rotation, toRotation, Stats.Handling * Time.deltaTime);
 
                 GetComponentInParent<PlayerResult>().DistanceTravelled += shipRigidBody.velocity.magnitude * Time.deltaTime;
             }
@@ -68,7 +68,7 @@ namespace ShipParts.Engines
 
             Vector3 forward = shipRoot.transform.forward;
             forward.y = 0;
-            shipRigidBody.AddForce(forward.normalized * _throttle * (engineData.Speed * Time.fixedDeltaTime), ForceMode.Impulse);
+            shipRigidBody.AddForce(forward.normalized * _throttle * (Stats.Speed * Time.fixedDeltaTime), ForceMode.Impulse);
         }
 
         public void MoveShip(Vector2 move)
@@ -186,8 +186,8 @@ namespace ShipParts.Engines
         protected override void CalculateHighestAndLowest()
         {
             base.CalculateHighestAndLowest();
-            StatBoundries.SetHighestAndLowest(engineData.Speed, ref StatBoundries.SPEED_BOUNDRIES);
-            StatBoundries.SetHighestAndLowest(engineData.Handling, ref StatBoundries.HANDLING_BOUNDRIES);
+            StatBoundries.SetHighestAndLowest(EngineData.Speed, ref StatBoundries.SPEED_BOUNDRIES);
+            StatBoundries.SetHighestAndLowest(EngineData.Handling, ref StatBoundries.HANDLING_BOUNDRIES);
         }
 
         public override string PartCategoryName => "Engine";

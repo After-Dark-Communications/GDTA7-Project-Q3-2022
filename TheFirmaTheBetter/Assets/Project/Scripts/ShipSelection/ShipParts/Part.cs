@@ -1,6 +1,7 @@
 using Collisions;
 using Controls;
 using EventSystem;
+using ShipParts.Ship;
 using ShipSelection;
 using ShipSelection.ShipBuilders.ConnectionPoints;
 using System;
@@ -30,6 +31,7 @@ namespace ShipParts
         protected Rigidbody shipRigidBody { get; private set; }
         protected InputDevice myInputDevice { get; private set; }
         protected ShipCollision thisCollision { get; private set; }
+        protected ShipStats Stats { get; private set; }
 
         private void Awake()
         {
@@ -48,6 +50,7 @@ namespace ShipParts
             shipRigidBody = rigidbody;
             myInputDevice = playerDevice;
             thisCollision = shipCollision;
+            this.Stats = thisCollision.GetComponent<ShipResources>()?.ShipStats;
             Setup();
         }
 

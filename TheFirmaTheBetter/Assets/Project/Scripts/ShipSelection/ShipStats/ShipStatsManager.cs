@@ -50,7 +50,7 @@ namespace ShipSelection
 
         private void SetShipStats(List<ShipStat> shipStatsUI, ShipStats changedShipStats)
         {
-            shipStatsUI[0].SetValueFill(changedShipStats.Speed, StatBoundries.SPEED_BOUNDRIES);
+            shipStatsUI[0].SetValueFill(changedShipStats.RawSpeed, StatBoundries.SPEED_BOUNDRIES);
             shipStatsUI[1].SetValueFill(changedShipStats.MaxHealth, StatBoundries.HEALTH_BOUNDRIES);
             shipStatsUI[2].SetValueFill(changedShipStats.Handling, StatBoundries.HANDLING_BOUNDRIES);
             shipStatsUI[3].SetValueFill(changedShipStats.EnergyCapacity, StatBoundries.ENERGY_CAPACITY_BOUNDRIES);

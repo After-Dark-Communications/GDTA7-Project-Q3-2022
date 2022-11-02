@@ -15,6 +15,7 @@ namespace ShipParts.Ship
     public class ShipStats
     {
         private const float liniarFactor = 0.06f;
+        private const float floatinessMultiplier = 0.25f;
 
         //movement
         private float _speed;
@@ -166,9 +167,11 @@ namespace ShipParts.Ship
             _specialDescription = specialData.Description;
         }
 
-        public float Speed { get => _speed; }
+        public float Speed { get => _speed * floatinessMultiplier; }
+        public float RawSpeed { get => _speed; }
         public float Handling { get => _handling; }
-        public float Drag { get => _drag; }
+        public float Drag { get => _drag * floatinessMultiplier; }
+        public float RawDrag { get => _drag; }
         public int MaxHealth { get => _maxHealth; }
         public int EnergyCapacity { get => _energyCapacity; }
         public float FuelCapacity { get => _fuelCapacity; }

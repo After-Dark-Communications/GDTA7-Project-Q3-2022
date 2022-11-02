@@ -12,6 +12,13 @@ namespace UI
 
         private float _timer;
 
+        private void Awake()
+        {
+#if !DEVELOPMENT_BUILD && !UNITY_EDITOR
+            Destroy(_fpsText.gameObject);
+            Destroy(this);
+#endif
+        }
         private void Update()
         {
             if (Time.unscaledTime > _timer)
