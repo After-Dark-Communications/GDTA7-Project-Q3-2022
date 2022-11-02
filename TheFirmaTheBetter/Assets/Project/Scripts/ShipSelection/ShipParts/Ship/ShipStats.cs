@@ -168,8 +168,10 @@ namespace ShipParts.Ship
         }
 
         public float Speed { get => _speed * floatinessMultiplier; }
+        public float RawSpeed { get => _speed; }
         public float Handling { get => _handling; }
         public float Drag { get => _drag * floatinessMultiplier; }
+        public float RawDrag { get => _drag; }
         public int MaxHealth { get => _maxHealth; }
         public int EnergyCapacity { get => _energyCapacity; }
         public float FuelCapacity { get => _fuelCapacity; }
