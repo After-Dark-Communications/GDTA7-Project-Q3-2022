@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.016316075, g: 0.016170885, b: 0.057872307, a: 1}
+  m_IndirectSpecularColor: {r: 0.016246442, g: 0.016111381, b: 0.05776002, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -236,7 +236,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 357082519}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -263,7 +264,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -476,6 +477,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299628398}
   m_CullTransparentMesh: 1
+--- !u!1001 &357082518
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 266509397}
+    m_Modifications:
+    - target: {fileID: 5476591559093010984, guid: 2cc743623acef204a96a2c119f758baa,
+        type: 3}
+      propertyPath: m_Name
+      value: PostProcess_For_Menus
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476591559093010985, guid: 2cc743623acef204a96a2c119f758baa,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476591559093010985, guid: 2cc743623acef204a96a2c119f758baa,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476591559093010985, guid: 2cc743623acef204a96a2c119f758baa,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476591559093010985, guid: 2cc743623acef204a96a2c119f758baa,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476591559093010985, guid: 2cc743623acef204a96a2c119f758baa,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476591559093010985, guid: 2cc743623acef204a96a2c119f758baa,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476591559093010985, guid: 2cc743623acef204a96a2c119f758baa,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476591559093010985, guid: 2cc743623acef204a96a2c119f758baa,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476591559093010985, guid: 2cc743623acef204a96a2c119f758baa,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476591559093010985, guid: 2cc743623acef204a96a2c119f758baa,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476591559093010985, guid: 2cc743623acef204a96a2c119f758baa,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2cc743623acef204a96a2c119f758baa, type: 3}
+--- !u!4 &357082519 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5476591559093010985, guid: 2cc743623acef204a96a2c119f758baa,
+    type: 3}
+  m_PrefabInstance: {fileID: 357082518}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &509877657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1873,7 +1949,7 @@ Canvas:
   m_GameObject: {fileID: 1904841438}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 266509396}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

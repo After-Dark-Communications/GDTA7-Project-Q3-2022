@@ -54,7 +54,8 @@ namespace ShipSelection
             playerInput.gameObject.transform.SetParent(playerShipSelectionParent);
 
             playerInput.gameObject.transform.localScale = Vector3.one;
-        PlayerSelectionScreen playerSelectionScreen = playerInput.gameObject.GetComponent<PlayerSelectionScreen>();
+            playerInput.gameObject.transform.localPosition = Vector3.zero;
+            PlayerSelectionScreen playerSelectionScreen = playerInput.gameObject.GetComponent<PlayerSelectionScreen>();
         int playerNumber = playerInput.playerIndex;
         playerSelectionScreen.PlayerNumber = playerNumber;
 
