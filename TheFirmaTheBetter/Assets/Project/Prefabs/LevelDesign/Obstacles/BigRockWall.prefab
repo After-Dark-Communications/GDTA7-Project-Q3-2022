@@ -9,6 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 945632998889783999}
+  - component: {fileID: 8356569438736432364}
+  - component: {fileID: 7248817067150441357}
+  - component: {fileID: 5553203980522160111}
   m_Layer: 0
   m_Name: BigRockWall
   m_TagString: Untagged
@@ -34,6 +37,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8356569438736432364
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815668262203894543}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.0167465, y: 23.9, z: 4.827322}
+  m_Center: {x: -27.328377, y: 5.5600004, z: -10.585961}
+--- !u!65 &7248817067150441357
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815668262203894543}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.198288, y: 23.9, z: 8.209712}
+  m_Center: {x: -31.028038, y: 5.5600004, z: -5.8845305}
+--- !u!65 &5553203980522160111
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815668262203894543}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.815897, y: 23.9, z: 10.2967205}
+  m_Center: {x: -23.507946, y: 5.5600004, z: -13.320661}
 --- !u!1001 &266820076021838768
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104,6 +146,10 @@ PrefabInstance:
     - target: {fileID: 401088, guid: 936e069dd3e84e04aab3e0be18074cd9, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495252, guid: 936e069dd3e84e04aab3e0be18074cd9, type: 3}
+      propertyPath: m_Convex
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 936e069dd3e84e04aab3e0be18074cd9, type: 3}
@@ -187,7 +233,7 @@ PrefabInstance:
     - target: {fileID: 64574709078331316, guid: d1e5a80e03f16e64ba5f1a6afbf6274e,
         type: 3}
       propertyPath: m_Convex
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1e5a80e03f16e64ba5f1a6afbf6274e, type: 3}
@@ -271,7 +317,7 @@ PrefabInstance:
     - target: {fileID: 64733098582153884, guid: a991ff0845f63714dbf781625eef7f85,
         type: 3}
       propertyPath: m_Convex
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a991ff0845f63714dbf781625eef7f85, type: 3}

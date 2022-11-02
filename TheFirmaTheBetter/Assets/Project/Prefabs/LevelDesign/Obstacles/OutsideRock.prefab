@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 2404791227355648258}
   - component: {fileID: 4062484263715463033}
   - component: {fileID: 2997806991655770083}
-  - component: {fileID: 6067011494713549607}
+  - component: {fileID: 1983794028194549468}
   m_Layer: 0
   m_Name: rock-sharp
   m_TagString: Untagged
@@ -91,14 +91,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7935484084965912760}
-  m_LocalRotation: {x: -4.135903e-25, y: -0.9183629, z: -1.6543612e-24, w: 0.39573935}
-  m_LocalPosition: {x: 2.5172975, y: 0.23, z: -3.72}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.47, y: 0.97, z: -3.95}
   m_LocalScale: {x: 1.7999992, y: 1.099995, z: 2.0499983}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9012213019646763841}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -133.376, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2404791227355648258
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d85977b23a1ec468228d779480844d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &6067011494713549607
+--- !u!65 &1983794028194549468
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,5 +172,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.15, y: 3.8095458, z: 3.9987912}
-  m_Center: {x: 0.0000038022677, y: 1.6982832, z: -0.2085344}
+  m_Size: {x: 3.5810716, y: 23.05, z: 3.998793}
+  m_Center: {x: 0.0000036759595, y: 1.6982826, z: -0.20853208}
