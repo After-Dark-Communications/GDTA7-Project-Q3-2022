@@ -32,6 +32,7 @@ namespace EventSystem
         public delegate void PlayerSpawned(GameObject spawnedShipBuilderObject, int playerNumber);
         public delegate void PlayerRespawned(int playerNumber);
         public delegate void PlayerDespawned(int playerNumber);
+        public delegate void EnergyZoneMoved();
         /// <summary>
         ///     Called when firing the gun while not having enough ammo
         /// </summary>
@@ -104,6 +105,7 @@ namespace EventSystem
         public static ShipAnimationManagerLoaded OnShipAnimationManagerLoaded;
         public static CountdownDone OnCountdownDone;
         public static QuitGame OnQuitGame;
+        public static EnergyZoneMoved OnEnergyZoneMoved;
     }
 
 }

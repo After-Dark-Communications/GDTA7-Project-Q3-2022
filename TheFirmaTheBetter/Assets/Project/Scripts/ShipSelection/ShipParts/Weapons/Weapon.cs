@@ -41,6 +41,7 @@ namespace ShipParts.Weapons
             playerNumber = GetComponentInParent<ShipBuilder>().PlayerNumber;
 
             Channels.OnChangeFireMode += OnChangeFireMode;
+            Channels.OnEnergyZoneMoved += ClearEnergyZoneTrigger;
             canShoot = true;
 
             if (rootInputHandler != null)
@@ -64,6 +65,10 @@ namespace ShipParts.Weapons
                 FireWeapon();
         }
 
+        private void ClearEnergyZoneTrigger()
+        {
+            OnChangeFireMode(true);
+        }
         private void OnChangeFireMode(bool newValue)
         {
             canShoot = newValue;
