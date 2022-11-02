@@ -46,6 +46,8 @@ namespace Managers
         private void OnPlayerDeath(ShipBuilder shipBuilderThatDied, int killerIndex)
         {
             PlayerResult playerResult = shipBuilderThatDied.GetComponent<PlayerResult>();
+            Transform ship = shipBuilderThatDied.transform.parent;
+            ship.GetComponent<PlayerDeathObjects>().SpawnExplosion();   
             KillShip(shipBuilderThatDied, playerResult);
 
             if (playersAlive <= 1)
@@ -58,11 +60,11 @@ namespace Managers
                 }
                 else
                 {
-                    foreach (ShipBuilder ship in ShipBuildManager.Instance.ShipBuilders)
+                    foreach (ShipBuilder shipBuilder in ShipBuildManager.Instance.ShipBuilders)
                     {
-                        if (ship.gameObject.activeInHierarchy)
+                        if (shipBuilder.gameObject.activeInHierarchy)
                         {
-                            winner = ship;
+                            winner = shipBuilder;
                         }
                     }
                 }
@@ -79,8 +81,7 @@ namespace Managers
             {
                 Channels.Announcer.OnPlayPlayerEliminated?.Invoke();
                 CameraShaker.Instance.ShakeOnce(camShakeMagnitude, camShakeRoughness, 1f, 1f);
-                Transform ship = shipBuilderThatDied.transform.parent;
-                ship.GetComponent<PlayerDeathObjects>().SpawnExplosion();
+
             }
         }
 

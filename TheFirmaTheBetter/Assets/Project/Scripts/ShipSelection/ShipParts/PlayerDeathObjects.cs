@@ -62,7 +62,6 @@ namespace ShipParts
         public void SpawnExplosion()
         {
             GameObject gObject = Instantiate(DeathPrefab);
-            gObject.transform.parent = _shipBuilder.transform.parent;
             gObject.transform.position = _shipBuilder.transform.position;
         }
     }
