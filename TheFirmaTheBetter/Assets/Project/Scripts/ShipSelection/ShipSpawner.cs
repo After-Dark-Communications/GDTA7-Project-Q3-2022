@@ -75,7 +75,7 @@ namespace ShipSelection
                 inp.transform.parent = playerShipObject.transform;
 
                 Channels.OnPlayerSpawned?.Invoke(shipBuilder.gameObject, playerIndex);
-                Channels.OnChangeFireMode?.Invoke(true);
+                Channels.OnChangeFireMode?.Invoke(true, shipBuilder.PlayerNumber);
             }
         }
 

@@ -2,10 +2,7 @@ using EventSystem;
 using ShipParts;
 using ShipParts.Ship;
 using ShipSelection;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace Managers

@@ -43,7 +43,7 @@ namespace Managers
             respawnIndicators[playerNumberDeadShip].SetOwnerOfIndicator(shipBuilderThatNeedsDying);
 
             Channels.KingOfTheHill.OnKingOfTheHillPlayerDied?.Invoke(playerNumberDeadShip);
-
+            Channels.OnPlayerDespawned?.Invoke(playerNumberDeadShip);
         }
 
         private void OnDisable()

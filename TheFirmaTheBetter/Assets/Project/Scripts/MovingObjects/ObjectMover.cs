@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EventSystem;
 using UnityEngine.AI;
 
 namespace MovingObjects
@@ -42,6 +43,7 @@ namespace MovingObjects
             oldPoint.DeSpawn();
             yield return new WaitForSeconds(10f);
             nextMovementPoint.Spawn();
+            Channels.OnEnergyZoneMoved?.Invoke();
 
         }
 

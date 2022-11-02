@@ -15,6 +15,7 @@ namespace UI
             Channels.OnPlayerSpawned += InitializePlayerStats;
             Channels.OnPlayerDespawned += HidePlayerStats;
             Channels.OnPlayerRespawned += ShowPlayerStats;
+            Channels.KingOfTheHill.OnKingOfTheHillPlayerRespawn += ShowPlayerStats;
 
             foreach (FloatingStatsPanel statPanel in statPanels)
             {
@@ -54,6 +55,11 @@ namespace UI
         {
             FloatingStatsPanel statPanel = statPanels[playerIndex];
             statPanel.gameObject.SetActive(true);
+        }
+
+        private void ShowPlayerStats(ShipBuilder builder)
+        {
+            ShowPlayerStats(builder.PlayerNumber);
         }
     }
 }
