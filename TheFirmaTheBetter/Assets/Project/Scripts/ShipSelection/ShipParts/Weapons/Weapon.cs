@@ -67,11 +67,12 @@ namespace ShipParts.Weapons
 
         private void ClearEnergyZoneTrigger()
         {
-            OnChangeFireMode(true);
+            OnChangeFireMode(true, 0);
         }
-        private void OnChangeFireMode(bool newValue)
+        private void OnChangeFireMode(bool newValue, int playerNumber)
         {
-            canShoot = newValue;
+            if (this.playerNumber == playerNumber)
+                canShoot = newValue;
         }
 
         private void ShootWeapon(ButtonStates state)

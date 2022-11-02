@@ -32,7 +32,7 @@ namespace ShipParts
         {
             if (enteredZone is EnergyZone)
             {
-                Channels.OnChangeFireMode?.Invoke(false);
+                Channels.OnChangeFireMode?.Invoke(false, playerNumber);
             }
         }
 
@@ -40,7 +40,7 @@ namespace ShipParts
         {
             if (enteredZone is EnergyZone)
             {
-                Channels.OnChangeFireMode?.Invoke(true);
+                Channels.OnChangeFireMode?.Invoke(true, playerNumber);
                 currentZoneInterval = 0;
             }
         }

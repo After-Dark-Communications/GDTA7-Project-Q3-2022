@@ -16,7 +16,7 @@ namespace EventSystem
         public static AnnouncerChannel Announcer = new AnnouncerChannel();
         public static KingOfTheHillChannel KingOfTheHill = new KingOfTheHillChannel();
 
-        public delegate void ChangeFireMode(bool newFireModeValue);
+        public delegate void ChangeFireMode(bool newFireModeValue, int playerNumber);
         public delegate void EnergyUsed(int playerNumber, int amount);
         public delegate void EnergyChanged(int playerNumber, float newEnergyPersentage);
         public delegate void RefillEnergy(int playerNumber, int amountToRefill);
