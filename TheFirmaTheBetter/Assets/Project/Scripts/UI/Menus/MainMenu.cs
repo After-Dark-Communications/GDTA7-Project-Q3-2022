@@ -12,7 +12,11 @@ namespace UI.Menus
 
         public void QuitGame()
         {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.ExitPlaymode();
+#else
             Application.Quit();
+#endif
         }
     }
 }
