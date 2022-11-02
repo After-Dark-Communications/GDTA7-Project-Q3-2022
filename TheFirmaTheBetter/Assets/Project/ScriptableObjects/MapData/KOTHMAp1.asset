@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapName: Moon Town USA
   mapPicture: {fileID: 0}
-  gameMode: KOTH
+  gameMode: King of the hill
   mapSceneIndex: 4
