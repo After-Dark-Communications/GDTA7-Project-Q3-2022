@@ -8,7 +8,7 @@ namespace Util.PrefabUtil
 {
     public static class CreatePrefabInAssets
     {
-        private const string PREFAB_FOLDER = "Assets/Project/Prefab Utility";//Replace this with desired folder for the prefabs to be created in
+        private const string PREFAB_FOLDER = "Assets/Project/Prefabs";//Replace this with desired folder for the prefabs to be created in
         private const string PREFAB_EXTENSION = ".prefab";
         private const string MENU_ITEM_PATH = "Prefab Utility/";
         private const int HIERARCHY_PRIORITY = 0;
@@ -34,7 +34,7 @@ namespace Util.PrefabUtil
             else if (Selection.count == 1)
             {
                 CreateMultiplePrefabsFromSelectionMenu();
-            }    
+            }
         }
         [MenuItem(MENU_ITEM_PATH + "Create Prefab(s) From Selection(s)", false, HIERARCHY_PRIORITY)]
         static void CreateMultiplePrefabsFromSelectionMenu()
@@ -147,6 +147,10 @@ namespace Util.PrefabUtil
             string localPath = prefabFolder + "/" + obj.name + PREFAB_EXTENSION;
 
             // Make sure the file name is unique, in case an existing Prefab has the same name.
+            if (!AssetDatabase.IsValidFolder(prefabFolder))
+            {
+                Debug.LogError($"No folder at path\"{prefabFolder}\", creating...");
+            }
             localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
 
             //focus on project window 
