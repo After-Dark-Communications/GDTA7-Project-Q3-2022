@@ -44,6 +44,7 @@ namespace MovingObjects
             yield return new WaitForSeconds(10f);
             nextMovementPoint.Spawn();
             Channels.OnEnergyZoneMoved?.Invoke();
+            Channels.Announcer.OnPlayEnergyZoneMoved?.Invoke();
 
         }
 
