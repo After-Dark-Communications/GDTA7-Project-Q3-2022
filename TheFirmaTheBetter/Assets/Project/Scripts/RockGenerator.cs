@@ -16,6 +16,9 @@ public class RockGenerator : MonoBehaviour
     [SerializeField]
     private Transform rock;
 
+    [SerializeField]
+    private bool lookat;
+
     private float currentInterval = 0;
     private Vector3 currentTargetPos;
 
@@ -35,6 +38,9 @@ public class RockGenerator : MonoBehaviour
         }
 
         rock.position = Vector3.MoveTowards(rock.position, currentTargetPos, Speed * Time.deltaTime);
+
+        if (lookat)
+            rock.LookAt(currentTargetPos);
     }
 
     private void MoveRockToRandomStartPos()
