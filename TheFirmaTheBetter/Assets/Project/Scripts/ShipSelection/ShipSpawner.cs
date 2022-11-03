@@ -106,6 +106,7 @@ namespace ShipSelection
         {
             playerShip.transform.position = spawnPoint.position;
             playerShip.transform.rotation = spawnPoint.rotation;
+            playerShip.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
 
         private void DestroyUnusedShips()
