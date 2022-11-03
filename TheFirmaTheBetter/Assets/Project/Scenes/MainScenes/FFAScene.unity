@@ -1846,6 +1846,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 805699052019831899, guid: 3ca85efab18a2d74490b6d5d1e935869,
+        type: 3}
+      propertyPath: m_text
+      value: 'Free for all: get the most kils'
+      objectReference: {fileID: 0}
+    - target: {fileID: 805699052019831899, guid: 3ca85efab18a2d74490b6d5d1e935869,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 2622443995163119585, guid: 3ca85efab18a2d74490b6d5d1e935869,
         type: 3}
       propertyPath: m_Pivot.x

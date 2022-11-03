@@ -185,7 +185,7 @@ namespace ShipParts.Weapons
             StatBoundries.SetHighestAndLowest(weaponData.Range, ref StatBoundries.RANGE_BOUNDRIES);
             StatBoundries.SetHighestAndLowest(weaponData.EnergyCost, ref StatBoundries.ENERGY_COST_BOUNDRIES);
             StatBoundries.SetHighestAndLowest(weaponData.DPS, ref StatBoundries.DPS_BOUNDRIES);
-            StatBoundries.SetHighestAndLowest(weaponData.ProjectilePrefab.ProjectileData.Damage * weaponData.ProjectilePrefab.ProjectileData.AmountToSpawn, ref StatBoundries.DAMAGE_BOUNDRIES);
+            StatBoundries.SetHighestAndLowest(weaponData.Damage, ref StatBoundries.DAMAGE_BOUNDRIES);
         }
     }
 }
