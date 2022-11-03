@@ -47,6 +47,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7522583526906692238, guid: f3b360233c5ffb84c8f72fefc0b3e5c9,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.7058824
+      objectReference: {fileID: 0}
     - target: {fileID: 7522583527034964384, guid: f3b360233c5ffb84c8f72fefc0b3e5c9,
         type: 3}
       propertyPath: m_fontAsset
@@ -71,10 +76,20 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 7522583527178187408, guid: f3b360233c5ffb84c8f72fefc0b3e5c9,
         type: 3}
+      propertyPath: m_fontColor.a
+      value: 0.7058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 7522583527178187408, guid: f3b360233c5ffb84c8f72fefc0b3e5c9,
+        type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 4193380936708699798, guid: dd5c1bafc7475d448b265283a4bf9f76,
         type: 2}
+    - target: {fileID: 7522583527178187408, guid: f3b360233c5ffb84c8f72fefc0b3e5c9,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 3036609640
+      objectReference: {fileID: 0}
     - target: {fileID: 7522583527178187408, guid: f3b360233c5ffb84c8f72fefc0b3e5c9,
         type: 3}
       propertyPath: m_HorizontalAlignment
