@@ -32,6 +32,7 @@ namespace ShipSelection
             }
 
             joinPlayerScreens[0].gameObject.SetActive(true);
+            ShipBuilderInput.EnableAllInputsHard();
         }
 
         private void OnDisable()

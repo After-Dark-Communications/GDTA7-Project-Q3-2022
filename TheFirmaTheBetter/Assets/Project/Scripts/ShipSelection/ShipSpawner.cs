@@ -99,14 +99,17 @@ namespace ShipSelection
             shipBuilder.gameObject.SetActive(true);
             SpawnShip(playerShipObject, spawnPointTransform);
             Channels.OnPlayerRespawned?.Invoke(playerIndex);
-        
+
         }
 
         private void SpawnShip(GameObject playerShip, Transform spawnPoint)
         {
             playerShip.transform.position = spawnPoint.position;
             playerShip.transform.rotation = spawnPoint.rotation;
-            playerShip.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            Rigidbody body = playerShip.GetComponent<Rigidbody>();
+            body.velocity = Vector3.zero;
+            body.angularVelocity = Vector3.zero;
+            body.AddForce(Vector3.zero, ForceMode.VelocityChange);
         }
 
         private void DestroyUnusedShips()
