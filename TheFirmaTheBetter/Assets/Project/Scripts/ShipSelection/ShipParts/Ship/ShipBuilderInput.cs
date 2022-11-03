@@ -15,6 +15,7 @@ public class ShipBuilderInput
         this.playerNumber = playerNumber;
 
         SubScribeToEvents();
+        EnableAllInputsHard();
     }
 
     public void UnSubscribeToEvents()
@@ -24,8 +25,8 @@ public class ShipBuilderInput
         Channels.Input.OnShipCompletedInput -= DisableInput;
 
         Channels.OnEveryPlayerReady -= EnableInputHard;
-        Channels.OnCountdownDone -= EnableInputHard;
-        Channels.OnGameOver -= EnableInputHard;
+        Channels.OnCountdownDone -= EnableAllInputsHard;
+        Channels.OnGameOver -= EnableAllInputsHard;
         Channels.OnQuitGame -= Quit;
     }
 
@@ -41,14 +42,14 @@ public class ShipBuilderInput
         Channels.Input.OnShipCompletedInput += DisableInput;
 
         Channels.OnEveryPlayerReady += EnableInputHard;
-        Channels.OnCountdownDone += EnableInputHard;
-        Channels.OnGameOver += EnableInputHard;
+        Channels.OnCountdownDone += EnableAllInputsHard;
+        Channels.OnGameOver += EnableAllInputsHard;
         Channels.OnQuitGame += Quit;
     }
 
     void Quit()
     {
-        EnableInputHard();
+        EnableAllInputsHard();
     }
 
     private void DisableInput(int roundIndex, int winnerIndex)
@@ -65,10 +66,6 @@ public class ShipBuilderInput
         InputSystem.DisableDevice(playerDevice);
     }
 
-    private void EnableInputHard()
-    {
-        InputSystem.EnableDevice(playerDevice);
-    }
     private void EnableInputHard(int number)
     {
         InputSystem.EnableDevice(playerDevice);
@@ -87,6 +84,14 @@ public class ShipBuilderInput
         if (this.playerNumber != playerNumber)
             return;
 
-        EnableInputHard();
+        EnableAllInputsHard();
+    }
+
+    public static void EnableAllInputsHard()
+    {
+        for (int i = 0; i < InputSystem.devices.Count; i++)
+        {
+            InputSystem.EnableDevice(InputSystem.devices[i]);
+        }
     }
 }

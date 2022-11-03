@@ -49,8 +49,9 @@ namespace ShipParts.Weapons
         public float Range { get { return range; } }
         public float ArmingTime { get { return armingTime; } }
         public int EnergyCost { get { return energyCost; } }
-        public int AmountOfBullets{ get { return amountOfBullets; } }
+        public int AmountOfBullets { get { return amountOfBullets; } }
         public float DPS { get { return ProjectilePrefab.ProjectileData.Damage * FireRate * AmountOfBullets; } }
+        public float Damage { get { return ProjectilePrefab.ProjectileData.Damage * ProjectilePrefab.ProjectileData.AmountToSpawn; } }
 
         public FMODUnity.EventReference WeaponFireEvent => weaponFireEvent;
     }

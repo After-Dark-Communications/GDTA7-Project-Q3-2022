@@ -43,7 +43,7 @@ namespace ShipSelection
         {
             Animator currentButtonAnimator = buttonAnimators[index];
             currentButtonAnimator.SetBool(DisabledBooleanName, false);
-            Debug.Log("Reset Button " + index + " FALSE");
+            //Debug.Log("Reset Button " + index + " FALSE");
         }
 
         private int GetNextIndex(int currentIndex)
