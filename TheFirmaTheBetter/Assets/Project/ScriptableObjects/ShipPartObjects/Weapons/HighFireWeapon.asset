@@ -21,7 +21,7 @@ MonoBehaviour:
   amountOfBullets: 1
   energyCost: 1
   sideSpreadAngle: 20
-  range: 40
+  range: 50
   armingTime: 0
   weaponFireEvent:
     Guid:

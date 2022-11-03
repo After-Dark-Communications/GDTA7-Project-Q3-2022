@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.016246442, g: 0.016111381, b: 0.05776002, a: 1}
+  m_IndirectSpecularColor: {r: 0.016316075, g: 0.016170885, b: 0.057872307, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1466,13 +1466,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8219291604407356519, guid: 07d57c452c0b4884dab3391e68a4c8c7,
         type: 3}
+      propertyPath: m_text
+      value: '<i>A</i>strofire
+
+        <i>A</i>ren<i angle=-35>a</i>'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219291604407356519, guid: 07d57c452c0b4884dab3391e68a4c8c7,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: dd5c1bafc7475d448b265283a4bf9f76,
+        type: 2}
+    - target: {fileID: 8219291604407356519, guid: 07d57c452c0b4884dab3391e68a4c8c7,
+        type: 3}
       propertyPath: m_fontSizeBase
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8219291604407356519, guid: 07d57c452c0b4884dab3391e68a4c8c7,
         type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4193380936708699798, guid: dd5c1bafc7475d448b265283a4bf9f76,
+        type: 2}
+    - target: {fileID: 8219291604407356519, guid: 07d57c452c0b4884dab3391e68a4c8c7,
+        type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4294900840
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8219291604473004410, guid: 07d57c452c0b4884dab3391e68a4c8c7,
         type: 3}
