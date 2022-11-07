@@ -1,12 +1,13 @@
 using Managers;
 using UnityEngine;
-
+using EventSystem;
 namespace UI.Menus
 {
     public class MainMenu : Menu
     {
         public void StartGame()
         {
+            Channels.OnLoadBuildingScene?.Invoke();
             SceneSwitchManager.SwitchToNextScene();
         }
 

@@ -30,7 +30,9 @@ namespace Audio
             Channels.OnLoadBuildingScene += LoadBuildingScene;
         }
         #endregion
-
+        [SerializeField]
+        private FMODUnity.EventReference jingle;
+        private FMOD.Studio.Bus master;
         private FMOD.Studio.EventInstance titleTheme;
         private FMOD.Studio.EventInstance buildingTheme;
         private FMOD.Studio.EventInstance battleTheme;
@@ -42,6 +44,7 @@ namespace Audio
             titleTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_MainTheme");
             titleTheme.start();
             buildingTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_BuildTheme");
+            master = FMODUnity.RuntimeManager.GetBus("Bus:/");
         }
 
         // Update is called once per frame
@@ -86,13 +89,14 @@ namespace Audio
 
         public void EndGame()
         {
+            master.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
             battleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            battleTheme.release();
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Music/Mus_Jingle", transform.position);
+            FMODUnity.RuntimeManager.PlayOneShot(jingle, transform.position);
         }
 
         public void Replay()
         {
+            master.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
             FMOD.RESULT res = titleTheme.start();
             Debug.Log(res);
         }
