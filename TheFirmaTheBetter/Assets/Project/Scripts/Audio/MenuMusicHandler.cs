@@ -23,7 +23,11 @@ namespace Audio
                 Destroy(gameObject);
                 return;
             }
-            SubscribeToEvents();
+            Channels.OnEveryPlayerReady += LoadBattleScene;
+            Channels.OnPlayerBecomesDeath += PlayerDeath;
+            Channels.OnGameOver += EndGame;
+            Channels.OnReturnToTitleScreen += Replay;
+            Channels.OnLoadBuildingScene += LoadBuildingScene;
         }
         #endregion
 
@@ -40,13 +44,6 @@ namespace Audio
             buildingTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_BuildTheme");
         }
 
-        void SubscribeToEvents()
-        {
-            Channels.OnEveryPlayerReady += LoadBattleScene;
-            Channels.OnPlayerBecomesDeath += PlayerDeath;
-            Channels.OnGameOver += Replay;
-        }
-
         // Update is called once per frame
         void Update()
         {
@@ -60,13 +57,15 @@ namespace Audio
         {
             Channels.OnEveryPlayerReady -= LoadBattleScene;
             Channels.OnPlayerBecomesDeath -= PlayerDeath;
-            Channels.OnGameOver -= Replay;
+            Channels.OnGameOver -= EndGame;
+            Channels.OnReturnToTitleScreen -= Replay;
+            Channels.OnLoadBuildingScene -= LoadBuildingScene;
         }
 
         public void LoadBuildingScene()
         {
-            titleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            titleTheme.release();
+            FMOD.RESULT res = titleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            Debug.Log(res);
             buildingTheme.start();
         }
 
@@ -82,20 +81,26 @@ namespace Audio
                 battleTheme.setParameterByName("Players_Left", playersLeft);
             }
             buildingTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            buildingTheme.release();
             battleTheme.start();
+        }
+
+        public void EndGame()
+        {
+            battleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            battleTheme.release();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Music/Mus_Jingle", transform.position);
         }
 
         public void Replay()
         {
-            battleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            titleTheme.start();
+            FMOD.RESULT res = titleTheme.start();
+            Debug.Log(res);
         }
 
         public void PlayerDeath(ShipBuilder builder, int playercount)
         {
             playersLeft -= 1;
-            if (playersLeft! <= 1)
+            if (playersLeft! <= 1 && playercount < playersLeft)
                 battleTheme.setParameterByName("Players_Left", playersLeft);
         }
     }

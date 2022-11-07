@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.016316075, g: 0.016170885, b: 0.057872307, a: 1}
+  m_IndirectSpecularColor: {r: 0.0163243, g: 0.016176106, b: 0.05786788, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -544,6 +544,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 547534657}
   m_CullTransparentMesh: 1
+--- !u!1 &610047166 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8219291604016260502, guid: 07d57c452c0b4884dab3391e68a4c8c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1694003174}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1083067505 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2048354240233296822, guid: b9448bcfa6d1397439b6f2e110ed2fa6,
@@ -1087,7 +1093,7 @@ PrefabInstance:
     - target: {fileID: 382306162051229113, guid: 07d57c452c0b4884dab3391e68a4c8c7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 382306162051229113, guid: 07d57c452c0b4884dab3391e68a4c8c7,
         type: 3}
@@ -1103,7 +1109,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1574378114}
+      objectReference: {fileID: 610047166}
     - target: {fileID: 382306162051229113, guid: 07d57c452c0b4884dab3391e68a4c8c7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -1117,12 +1123,17 @@ PrefabInstance:
     - target: {fileID: 382306162051229113, guid: 07d57c452c0b4884dab3391e68a4c8c7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartGame
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 382306162051229113, guid: 07d57c452c0b4884dab3391e68a4c8c7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: LoadBuildingScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 382306162051229113, guid: 07d57c452c0b4884dab3391e68a4c8c7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuMusicHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 382306162051229113, guid: 07d57c452c0b4884dab3391e68a4c8c7,
         type: 3}
@@ -1533,6 +1544,16 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8492545158423163631, guid: 07d57c452c0b4884dab3391e68a4c8c7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 51.873993
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492545158423163631, guid: 07d57c452c0b4884dab3391e68a4c8c7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.6720009
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07d57c452c0b4884dab3391e68a4c8c7, type: 3}
 --- !u!224 &1694003175 stripped
@@ -1547,7 +1568,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1694003174}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 610047166}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3a7b2b35ea6b5f47ab550adb82ac432, type: 3}
@@ -2539,17 +2560,17 @@ PrefabInstance:
     - target: {fileID: 8102728122054629631, guid: 7458f2026926efb49aad4c61d276ede8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.457272
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8102728122054629631, guid: 7458f2026926efb49aad4c61d276ede8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.750001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8102728122054629631, guid: 7458f2026926efb49aad4c61d276ede8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23.609972
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8102728122054629631, guid: 7458f2026926efb49aad4c61d276ede8,
         type: 3}

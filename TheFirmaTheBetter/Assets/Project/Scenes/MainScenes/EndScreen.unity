@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.016246442, g: 0.016111381, b: 0.05776002, a: 1}
+  m_IndirectSpecularColor: {r: 0.0163243, g: 0.016176106, b: 0.05786788, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1620,6 +1620,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616613149468215779, guid: f23f3b8d8b26b4d48a91cab407f6d354,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616613149468215779, guid: f23f3b8d8b26b4d48a91cab407f6d354,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616613149468215779, guid: f23f3b8d8b26b4d48a91cab407f6d354,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 11500000, guid: 0fdd089a89e130747b4361fbe40b52ec,
+        type: 3}
+    - target: {fileID: 4616613149468215779, guid: f23f3b8d8b26b4d48a91cab407f6d354,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616613149468215779, guid: f23f3b8d8b26b4d48a91cab407f6d354,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: EndScreen, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4649883127849530699, guid: f23f3b8d8b26b4d48a91cab407f6d354,
         type: 3}

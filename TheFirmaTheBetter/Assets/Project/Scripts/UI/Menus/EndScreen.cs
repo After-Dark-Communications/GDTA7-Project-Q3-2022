@@ -1,6 +1,7 @@
 using Managers;
 using ShipSelection;
 using UnityEngine;
+using EventSystem;
 
 
 namespace UI.Menus
@@ -36,6 +37,7 @@ namespace UI.Menus
         }
         public void Rematch()
         {
+            Channels.OnReturnToTitleScreen?.Invoke();
             SceneSwitchManager.SwitchToFirstScene();
         }
 
