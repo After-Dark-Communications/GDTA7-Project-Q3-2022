@@ -22,7 +22,7 @@ namespace UI.Menus
         {
             foreach (EndScreenPanel panel in panels)
             {
-                panel.gameObject.SetActive(false);
+                //panel.gameObject.SetActive(false);
             }
 
             PlayerResult[] results = ResultsManager.Instance.Results;
