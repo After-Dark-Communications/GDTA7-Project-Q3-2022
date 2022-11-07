@@ -15,7 +15,6 @@ namespace UI
             Channels.OnPlayerSpawned += InitializePlayerStats;
             Channels.OnPlayerDespawned += HidePlayerStats;
             Channels.OnPlayerRespawned += ShowPlayerStats;
-            Channels.KingOfTheHill.OnKingOfTheHillPlayerRespawn += ShowPlayerStats;
 
             foreach (FloatingStatsPanel statPanel in statPanels)
             {
@@ -28,6 +27,7 @@ namespace UI
             Channels.OnPlayerSpawned -= InitializePlayerStats;
             Channels.OnPlayerDespawned -= HidePlayerStats;
             Channels.OnPlayerRespawned -= ShowPlayerStats;
+
         }
 
         public void InitializePlayerStats(GameObject player, int playerIndex)
