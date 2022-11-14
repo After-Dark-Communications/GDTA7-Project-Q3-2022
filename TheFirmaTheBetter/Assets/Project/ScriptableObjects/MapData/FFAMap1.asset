@@ -15,4 +15,5 @@ MonoBehaviour:
   mapName: Asteroid Field
   mapPicture: {fileID: 0}
   gameMode: Free for all
+  mapDescription: Eliminate your enemies to win!
   mapSceneIndex: 3
