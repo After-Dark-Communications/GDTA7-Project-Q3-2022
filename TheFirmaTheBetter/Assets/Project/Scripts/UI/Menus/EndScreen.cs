@@ -20,12 +20,15 @@ namespace UI.Menus
 
         private void DisplayResults()
         {
+            PlayerResult[] results = ResultsManager.Instance.Results;
+
+            if (results == null || results.Length == 0)
+            { return; }
+
             foreach (EndScreenPanel panel in panels)
             {
-                //panel.gameObject.SetActive(false);
+                panel.gameObject.SetActive(false);
             }
-
-            PlayerResult[] results = ResultsManager.Instance.Results;
 
             for (int i = 0; i < results.Length; i++)
             {
