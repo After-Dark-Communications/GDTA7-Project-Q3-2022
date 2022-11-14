@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class RoundManager : MonoBehaviour
 {
-    public static readonly float _slowMotionTiming = 1;
-    public static readonly float _slowMotionKillTimer = 0.99f;
+    public static readonly float _slowMotionTiming = 2;
+    public static readonly float _slowMotionKillTimer = 1.99f;
+
+    private const float slowStrenght = 0.5f;
 
     public int DebugNumberOfRounds = 3;
 
@@ -54,7 +56,7 @@ public class RoundManager : MonoBehaviour
 
     private IEnumerator EndOfRoundTime()
     {
-        Time.timeScale = 0.2f;
+        Time.timeScale = slowStrenght;
         yield return new WaitForSeconds(_slowMotionTiming);
         Time.timeScale = 1f;
 
@@ -64,7 +66,7 @@ public class RoundManager : MonoBehaviour
 
     private IEnumerator EndGame()
     {
-        Time.timeScale = 0.2f;
+        Time.timeScale = slowStrenght;
         yield return new WaitForSeconds(_slowMotionTiming); 
         Channels.OnGameOver?.Invoke();
         Time.timeScale = 1f;
