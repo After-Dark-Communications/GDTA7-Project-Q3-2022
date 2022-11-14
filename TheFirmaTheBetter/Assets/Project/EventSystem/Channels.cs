@@ -69,6 +69,10 @@ namespace EventSystem
         public delegate void CountdownDone();
 
         public delegate void QuitGame();
+        public delegate void SpecialUsed(ShipBuilder shipBuilderThatUsedSpecial);
+        public delegate void SpecialReady(ShipBuilder shipBuilder);
+        public delegate void PlayerBarsLoaded(ShipBuilder shipBuilder);
+
 
         public static ChangeFireMode OnChangeFireMode;
         public static EnergyUsed OnEnergyUsed;
@@ -106,6 +110,9 @@ namespace EventSystem
         public static CountdownDone OnCountdownDone;
         public static QuitGame OnQuitGame;
         public static EnergyZoneMoved OnEnergyZoneMoved;
+        public static SpecialUsed OnSpecialUsed;
+        public static SpecialReady OnSpecialReady;
+        public static PlayerBarsLoaded OnPlayerBarsLoaded;
     }
 
 }

@@ -6,9 +6,14 @@ namespace UI
 {
     public class FloatingStatsPanel : MonoBehaviour
     {
+        [Header("Stats")]
         [SerializeField]
         private List<ShipStatBar> statBars;
-
+        [SerializeField]
+        private CrownShower crownShower;
+        [SerializeField]
+        private SpecialCooldownShower specialCooldownShower;
+        [Header("Objects")]
         [SerializeField]
         private GameObject objectToFollow;
 
@@ -49,5 +54,8 @@ namespace UI
         {
             get { return statBars.ToArray(); }
         }
+
+        public CrownShower CrownShower { get => crownShower; set => crownShower = value; }
+        public SpecialCooldownShower SpecialCooldownShower { get => specialCooldownShower; set => specialCooldownShower = value; }
     }
 }
