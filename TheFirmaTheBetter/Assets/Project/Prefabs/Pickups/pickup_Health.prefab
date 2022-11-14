@@ -55,16 +55,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 198120616721689680, guid: 6083f7eb523e46e438d9bd70972cce9a,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.g
-      value: 0.12428439
-      objectReference: {fileID: 0}
-    - target: {fileID: 198120616721689680, guid: 6083f7eb523e46e438d9bd70972cce9a,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 198144152629241808, guid: 6083f7eb523e46e438d9bd70972cce9a,
         type: 3}
       propertyPath: RotationModule.x.scalar
@@ -220,21 +210,6 @@ PrefabInstance:
       propertyPath: RotationModule.y.maxCurve.m_Curve.Array.data[1].tangentMode
       value: 34
       objectReference: {fileID: 0}
-    - target: {fileID: 198792107676097158, guid: 6083f7eb523e46e438d9bd70972cce9a,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198792107676097158, guid: 6083f7eb523e46e438d9bd70972cce9a,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.10005535
-      objectReference: {fileID: 0}
-    - target: {fileID: 198792107676097158, guid: 6083f7eb523e46e438d9bd70972cce9a,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 199199879794061098, guid: 6083f7eb523e46e438d9bd70972cce9a,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -284,7 +259,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c033090f277397a4389ef0b17894adb3, type: 2}
+      objectReference: {fileID: 2100000, guid: 005674afd0f78a94e88b6663207cdb4b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6083f7eb523e46e438d9bd70972cce9a, type: 3}
 --- !u!1001 &6878674768450084109
@@ -314,21 +289,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7010246694102920486, guid: 912c85f82f88e2c4a9d135f475a27ea2,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7010246694102920486, guid: 912c85f82f88e2c4a9d135f475a27ea2,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7010246694102920486, guid: 912c85f82f88e2c4a9d135f475a27ea2,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7010246694102920486, guid: 912c85f82f88e2c4a9d135f475a27ea2,
         type: 3}
@@ -379,11 +339,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7010246694102920486, guid: 912c85f82f88e2c4a9d135f475a27ea2,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7233794386608959149, guid: 912c85f82f88e2c4a9d135f475a27ea2,
         type: 3}
