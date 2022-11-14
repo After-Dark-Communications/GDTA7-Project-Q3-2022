@@ -48,6 +48,14 @@ namespace ShipSelection
             previewManager = manager as CamPreviewManager;
         }
 
+#if UNITY_EDITOR
+        public void OnPlayerJoin(PlayerInput playerInput, bool isDebug = true)
+        {
+            OnPlayerJoin(playerInput);
+            Channels.Input.OnShipCompletedInput(playerInput.playerIndex);
+        }
+#endif
+
         public void OnPlayerJoin(PlayerInput playerInput)
         {
             InputDevice playerGamepad = playerInput.GetDevice<InputDevice>();
@@ -57,13 +65,13 @@ namespace ShipSelection
             playerInput.gameObject.transform.localScale = Vector3.one;
             playerInput.gameObject.transform.localPosition = Vector3.zero;
             PlayerSelectionScreen playerSelectionScreen = playerInput.gameObject.GetComponent<PlayerSelectionScreen>();
-        int playerNumber = playerInput.playerIndex;
-        playerSelectionScreen.PlayerNumber = playerNumber;
+            int playerNumber = playerInput.playerIndex;
+            playerSelectionScreen.PlayerNumber = playerNumber;
 
 
-        playerSelectionScreen.GetComponentInChildren<ShipStatsManager>().PlayerIndex = playerNumber;
+            playerSelectionScreen.GetComponentInChildren<ShipStatsManager>().PlayerIndex = playerNumber;
 
-        ShowAndHideJoinPlayerButton(playerInput);
+            ShowAndHideJoinPlayerButton(playerInput);
 
             ShowAndHideJoinPlayerButton(playerInput);
 
@@ -88,5 +96,7 @@ namespace ShipSelection
 
             joinPlayerScreens[playerInput.playerIndex + 1].gameObject.SetActive(true);
         }
+
+        public GameObject PrefabPlayerShipSelection => prefabPlayerShipSelection; 
     }
 }

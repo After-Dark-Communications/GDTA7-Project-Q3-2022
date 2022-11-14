@@ -1,9 +1,9 @@
 using EventSystem;
+using Managers;
+using ShipParts.Ship;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using ShipParts.Ship;
-using Managers;
 
 namespace ShipSelection.ShipBuilders
 {
@@ -53,6 +53,19 @@ namespace ShipSelection.ShipBuilders
 
             shipBuilders.Add(shipBuilder);
 
+#if UNITY_EDITOR
+            if (shipBuilders.Count == 1)
+            {
+                PlayerJoinManager FakeJoiner = FindObjectOfType<PlayerJoinManager>();
+                InputDevice fakeDevice = InputSystem.AddDevice("Gamepad");
+                PlayerInput fakeInput = PlayerInput.Instantiate(FakeJoiner.PrefabPlayerShipSelection, pairWithDevice: fakeDevice);
+                FakeJoiner?.OnPlayerJoin(fakeInput, true);
+                Channels.OnEveryPlayerReady?.Invoke(amountOfPlayersJoined);
+                return;
+            }
+#endif
+            if (shipBuilders.Count < 2)
+            { return; }
             if (shipBuilders.Count == amountOfPlayersJoined)
                 Channels.OnEveryPlayerReady?.Invoke(amountOfPlayersJoined);
         }
