@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  timeToTakeDamage: 0.5
+  timeToTakeDamage: 0.1
 --- !u!135 &7263717446291792761
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -513,10 +513,6 @@ PrefabInstance:
     - target: {fileID: 1668784895102394, guid: 70d59fac261e86f489f55b465d666b26, type: 3}
       propertyPath: m_Name
       value: GlowZoneRed
-      objectReference: {fileID: 0}
-    - target: {fileID: 1668784895102394, guid: 70d59fac261e86f489f55b465d666b26, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4656526324291700, guid: 70d59fac261e86f489f55b465d666b26, type: 3}
       propertyPath: m_RootOrder
