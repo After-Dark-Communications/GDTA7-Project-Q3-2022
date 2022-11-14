@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FFAMap2
   m_EditorClassIdentifier: 
   mapName: Obscure Grotto
-  mapPicture: {fileID: 0}
+  mapPicture: {fileID: 21300000, guid: 405807f25a28b62409654c568138fde6, type: 3}
   gameMode: Free for all
+  gameModeDescription: Eliminate your enemies!
   mapSceneIndex: 5

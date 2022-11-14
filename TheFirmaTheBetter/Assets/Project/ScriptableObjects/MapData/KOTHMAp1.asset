@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: KOTHMap1
   m_EditorClassIdentifier: 
   mapName: Moon Town USA
-  mapPicture: {fileID: 0}
+  mapPicture: {fileID: 21300000, guid: 5afcf6515cdeca843b8d2236cae2f3b7, type: 3}
   gameMode: King of the hill
+  gameModeDescription: Stay in the scoring zone to win
   mapSceneIndex: 4

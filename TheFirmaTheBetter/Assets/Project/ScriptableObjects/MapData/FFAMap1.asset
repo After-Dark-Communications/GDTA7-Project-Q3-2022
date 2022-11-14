@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FFAMap1
   m_EditorClassIdentifier: 
   mapName: Asteroid Field
-  mapPicture: {fileID: 0}
+  mapPicture: {fileID: 21300000, guid: dca5adca2445fe848836f86a83ff693e, type: 3}
   gameMode: Free for all
-  mapDescription: Eliminate your enemies to win!
+  gameModeDescription: Eliminate your enemies!
   mapSceneIndex: 3
