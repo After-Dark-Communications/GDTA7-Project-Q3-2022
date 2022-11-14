@@ -1,6 +1,8 @@
+using EventSystem;
 using Projectiles;
 using ShipParts.Engines;
 using ShipParts.Ship;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +10,8 @@ namespace Projectiles
 {
     public class HookShotProjectile : Projectile
     {
-        private const float HookConnectedTime = 10f;//4f;
+        private const int _ignoreCastLayer = 2;//ignoreraycast layer
+        private const float _hookConnectedTime = 10f;//4f;
 
         private float currentConnectedTime = 0;
         private float currentArmingTime = 0;
@@ -19,7 +22,7 @@ namespace Projectiles
         //private Rigidbody firerer;
         private Rigidbody _firerer;
 
-        private const float _desiredSegmentLength = .25f;//must be positive
+        private const float _desiredSegmentLength = .3f;//must be positive
         private float _initialSegmentLength = 1f, _currentSegmentLength = 1f;
         private Vector3 _ropeGravity;
 
@@ -27,11 +30,15 @@ namespace Projectiles
         private LineRenderer _lineRenderer;
         public RopeNode[] _ropeSegments;
         private const int _segmentCount = 35;
-        private const float _lineWidth = 0.1f;
+        private const float _lineWidth = 0.25f;
         private const float _rotateTime = 10f;
         private const float _stepTime = 0.01f;
         private const int _constraintSimulations = 100;//higher should get better results
         private const float _pullDelay = 1f;//should be less than HookConnectedTime
+
+#if UNITY_EDITOR
+        private Vector3 GizmoPosition;
+#endif
 
         private void Awake()
         {
@@ -40,6 +47,29 @@ namespace Projectiles
 
             _lineRenderer.startWidth = _lineWidth;
             _lineRenderer.endWidth = _lineWidth;
+
+            Channels.OnPlayerBecomesDeath += OnTargetDies;
+            Channels.OnRoundOver += OnRoundEnd;
+        }
+
+        private void OnDestroy()
+        {
+            Channels.OnPlayerBecomesDeath -= OnTargetDies;
+            Channels.OnRoundOver -= OnRoundEnd;
+        }
+
+        private void OnTargetDies(ShipBuilder shipBuilderThatNeedsDying, int playerIndexOfKiller)
+        {
+            if (target == null)
+            { return; }
+            if (shipBuilderThatNeedsDying == target)
+            {
+                Destroy(transform.parent.gameObject);
+            }
+        }
+        private void OnRoundEnd(int roundIndex, int winnerIndex)
+        {
+            Destroy(transform.parent.gameObject);
         }
 
         public void SetJointFirer(Rigidbody shipbuilder)
@@ -92,7 +122,7 @@ namespace Projectiles
             //FollowHookShotWithTarget();
 
             currentConnectedTime += Time.deltaTime;
-            if (currentConnectedTime < HookConnectedTime)
+            if (currentConnectedTime < _hookConnectedTime)
                 return;
 
             Destroy(transform.parent.gameObject);
@@ -108,22 +138,18 @@ namespace Projectiles
             {
                 ApplyVerletConstraints();
             }
-            DrawRope();
             Vector3 lookPos = _firerer.position;//_ropeSegments[_segmentCount - 2].CurrentPos;
             lookPos.y = 0;
             Rigidbody targetRigidbody = target.transform.parent.GetComponent<Rigidbody>();
             target.transform.parent.rotation = Quaternion.Lerp(target.transform.parent.rotation, Quaternion.LookRotation(lookPos), _rotateTime * Time.deltaTime);
             //adjust position of attached object
-            //TODO: change this to use rigidbody for collisions
-            target.transform.parent.position = _ropeSegments[^1].position;
-        }
+            //TODO: issue where, if the hooked ship is too far away from where it should be, the hooked ship will jolt towards the firerer.
+            Debug.DrawRay(_ropeSegments[^1].prevPosition, (_ropeSegments[^1].position - _ropeSegments[^1].prevPosition) * 5);
 
-        private void LateUpdate()
-        {
-            if (target == null)
-            { return; }
-
-            //lerp rotation of attached object
+            Vector3 desiredVelocity = (_ropeSegments[^1].position - _ropeSegments[^1].prevPosition) / Time.fixedDeltaTime;
+            target.transform.parent.GetComponent<Rigidbody>().velocity = desiredVelocity;
+            _ropeSegments[^1].position = target.transform.parent.position;
+            DrawRope();
         }
 
         public void ArmHook()
@@ -225,9 +251,10 @@ namespace Projectiles
                 {
                     Gizmos.color = Color.white;
                 }
-
+            
                 Gizmos.DrawLine(_ropeSegments[i].position, _ropeSegments[i + 1].position);
             }
+            Gizmos.DrawWireSphere(GizmoPosition, 5 / 2);
         }
 #endif
     }
