@@ -76,15 +76,35 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 198437534905964972, guid: 2efd61b9ccf276c48af088089fcea0eb,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198437534905964972, guid: 2efd61b9ccf276c48af088089fcea0eb,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.9283911
+      objectReference: {fileID: 0}
+    - target: {fileID: 198437534905964972, guid: 2efd61b9ccf276c48af088089fcea0eb,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.48584908
+      objectReference: {fileID: 0}
     - target: {fileID: 198844854054453804, guid: 2efd61b9ccf276c48af088089fcea0eb,
         type: 3}
       propertyPath: RotationModule.y.scalar
-      value: 3.1415925
+      value: -3.1415925
       objectReference: {fileID: 0}
     - target: {fileID: 198844854054453804, guid: 2efd61b9ccf276c48af088089fcea0eb,
         type: 3}
       propertyPath: RotationModule.curve.scalar
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198844854054453804, guid: 2efd61b9ccf276c48af088089fcea0eb,
+        type: 3}
+      propertyPath: RotationModule.separateAxes
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 199268104160342410, guid: 2efd61b9ccf276c48af088089fcea0eb,
         type: 3}
