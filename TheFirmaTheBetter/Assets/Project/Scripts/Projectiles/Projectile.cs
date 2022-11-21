@@ -129,7 +129,10 @@ namespace Projectiles
         public void DestroySelf()
         {
             if (projectilesPool == null)
+            {
+                Destroy(gameObject);
                 return;
+            }
             projectilesPool.ReturnToPool(gameObject);
         }
 
