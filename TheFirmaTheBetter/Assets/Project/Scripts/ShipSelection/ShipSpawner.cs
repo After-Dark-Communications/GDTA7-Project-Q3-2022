@@ -84,6 +84,7 @@ namespace ShipSelection
             foreach (ShipBuilder shipBuilder in ShipBuildManager.Instance.ShipBuilders)
             {
                 RespawnShip(shipBuilder);
+                Channels.OnPlayerSpawned?.Invoke(shipBuilder.gameObject, shipBuilder.PlayerNumber);
             }
         }
 

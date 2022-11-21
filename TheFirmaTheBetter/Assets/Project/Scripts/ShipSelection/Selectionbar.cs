@@ -31,7 +31,7 @@ namespace ShipSelection
 
         private int playerNumber;
 
-        private int currentHoveredIndex = 0; 
+        private int currentHoveredIndex = 0;
 
         private void Awake()
         {
@@ -50,20 +50,23 @@ namespace ShipSelection
             selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(selectionScreensData.CollectionManager.WeaponList));
             selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(selectionScreensData.CollectionManager.SpecialList));
             UpdateLabelTexts();
-
+            // Animator should be loaded to handle the first buton to be selected
             Channels.OnShipAnimationManagerLoaded += SetUpSelectionBar;
+            //Channels.OnPlayerJoined += SetUpSelectionBar;
         }
+
 
         private void OnDestroy()
         {
+            //Channels.OnPlayerJoined -= SetUpSelectionBar;
             Channels.OnShipAnimationManagerLoaded -= SetUpSelectionBar;
         }
-        
         private void SetUpSelectionBar()
         {
+
             buttonSelectionManager.ResetButtons();
             buttonSelectionManager.UpdateButtons(this);
-            Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
+            Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, this.playerNumber);
             SetSelectedOptionIndex(CurrentSelectedCollection.CurrentSelectedIndex);
         }
 
@@ -71,9 +74,6 @@ namespace ShipSelection
         {
             playerNumber = GetComponentInParent<PlayerSelectionScreen>().PlayerNumber;
 
-            //Update
-            //buttonSelectionManager.ResetButtons();
-            //buttonSelectionManager.UpdateButtons(this);
         }
 
         public void OnNavigate_Up()
@@ -82,7 +82,7 @@ namespace ShipSelection
             UpdateLabelTexts();
             buttonSelectionManager.ResetButtons();
             buttonSelectionManager.UpdateButtons(this);
-           
+
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
             Channels.OnNavigateUp?.Invoke();
         }
@@ -93,7 +93,7 @@ namespace ShipSelection
             UpdateLabelTexts();
             buttonSelectionManager.ResetButtons();
             buttonSelectionManager.UpdateButtons(this);
-        
+
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
             Channels.OnNavigateDown?.Invoke();
         }
@@ -113,7 +113,7 @@ namespace ShipSelection
         {
             buttonSelectionManager.UpdateHoverEffectAt(currentHoveredIndex, false);
             currentHoveredIndex--;
-            if(currentHoveredIndex < 0)
+            if (currentHoveredIndex < 0)
             {
                 currentHoveredIndex = CurrentSelectedCollection.Selectables.Count - 1;
             }
@@ -132,6 +132,7 @@ namespace ShipSelection
 
         public void SetSelectedOptionIndex(int index)
         {
+
             // Error check if the index in the function is different than the current Hovered index
             if (index != currentHoveredIndex)
             {
@@ -140,15 +141,14 @@ namespace ShipSelection
            
             buttonSelectionManager.ResetButtons();
             CurrentSelectedCollection.CurrentSelectedIndex = index;
+            buttonSelectionManager.ResetButtonAt(CurrentSelectedCollection.CurrentSelectedIndex);
             buttonSelectionManager.UpdateButtons(this);
 
         }
 
         public Part GetCurrentSelectedPart()
         {
-            
 
-           // buttonSelectionManager.UpdateButtons(this);
             return CurrentSelectedCollection.Selectables[currentHoveredIndex].Part;
         }
 
