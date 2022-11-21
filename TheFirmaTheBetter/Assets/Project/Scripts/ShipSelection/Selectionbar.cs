@@ -31,7 +31,7 @@ namespace ShipSelection
 
         private int playerNumber;
 
-        private int currentHoveredIndex = 0; 
+        private int currentHoveredIndex = 0;
 
         private void Awake()
         {
@@ -51,22 +51,21 @@ namespace ShipSelection
             selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(selectionScreensData.CollectionManager.SpecialList));
             UpdateLabelTexts();
 
-            Channels.OnShipAnimationManagerLoaded += SetUpSelectionBar;
+            Channels.OnPlayerJoined += SetUpSelectionBar;
         }
+
 
         private void OnDestroy()
         {
-            Channels.OnShipAnimationManagerLoaded -= SetUpSelectionBar;
+            Channels.OnPlayerJoined -= SetUpSelectionBar;
         }
-        
-        private void SetUpSelectionBar()
+        private void SetUpSelectionBar(int playerNumber, InputDevice joinedPlayerDevice)
         {
-
             //OnNavigate_Up();
             // OnNavigate_Down();
             buttonSelectionManager.ResetButtons();
             buttonSelectionManager.UpdateButtons(this);
-            Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
+            Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, this.playerNumber);
             SetSelectedOptionIndex(CurrentSelectedCollection.CurrentSelectedIndex);
         }
 
@@ -87,7 +86,7 @@ namespace ShipSelection
             UpdateLabelTexts();
             buttonSelectionManager.ResetButtons();
             buttonSelectionManager.UpdateButtons(this);
-           
+
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
             Channels.OnNavigateUp?.Invoke();
         }
@@ -98,7 +97,7 @@ namespace ShipSelection
             UpdateLabelTexts();
             buttonSelectionManager.ResetButtons();
             buttonSelectionManager.UpdateButtons(this);
-        
+
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
             Channels.OnNavigateDown?.Invoke();
         }
@@ -118,7 +117,7 @@ namespace ShipSelection
         {
             buttonSelectionManager.UpdateHoverEffectAt(currentHoveredIndex, false);
             currentHoveredIndex--;
-            if(currentHoveredIndex < 0)
+            if (currentHoveredIndex < 0)
             {
                 currentHoveredIndex = CurrentSelectedCollection.Selectables.Count - 1;
             }
@@ -140,15 +139,15 @@ namespace ShipSelection
             buttonSelectionManager.ResetButtonAt(CurrentSelectedCollection.CurrentSelectedIndex);
 
             CurrentSelectedCollection.CurrentSelectedIndex = index;
-           
+
             buttonSelectionManager.UpdateButtons(this);
         }
 
         public Part GetCurrentSelectedPart()
         {
-            
 
-           // buttonSelectionManager.UpdateButtons(this);
+
+            // buttonSelectionManager.UpdateButtons(this);
             return CurrentSelectedCollection.Selectables[currentHoveredIndex].Part;
         }
 
