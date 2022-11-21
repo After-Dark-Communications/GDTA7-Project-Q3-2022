@@ -46,7 +46,8 @@ namespace Controls
             //}
 
             SetupParts();
-
+            Channels.OnPlayerBecomesDeath += OnDeath;
+            Channels.OnPlayerRespawned += OnRespawn;
         }
 
         private void OnDisable()
@@ -145,6 +146,20 @@ namespace Controls
         public void OnMoveDown(InputAction.CallbackContext ctx)
         {
             OnPlayerMoveDown?.Invoke(ButtonStatesHandler.ConvertBoolsToState(ctx.started, ctx.performed, ctx.canceled));
+        }
+
+        void OnDeath(ShipBuilder builder, int index)
+        {
+            PlayerControlls.PlayerActions actions = new PlayerControlls().Player;
+            var controls = GetInputActions();
+            controls.FindAction(actions.Special.name).started -= OnSpecial;
+        }
+
+        void OnRespawn(int number)
+        {
+            PlayerControlls.PlayerActions actions = new PlayerControlls().Player;
+            var controls = GetInputActions();
+            controls.FindAction(actions.Special.name).started += OnSpecial;
         }
     }
 }
