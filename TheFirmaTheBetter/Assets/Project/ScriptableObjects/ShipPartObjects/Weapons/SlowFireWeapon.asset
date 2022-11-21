@@ -21,12 +21,12 @@ MonoBehaviour:
   amountOfBullets: 1
   energyCost: 1
   sideSpreadAngle: 6
-  range: 80
+  range: 100
   armingTime: 0
   weaponFireEvent:
     Guid:
-      Data1: -1523842194
-      Data2: 1084725929
-      Data3: -1189224023
-      Data4: -1307751479
-    Path: event:/Weapons/Weap_Shotgun
+      Data1: -2125358925
+      Data2: 1324075078
+      Data3: 111648152
+      Data4: 794917210
+    Path: event:/Weapons/Weap_LowFireRate

@@ -8,6 +8,25 @@ namespace Audio
 {
     public class MenuMusicHandler : MonoBehaviour
     {
+        #region Singleton
+        public static MenuMusicHandler Instance;
+
+        void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);  
+            }
+            if (Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            SubscribeToEvents();
+        }
+        #endregion
+
         private FMOD.Studio.EventInstance titleTheme;
         private FMOD.Studio.EventInstance buildingTheme;
         private FMOD.Studio.EventInstance battleTheme;
@@ -16,10 +35,13 @@ namespace Audio
         void Start()
         {
             battleTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_Battle");
-            DontDestroyOnLoad(gameObject);
             titleTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_MainTheme");
             titleTheme.start();
             buildingTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_BuildTheme");
+        }
+
+        void SubscribeToEvents()
+        {
             Channels.OnEveryPlayerReady += LoadBattleScene;
             Channels.OnPlayerBecomesDeath += PlayerDeath;
             Channels.OnGameOver += Replay;
@@ -30,9 +52,15 @@ namespace Audio
         {
         }
 
-        private void OnDestroy()
+        private void OnApplicationQuit()
+        {
+            Channels.OnQuitGame?.Invoke();
+        }
+        private void OnDisable()
         {
             Channels.OnEveryPlayerReady -= LoadBattleScene;
+            Channels.OnPlayerBecomesDeath -= PlayerDeath;
+            Channels.OnGameOver -= Replay;
         }
 
         public void LoadBuildingScene()
@@ -49,6 +77,10 @@ namespace Audio
             {
                 battleTheme.setParameterByName("Players_Left", float.MaxValue);
             }
+            else
+            {
+                battleTheme.setParameterByName("Players_Left", playersLeft);
+            }
             buildingTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             buildingTheme.release();
             battleTheme.start();
@@ -63,7 +95,8 @@ namespace Audio
         public void PlayerDeath(ShipBuilder builder, int playercount)
         {
             playersLeft -= 1;
-            battleTheme.setParameterByName("Players_Left", playersLeft);
+            if (playersLeft! <= 1)
+                battleTheme.setParameterByName("Players_Left", playersLeft);
         }
     }
 }

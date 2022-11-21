@@ -50,7 +50,7 @@ namespace ShipSelection
 
         private void SetShipStats(List<ShipStat> shipStatsUI, ShipStats changedShipStats)
         {
-            shipStatsUI[0].SetValueFill(changedShipStats.Speed, StatBoundries.SPEED_BOUNDRIES);
+            shipStatsUI[0].SetValueFill(changedShipStats.RawSpeed, StatBoundries.SPEED_BOUNDRIES);
             shipStatsUI[1].SetValueFill(changedShipStats.MaxHealth, StatBoundries.HEALTH_BOUNDRIES);
             shipStatsUI[2].SetValueFill(changedShipStats.Handling, StatBoundries.HANDLING_BOUNDRIES);
             shipStatsUI[3].SetValueFill(changedShipStats.EnergyCapacity, StatBoundries.ENERGY_CAPACITY_BOUNDRIES);
@@ -58,10 +58,11 @@ namespace ShipSelection
 
         private void SetWeaponStats(List<WeaponStat> weaponStatsUI, ShipStats changedWeaponStats)
         {
-            weaponStatsUI[0].SetValueFill(changedWeaponStats.Range, StatBoundries.RANGE_BOUNDRIES);
-            weaponStatsUI[1].SetValueFill(changedWeaponStats.FireRate, StatBoundries.FIRE_RATE_BOUNDRIES);
-            weaponStatsUI[2].SetValueFill(changedWeaponStats.EnergyCost, StatBoundries.ENERGY_COST_BOUNDRIES);
-            weaponStatsUI[3].SetValueFill(changedWeaponStats.DPS, StatBoundries.DPS_BOUNDRIES);
+            weaponStatsUI[0]?.SetValueFill(changedWeaponStats.Range, StatBoundries.RANGE_BOUNDRIES);
+            weaponStatsUI[1]?.SetValueFill(changedWeaponStats.FireRate, StatBoundries.FIRE_RATE_BOUNDRIES);
+            weaponStatsUI[2]?.SetValueFill(changedWeaponStats.EnergyCost, StatBoundries.ENERGY_COST_BOUNDRIES);
+            weaponStatsUI[3]?.SetValueFill(changedWeaponStats.DPS, StatBoundries.DPS_BOUNDRIES);
+            weaponStatsUI[4]?.SetValueFill(changedWeaponStats.Damage, StatBoundries.DAMAGE_BOUNDRIES);
         }
 
         private void SetSpecialStats(List<SpecialStat> specialStatsUI, ShipStats changedSpecialStats)

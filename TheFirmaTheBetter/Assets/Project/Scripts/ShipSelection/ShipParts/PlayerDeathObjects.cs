@@ -13,9 +13,14 @@ namespace ShipParts
         private Transform DeathHolder;
         private GameObject[] _OnDeathChildren;
         private ShipBuilder _shipBuilder;
+
+        [SerializeField]
+        private GameObject DeathPrefab;
+
         private void OnEnable()
         {
             Channels.OnPlayerSpawned += setup;
+            Channels.OnPlayerBecomesDeath += OnPlayerDeath;
         }
 
         private void OnDisable()
@@ -33,7 +38,6 @@ namespace ShipParts
                 Debug.Log($"{transform.name} doesn't have shipBuilder");
                 return;
             }
-            Channels.OnPlayerBecomesDeath += OnPlayerDeath;
             _OnDeathChildren = new GameObject[DeathHolder.childCount];
             for (int i = 0; i < _OnDeathChildren.Length; i++)
             {
@@ -53,6 +57,12 @@ namespace ShipParts
                     _OnDeathChildren[i].SetActive(true);
                 }
             }
+        }
+
+        public void SpawnExplosion()
+        {
+            GameObject gObject = Instantiate(DeathPrefab);
+            gObject.transform.position = _shipBuilder.transform.position;
         }
     }
 }

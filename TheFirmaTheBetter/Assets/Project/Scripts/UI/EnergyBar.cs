@@ -5,12 +5,12 @@ namespace UI
 {
     public class EnergyBar : ShipStatBar
     {
-        private void OnEnable()
+        private void Awake()
         {
             Channels.OnEnergyChanged += UpdateStatbar;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             Channels.OnEnergyChanged -= UpdateStatbar;
         }

@@ -5,23 +5,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace ShipParts
 {
     public class ShipEnergy
     {
         private int playerNumber;
-        private int currentEnergyAmount;
+        private float currentEnergyAmount;
         private int maxEnergyAmount;
 
         public ShipEnergy(int playerNumber, ShipStats shipStats)
         {
             this.playerNumber = playerNumber;
 
+            Subscribe();
+
+            ResetEnergy(shipStats);
+        }
+
+        public void Subscribe()
+        {
             Channels.OnEnergyUsed += OnEnergyUsed;
             Channels.OnRefillEnergy += OnEnergyRefilled;
-
-            SetEnergy(shipStats);
         }
 
         public void Unsubscribe()
@@ -30,11 +36,11 @@ namespace ShipParts
             Channels.OnRefillEnergy -= OnEnergyRefilled;
         }
 
-
-        private void SetEnergy(ShipStats shipStats)
+        public void ResetEnergy(ShipStats shipStats)
         {
             maxEnergyAmount = shipStats.EnergyCapacity;
             currentEnergyAmount = maxEnergyAmount;
+            UpdateEnergy();
         }
 
         private void OnEnergyRefilled(int playerNumber, int refillAmount)
@@ -48,13 +54,7 @@ namespace ShipParts
             {
                 currentEnergyAmount = maxEnergyAmount;
             }
-
-            Channels.OnEnergyChanged(playerNumber, currentEnergyAmount / maxEnergyAmount);
-        }
-
-        public void UpdateEnergy(ShipStats shipStats)
-        {
-            SetEnergy(shipStats);
+            UpdateEnergy();
         }
 
         private void OnEnergyUsed(int playerNumber, int usedAmount)
@@ -64,9 +64,13 @@ namespace ShipParts
 
             currentEnergyAmount -= usedAmount;
 
-            float energypersentage = (float)currentEnergyAmount / maxEnergyAmount;
+            UpdateEnergy();
+        }
 
-            Channels.OnEnergyChanged(playerNumber, energypersentage);
+        private void UpdateEnergy()
+        {
+            float energypersentage = currentEnergyAmount / maxEnergyAmount;
+            Channels.OnEnergyChanged?.Invoke(playerNumber, energypersentage);
         }
 
         private bool IsThisNotMe(int playerNumber)
@@ -77,6 +81,6 @@ namespace ShipParts
             return false;
         }
 
-        public int CurrentEnergyAmount => currentEnergyAmount;
+        public float CurrentEnergyAmount => currentEnergyAmount;
     }
 }

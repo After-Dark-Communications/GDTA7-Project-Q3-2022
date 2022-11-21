@@ -10,16 +10,25 @@ namespace UI
         [SerializeField]
         private List<FloatingStatsPanel> statPanels;
 
-        private void OnEnable()
+
+        private void Awake()
         {
             Channels.OnPlayerSpawned += InitializePlayerStats;
-            Channels.OnPlayerBecomesDeath += HidePlayerStats;
+            Channels.OnPlayerDespawned += HidePlayerStats;
+            Channels.OnPlayerRespawned += ShowPlayerStats;
+            Channels.KingOfTheHill.OnKingOfTheHillPlayerRespawn += ShowPlayerStats;
+
+            foreach (FloatingStatsPanel statPanel in statPanels)
+            {
+                statPanel.gameObject.SetActive(false);
+            }
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             Channels.OnPlayerSpawned -= InitializePlayerStats;
-            Channels.OnPlayerBecomesDeath -= HidePlayerStats;
+            Channels.OnPlayerDespawned -= HidePlayerStats;
+            Channels.OnPlayerRespawned -= ShowPlayerStats;
         }
 
         public void InitializePlayerStats(GameObject player, int playerIndex)
@@ -29,27 +38,34 @@ namespace UI
             statPanel.ObjectToFollow = player;
             statPanel.gameObject.SetActive(true);
 
+            statPanel.SpecialCooldownShower.PlayerIndex = playerIndex;
+            statPanel.CrownShower.PlayerIndex = playerIndex;
+
             // Assign the player index to all stat bars
             foreach (ShipStatBar statBar in statPanel.StatBars)
             {
                 statBar.PlayerIndex = playerIndex;
                 statBar.gameObject.SetActive(true);
             }
+
+            Channels.OnPlayerBarsLoaded(player.GetComponent<ShipBuilder>());
         }
 
-        private void HidePlayerStats(ShipBuilder ship, int killerIndex)
+        private void HidePlayerStats(int playerIndex)
         {
-            // Get the stats panel
-            FloatingStatsPanel statPanel = statPanels[ship.PlayerNumber];
-            statPanel.ObjectToFollow = null;
+            FloatingStatsPanel statPanel = statPanels[playerIndex];
             statPanel.gameObject.SetActive(false);
+        }
 
-            // Remove the player index from all stat bars
-            foreach (ShipStatBar statBar in statPanel.StatBars)
-            {
-                statBar.PlayerIndex = -1;
-                statBar.gameObject.SetActive(false);
-            }
+        private void ShowPlayerStats(int playerIndex)
+        {
+            FloatingStatsPanel statPanel = statPanels[playerIndex];
+            statPanel.gameObject.SetActive(true);
+        }
+
+        private void ShowPlayerStats(ShipBuilder builder)
+        {
+            ShowPlayerStats(builder.PlayerNumber);
         }
     }
 }

@@ -6,9 +6,14 @@ namespace UI
 {
     public class FloatingStatsPanel : MonoBehaviour
     {
+        [Header("Stats")]
         [SerializeField]
         private List<ShipStatBar> statBars;
-
+        [SerializeField]
+        private CrownShower crownShower;
+        [SerializeField]
+        private SpecialCooldownShower specialCooldownShower;
+        [Header("Objects")]
         [SerializeField]
         private GameObject objectToFollow;
 
@@ -32,7 +37,7 @@ namespace UI
             }
         }
 
-        private void OnDrawGizmosSelected()
+        private void OnDrawGizmos()
         {
             // Creates an outline for where the player will be placed compared to the panel
             Vector3 reverseOffset = new Vector3(transform.position.x - xOffsetPixels, transform.position.y - yOffsetPixels);
@@ -49,5 +54,8 @@ namespace UI
         {
             get { return statBars.ToArray(); }
         }
+
+        public CrownShower CrownShower { get => crownShower; set => crownShower = value; }
+        public SpecialCooldownShower SpecialCooldownShower { get => specialCooldownShower; set => specialCooldownShower = value; }
     }
 }

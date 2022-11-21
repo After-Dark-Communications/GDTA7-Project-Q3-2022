@@ -1,6 +1,7 @@
 using Collisions;
 using Controls;
 using EventSystem;
+using ShipParts.Ship;
 using ShipSelection;
 using ShipSelection.ShipBuilders.ConnectionPoints;
 using System;
@@ -13,7 +14,7 @@ namespace ShipParts
     public abstract class Part : MonoBehaviour
     {
         [SerializeField]
-        private Image partIcon;
+        private Sprite partIcon;
         [SerializeField]
         private Vector3 connectionPoint;
         [SerializeField]
@@ -30,6 +31,7 @@ namespace ShipParts
         protected Rigidbody shipRigidBody { get; private set; }
         protected InputDevice myInputDevice { get; private set; }
         protected ShipCollision thisCollision { get; private set; }
+        protected ShipStats Stats { get; private set; }
 
         private void Awake()
         {
@@ -48,11 +50,14 @@ namespace ShipParts
             shipRigidBody = rigidbody;
             myInputDevice = playerDevice;
             thisCollision = shipCollision;
+            this.Stats = thisCollision.GetComponent<ShipResources>()?.ShipStats;
             Setup();
         }
 
         protected virtual void CalculateHighestAndLowest() { }
 
         public ConnectionPointsCollection ConnectionPointCollection => connectionPointCollection;
+
+        public Sprite PartIcon { get => partIcon; set => partIcon = value; }
     }
 }

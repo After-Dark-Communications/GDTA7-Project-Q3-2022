@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace ShipParts
 {
@@ -17,24 +18,56 @@ namespace ShipParts
 
         private float maxHealth;
 
+        private bool isAlive;
+
         public ShipHealth(int playerNumber, ShipStats shipStats)
         {//TODO: reinstantiate ShipHealth when starting game (playerspawned?)
             this.playerNumber = playerNumber;
             ResetHealth(shipStats);
 
-            Channels.OnPlayerTakeDamage += TakeDamage;
+            Subscribe();
         }
 
-        private void ResetHealth(ShipStats shipStats)
+        public void Subscribe()
+        {
+            Channels.OnPlayerTakeDamage += TakeDamage;
+            Channels.OnPlayerHealed += Heal;
+        }
+
+        public void Unsubscribe()
+        {
+            Channels.OnPlayerTakeDamage -= TakeDamage;
+            Channels.OnPlayerHealed -= Heal;
+        }
+
+        public void ResetHealth(ShipStats shipStats)
         {
             maxHealth = shipStats.MaxHealth;
             currentShipHealth = maxHealth;
+            isAlive = true;
+            UpdateHealthBar(playerNumber);
+        }
+
+        private void Heal(int healthIncreaseAmount, int playerNumber)
+        {
+            //check pl number
+            //increse health by persentage
+            if (this.playerNumber != playerNumber)
+                return;
+
+            currentShipHealth += (float)healthIncreaseAmount / 100 * maxHealth;
+
+            if (currentShipHealth >= maxHealth)
+                currentShipHealth = maxHealth;
+
+            UpdateHealthBar(playerNumber);
+
         }
 
         public void TakeDamage(ShipBuilder shipBuilder, int amount, int damagerIndex)
         {
-            if (shipBuilder == null)
-            { return; }
+            if (!isAlive || shipBuilder == null)
+                return;
             if (playerNumber != shipBuilder.PlayerNumber)
                 return;
 
@@ -43,20 +76,16 @@ namespace ShipParts
             if (currentShipHealth <= 0)
             {
                 currentShipHealth = 0;
+                isAlive = false;
                 Channels.OnPlayerBecomesDeath?.Invoke(shipBuilder, damagerIndex);
             }
 
-            Channels.OnHealthChanged(playerNumber, currentShipHealth / maxHealth);
+            UpdateHealthBar(playerNumber);
         }
 
-        public void UpdateHealth(ShipStats shipStats)
+        private void UpdateHealthBar(int playerNumber)
         {
-            ResetHealth(shipStats);
-        }
-
-        public void Unsubscribe()
-        {
-            Channels.OnPlayerTakeDamage -= TakeDamage;
+            Channels.OnHealthChanged?.Invoke(playerNumber, currentShipHealth / maxHealth);
         }
 
         public float MaxHealth { get => maxHealth; set => maxHealth = value; }

@@ -21,12 +21,12 @@ MonoBehaviour:
   amountOfBullets: 3
   energyCost: 1
   sideSpreadAngle: 10
-  range: 15
+  range: 30
   armingTime: 0
   weaponFireEvent:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -1567628488
+      Data2: 1168763457
+      Data3: -1911776581
+      Data4: -562773335
+    Path: event:/Weapons/Weap_Flamethrower

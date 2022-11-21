@@ -34,7 +34,7 @@ namespace ShipSelection
         private void EnableOneStat(int index)
         {
             switch (index)
-            {
+            {//mama mia
                 case 0:
                     statsGameObjectList[0].SetActive(true);
                     ChangeLabelStats(0);

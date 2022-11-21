@@ -28,20 +28,21 @@ namespace ShipParts
             shipStats = new ShipStats();
             shipHealth = new ShipHealth(shipBuilder.PlayerNumber, shipStats);
             shipEnergy = new ShipEnergy(shipBuilder.PlayerNumber, shipStats);
-        }
 
-        private void Start()
-        {
             Channels.OnShipPartSelected += OnShipPartSelected;
             Channels.OnShipCompleted += OnShipCompleted;
+            Channels.OnPlayerRespawned += OnPlayerRespawned;
+            shipHealth.Subscribe();
+            shipEnergy.Subscribe();
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             shipHealth.Unsubscribe();
             shipEnergy.Unsubscribe();
             Channels.OnShipPartSelected -= OnShipPartSelected;
             Channels.OnShipCompleted -= OnShipCompleted;
+            Channels.OnPlayerRespawned -= OnPlayerRespawned;
         }
 
         private void OnShipCompleted(ShipBuilder completedShipBuilder)
@@ -49,9 +50,13 @@ namespace ShipParts
             if (shipBuilder.PlayerNumber != completedShipBuilder.PlayerNumber)
                 return;
 
-            shipHealth.UpdateHealth(shipStats);
-            shipEnergy.UpdateEnergy(shipStats);
+            ResetRescources();
 
+            UpdateTotalWeight();
+        }
+
+        private void UpdateTotalWeight()
+        {
             int[] partWeights = new int[shipBuilder.SelectedParts.Count];
             for (int i = 0; i < partWeights.Length; i++)
             {
@@ -64,6 +69,8 @@ namespace ShipParts
         {
             if (shipBuilder.PlayerNumber != playerNumber)
                 return;
+
+            UpdateTotalWeight();
 
             if (selectedPart is Engine)
             {
@@ -85,7 +92,21 @@ namespace ShipParts
             Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, shipStats);
         }
 
-        public int CurrentEnergyAmount => shipEnergy.CurrentEnergyAmount;
+        private void OnPlayerRespawned(int playerNumber)
+        {
+            if (shipBuilder.PlayerNumber != playerNumber)
+                return;
+
+            ResetRescources();
+        }
+
+        public void ResetRescources()
+        {
+            shipHealth.ResetHealth(shipStats);
+            shipEnergy.ResetEnergy(shipStats);
+        }
+
+        public float CurrentEnergyAmount => shipEnergy.CurrentEnergyAmount;
 
         public ShipStats ShipStats => shipStats;
 

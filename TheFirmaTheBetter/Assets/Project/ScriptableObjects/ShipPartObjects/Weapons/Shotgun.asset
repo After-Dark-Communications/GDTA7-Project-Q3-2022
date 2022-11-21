@@ -17,11 +17,11 @@ MonoBehaviour:
   partWeight: 0
   projectilePrefab: {fileID: 3994246806297512443, guid: d90a371098a4b3247a4f0d62f89d5c04,
     type: 3}
-  fireRate: 1
+  fireRate: 1.5
   amountOfBullets: 5
   energyCost: 1
   sideSpreadAngle: 30
-  range: 10
+  range: 20
   armingTime: 0
   weaponFireEvent:
     Guid:

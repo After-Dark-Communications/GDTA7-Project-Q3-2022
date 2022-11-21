@@ -21,6 +21,7 @@ namespace Util
         public static float[] ENERGY_COST_BOUNDRIES = new float[2] { DefaultValue, DefaultValue };
         public static float[] RANGE_BOUNDRIES = new float[2] { DefaultValue, DefaultValue };
         public static float[] DPS_BOUNDRIES = new float[2] { DefaultValue, DefaultValue };
+        public static float[] DAMAGE_BOUNDRIES = new float[2] { DefaultValue, DefaultValue };
 
         public static void SetHighestAndLowest(float value, ref float[] currentBoundries)
         {

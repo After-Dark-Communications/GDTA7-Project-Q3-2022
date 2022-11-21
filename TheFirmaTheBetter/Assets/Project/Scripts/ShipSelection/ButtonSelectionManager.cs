@@ -7,59 +7,62 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Project.Scripts.ShipSelection
+namespace ShipSelection
 {
     public class ButtonSelectionManager : MonoBehaviour
     {
+        private const string DisabledBooleanName = "Disabled";
+        private const string IsHoveredBooleanName  = "IsHovered";
         private Color selectedColor;
         private Color normalColor;
 
-        private List<Button> buttons = new List<Button>();
+        private List<Animator> buttonAnimators = new List<Animator>();
 
         private void Awake()
         {
             foreach (Button button in transform.GetComponentsInChildren<Button>())
             {
-                buttons.Add(button);
+                buttonAnimators.Add(button.GetComponent<Animator>());
             }
-
-            if (buttons.Count <= 0)
-                return;
-
-            selectedColor = buttons[0].colors.disabledColor;
-            normalColor = buttons[0].colors.normalColor;
         }
 
         internal void UpdateButtons(Selectionbar selectionBar)
         {
-            foreach (Button button in buttons)
+            Animator animatorSelectedButton = buttonAnimators[selectionBar.CurrentSelectedCollection.CurrentSelectedIndex];
+            animatorSelectedButton.SetBool(DisabledBooleanName, true);
+        }
+
+        public void ResetButtons()
+        {
+            foreach (Animator buttonAnimator in buttonAnimators)
             {
-                ColorBlock normalBlock = button.colors;
-                normalBlock.normalColor = normalColor;
-                button.colors = normalBlock;
+                buttonAnimator.SetBool(DisabledBooleanName, false);
             }
-
-            int nextIndex = GetNextIndex(selectionBar.CurrentSelectedCollection.CurrentSelectedIndex);
-
-            //buttons[nextIndex].Select();
-
-            Button currentSelectedButton = buttons[selectionBar.CurrentSelectedCollection.CurrentSelectedIndex];
-            ColorBlock block = currentSelectedButton.colors;
-            block.normalColor = selectedColor;
-            currentSelectedButton.colors = block;
+        }
+        public void ResetButtonAt(int index)
+        {
+            Animator currentButtonAnimator = buttonAnimators[index];
+            currentButtonAnimator.SetBool(DisabledBooleanName, false);
+            //Debug.Log("Reset Button " + index + " FALSE");
         }
 
         private int GetNextIndex(int currentIndex)
         {
             int toReturn = currentIndex + 1;
 
-            if (toReturn >= buttons.Count)
+            if (toReturn >= buttonAnimators.Count)
                 toReturn = 0;
 
             if (toReturn < 0)
-                toReturn = buttons.Count - 1;
+                toReturn = buttonAnimators.Count - 1;
 
             return toReturn;
+        }
+
+        internal void UpdateHoverEffectAt(int index, bool state)
+        {
+            Animator currentButtonAnimator = buttonAnimators[index];
+            currentButtonAnimator.SetBool(IsHoveredBooleanName, state);
         }
     }
 }

@@ -10,5 +10,7 @@ namespace Zones
     {
         public void HandleZoneEnterInteraction(Zone enteredZone);
         public void HandleZoneExitInteraction(Zone enteredZone);
+
+        public void HandleZoneStayInteraction(Zone enteredZone);
     }
 }

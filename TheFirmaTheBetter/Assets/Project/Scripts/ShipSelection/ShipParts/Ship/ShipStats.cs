@@ -14,6 +14,9 @@ namespace ShipParts.Ship
 {
     public class ShipStats
     {
+        private const float liniarFactor = 0.06f;
+        private const float floatinessMultiplier = 0.25f;
+
         //movement
         private float _speed;
         private float _handling;
@@ -32,12 +35,12 @@ namespace ShipParts.Ship
         private float _fireRate;
         private float _energyCost;
         private float _dps;
+        private float _damage;
         //special
         private string _specialName;
         private string _specialDescription;
         //body
         private int _totalWeight;
-
         private readonly List<float> _speedModifier;
         private readonly List<float> _handlingModifier;
         private readonly List<float> _dragModifier;
@@ -120,7 +123,15 @@ namespace ShipParts.Ship
             {
                 _totalWeight += weight;
             }
+
+            UpdateDragWithWeight();
+
             Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, this);
+        }
+
+        private void UpdateDragWithWeight()
+        {
+            _drag = _totalWeight * liniarFactor;
         }
 
         /// <summary>Adds to the weight modifier list.</summary>
@@ -149,6 +160,7 @@ namespace ShipParts.Ship
             _fireRate = weaponData.FireRate;
             _energyCost = weaponData.EnergyCost;
             _dps = weaponData.DPS;
+            _damage = weaponData.Damage;
         }
 
         public void UpdateStats(SpecialData specialData)
@@ -157,9 +169,11 @@ namespace ShipParts.Ship
             _specialDescription = specialData.Description;
         }
 
-        public float Speed { get => _speed; }
+        public float Speed { get => _speed * floatinessMultiplier; }
+        public float RawSpeed { get => _speed; }
         public float Handling { get => _handling; }
-        public float Drag { get => _drag; }
+        public float Drag { get => _drag * floatinessMultiplier; }
+        public float RawDrag { get => _drag; }
         public int MaxHealth { get => _maxHealth; }
         public int EnergyCapacity { get => _energyCapacity; }
         public float FuelCapacity { get => _fuelCapacity; }
@@ -168,6 +182,7 @@ namespace ShipParts.Ship
         public float FireRate { get => _fireRate; }
         public float EnergyCost { get => _energyCost; }
         public float DPS { get => _dps; }
+        public float Damage { get => _damage; }
         public string SpecialName { get => _specialName; }
         public string SpecialDescription { get => _specialDescription; }
         public int TotalWeight { get => _totalWeight; }

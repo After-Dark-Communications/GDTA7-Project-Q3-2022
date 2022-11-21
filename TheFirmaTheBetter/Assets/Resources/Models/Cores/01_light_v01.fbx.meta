@@ -3,7 +3,12 @@ guid: 89b2fe3f43ea8aa4a83d3c037f123917
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightShipMaterial
+    second: {fileID: 2100000, guid: d8e339a5f7c79c2479216e09b2931840, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -42,8 +47,8 @@ ModelImporter:
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0

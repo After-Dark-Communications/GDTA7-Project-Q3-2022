@@ -1,4 +1,5 @@
 using EventSystem;
+using ShipParts;
 using ShipParts.Ship;
 using ShipSelection.ShipBuilders;
 using System;
@@ -16,14 +17,38 @@ namespace ShipSelection
         private List<Transform> playerSpawnPoints;
 
         [SerializeField]
+        private List<GameObject> playerShipObjects;
+
+        [SerializeField]
         private GameObject joinprefab;
 
+        [SerializeField]
+        [Tooltip("Required only for King of the Hill")]
+        private GameObject respawnIndicatorPrefab;
 
-        private ShipBuildManager shipBuildManager;
-
-        private void Start()
+        private void OnEnable()
         {
-            SpawnShips();
+            Channels.OnRoundStarted += OnRoundStared;
+            Channels.KingOfTheHill.OnKingOfTheHillPlayerRespawn += RespawnShip;
+        }
+
+        private void OnDisable()
+        {
+            Channels.OnRoundStarted -= OnRoundStared;
+            Channels.KingOfTheHill.OnKingOfTheHillPlayerRespawn -= RespawnShip;
+        }
+
+        private void OnRoundStared(int roundIndex, int numberOfRounds)
+        {
+            if (roundIndex == 1)
+            {
+                SpawnShips();
+                DestroyUnusedShips();
+            }
+            else if (roundIndex > 1)
+            {
+                RespawnShips();
+            }
         }
 
         private void SpawnShips()
@@ -33,21 +58,70 @@ namespace ShipSelection
                 int playerIndex = shipBuilder.PlayerNumber;
 
                 Transform spawnPointTransform = playerSpawnPoints[playerIndex];
-
-                if (spawnPointTransform == null)
+                GameObject playerShipObject = playerShipObjects[playerIndex];
+                if (spawnPointTransform == null || playerShipObject == null)
                     continue;
 
-                spawnPointTransform.gameObject.SetActive(true);
+                playerShipObject.SetActive(true);
 
-                shipBuilder.transform.position = spawnPointTransform.position;
-                shipBuilder.transform.rotation = Quaternion.Euler(0, spawnPointTransform.eulerAngles.y - 90, 0);//TODO: set rotation relative to parent, not to world
-                shipBuilder.transform.parent = spawnPointTransform;
+                SpawnShip(playerShipObject, spawnPointTransform);
+
+                shipBuilder.transform.parent = playerShipObject.transform;
+                shipBuilder.transform.localPosition = Vector3.zero;
+                shipBuilder.transform.localRotation = Quaternion.Euler(0, -90, 0);
 
                 PlayerInputManager.instance.playerPrefab = joinprefab;
                 PlayerInput inp = PlayerInputManager.instance.JoinPlayer(playerIndex, -1, null, shipBuilder.PlayerDevice);
-                inp.transform.parent = spawnPointTransform;
-                Channels.OnPlayerSpawned?.Invoke(shipBuilder.gameObject, shipBuilder.PlayerNumber);
+                inp.transform.parent = playerShipObject.transform;
+
+                Channels.OnPlayerSpawned?.Invoke(shipBuilder.gameObject, playerIndex);
+                Channels.OnChangeFireMode?.Invoke(true, shipBuilder.PlayerNumber);
             }
         }
+
+        private void RespawnShips()
+        {
+            foreach (ShipBuilder shipBuilder in ShipBuildManager.Instance.ShipBuilders)
+            {
+                RespawnShip(shipBuilder);
+            }
+        }
+
+        public void RespawnShip(ShipBuilder shipBuilder)
+        {
+            int playerIndex = shipBuilder.PlayerNumber;
+
+            Transform spawnPointTransform = playerSpawnPoints[playerIndex];
+            GameObject playerShipObject = playerShipObjects[playerIndex];
+            if (spawnPointTransform == null || playerShipObject == null)
+                return;
+
+            shipBuilder.gameObject.SetActive(true);
+            SpawnShip(playerShipObject, spawnPointTransform);
+            Channels.OnPlayerRespawned?.Invoke(playerIndex);
+
+        }
+
+        private void SpawnShip(GameObject playerShip, Transform spawnPoint)
+        {
+            playerShip.transform.position = spawnPoint.position;
+            playerShip.transform.rotation = spawnPoint.rotation;
+            Rigidbody body = playerShip.GetComponent<Rigidbody>();
+            body.velocity = Vector3.zero;
+            body.angularVelocity = Vector3.zero;
+            body.AddForce(Vector3.zero, ForceMode.VelocityChange);
+        }
+
+        private void DestroyUnusedShips()
+        {
+            foreach (GameObject playerShip in playerShipObjects)
+            {
+                if (!playerShip.GetComponentInChildren<ShipBuilder>())
+                {
+                    Destroy(playerShip);
+                }
+            }
+        }
+
     }
 }

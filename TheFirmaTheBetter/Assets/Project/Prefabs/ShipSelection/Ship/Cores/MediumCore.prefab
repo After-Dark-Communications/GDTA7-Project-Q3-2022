@@ -44,7 +44,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.32, y: 4.45, z: 11}
+  m_Size: {x: 3.32, y: 20, z: 11}
   m_Center: {x: -7.1054375e-16, y: 1.5067582, z: -0.4499998}
 --- !u!1 &7602503678260995921
 GameObject:
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90fd9e287cd2e5c4391cc12d758cb891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partIcon: {fileID: 0}
+  partIcon: {fileID: 21300000, guid: f6325dfc10d7adc42af788eb28cd5057, type: 3}
   connectionPoint: {x: 0, y: 0, z: 0}
   connectionPointCollection: {fileID: 4666277928107385656}
   coreData: {fileID: 11400000, guid: 35d2348859beb754d961e7f35c83932f, type: 2}
@@ -109,8 +109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6813a6918165ae043b8c70cbe3102fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animators:
-  - {fileID: 283033988209299986}
 --- !u!1001 &3490306209973560010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -182,7 +180,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+      objectReference: {fileID: 2100000, guid: c0fcf84fb2b4b7e4082aa24b4b8bb21f, type: 2}
     - target: {fileID: -7511558181221131132, guid: f76883668609ea44fadaa57326b38f8d,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -218,7 +216,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 12.49, y: 10.636414, z: 14.018148}
+  m_Size: {x: 12.49, y: 20, z: 14.018148}
   m_Center: {x: -7.3564e-15, y: 3.1271298, z: 2.1208632}
 --- !u!95 &283033988209299986
 Animator:

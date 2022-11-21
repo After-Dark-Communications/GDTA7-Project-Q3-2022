@@ -62,7 +62,7 @@ namespace Controls
 
 
             controls.FindAction(actions.MoveUp.name).started -= OnMoveUp;
-            controls.FindAction(actions.MoveDown.name).started -= OnMoveDown;
+            //controls.FindAction(actions.MoveDown.name).started -= OnMoveDown;
             controls.FindAction(actions.Pause.name).started -= OnPause;
             controls.FindAction(actions.Special.name).started -= OnSpecial;
 
@@ -108,7 +108,7 @@ namespace Controls
             _Aim.Enable();
 
             controls.FindAction(actions.MoveUp.name).started += OnMoveUp;
-            controls.FindAction(actions.MoveDown.name).started += OnMoveDown;
+            //controls.FindAction(actions.MoveDown.name).started += OnMoveDown;
             controls.FindAction(actions.Pause.name).started += OnPause;
             controls.FindAction(actions.Special.name).performed += OnSpecial;
 

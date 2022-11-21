@@ -1,4 +1,5 @@
 using EventSystem;
+using Hazards;
 using Projectiles;
 using ShipParts;
 using ShipParts.Ship;
@@ -13,7 +14,9 @@ namespace Collisions
         private Rigidbody rigidbody;
         private ShipStats shipStats;
 
-        private const float _collisionWeightImpactMultiplier = 0.5f, _bumpForceClamp = 25f;//adjust to get different feel (used to prevent "random" spikes to 500+ bumpforce)
+        private const float _collisionWeightImpactMultiplier = 0.5f, _bumpForceClamp = 12f;//adjust to get different feel (used to prevent "random" spikes to 500+ bumpforce)
+
+        public ShipBuilder ShipBuilder { get => shipBuilder;}
 
         private void Awake()
         {
@@ -53,6 +56,7 @@ namespace Collisions
             {
                 HandleHitByOtherShip(objectThatHit as ShipCollision, shipStats);
             }
+
             if (objectThatHit is Hazard)
             {
                 HandleHitByHazard(objectThatHit as Hazard);

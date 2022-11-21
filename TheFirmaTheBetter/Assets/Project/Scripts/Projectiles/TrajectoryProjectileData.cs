@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Projectiles
 {
-    [CreateAssetMenu(fileName = "NewTrajectoryProjectileData", menuName = "Projectiles/ Create new TrajectoryProjectileData")]
+    [CreateAssetMenu(fileName = "NewTrajectoryProjectileData", menuName = "Astrofire/Projectiles/ Create new TrajectoryProjectileData")]
     public class TrajectoryProjectileData : ProjectileData
     {
 

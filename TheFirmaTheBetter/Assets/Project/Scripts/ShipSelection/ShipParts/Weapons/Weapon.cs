@@ -41,6 +41,7 @@ namespace ShipParts.Weapons
             playerNumber = GetComponentInParent<ShipBuilder>().PlayerNumber;
 
             Channels.OnChangeFireMode += OnChangeFireMode;
+            Channels.OnEnergyZoneMoved += ClearEnergyZoneTrigger;
             canShoot = true;
 
             if (rootInputHandler != null)
@@ -64,9 +65,14 @@ namespace ShipParts.Weapons
                 FireWeapon();
         }
 
-        private void OnChangeFireMode(bool newValue)
+        private void ClearEnergyZoneTrigger()
         {
-            canShoot = newValue;
+            OnChangeFireMode(true, 0);
+        }
+        private void OnChangeFireMode(bool newValue, int playerNumber)
+        {
+            if (this.playerNumber == playerNumber)
+                canShoot = newValue;
         }
 
         private void ShootWeapon(ButtonStates state)
@@ -140,6 +146,7 @@ namespace ShipParts.Weapons
 
             void FireProjectile(GameObject projectileObject, Vector3 direction, Projectile projectile)
             {
+                projectile.FirerId = shipResources.GetComponent<ShipBuilder>().PlayerNumber;
                 projectileObject.GetComponent<Rigidbody>().AddForce(direction * projectile.ProjectileSpeed, ForceMode.Impulse);
                 Channels.OnEnergyUsed?.Invoke(playerNumber, weaponData.EnergyCost);
             }
@@ -178,6 +185,7 @@ namespace ShipParts.Weapons
             StatBoundries.SetHighestAndLowest(weaponData.Range, ref StatBoundries.RANGE_BOUNDRIES);
             StatBoundries.SetHighestAndLowest(weaponData.EnergyCost, ref StatBoundries.ENERGY_COST_BOUNDRIES);
             StatBoundries.SetHighestAndLowest(weaponData.DPS, ref StatBoundries.DPS_BOUNDRIES);
+            StatBoundries.SetHighestAndLowest(weaponData.Damage, ref StatBoundries.DAMAGE_BOUNDRIES);
         }
     }
 }

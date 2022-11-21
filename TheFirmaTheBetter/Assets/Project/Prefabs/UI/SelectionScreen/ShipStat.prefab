@@ -533,7 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127f1702b2a33d74b8cb7bb228640740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statName: {fileID: 2834833632631034038}
   statValueFill: {fileID: 4418526392980629326}
   statBarDivisions: 5
+  statName: {fileID: 2834833632631034038}
   statValue: {fileID: 3721906925970008291}

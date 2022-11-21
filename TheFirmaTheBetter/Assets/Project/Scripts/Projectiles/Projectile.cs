@@ -1,7 +1,10 @@
 
 using Collisions;
+using EventSystem;
+using Hazards;
 using Pooling;
 using ShipParts.Ship;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -28,14 +31,23 @@ namespace Projectiles
 
         private ImpactSpawner impactSpawner;
 
+        private int firerId;
+
         private void OnEnable()
         {
+            Channels.OnRoundOver += OnRoundOver;
+
             projectileDamage = projectileData.Damage;
             projectileSpeed = projectileData.ProjectileSpeed;
             armingTime = projectileData.ArmingTime;
             amountToSpawn = projectileData.AmountToSpawn;
             currentLifeTime = 0;
             impactSpawner = GetComponent<ImpactSpawner>();
+        }
+
+        private void OnDisable()
+        {
+            Channels.OnRoundOver -= OnRoundOver;
         }
 
         private void Update()
@@ -86,9 +98,26 @@ namespace Projectiles
             ICollidable collisionObject = other.GetComponentInParent<ICollidable>();
 
             if (collisionObject != null)
-            {
+            { 
                 if (collisionObject is Projectile)
                     return;
+
+                if (collisionObject is Pickup)
+                    return;
+
+                if (collisionObject is Hazard)
+                    return;
+                
+                if(collisionObject is ShipCollision)
+                {
+                    ShipCollision collidedShip = collisionObject as ShipCollision;
+                    ShipBuilder builder = collidedShip.GetComponent<ShipBuilder>();
+
+                    if (builder.PlayerNumber == firerId)
+                    {
+                        return;
+                    }
+                }    
 
                 impactSpawner.SpawnImpactHitPrefab();
                 collisionObject.HandleCollision(this, null);
@@ -104,12 +133,17 @@ namespace Projectiles
             projectilesPool.ReturnToPool(gameObject);
         }
 
+        private void OnRoundOver(int roundIndex, int winnerIndex)
+        {
+            DestroySelf();
+        }
+
         public int ProjectileDamage { get { return projectileDamage; } }
         public float ProjectileSpeed { get { return projectileSpeed; } }
         public float ArmingTime { get { return armingTime; } }
         public int AmountToSpawn { get { return amountToSpawn; } }
         public int PlayerIndex { get { return playerIndex; } }
-
+        public int FirerId { get { return firerId; } set { firerId = value; } }
         public ProjectileData ProjectileData => projectileData;
     }
 }
