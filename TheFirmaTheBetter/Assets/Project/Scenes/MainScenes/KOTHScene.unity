@@ -15850,7 +15850,7 @@ PrefabInstance:
     - target: {fileID: 3005159605864274524, guid: 5a9d493fa670bf64eb29d9e60a44982f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a9d493fa670bf64eb29d9e60a44982f, type: 3}
@@ -98393,6 +98393,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BattleTimerText
+      objectReference: {fileID: 0}
+    - target: {fileID: 6513581180949860365, guid: fc55e3417d46f9d448d74487bd6aabce,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc55e3417d46f9d448d74487bd6aabce, type: 3}

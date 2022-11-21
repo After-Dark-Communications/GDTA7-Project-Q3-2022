@@ -22,11 +22,18 @@ namespace Hazards
         private void Start()
         {
             Channels.OnPlayerBecomesDeath += RemoveDeadPlayerFromTrigger;
+            Channels.OnPlayerSpawned += OnPlayerSpawned;
+        }
+
+        private void OnPlayerSpawned(GameObject spawnedShipBuilderObject, int playerNumber)
+        {
+            shipsCollidersThatEntered.Clear();
         }
 
         private void OnDestroy()
         {
             Channels.OnPlayerBecomesDeath -= RemoveDeadPlayerFromTrigger;
+            Channels.OnPlayerSpawned -= OnPlayerSpawned;
         }
         private void Update()
         {
