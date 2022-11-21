@@ -1,4 +1,6 @@
-﻿using ShipParts;
+﻿using EventSystem;
+using ShipParts;
+using ShipParts.Ship;
 using ShipSelection.ShipBuilders.ConnectionPoints;
 using System;
 using UnityEngine;
@@ -11,6 +13,8 @@ namespace ShipParts.Specials
     {
         [SerializeField]
         private SpecialData specialData;
+
+        private ShipBuilder shipBuilder;
 
         protected bool CanDoSpecial = true;
 
@@ -29,6 +33,8 @@ namespace ShipParts.Specials
             {
                 CanDoSpecial = true;
                 currentCooldown = 0;
+                SetupShipBuilder();
+                Channels.OnSpecialReady.Invoke(shipBuilder);
             }
         }
 
@@ -68,6 +74,8 @@ namespace ShipParts.Specials
                 return;
 
             CanDoSpecial = false;
+            SetupShipBuilder();
+            Channels.OnSpecialUsed.Invoke(shipBuilder);
             HandleSpecial();
         }
 
@@ -76,6 +84,14 @@ namespace ShipParts.Specials
         public override PartData GetData()
         {
             return specialData;
+        }
+
+        private void SetupShipBuilder()
+        {
+            if (shipBuilder != null)
+                return;
+
+            shipBuilder = shipRoot.GetComponentInChildren<ShipBuilder>();
         }
     }
 }

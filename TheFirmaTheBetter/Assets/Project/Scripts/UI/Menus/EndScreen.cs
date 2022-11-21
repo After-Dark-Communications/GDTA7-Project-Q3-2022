@@ -1,6 +1,7 @@
 using Managers;
 using ShipSelection;
 using UnityEngine;
+using EventSystem;
 
 
 namespace UI.Menus
@@ -20,12 +21,15 @@ namespace UI.Menus
 
         private void DisplayResults()
         {
+            PlayerResult[] results = ResultsManager.Instance.Results;
+
+            if (results == null || results.Length == 0)
+            { return; }
+
             foreach (EndScreenPanel panel in panels)
             {
                 panel.gameObject.SetActive(false);
             }
-
-            PlayerResult[] results = ResultsManager.Instance.Results;
 
             for (int i = 0; i < results.Length; i++)
             {
@@ -36,16 +40,8 @@ namespace UI.Menus
         }
         public void Rematch()
         {
+            Channels.OnReturnToTitleScreen?.Invoke();
             SceneSwitchManager.SwitchToFirstScene();
-        }
-
-        public void QuitGame()
-        {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.ExitPlaymode();
-#else
-            Application.Quit();
-#endif
         }
     }
 }

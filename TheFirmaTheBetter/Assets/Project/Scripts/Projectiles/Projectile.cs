@@ -1,6 +1,7 @@
 
 using Collisions;
 using EventSystem;
+using Hazards;
 using Pooling;
 using ShipParts.Ship;
 using System;
@@ -99,6 +100,12 @@ namespace Projectiles
             if (collisionObject != null)
             { 
                 if (collisionObject is Projectile)
+                    return;
+
+                if (collisionObject is Pickup)
+                    return;
+
+                if (collisionObject is Hazard)
                     return;
                 
                 if(collisionObject is ShipCollision)

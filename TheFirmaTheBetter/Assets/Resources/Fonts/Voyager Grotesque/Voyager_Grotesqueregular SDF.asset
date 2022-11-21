@@ -39,7 +39,7 @@ MonoBehaviour:
     m_SubscriptSize: 0.5
     m_UnderlineOffset: -4.1
     m_UnderlineThickness: 2.05
-    m_StrikethroughOffset: 0
+    m_StrikethroughOffset: 12
     m_StrikethroughThickness: 2.05
     m_TabWidth: 11
   m_GlyphTable:
@@ -1759,9 +1759,9 @@ Material:
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 0.9
-    - _ScaleRatioB: 0.64575
-    - _ScaleRatioC: 0.64575
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.59791666
+    - _ScaleRatioC: 0.59791666
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0

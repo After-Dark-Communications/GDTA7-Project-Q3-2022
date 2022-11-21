@@ -10,6 +10,7 @@ namespace UI
         [SerializeField]
         private List<FloatingStatsPanel> statPanels;
 
+
         private void Awake()
         {
             Channels.OnPlayerSpawned += InitializePlayerStats;
@@ -37,12 +38,17 @@ namespace UI
             statPanel.ObjectToFollow = player;
             statPanel.gameObject.SetActive(true);
 
+            statPanel.SpecialCooldownShower.PlayerIndex = playerIndex;
+            statPanel.CrownShower.PlayerIndex = playerIndex;
+
             // Assign the player index to all stat bars
             foreach (ShipStatBar statBar in statPanel.StatBars)
             {
                 statBar.PlayerIndex = playerIndex;
                 statBar.gameObject.SetActive(true);
             }
+
+            Channels.OnPlayerBarsLoaded(player.GetComponent<ShipBuilder>());
         }
 
         private void HidePlayerStats(int playerIndex)

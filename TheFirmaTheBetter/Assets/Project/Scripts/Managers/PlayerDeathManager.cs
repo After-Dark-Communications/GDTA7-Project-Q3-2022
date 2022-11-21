@@ -7,6 +7,7 @@ using UnityEngine;
 using EZCameraShake;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
+using System.Collections;
 
 namespace Managers
 {
@@ -69,13 +70,9 @@ namespace Managers
                     }
                 }
 
-                if (winner.PlayerNumber != shipBuilderThatDied.PlayerNumber)
-                {
-                    playerResult = winner.GetComponent<PlayerResult>();
-                    KillShip(winner, playerResult);
-                }
 
                 Channels.OnRoundOver?.Invoke(roundManager.CurrentRoundIndex, winner.PlayerNumber);
+                StartCoroutine(KillWinner(shipBuilderThatDied, playerResult, winner));
             }
             else
             {
@@ -84,13 +81,23 @@ namespace Managers
 
             }
         }
+        private IEnumerator KillWinner(ShipBuilder shipBuilderThatDied, PlayerResult playerResult, ShipBuilder winner)
+        {
+            yield return new WaitForSeconds(RoundManager._slowMotionKillTimer);
 
+            if (winner.PlayerNumber != shipBuilderThatDied.PlayerNumber)
+            {
+                playerResult = winner.GetComponent<PlayerResult>();
+                KillShip(winner, playerResult);
+            }
+        }
 
         private void KillShip(ShipBuilder ship, PlayerResult playerResult)
         {
             ship.gameObject.SetActive(false);
             playerResult.TimeSurvived += battleTimer.TimeSinceStart;
             playersAlive--;
+         
             if (roundManager.IsLastRound)
             {
                 RemoveShipFromScene(ship);
