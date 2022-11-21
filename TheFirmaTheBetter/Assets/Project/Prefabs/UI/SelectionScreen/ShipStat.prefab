@@ -491,21 +491,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3721906925970008291 stripped
+--- !u!114 &4418526392980629326 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1854203613301244, guid: ff3400861e7a1224785e3251b6ae8dc3,
+  m_CorrespondingSourceObject: {fileID: 1076794181264344657, guid: ff3400861e7a1224785e3251b6ae8dc3,
     type: 3}
   m_PrefabInstance: {fileID: 3720053291782267167}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4418526392980629326 stripped
+--- !u!114 &7837654893272872196 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1076794181264344657, guid: ff3400861e7a1224785e3251b6ae8dc3,
+  m_CorrespondingSourceObject: {fileID: 6873822735317193755, guid: ff3400861e7a1224785e3251b6ae8dc3,
     type: 3}
   m_PrefabInstance: {fileID: 3720053291782267167}
   m_PrefabAsset: {fileID: 0}
@@ -533,7 +533,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127f1702b2a33d74b8cb7bb228640740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statValueFill: {fileID: 4418526392980629326}
+  statValueFill: {fileID: 7837654893272872196}
+  comparisonValueFill: {fileID: 4418526392980629326}
   statBarDivisions: 5
   statName: {fileID: 2834833632631034038}
-  statValue: {fileID: 3721906925970008291}
+  comparisonColors:
+    serializedVersion: 2
+    key0: {r: 0.85882354, g: 0.3529412, b: 0.30980393, a: 1}
+    key1: {r: 0.32156864, g: 0.81960785, b: 0.3529412, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 32768
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 32768
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
