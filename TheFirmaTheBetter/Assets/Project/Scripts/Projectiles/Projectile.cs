@@ -133,7 +133,7 @@ namespace Projectiles
             projectilesPool.ReturnToPool(gameObject);
         }
 
-        private void OnRoundOver(int roundIndex, int winnerIndex)
+        protected virtual void OnRoundOver(int roundIndex, int winnerIndex)
         {
             DestroySelf();
         }

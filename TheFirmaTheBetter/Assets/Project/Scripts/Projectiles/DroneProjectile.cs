@@ -8,7 +8,7 @@ namespace Projectiles
 {
     public class DroneProjectile : Projectile
     {
-        private const float attackSpeed = 2;
+        private const float attackSpeed = 0.7f;
         private const float lifeTime = 10f;
 
         [SerializeField]
@@ -97,6 +97,11 @@ namespace Projectiles
             target = null;
         }
 
+        protected override void OnRoundOver(int roundIndex, int winnerIndex)
+        {
+            Destroy(gameObject);
+        }
+
         private void ShootTarget()
         {
             if (target == null)
@@ -113,6 +118,7 @@ namespace Projectiles
 
             currentAttackSpeed = 0;
             Projectile createdProjectile = Instantiate(projectilePrefab);
+            createdProjectile.FirerId = noTarget.PlayerNumber;
             Vector3 direction = shootingPoint.forward;
 
             createdProjectile.transform.SetPositionAndRotation(shootingPoint.position, shootingPoint.rotation);

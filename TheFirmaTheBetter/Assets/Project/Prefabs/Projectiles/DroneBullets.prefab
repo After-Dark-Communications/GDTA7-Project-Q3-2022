@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 7597808386599015775}
   - component: {fileID: 3852572413530482919}
   - component: {fileID: 4823603599349192703}
-  - component: {fileID: 7314501562685179124}
+  - component: {fileID: 3994246806297512443}
   - component: {fileID: 5347808386704539653}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: DroneBullets
   m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &7314501562685179124
+--- !u!114 &3994246806297512443
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312767fafde8f1c40a803d33346ce0d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileData: {fileID: 11400000, guid: 90c30ca846f619f4685ef285156c4a52, type: 2}
+  projectileData: {fileID: 11400000, guid: 79762cd53d45135469c3d01c8379c70f, type: 2}
   playerIndex: 0
 --- !u!114 &5347808386704539653
 MonoBehaviour:
