@@ -99,7 +99,6 @@ namespace ShipParts.Ship
             _speed = engineData.Speed;
             _handling = engineData.Handling;
             _fuelUsage = engineData.FuelUsage;
-            Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, this);
         }
 
         /// <summary>Updates the <see cref="CoreData"/> related stats</summary>
@@ -110,7 +109,6 @@ namespace ShipParts.Ship
             _energyCapacity = coreData.EnergyCapacity;
             _fuelCapacity = coreData.FuelCapacity;
             _maxHealth = coreData.Health;
-            Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, this);
         }
 
         /// <summary>Sets <see cref="_totalWeight"/> with the given weights</summary>
@@ -125,8 +123,6 @@ namespace ShipParts.Ship
             }
 
             UpdateDragWithWeight();
-
-            Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, this);
         }
 
         private void UpdateDragWithWeight()
@@ -141,7 +137,6 @@ namespace ShipParts.Ship
         public void AddWeightModifier(int weight, ShipBuilder shipBuilder)
         {
             _totalWeightModifier.Add(weight);
-            Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, this);
         }
 
         /// <summary>Removes weight from the modifier list at index.</summary>
@@ -149,9 +144,7 @@ namespace ShipParts.Ship
         /// <param name="shipBuilder"><see cref="ShipBuilder"/> that is associated with these stats</param>
         public void RemoveWeightModifier(int weightIndex, ShipBuilder shipBuilder)
         {
-
             _totalWeightModifier.RemoveAt(weightIndex);
-            Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, this);
         }
 
         public void UpdateStats(WeaponData weaponData)

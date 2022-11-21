@@ -19,6 +19,7 @@ namespace ShipParts
     {
         private ShipBuilder shipBuilder;
         private ShipStats shipStats;
+        private ShipStats hoveredStats;
         private ShipHealth shipHealth;
         private ShipEnergy shipEnergy;
 
@@ -26,9 +27,11 @@ namespace ShipParts
         {
             shipBuilder = GetComponent<ShipBuilder>();
             shipStats = new ShipStats();
+            hoveredStats = new ShipStats();
             shipHealth = new ShipHealth(shipBuilder.PlayerNumber, shipStats);
             shipEnergy = new ShipEnergy(shipBuilder.PlayerNumber, shipStats);
 
+            Channels.OnShipPartHovered += OnShipStatHovered;
             Channels.OnShipPartSelected += OnShipPartSelected;
             Channels.OnShipCompleted += OnShipCompleted;
             Channels.OnPlayerRespawned += OnPlayerRespawned;
@@ -40,6 +43,7 @@ namespace ShipParts
         {
             shipHealth.Unsubscribe();
             shipEnergy.Unsubscribe();
+            Channels.OnShipPartHovered -= OnShipStatHovered;
             Channels.OnShipPartSelected -= OnShipPartSelected;
             Channels.OnShipCompleted -= OnShipCompleted;
             Channels.OnPlayerRespawned -= OnPlayerRespawned;
@@ -72,24 +76,40 @@ namespace ShipParts
 
             UpdateTotalWeight();
 
-            if (selectedPart is Engine)
-            {
-                shipStats.UpdateStats(selectedPart.GetData() as EngineData, shipBuilder);
-            }
-            if (selectedPart is Core)
-            {
-                shipStats.UpdateStats(selectedPart.GetData() as CoreData, shipBuilder);
-            }
-            if (selectedPart is Weapon)
-            {
-                shipStats.UpdateStats(selectedPart.GetData() as WeaponData);
-            }
-            if (selectedPart is SpecialAbility)
-            {
-                shipStats.UpdateStats(selectedPart.GetData() as SpecialData);
-            }
+            UpdateShipStats(shipStats, selectedPart);
 
-            Channels.OnPlayerStatsChanged?.Invoke(shipBuilder, shipStats);
+            Channels.OnDisplayabeStatsChanged?.Invoke(playerNumber, selectedPart, shipStats, shipStats);
+        }
+
+
+        private void OnShipStatHovered(Part hoveredPart, int playerNumber)
+        {
+            if (shipBuilder.PlayerNumber != playerNumber)
+                return;
+
+            UpdateShipStats(hoveredStats, hoveredPart);
+
+            Channels.OnDisplayabeStatsChanged?.Invoke(playerNumber, hoveredPart, shipStats, hoveredStats);
+        }
+
+        private void UpdateShipStats(ShipStats stats, Part shipPart)
+        {
+            if (shipPart is Engine)
+            {
+                stats.UpdateStats(shipPart.GetData() as EngineData, shipBuilder);
+            }
+            else if (shipPart is Core)
+            {
+                stats.UpdateStats(shipPart.GetData() as CoreData, shipBuilder);
+            }
+            else if (shipPart is Weapon)
+            {
+                stats.UpdateStats(shipPart.GetData() as WeaponData);
+            }
+            else if (shipPart is SpecialAbility)
+            {
+                stats.UpdateStats(shipPart.GetData() as SpecialData);
+            }
         }
 
         private void OnPlayerRespawned(int playerNumber)

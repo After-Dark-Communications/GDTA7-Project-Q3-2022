@@ -10,28 +10,59 @@ namespace ShipSelection.Stats
         [SerializeField]
         private Image statValueFill;
         [SerializeField]
+        private Image comparisonValueFill;
+        [SerializeField]
         private int statBarDivisions = 5;
         [SerializeField]
         private TMP_Text statName;
 
-        public void SetValueFill(float value, float[] boundries)
+        [Tooltip("0 is the negative color, 1 is the positive color")]
+        [SerializeField]
+        private Gradient comparisonColors;
+
+        private float minValue;
+        private float maxValue;
+
+        public void SetValueFill(float actualValue, float[] boundries)
         {
-            if (statValueFill != null)
+            if (statValueFill == null || comparisonValueFill == null)
+                return;
+
+            minValue = boundries[StatBoundries.LowestIndex];
+            maxValue = boundries[StatBoundries.HigestIndex];
+
+            if (minValue == StatBoundries.DefaultValue || maxValue == StatBoundries.DefaultValue)
             {
-                float minValue = boundries[StatBoundries.LowestIndex];
-                float maxValue = boundries[StatBoundries.HigestIndex];
+                Debug.LogWarning("The highest or lowest values of " + gameObject.name + " weren't calculated");
+                return;
+            }
 
-                if (minValue == StatBoundries.DefaultValue || maxValue == StatBoundries.DefaultValue)
-                {
-                    Debug.LogWarning("The highest or lowest values of " + gameObject.name + " weren't calculated");
-                    return;
-                }
+            statValueFill.fillAmount = CalculateFillAmount(actualValue, minValue, maxValue);
+            comparisonValueFill.fillAmount = 0;
+        }
 
-                statValueFill.fillAmount = CalculateFillAmount(value, minValue, maxValue);
+        public void SetValueFill(float actualValue, float comparisonValue, float[] boundries)
+        {
+            SetValueFill(actualValue, boundries);
+
+            float actualFillAmount = statValueFill.fillAmount;
+            float comparisonFillAmount = CalculateFillAmount(comparisonValue, minValue, maxValue);
+
+            if (actualFillAmount <= comparisonFillAmount)
+            {
+                statValueFill.fillAmount = actualFillAmount;
+                comparisonValueFill.fillAmount = comparisonFillAmount;
+                comparisonValueFill.color = comparisonColors.Evaluate(1);
+            }
+            else
+            {
+                statValueFill.fillAmount = comparisonFillAmount;
+                comparisonValueFill.fillAmount = actualFillAmount;
+                comparisonValueFill.color = comparisonColors.Evaluate(0);
             }
         }
 
-        private float CalculateFillAmount(float value,  float minValue, float maxValue)
+        private float CalculateFillAmount(float value, float minValue, float maxValue)
         {
             if (minValue == maxValue && value == minValue)
             {

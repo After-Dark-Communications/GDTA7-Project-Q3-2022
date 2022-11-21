@@ -90,6 +90,7 @@ namespace ShipSelection
            
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
             Channels.OnNavigateUp?.Invoke();
+            Channels.OnShipPartHovered?.Invoke(GetCurrentHoveredPart(), playerNumber);
         }
 
         public void OnNavigate_Down()
@@ -101,6 +102,7 @@ namespace ShipSelection
         
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
             Channels.OnNavigateDown?.Invoke();
+            Channels.OnShipPartHovered?.Invoke(GetCurrentHoveredPart(), playerNumber);
         }
 
         public void OnNavigate_Right()
@@ -112,6 +114,7 @@ namespace ShipSelection
                 currentHoveredIndex = 0;
             }
             buttonSelectionManager.UpdateHoverEffectAt(currentHoveredIndex, true);
+            Channels.OnShipPartHovered?.Invoke(GetCurrentHoveredPart(), playerNumber);
         }
 
         public void OnNavigate_Left()
@@ -123,6 +126,7 @@ namespace ShipSelection
                 currentHoveredIndex = CurrentSelectedCollection.Selectables.Count - 1;
             }
             buttonSelectionManager.UpdateHoverEffectAt(currentHoveredIndex, true);
+            Channels.OnShipPartHovered?.Invoke(GetCurrentHoveredPart(), playerNumber);
         }
 
         private void UpdateLabelTexts()
@@ -149,6 +153,11 @@ namespace ShipSelection
             
 
            // buttonSelectionManager.UpdateButtons(this);
+            return CurrentSelectedCollection.Selectables[currentHoveredIndex].Part;
+        }
+
+        public Part GetCurrentHoveredPart()
+        {
             return CurrentSelectedCollection.Selectables[currentHoveredIndex].Part;
         }
 
