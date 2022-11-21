@@ -24,7 +24,7 @@ namespace MovingObjects
             {
                 this.movementPoints.Add(point);
             }
-            StartCorountineMovePoint();
+            currentMovementPoint.Spawn();
         }
 
         public void StartCorountineMovePoint()
@@ -45,7 +45,6 @@ namespace MovingObjects
             nextMovementPoint.Spawn();
             Channels.OnEnergyZoneMoved?.Invoke();
             Channels.Announcer.OnPlayEnergyZoneMoved?.Invoke();
-
         }
 
         void IncrementIndex()
