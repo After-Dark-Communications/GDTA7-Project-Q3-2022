@@ -61,9 +61,6 @@ namespace ShipSelection
         
         private void SetUpSelectionBar()
         {
-
-            //OnNavigate_Up();
-            // OnNavigate_Down();
             buttonSelectionManager.ResetButtons();
             buttonSelectionManager.UpdateButtons(this);
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
@@ -77,8 +74,6 @@ namespace ShipSelection
             //Update
             //buttonSelectionManager.ResetButtons();
             //buttonSelectionManager.UpdateButtons(this);
-
-
         }
 
         public void OnNavigate_Up()
@@ -137,11 +132,16 @@ namespace ShipSelection
 
         public void SetSelectedOptionIndex(int index)
         {
-            buttonSelectionManager.ResetButtonAt(CurrentSelectedCollection.CurrentSelectedIndex);
-
-            CurrentSelectedCollection.CurrentSelectedIndex = index;
+            // Error check if the index in the function is different than the current Hovered index
+            if (index != currentHoveredIndex)
+            {
+                index = currentHoveredIndex;
+            }
            
+            buttonSelectionManager.ResetButtons();
+            CurrentSelectedCollection.CurrentSelectedIndex = index;
             buttonSelectionManager.UpdateButtons(this);
+
         }
 
         public Part GetCurrentSelectedPart()
