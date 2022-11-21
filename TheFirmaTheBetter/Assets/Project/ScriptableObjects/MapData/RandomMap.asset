@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RandomMap
   m_EditorClassIdentifier: 
   mapName: Random
-  mapPicture: {fileID: 0}
+  mapPicture: {fileID: 21300000, guid: f7ee69d6e9af86242803a7f6a4896fb2, type: 3}
   gameMode: ???
+  gameModeDescription: Select a random map
   mapSceneIndex: 0
