@@ -40,8 +40,9 @@ namespace Hazards
             }
         }
 
-        void doDamageToAllShips(List<ICollidable> ships)
+        void doDamageToAllShips(List<ICollidable> EnteredShips)
         {
+            List<ICollidable> ships = EnteredShips;
             foreach (ICollidable collidableShip in ships)
             {
                 collidableShip.HandleCollision(this, null);

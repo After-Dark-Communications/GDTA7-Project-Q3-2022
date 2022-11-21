@@ -12,6 +12,7 @@ namespace Projectiles
     {
         private const int _ignoreCastLayer = 2;//ignoreraycast layer
         private const float _hookConnectedTime = 10f;//4f;
+        private const float _maxAddedVelocity = 10f;
 
         private float currentConnectedTime = 0;
         private float currentArmingTime = 0;
@@ -147,6 +148,7 @@ namespace Projectiles
             Debug.DrawRay(_ropeSegments[^1].prevPosition, (_ropeSegments[^1].position - _ropeSegments[^1].prevPosition) * 5);
 
             Vector3 desiredVelocity = (_ropeSegments[^1].position - _ropeSegments[^1].prevPosition) / Time.fixedDeltaTime;
+            //Debug.Log($"added velocity:{desiredVelocity}, current velocity:{target.transform.parent.GetComponent<Rigidbody>().velocity}");
             target.transform.parent.GetComponent<Rigidbody>().velocity = desiredVelocity;
             _ropeSegments[^1].position = target.transform.parent.position;
             DrawRope();
@@ -251,7 +253,7 @@ namespace Projectiles
                 {
                     Gizmos.color = Color.white;
                 }
-            
+
                 Gizmos.DrawLine(_ropeSegments[i].position, _ropeSegments[i + 1].position);
             }
             Gizmos.DrawWireSphere(GizmoPosition, 5 / 2);

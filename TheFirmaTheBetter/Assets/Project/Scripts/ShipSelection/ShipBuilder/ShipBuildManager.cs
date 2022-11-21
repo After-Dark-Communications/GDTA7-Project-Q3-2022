@@ -54,7 +54,7 @@ namespace ShipSelection.ShipBuilders
             shipBuilders.Add(shipBuilder);
 
 #if UNITY_EDITOR
-            if (shipBuilders.Count == 1)
+            if (shipBuilders.Count == 1 && amountOfPlayersJoined == 1)
             {
                 PlayerJoinManager FakeJoiner = FindObjectOfType<PlayerJoinManager>();
                 InputDevice fakeDevice = InputSystem.AddDevice("Gamepad");
