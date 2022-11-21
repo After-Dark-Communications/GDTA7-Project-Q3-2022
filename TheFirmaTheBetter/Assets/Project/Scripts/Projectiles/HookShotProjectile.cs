@@ -5,6 +5,7 @@ using ShipParts.Ship;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 namespace Projectiles
 {
@@ -12,7 +13,7 @@ namespace Projectiles
     {
         private const int _ignoreCastLayer = 2;//ignoreraycast layer
         private const float _hookConnectedTime = 10f;//4f;
-        private const float _maxAddedVelocity = 10f;
+        private const float _maxAddedVelocity = 50f;
 
         private float currentConnectedTime = 0;
         private float currentArmingTime = 0;
@@ -148,8 +149,8 @@ namespace Projectiles
             Debug.DrawRay(_ropeSegments[^1].prevPosition, (_ropeSegments[^1].position - _ropeSegments[^1].prevPosition) * 5);
 
             Vector3 desiredVelocity = (_ropeSegments[^1].position - _ropeSegments[^1].prevPosition) / Time.fixedDeltaTime;
-            //Debug.Log($"added velocity:{desiredVelocity}, current velocity:{target.transform.parent.GetComponent<Rigidbody>().velocity}");
-            target.transform.parent.GetComponent<Rigidbody>().velocity = desiredVelocity;
+            Debug.Log($"added velocity:{desiredVelocity}, current velocity:{target.transform.parent.GetComponent<Rigidbody>().velocity}");
+            target.transform.parent.GetComponent<Rigidbody>().velocity = desiredVelocity.Clamp(-_maxAddedVelocity, _maxAddedVelocity);
             _ropeSegments[^1].position = target.transform.parent.position;
             DrawRope();
         }
