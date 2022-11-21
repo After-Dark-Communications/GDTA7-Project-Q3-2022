@@ -27,6 +27,7 @@ public class RoundManager : MonoBehaviour
 
     private void Start()
     {
+
         SetRounds(DebugNumberOfRounds);
     }
 
