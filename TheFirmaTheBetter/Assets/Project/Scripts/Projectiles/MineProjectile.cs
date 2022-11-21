@@ -56,6 +56,11 @@ namespace Projectiles
             buildersInRange.RemoveAt(index);
         }
 
+        protected override void OnRoundOver(int roundIndex, int winnerIndex)
+        {
+            Destroy(gameObject);
+        }
+
         private void Update()
         {
             ArmMine();
