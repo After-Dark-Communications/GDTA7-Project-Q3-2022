@@ -3421,7 +3421,7 @@ PrefabInstance:
     - target: {fileID: 805699052019831899, guid: 3ca85efab18a2d74490b6d5d1e935869,
         type: 3}
       propertyPath: m_text
-      value: 'Free for all: get the most kils'
+      value: 'Free for all: get the most kills'
       objectReference: {fileID: 0}
     - target: {fileID: 2622443995163119585, guid: 3ca85efab18a2d74490b6d5d1e935869,
         type: 3}
