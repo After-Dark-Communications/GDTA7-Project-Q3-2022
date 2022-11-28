@@ -50,21 +50,25 @@ namespace Projectiles
             _lineRenderer.startWidth = _lineWidth;
             _lineRenderer.endWidth = _lineWidth;
 
-            Channels.OnPlayerBecomesDeath += OnTargetDies;
+            Channels.OnPlayerBecomesDeath += OnTargetOrFirerDies;
             Channels.OnRoundOver += OnRoundEnd;
         }
 
         private void OnDestroy()
         {
-            Channels.OnPlayerBecomesDeath -= OnTargetDies;
+            Channels.OnPlayerBecomesDeath -= OnTargetOrFirerDies;
             Channels.OnRoundOver -= OnRoundEnd;
         }
 
-        private void OnTargetDies(ShipBuilder shipBuilderThatNeedsDying, int playerIndexOfKiller)
+        private void OnTargetOrFirerDies(ShipBuilder shipBuilderThatNeedsDying, int playerIndexOfKiller)
         {
             if (target == null)
             { return; }
             if (shipBuilderThatNeedsDying == target)
+            {
+                Destroy(transform.parent.gameObject);
+            }
+            else if (shipBuilderThatNeedsDying.PlayerNumber == FirerId)
             {
                 Destroy(transform.parent.gameObject);
             }
@@ -149,7 +153,7 @@ namespace Projectiles
             Debug.DrawRay(_ropeSegments[^1].prevPosition, (_ropeSegments[^1].position - _ropeSegments[^1].prevPosition) * 5);
 
             Vector3 desiredVelocity = (_ropeSegments[^1].position - _ropeSegments[^1].prevPosition) / Time.fixedDeltaTime;
-            Debug.Log($"added velocity:{desiredVelocity}, current velocity:{target.transform.parent.GetComponent<Rigidbody>().velocity}");
+            //Debug.Log($"added velocity:{desiredVelocity}, current velocity:{target.transform.parent.GetComponent<Rigidbody>().velocity}");
             target.transform.parent.GetComponent<Rigidbody>().velocity = desiredVelocity.Clamp(-_maxAddedVelocity, _maxAddedVelocity);
             _ropeSegments[^1].position = target.transform.parent.position;
             DrawRope();
