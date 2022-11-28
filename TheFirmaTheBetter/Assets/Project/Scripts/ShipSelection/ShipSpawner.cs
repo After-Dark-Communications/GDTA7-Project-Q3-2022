@@ -1,12 +1,9 @@
 using EventSystem;
-using ShipParts;
 using ShipParts.Ship;
 using ShipSelection.ShipBuilders;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 namespace ShipSelection
 {
@@ -84,7 +81,7 @@ namespace ShipSelection
             foreach (ShipBuilder shipBuilder in ShipBuildManager.Instance.ShipBuilders)
             {
                 RespawnShip(shipBuilder);
-                Channels.OnPlayerSpawned?.Invoke(shipBuilder.gameObject, shipBuilder.PlayerNumber);
+                Channels.OnPlayerRespawned?.Invoke(shipBuilder.PlayerNumber);
             }
         }
 
@@ -99,14 +96,12 @@ namespace ShipSelection
 
             shipBuilder.gameObject.SetActive(true);
             SpawnShip(playerShipObject, spawnPointTransform);
-            Channels.OnPlayerRespawned?.Invoke(playerIndex);
-
         }
 
         private void SpawnShip(GameObject playerShip, Transform spawnPoint)
         {
-            playerShip.transform.position = spawnPoint.position;
-            playerShip.transform.rotation = spawnPoint.rotation;
+            playerShip.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+
             Rigidbody body = playerShip.GetComponent<Rigidbody>();
             body.velocity = Vector3.zero;
             body.angularVelocity = Vector3.zero;
@@ -123,6 +118,5 @@ namespace ShipSelection
                 }
             }
         }
-
     }
 }
