@@ -16,22 +16,19 @@ public class DamageIndicatorLightUp : MonoBehaviour
 
     private void OnEnable()
     {
-        //get player number for current ship (from ShipInfo)
         _ShipInfo = GetComponentInParent<ShipInfo>();
         currentPlayerNumber = _ShipInfo.PlayerNumber;
 
         animator = GetComponent<Animator>();
-        //subscribe to OnPlayerTakeDamage
+
         Channels.OnPlayerTakeDamage += OnPlayerTakeDamage;
     }
 
     private void OnPlayerTakeDamage(ShipBuilder hittedBuilder, int damageAmount, int indexOfPlayerThatShotTheBullet)
     {
-        //if current ship is damaged light up
         if (hittedBuilder.PlayerNumber == currentPlayerNumber)
         {
             animator.Play("Base Layer.DamageFlash", -1, 0);
-            Debug.Log("player " + currentPlayerNumber + " hit");
         }
         
     }
