@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using Data;
+using EventSystem;
 
 namespace Audio
 {
@@ -15,10 +16,20 @@ namespace Audio
 
         private void Awake()
         {
+            Channels.OnAudioSettingsSaved += SetAudioLevels;
+            Channels.OnMasterValueChanged += SetMasterVolume;
+            Channels.OnMusicChangedEvent += SetMusicVolume;
+            Channels.OnSFXChangedEvent += SetSFXVolume;
+            Channels.OnVoiceChangedEvent += SetVoiceVolume;
             Master = RuntimeManager.GetVCA("vca:/Master");
             Music = RuntimeManager.GetVCA("vca:/Music");
             SFX = RuntimeManager.GetVCA("vca:/SFX");
             Voice = RuntimeManager.GetVCA("vca:/Voice");
+        }
+
+        private void OnDestroy()
+        {
+            Channels.OnAudioSettingsSaved -= SetAudioLevels;
         }
 
         // Start is called before the first frame update
@@ -39,6 +50,26 @@ namespace Audio
             Music.setVolume(data.MusicVolume);
             SFX.setVolume(data.SfxVolume);
             Voice.setVolume(data.VoiceVolume);
+        }
+
+        void SetMusicVolume(float volume)
+        {
+            Music.setVolume(volume);
+        }
+
+        void SetSFXVolume(float volume)
+        {
+            SFX.setVolume(volume);
+        }
+
+        void SetVoiceVolume(float volume)
+        {
+            Voice.setVolume(volume);
+        }
+
+        void SetMasterVolume(float volume)
+        {
+            Master.setVolume(volume);
         }
     }
 }

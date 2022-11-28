@@ -37,7 +37,6 @@ namespace ShipParts.Engines
                 shipRoot.GetComponent<ShipBody>().OnPlayerCrash.AddListener(CrashShip);
                 rootInputHandler.OnPlayerMoveUp.AddListener(MoveUp);
                 rootInputHandler.OnPlayerMoveDown.AddListener(MoveDown);
-                Channels.OnPlayerSpawned += OnShipSpawned;
             }
             shipRigidBody.drag = Stats.Drag;
 
@@ -47,11 +46,6 @@ namespace ShipParts.Engines
             _lastPosition = shipRigidBody.position;
 
             CalculateHighestAndLowest();
-        }
-
-        private void OnShipSpawned(GameObject spawnedShipBuilderObject, int playerNumber)
-        {
-            shipRigidBody.velocity = Vector3.zero;
         }
 
         private void Update()
@@ -188,8 +182,6 @@ namespace ShipParts.Engines
                 return;
 
             gamepad.SetMotorSpeeds(0, 0);
-
-            Channels.OnPlayerSpawned -= OnShipSpawned;
         }
 
         protected override void CalculateHighestAndLowest()
