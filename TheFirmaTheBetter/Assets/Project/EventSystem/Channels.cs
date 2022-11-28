@@ -5,7 +5,9 @@ using ShipSelection;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Audio;
 using static EventSystem.Channels;
+using Data;
 
 namespace EventSystem
 {
@@ -76,7 +78,8 @@ namespace EventSystem
         public delegate void SpecialUsed(ShipBuilder shipBuilderThatUsedSpecial);
         public delegate void SpecialReady(ShipBuilder shipBuilder);
         public delegate void PlayerBarsLoaded(ShipBuilder shipBuilder);
-
+        public delegate void AudioSettingsEvent(VolumeSettingsData data);
+        public delegate void AudioSettingsChangedEvent(float value);
 
         public static ChangeFireMode OnChangeFireMode;
         public static EnergyUsed OnEnergyUsed;
@@ -120,6 +123,11 @@ namespace EventSystem
         public static SpecialReady OnSpecialReady;
         public static ReturnToTitleScreen OnReturnToTitleScreen;
         public static LoadBuildingScene OnLoadBuildingScene;
+        public static AudioSettingsEvent OnAudioSettingsSaved;
+        public static AudioSettingsChangedEvent OnMasterValueChanged;
+        public static AudioSettingsChangedEvent OnMusicChangedEvent;
+        public static AudioSettingsChangedEvent OnSFXChangedEvent;
+        public static AudioSettingsChangedEvent OnVoiceChangedEvent;
     }
 
 }
