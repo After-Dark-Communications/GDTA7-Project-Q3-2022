@@ -10,22 +10,20 @@ namespace ShipSelection.Stats
         [SerializeField]
         private Image statValueFill;
         [SerializeField]
-        private Image comparisonValueFill;
+        private Image positiveComparisonFill;
+        [SerializeField]
+        private Image negativeComparisonFill;
         [SerializeField]
         private int statBarDivisions = 5;
         [SerializeField]
         private TMP_Text statName;
-
-        [Tooltip("0 is the negative color, 1 is the positive color")]
-        [SerializeField]
-        private Gradient comparisonColors;
 
         private float minValue;
         private float maxValue;
 
         public void SetValueFill(float actualValue, float[] boundries)
         {
-            if (statValueFill == null || comparisonValueFill == null)
+            if (statValueFill == null || positiveComparisonFill == null)
                 return;
 
             minValue = boundries[StatBoundries.LowestIndex];
@@ -38,7 +36,8 @@ namespace ShipSelection.Stats
             }
 
             statValueFill.fillAmount = CalculateFillAmount(actualValue, minValue, maxValue);
-            comparisonValueFill.fillAmount = 0;
+            positiveComparisonFill.gameObject.SetActive(false);
+            negativeComparisonFill.gameObject.SetActive(false);
         }
 
         public void SetValueFill(float actualValue, float comparisonValue, float[] boundries)
@@ -50,15 +49,19 @@ namespace ShipSelection.Stats
 
             if (actualFillAmount <= comparisonFillAmount)
             {
+                // Positive comparison
                 statValueFill.fillAmount = actualFillAmount;
-                comparisonValueFill.fillAmount = comparisonFillAmount;
-                comparisonValueFill.color = comparisonColors.Evaluate(1);
+                positiveComparisonFill.fillAmount = comparisonFillAmount;
+                positiveComparisonFill.gameObject.SetActive(true);
+                negativeComparisonFill.gameObject.SetActive(false);
             }
             else
             {
+                // Negative comparison
                 statValueFill.fillAmount = comparisonFillAmount;
-                comparisonValueFill.fillAmount = actualFillAmount;
-                comparisonValueFill.color = comparisonColors.Evaluate(0);
+                negativeComparisonFill.fillAmount = actualFillAmount;
+                negativeComparisonFill.gameObject.SetActive(true);
+                positiveComparisonFill.gameObject.SetActive(false);
             }
         }
 
@@ -75,7 +78,6 @@ namespace ShipSelection.Stats
             int barsToFill = (int)(statPercent / divisionPercent) + 1;
 
             return divisionPercent * barsToFill;
-
         }
 
         public TMP_Text StatName { get { return statName; } set { statName = value; } }
