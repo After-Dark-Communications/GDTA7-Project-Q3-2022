@@ -1,13 +1,8 @@
 using Collisions;
 using EventSystem;
-using Projectiles;
 using ShipParts.Ship;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using EventSystem;
 
 namespace Hazards
 {
@@ -35,13 +30,14 @@ namespace Hazards
             timer += Time.deltaTime;
             if (timer >= timeToTakeDamage)
             {
-                doDamageToAllShips(shipsCollidersThatEntered);
+                DoDamageToAllShips(shipsCollidersThatEntered);
                 timer = 0;
             }
         }
 
-        void doDamageToAllShips(List<ICollidable> ships)
+        private void DoDamageToAllShips(List<ICollidable> EnteredShips)
         {
+            List<ICollidable> ships = EnteredShips;
             foreach (ICollidable collidableShip in ships)
             {
                 collidableShip.HandleCollision(this, null);
@@ -51,34 +47,43 @@ namespace Hazards
         private void OnTriggerEnter(Collider other)
         {
             ICollidable collisionObject = other.GetComponentInParent<ICollidable>();
-            if (collisionObject != null)
-            {
-                if (collisionObject is ShipCollision)
-                {
-                    if (shipsCollidersThatEntered.Contains(collisionObject))
-                        return;
-                    shipsCollidersThatEntered.Add(collisionObject);
-                }
-
-            }
+            AddCollidable(collisionObject);
         }
         private void OnTriggerExit(Collider other)
         {
             ICollidable collisionObject = other.GetComponentInParent<ICollidable>();
-            if (collisionObject != null)
-            {
-                if (collisionObject is ShipCollision)
-                {
-                    if (shipsCollidersThatEntered.Contains(collisionObject))
-                        shipsCollidersThatEntered.Remove(collisionObject);
-                }
+            RemoveCollidable(collisionObject);
+        }
 
+        private void RemoveDeadPlayerFromTrigger(ShipBuilder deadPlayer, int playerNumber)
+        {
+            ICollidable collidable = deadPlayer.GetComponent<ICollidable>();
+            RemoveCollidable(collidable);
+        }
+
+        private void AddCollidable(ICollidable collidable)
+        {
+            if (collidable != null)
+            {
+                if (collidable is ShipCollision)
+                {
+                    if (shipsCollidersThatEntered.Contains(collidable))
+                        return;
+                    shipsCollidersThatEntered.Add(collidable);
+                }
             }
         }
 
-        void RemoveDeadPlayerFromTrigger(ShipBuilder deadPlayer, int playerNumber)
+        private void RemoveCollidable(ICollidable collidable)
         {
-            shipsCollidersThatEntered.Clear();
+            if (collidable != null)
+            {
+                if (collidable is ShipCollision)
+                {
+                    if (shipsCollidersThatEntered.Contains(collidable))
+                        shipsCollidersThatEntered.Remove(collidable);
+                }
+            }
         }
     }
 }

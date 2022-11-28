@@ -67,7 +67,7 @@ namespace ShipParts.Weapons
 
         private void ClearEnergyZoneTrigger()
         {
-            OnChangeFireMode(true, 0);
+            OnChangeFireMode(true, playerNumber);
         }
         private void OnChangeFireMode(bool newValue, int playerNumber)
         {

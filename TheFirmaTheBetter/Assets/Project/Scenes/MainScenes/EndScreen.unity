@@ -1568,6 +1568,32 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1.75
       objectReference: {fileID: 0}
+    - target: {fileID: 4616613149468215779, guid: f23f3b8d8b26b4d48a91cab407f6d354,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616613149468215779, guid: f23f3b8d8b26b4d48a91cab407f6d354,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616613149468215779, guid: f23f3b8d8b26b4d48a91cab407f6d354,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 11500000, guid: 0fdd089a89e130747b4361fbe40b52ec,
+        type: 3}
+    - target: {fileID: 4616613149468215779, guid: f23f3b8d8b26b4d48a91cab407f6d354,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616613149468215779, guid: f23f3b8d8b26b4d48a91cab407f6d354,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: EndScreen, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4649883127849530699, guid: f23f3b8d8b26b4d48a91cab407f6d354,
         type: 3}
       propertyPath: m_AnchorMax.y

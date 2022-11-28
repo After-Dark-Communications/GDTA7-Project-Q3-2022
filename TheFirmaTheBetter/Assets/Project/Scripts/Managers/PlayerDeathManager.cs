@@ -70,7 +70,6 @@ namespace Managers
                     }
                 }
 
-
                 Channels.OnRoundOver?.Invoke(roundManager.CurrentRoundIndex, winner.PlayerNumber);
                 StartCoroutine(KillWinner(shipBuilderThatDied, playerResult, winner));
             }

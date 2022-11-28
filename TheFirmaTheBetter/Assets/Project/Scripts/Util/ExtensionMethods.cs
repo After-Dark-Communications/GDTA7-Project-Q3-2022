@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Util
 {
@@ -19,6 +20,32 @@ namespace Util
         public static float Remap(this float value, float from1, float to1, float from2, float to2)
         {
             return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
+        }
+        /// <summary>
+        /// Clamps each axis of the given <see cref="Vector3"/> between the given minimum float and maximum float values. Returns the axis value if it is within the minimum and maximum range.
+        /// </summary>
+        /// <param name="val">The <see cref="Vector3"/> to restrict inside the ragne defined by the minimum and maximum values</param>
+        /// <param name="min">The minimum floating point value to compare each axis against</param>
+        /// <param name="max">The maximum floating point value to compare each axis against</param>
+        /// <returns>The <see cref="Vector3"/> result between the minimum and maximum values</returns>
+        public static Vector3 Clamp(this Vector3 val, float min, float max)
+        {
+            float X = val.x;
+            float Y = val.y;
+            float Z = val.z;
+            if (X > max || X < min)
+            {
+                X = Mathf.Clamp(X, min, max);
+            }
+            if (Y > max || Y < min)
+            {
+                Y = Mathf.Clamp(Y, min, max);
+            }
+            if (Z > max || Z < min)
+            {
+                Z = Mathf.Clamp(Z, min, max);
+            }
+            return new Vector3(X, Y, Z);
         }
     }
 }

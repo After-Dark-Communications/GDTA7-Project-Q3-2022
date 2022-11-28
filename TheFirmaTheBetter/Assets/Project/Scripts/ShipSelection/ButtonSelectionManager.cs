@@ -39,6 +39,11 @@ namespace ShipSelection
                 buttonAnimator.SetBool(DisabledBooleanName, false);
             }
         }
+        public void UpdateButtonAt (int index)
+        {
+            Animator currentButtonAnimator = buttonAnimators[index];
+            currentButtonAnimator.SetBool(DisabledBooleanName, true);
+        }
         public void ResetButtonAt(int index)
         {
             Animator currentButtonAnimator = buttonAnimators[index];

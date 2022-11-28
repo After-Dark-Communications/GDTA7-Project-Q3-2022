@@ -5,7 +5,9 @@ using ShipSelection;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Audio;
 using static EventSystem.Channels;
+using Data;
 
 namespace EventSystem
 {
@@ -63,6 +65,8 @@ namespace EventSystem
         public delegate void GameStart();
         public delegate void ControllerShemeHidden();
         public delegate void ControllerShemeShowing();
+        public delegate void ReturnToTitleScreen();
+        public delegate void LoadBuildingScene();
 
         public delegate void PlayerHealed(int healthIncreaseAmount, int playerNumber);
         public delegate void PickupDestroyed();
@@ -74,7 +78,8 @@ namespace EventSystem
         public delegate void SpecialUsed(ShipBuilder shipBuilderThatUsedSpecial);
         public delegate void SpecialReady(ShipBuilder shipBuilder);
         public delegate void PlayerBarsLoaded(ShipBuilder shipBuilder);
-
+        public delegate void AudioSettingsEvent(VolumeSettingsData data);
+        public delegate void AudioSettingsChangedEvent(float value);
 
         public static ChangeFireMode OnChangeFireMode;
         public static EnergyUsed OnEnergyUsed;
@@ -114,8 +119,15 @@ namespace EventSystem
         public static QuitGame OnQuitGame;
         public static EnergyZoneMoved OnEnergyZoneMoved;
         public static SpecialUsed OnSpecialUsed;
-        public static SpecialReady OnSpecialReady;
         public static PlayerBarsLoaded OnPlayerBarsLoaded;
+        public static SpecialReady OnSpecialReady;
+        public static ReturnToTitleScreen OnReturnToTitleScreen;
+        public static LoadBuildingScene OnLoadBuildingScene;
+        public static AudioSettingsEvent OnAudioSettingsSaved;
+        public static AudioSettingsChangedEvent OnMasterValueChanged;
+        public static AudioSettingsChangedEvent OnMusicChangedEvent;
+        public static AudioSettingsChangedEvent OnSFXChangedEvent;
+        public static AudioSettingsChangedEvent OnVoiceChangedEvent;
     }
 
 }

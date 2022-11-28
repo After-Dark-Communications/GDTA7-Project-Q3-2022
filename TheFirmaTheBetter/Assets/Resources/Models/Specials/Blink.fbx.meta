@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Blink Core
-    second: {fileID: 2100000, guid: 730712a269da3f54682e64cf17acabd7, type: 2}
+    second: {fileID: 2100000, guid: 91b2caf3196f854458aa121f708f189a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

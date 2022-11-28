@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 using ShipParts.Ship;
+using System;
 
 namespace Audio
 {
@@ -23,13 +24,21 @@ namespace Audio
                 Destroy(gameObject);
                 return;
             }
-            SubscribeToEvents();
+            Channels.OnEveryPlayerReady += LoadBattleScene;
+            Channels.OnPlayerBecomesDeath += PlayerDeath;
+            Channels.OnGameOver += EndGame;
+            Channels.OnReturnToTitleScreen += Replay;
+            Channels.OnLoadBuildingScene += LoadBuildingScene;
+            Channels.OnRoundStarted += RestartRound;
         }
         #endregion
-
+        [SerializeField]
+        private FMODUnity.EventReference jingle;
+        private FMOD.Studio.Bus master;
         private FMOD.Studio.EventInstance titleTheme;
         private FMOD.Studio.EventInstance buildingTheme;
         private FMOD.Studio.EventInstance battleTheme;
+        private int playersInGame;
         private float playersLeft;
         // Start is called before the first frame update
         void Start()
@@ -38,13 +47,7 @@ namespace Audio
             titleTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_MainTheme");
             titleTheme.start();
             buildingTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_BuildTheme");
-        }
-
-        void SubscribeToEvents()
-        {
-            Channels.OnEveryPlayerReady += LoadBattleScene;
-            Channels.OnPlayerBecomesDeath += PlayerDeath;
-            Channels.OnGameOver += Replay;
+            master = FMODUnity.RuntimeManager.GetBus("Bus:/");
         }
 
         // Update is called once per frame
@@ -60,19 +63,23 @@ namespace Audio
         {
             Channels.OnEveryPlayerReady -= LoadBattleScene;
             Channels.OnPlayerBecomesDeath -= PlayerDeath;
-            Channels.OnGameOver -= Replay;
+            Channels.OnGameOver -= EndGame;
+            Channels.OnReturnToTitleScreen -= Replay;
+            Channels.OnLoadBuildingScene -= LoadBuildingScene;
+            Channels.OnRoundStarted -= RestartRound;
         }
 
         public void LoadBuildingScene()
         {
-            titleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            titleTheme.release();
+            FMOD.RESULT res = titleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            Debug.Log(res);
             buildingTheme.start();
         }
 
         public void LoadBattleScene(int playerCount)
         {
             playersLeft = playerCount;
+            playersInGame = playerCount;
             if (playersLeft <= 2)
             {
                 battleTheme.setParameterByName("Players_Left", float.MaxValue);
@@ -82,21 +89,43 @@ namespace Audio
                 battleTheme.setParameterByName("Players_Left", playersLeft);
             }
             buildingTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            buildingTheme.release();
             battleTheme.start();
+        }
+
+        public void EndGame()
+        {
+            master.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            battleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            FMODUnity.RuntimeManager.PlayOneShot(jingle, transform.position);
         }
 
         public void Replay()
         {
-            battleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            titleTheme.start();
+            master.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            FMOD.RESULT res = titleTheme.start();
+            Debug.Log(res);
         }
 
         public void PlayerDeath(ShipBuilder builder, int playercount)
         {
             playersLeft -= 1;
-            if (playersLeft! <= 1)
+            if (playersLeft! <= 1 && playercount < playersLeft)
                 battleTheme.setParameterByName("Players_Left", playersLeft);
+        }
+
+        public void RestartRound(int currentRound, int maxRounds)
+        {
+            playersLeft = playersInGame;
+            if (playersLeft <= 2)
+            {
+                battleTheme.setParameterByName("Players_Left", float.MaxValue);
+
+            }
+            else
+            {
+                battleTheme.setParameterByName("Players_Left", playersLeft);
+            }
+            battleTheme.setParameterByName("Rounds", maxRounds - currentRound + 1); 
         }
     }
 }
