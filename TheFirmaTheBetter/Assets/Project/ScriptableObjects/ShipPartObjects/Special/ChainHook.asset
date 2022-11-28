@@ -15,5 +15,5 @@ MonoBehaviour:
   partName: Chain Hook
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 0
-  description: Launch a hook to attach to another ship.
+  description: Launch a hook that can attach to another ship.
   abilityCooldown: 2
