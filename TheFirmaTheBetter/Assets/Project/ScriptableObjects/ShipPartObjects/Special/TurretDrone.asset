@@ -15,5 +15,5 @@ MonoBehaviour:
   partName: Turret Drone
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 0
-  description: Spawns a drone that shoots at enemy players in its range.
+  description: Spawn a drone that shoots at enemy players in its range.
   abilityCooldown: 5
