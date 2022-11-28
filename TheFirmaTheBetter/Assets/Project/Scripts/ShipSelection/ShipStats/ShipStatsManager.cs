@@ -1,6 +1,10 @@
 using EventSystem;
 using ShipParts;
+using ShipParts.Cores;
+using ShipParts.Engines;
 using ShipParts.Ship;
+using ShipParts.Weapons;
+using ShipParts.Specials;
 using ShipSelection.Stats;
 using System;
 using System.Collections;
@@ -26,8 +30,14 @@ namespace ShipSelection
                 stats = statsCollection;
             }
 
-            Channels.OnPlayerStatsChanged += PlayerStatChange;
+            Channels.OnDisplayabeStatsChanged += OnDisplayabeStatsChanged;
             Channels.OnEnabledStatGameObject += SetAsEnableGameObject;
+        }
+
+        private void OnDestroy()
+        {
+            Channels.OnDisplayabeStatsChanged -= OnDisplayabeStatsChanged;
+            Channels.OnEnabledStatGameObject -= SetAsEnableGameObject;
         }
 
         private void SetAsEnableGameObject(int activateStatGameObjectIndex, int playerNumber)
@@ -37,46 +47,60 @@ namespace ShipSelection
             enabledStatGameObjectIndex = activateStatGameObjectIndex;
         }
 
-        private void PlayerStatChange(ShipBuilder shipBuilder, ShipStats changedShipStats)
+        private void OnDisplayabeStatsChanged(int playerIndex, Part changedPart, ShipStats selectedStats, ShipStats hoveredStats)
         {
-            if (playerIndex != shipBuilder.PlayerNumber)
+            if (this.playerIndex != playerIndex)
                 return;
 
-            SetShipStats(stats.ShipStats, changedShipStats);
-            SetWeaponStats(stats.WeaponStats, changedShipStats);
-            SetSpecialStats(stats.SpecialStats, changedShipStats);
-
+            if (changedPart is Core)
+            {
+                SetCoreStats(stats.ShipStats, selectedStats, hoveredStats);
+            }
+            else if (changedPart is Engine)
+            {
+                SetEngineStats(stats.ShipStats, selectedStats, hoveredStats);
+            }
+            else if (changedPart is Weapon)
+            {
+                SetWeaponStats(stats.WeaponStats, selectedStats, hoveredStats);
+            }
+            else if (changedPart is SpecialAbility)
+            {
+                SetSpecialStats(stats.SpecialStats, selectedStats, hoveredStats);
+            }
         }
 
-        private void SetShipStats(List<ShipStat> shipStatsUI, ShipStats changedShipStats)
+        private void SetCoreStats(List<ShipStat> shipStatsUI, ShipStats selectedStats, ShipStats hoveredStats)
         {
-            shipStatsUI[0].SetValueFill(changedShipStats.RawSpeed, StatBoundries.SPEED_BOUNDRIES);
-            shipStatsUI[1].SetValueFill(changedShipStats.MaxHealth, StatBoundries.HEALTH_BOUNDRIES);
-            shipStatsUI[2].SetValueFill(changedShipStats.Handling, StatBoundries.HANDLING_BOUNDRIES);
-            shipStatsUI[3].SetValueFill(changedShipStats.EnergyCapacity, StatBoundries.ENERGY_CAPACITY_BOUNDRIES);
+            shipStatsUI[0].SetValueFill(selectedStats.RawSpeed, StatBoundries.SPEED_BOUNDRIES);
+            shipStatsUI[1].SetValueFill(selectedStats.MaxHealth, hoveredStats.MaxHealth, StatBoundries.HEALTH_BOUNDRIES);
+            shipStatsUI[2].SetValueFill(selectedStats.Handling, StatBoundries.HANDLING_BOUNDRIES);
+            shipStatsUI[3].SetValueFill(selectedStats.EnergyCapacity, hoveredStats.EnergyCapacity, StatBoundries.ENERGY_CAPACITY_BOUNDRIES);
         }
 
-        private void SetWeaponStats(List<WeaponStat> weaponStatsUI, ShipStats changedWeaponStats)
+        private void SetEngineStats(List<ShipStat> shipStatsUI, ShipStats selectedStats, ShipStats hoveredStats)
         {
-            weaponStatsUI[0]?.SetValueFill(changedWeaponStats.Range, StatBoundries.RANGE_BOUNDRIES);
-            weaponStatsUI[1]?.SetValueFill(changedWeaponStats.FireRate, StatBoundries.FIRE_RATE_BOUNDRIES);
-            weaponStatsUI[2]?.SetValueFill(changedWeaponStats.EnergyCost, StatBoundries.ENERGY_COST_BOUNDRIES);
-            weaponStatsUI[3]?.SetValueFill(changedWeaponStats.DPS, StatBoundries.DPS_BOUNDRIES);
-            weaponStatsUI[4]?.SetValueFill(changedWeaponStats.Damage, StatBoundries.DAMAGE_BOUNDRIES);
+            shipStatsUI[0].SetValueFill(selectedStats.RawSpeed, hoveredStats.RawSpeed, StatBoundries.SPEED_BOUNDRIES);
+            shipStatsUI[1].SetValueFill(selectedStats.MaxHealth, StatBoundries.HEALTH_BOUNDRIES);
+            shipStatsUI[2].SetValueFill(selectedStats.Handling, hoveredStats.Handling, StatBoundries.HANDLING_BOUNDRIES);
+            shipStatsUI[3].SetValueFill(selectedStats.EnergyCapacity, StatBoundries.ENERGY_CAPACITY_BOUNDRIES);
         }
 
-        private void SetSpecialStats(List<SpecialStat> specialStatsUI, ShipStats changedSpecialStats)
+        private void SetWeaponStats(List<WeaponStat> weaponStatsUI, ShipStats selectedStats, ShipStats hoveredStats)
         {
-            specialStatsUI[0].StatName.text = changedSpecialStats.SpecialName.ToString();
-            specialStatsUI[0].Description.text = changedSpecialStats.SpecialDescription.ToString();
+            weaponStatsUI[0].SetValueFill(selectedStats.Range, hoveredStats.Range, StatBoundries.RANGE_BOUNDRIES);
+            weaponStatsUI[1].SetValueFill(selectedStats.FireRate, hoveredStats.FireRate, StatBoundries.FIRE_RATE_BOUNDRIES);
+            weaponStatsUI[2].SetValueFill(selectedStats.EnergyCost, hoveredStats.EnergyCost, StatBoundries.ENERGY_COST_BOUNDRIES);
+            weaponStatsUI[3].SetValueFill(selectedStats.DPS, hoveredStats.DPS, StatBoundries.DPS_BOUNDRIES);
+            weaponStatsUI[4].SetValueFill(selectedStats.Damage, hoveredStats.Damage, StatBoundries.DAMAGE_BOUNDRIES);
+        }
+
+        private void SetSpecialStats(List<SpecialStat> specialStatsUI, ShipStats selectedStats, ShipStats hoveredStats)
+        {
+            specialStatsUI[0].StatName.text = hoveredStats.SpecialName.ToString();
+            specialStatsUI[0].Description.text = hoveredStats.SpecialDescription.ToString();
         }
 
         public int PlayerIndex { get { return playerIndex; } set { playerIndex = value; } }
-
-        private void OnDestroy()
-        {
-            Channels.OnPlayerStatsChanged -= PlayerStatChange;
-            Channels.OnEnabledStatGameObject -= SetAsEnableGameObject;
-        }
     }
 }

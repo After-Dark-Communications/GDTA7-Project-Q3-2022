@@ -20,10 +20,12 @@ namespace EventSystem
         public delegate void EnergyUsed(int playerNumber, int amount);
         public delegate void EnergyChanged(int playerNumber, float newEnergyPersentage);
         public delegate void RefillEnergy(int playerNumber, int amountToRefill);
-        public delegate void PlayerStatsChanged(ShipBuilder shipBuilderThatChanged, ShipStats updatedShipStats);
+
+        public delegate void DisplayableStatsChanged(int playerIndex, Part changedPart, ShipStats selectedShipStats, ShipStats hoveredShipStats);
         public delegate void PlayerBecomesDeath(ShipBuilder shipBuilderThatNeedsDying, int playerIndexOfKiller);
         public delegate void ZoneEntered(GameObject enteredZoneObject);
         public delegate void ManagerInitialized(Manager initializedManager);
+        public delegate void ShipPartHovered(Part hoveredPart, int playerNumber);
         public delegate void ShipPartSelected(Part selectedPart, int playerNumber);
         public delegate void ShipCompleted(ShipBuilder completedShipBuilder);
         public delegate void PlayerJoined(int playerNumber, InputDevice joinedPlayerDevice);
@@ -80,10 +82,11 @@ namespace EventSystem
         public static EnergyUsed OnEnergyUsed;
         public static EnergyChanged OnEnergyChanged;
         public static RefillEnergy OnRefillEnergy;
-        public static PlayerStatsChanged OnPlayerStatsChanged;
+        public static DisplayableStatsChanged OnDisplayabeStatsChanged;
         public static PlayerBecomesDeath OnPlayerBecomesDeath;
         public static ZoneEntered OnZoneEntered;
         public static ManagerInitialized OnManagerInitialized;
+        public static ShipPartHovered OnShipPartHovered;
         public static ShipPartSelected OnShipPartSelected;
         public static ShipCompleted OnShipCompleted;
         public static PlayerJoined OnPlayerJoined;

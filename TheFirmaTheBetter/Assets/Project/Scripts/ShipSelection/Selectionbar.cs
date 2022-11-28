@@ -50,19 +50,20 @@ namespace ShipSelection
             selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(selectionScreensData.CollectionManager.WeaponList));
             selectionCollections.Add(SelectionCollectionInitializer.CreateNewSelectableCollection(selectionScreensData.CollectionManager.SpecialList));
             UpdateLabelTexts();
-
-            Channels.OnPlayerJoined += SetUpSelectionBar;
+            // Animator should be loaded to handle the first buton to be selected
+            Channels.OnShipAnimationManagerLoaded += SetUpSelectionBar;
+            //Channels.OnPlayerJoined += SetUpSelectionBar;
         }
 
 
         private void OnDestroy()
         {
-            Channels.OnPlayerJoined -= SetUpSelectionBar;
+            //Channels.OnPlayerJoined -= SetUpSelectionBar;
+            Channels.OnShipAnimationManagerLoaded -= SetUpSelectionBar;
         }
-        private void SetUpSelectionBar(int playerNumber, InputDevice joinedPlayerDevice)
+        private void SetUpSelectionBar()
         {
-            //OnNavigate_Up();
-            // OnNavigate_Down();
+
             buttonSelectionManager.ResetButtons();
             buttonSelectionManager.UpdateButtons(this);
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, this.playerNumber);
@@ -72,11 +73,6 @@ namespace ShipSelection
         private void Start()
         {
             playerNumber = GetComponentInParent<PlayerSelectionScreen>().PlayerNumber;
-
-            //Update
-            //buttonSelectionManager.ResetButtons();
-            //buttonSelectionManager.UpdateButtons(this);
-
 
         }
 
@@ -89,6 +85,7 @@ namespace ShipSelection
 
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
             Channels.OnNavigateUp?.Invoke();
+            Channels.OnShipPartHovered?.Invoke(GetCurrentHoveredPart(), playerNumber);
         }
 
         public void OnNavigate_Down()
@@ -100,6 +97,7 @@ namespace ShipSelection
 
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
             Channels.OnNavigateDown?.Invoke();
+            Channels.OnShipPartHovered?.Invoke(GetCurrentHoveredPart(), playerNumber);
         }
 
         public void OnNavigate_Right()
@@ -111,6 +109,7 @@ namespace ShipSelection
                 currentHoveredIndex = 0;
             }
             buttonSelectionManager.UpdateHoverEffectAt(currentHoveredIndex, true);
+            Channels.OnShipPartHovered?.Invoke(GetCurrentHoveredPart(), playerNumber);
         }
 
         public void OnNavigate_Left()
@@ -122,6 +121,7 @@ namespace ShipSelection
                 currentHoveredIndex = CurrentSelectedCollection.Selectables.Count - 1;
             }
             buttonSelectionManager.UpdateHoverEffectAt(currentHoveredIndex, true);
+            Channels.OnShipPartHovered?.Invoke(GetCurrentHoveredPart(), playerNumber);
         }
 
         private void UpdateLabelTexts()
@@ -136,18 +136,28 @@ namespace ShipSelection
 
         public void SetSelectedOptionIndex(int index)
         {
-            buttonSelectionManager.ResetButtonAt(CurrentSelectedCollection.CurrentSelectedIndex);
 
+            // Error check if the index in the function is different than the current Hovered index
+            if (index != currentHoveredIndex)
+            {
+                index = currentHoveredIndex;
+            }
+           
+            buttonSelectionManager.ResetButtons();
             CurrentSelectedCollection.CurrentSelectedIndex = index;
-
+            buttonSelectionManager.ResetButtonAt(CurrentSelectedCollection.CurrentSelectedIndex);
             buttonSelectionManager.UpdateButtons(this);
+
         }
 
         public Part GetCurrentSelectedPart()
         {
 
+            return CurrentSelectedCollection.Selectables[currentHoveredIndex].Part;
+        }
 
-            // buttonSelectionManager.UpdateButtons(this);
+        public Part GetCurrentHoveredPart()
+        {
             return CurrentSelectedCollection.Selectables[currentHoveredIndex].Part;
         }
 
