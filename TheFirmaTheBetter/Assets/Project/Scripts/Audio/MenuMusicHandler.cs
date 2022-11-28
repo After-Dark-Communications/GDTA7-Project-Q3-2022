@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 using ShipParts.Ship;
+using System;
 
 namespace Audio
 {
@@ -28,6 +29,7 @@ namespace Audio
             Channels.OnGameOver += EndGame;
             Channels.OnReturnToTitleScreen += Replay;
             Channels.OnLoadBuildingScene += LoadBuildingScene;
+            Channels.OnRoundStarted += RestartRound;
         }
         #endregion
         [SerializeField]
@@ -36,6 +38,7 @@ namespace Audio
         private FMOD.Studio.EventInstance titleTheme;
         private FMOD.Studio.EventInstance buildingTheme;
         private FMOD.Studio.EventInstance battleTheme;
+        private int playersInGame;
         private float playersLeft;
         // Start is called before the first frame update
         void Start()
@@ -63,6 +66,7 @@ namespace Audio
             Channels.OnGameOver -= EndGame;
             Channels.OnReturnToTitleScreen -= Replay;
             Channels.OnLoadBuildingScene -= LoadBuildingScene;
+            Channels.OnRoundStarted -= RestartRound;
         }
 
         public void LoadBuildingScene()
@@ -75,6 +79,7 @@ namespace Audio
         public void LoadBattleScene(int playerCount)
         {
             playersLeft = playerCount;
+            playersInGame = playerCount;
             if (playersLeft <= 2)
             {
                 battleTheme.setParameterByName("Players_Left", float.MaxValue);
@@ -106,6 +111,21 @@ namespace Audio
             playersLeft -= 1;
             if (playersLeft! <= 1 && playercount < playersLeft)
                 battleTheme.setParameterByName("Players_Left", playersLeft);
+        }
+
+        public void RestartRound(int currentRound, int maxRounds)
+        {
+            playersLeft = playersInGame;
+            if (playersLeft <= 2)
+            {
+                battleTheme.setParameterByName("Players_Left", float.MaxValue);
+
+            }
+            else
+            {
+                battleTheme.setParameterByName("Players_Left", playersLeft);
+            }
+            battleTheme.setParameterByName("Rounds", maxRounds - currentRound + 1); 
         }
     }
 }
