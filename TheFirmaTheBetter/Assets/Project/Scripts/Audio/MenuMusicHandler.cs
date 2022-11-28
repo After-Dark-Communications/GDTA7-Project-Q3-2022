@@ -11,13 +11,14 @@ namespace Audio
     {
         #region Singleton
         public static MenuMusicHandler Instance;
+        private bool isKoth;
 
         void Awake()
         {
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);  
+                DontDestroyOnLoad(gameObject);
             }
             if (Instance != this)
             {
@@ -30,6 +31,8 @@ namespace Audio
             Channels.OnReturnToTitleScreen += Replay;
             Channels.OnLoadBuildingScene += LoadBuildingScene;
             Channels.OnRoundStarted += RestartRound;
+            Channels.KingOfTheHill.OnKingOfTheHillStart += StartKingOfTheHill;
+
         }
         #endregion
         [SerializeField]
@@ -43,6 +46,7 @@ namespace Audio
         // Start is called before the first frame update
         void Start()
         {
+            isKoth = false;
             battleTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_Battle");
             titleTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_MainTheme");
             titleTheme.start();
@@ -67,6 +71,7 @@ namespace Audio
             Channels.OnReturnToTitleScreen -= Replay;
             Channels.OnLoadBuildingScene -= LoadBuildingScene;
             Channels.OnRoundStarted -= RestartRound;
+            Channels.KingOfTheHill.OnKingOfTheHillStart -= StartKingOfTheHill;
         }
 
         public void LoadBuildingScene()
@@ -108,24 +113,42 @@ namespace Audio
 
         public void PlayerDeath(ShipBuilder builder, int playercount)
         {
-            playersLeft -= 1;
-            if (playersLeft! <= 1 && playercount < playersLeft)
-                battleTheme.setParameterByName("Players_Left", playersLeft);
+            if (!isKoth)
+            {
+                playersLeft -= 1;
+                if (playersLeft !<= 1 && playercount < playersLeft)
+                    battleTheme.setParameterByName("Players_Left", playersLeft);
+            }
         }
 
         public void RestartRound(int currentRound, int maxRounds)
         {
-            playersLeft = playersInGame;
-            if (playersLeft <= 2)
+            if (!isKoth)
             {
-                battleTheme.setParameterByName("Players_Left", float.MaxValue);
+                playersLeft = playersInGame;
+                if (playersLeft <= 2)
+                {
+                    battleTheme.setParameterByName("Players_Left", float.MaxValue);
 
+                }
+                else
+                {
+                    battleTheme.setParameterByName("Players_Left", playersLeft);
+                }
+                battleTheme.setParameterByName("Rounds", maxRounds - currentRound + 1);
             }
-            else
-            {
-                battleTheme.setParameterByName("Players_Left", playersLeft);
-            }
-            battleTheme.setParameterByName("Rounds", maxRounds - currentRound + 1); 
+        }
+
+        public void StartKingOfTheHill(List<int> playerNumbers)
+        {
+            float rounds;
+            float players;
+            isKoth = true;
+            battleTheme.setParameterByName("Rounds", float.MaxValue);
+            battleTheme.getParameterByName("Rounds", out rounds);
+            battleTheme.getParameterByName("Players_Left", out players);
+            Debug.Log(rounds);
+            Debug.Log(players);
         }
     }
 }
