@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partName: Heavy core
   connectionPoint: {x: 0, y: 0, z: 0}
-  partWeight: 100
+  partWeight: 75
   health: 800
   energyCapacity: 12
   fuelCapacity: 100
