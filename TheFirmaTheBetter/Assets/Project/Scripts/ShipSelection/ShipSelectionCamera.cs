@@ -24,6 +24,7 @@ namespace ShipSelection
         [SerializeField]
         private ShipBuilder shipBuilder;
 
+        private bool _shipIsReady = false;
 
         private void OnEnable()
         {
@@ -38,6 +39,8 @@ namespace ShipSelection
 
         private void OnCategoryChanged(SelectableCollection currentSelectedCollection, int playerNumber)
         {
+            if (_shipIsReady)
+            { return; }
             if (playerNumber != shipBuilder.PlayerNumber)
             { return; }
             switch (currentSelectedCollection.CategoryName)
@@ -61,9 +64,12 @@ namespace ShipSelection
 
         private void ShipReady(ShipBuilder completedShipBuilder)
         {//disable all cams but the preview camera
+            if (_shipIsReady)
+            { return; }
             if (completedShipBuilder.PlayerNumber != shipBuilder.PlayerNumber)
             { return; }
             SetCameras(preview: true);
+            _shipIsReady = true;
         }
 
         private void SetCameras(bool preview = false, bool core = false, bool engine = false, bool weapon = false, bool special = false)
