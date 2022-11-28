@@ -22,20 +22,27 @@ namespace Managers
 
         private void Awake()
         {
+            Channels.OnRoundStarted += OnRoundStarted;
             Channels.OnRoundOver += OnRoundOver;
             Channels.OnCountdownDone += OnCountdownDone;
         }
 
         private void OnDestroy()
         {
+            Channels.OnRoundStarted -= OnRoundStarted;
             Channels.OnRoundOver -= OnRoundOver;
             Channels.OnCountdownDone -= OnCountdownDone;
+        }
+
+        private void OnRoundStarted(int roundIndex, int winnerIndex)
+        {
+            ResetTimer();
+            DisplayTime(timeSinceStart);
         }
 
         private void OnRoundOver(int roundIndex, int winnerIndex)
         {
             StopTimer();
-            ResetTimer();
             DisplayTime(timeSinceStart);
         }
 
@@ -79,28 +86,28 @@ namespace Managers
             {
                 timeSinceStart = kothTimeInSec;
             }
-
         }
 
         private void Update()
         {
             if (!timerRunning) return;
-                if (isKingOfTheHill)
+            if (isKingOfTheHill)
+            {
+                timeSinceStart -= Time.deltaTime;
+                if (timeSinceStart <= 0)
                 {
-                    timeSinceStart -= Time.deltaTime;
-                    if (timeSinceStart <= 0)
-                    {
-                    timerRunning=false;
+                    timerRunning = false;
                     Channels.KingOfTheHill.OnKingOfTheHillEnd?.Invoke();
                     SceneSwitchManager.SwitchToLastScene();
-                    }
                 }
-                else
-                {
-                    timeSinceStart += Time.deltaTime;
-                }
-                DisplayTime(timeSinceStart);
+            }
+            else
+            {
+                timeSinceStart += Time.deltaTime;
+            }
+            DisplayTime(timeSinceStart);
         }
+
         private void DisplayTime(float timeToDisplay)
         {
             float minutes = Mathf.FloorToInt(timeToDisplay / 60);

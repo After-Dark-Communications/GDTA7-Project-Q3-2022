@@ -15,7 +15,7 @@ MonoBehaviour:
   partName: Medium weapon
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 0
-  projectilePrefab: {fileID: 3994246806297512443, guid: cffc0c60e9c1c5c4282f1e1ce8ad4a65,
+  projectilePrefab: {fileID: 3994246806297512443, guid: 396ca74c200df864288c037f9aebea59,
     type: 3}
   fireRate: 4
   amountOfBullets: 1
