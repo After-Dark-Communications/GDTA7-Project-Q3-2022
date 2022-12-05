@@ -15,11 +15,6 @@ public class RoundManager : MonoBehaviour
     private int numberOfRounds;
     private int currentRoundIndex = -1;
 
-    private void OnEnable()
-    {
-        Channels.OnRoundOver += RoundOver;
-    }
-
     private void OnDisable()
     {
         Channels.OnRoundOver -= RoundOver;
@@ -27,7 +22,11 @@ public class RoundManager : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_EDITOR
+        DebugNumberOfRounds = 2;
+#endif
         SetRounds(DebugNumberOfRounds);
+        Channels.OnRoundOver += RoundOver;
     }
 
     public void SetRounds(int numberOfRounds)
@@ -67,7 +66,7 @@ public class RoundManager : MonoBehaviour
     private IEnumerator EndGame()
     {
         Time.timeScale = slowStrenght;
-        yield return new WaitForSeconds(_slowMotionTiming); 
+        yield return new WaitForSeconds(_slowMotionTiming);
         Channels.OnGameOver?.Invoke();
         Time.timeScale = 1f;
         SceneSwitchManager.SwitchToLastScene();

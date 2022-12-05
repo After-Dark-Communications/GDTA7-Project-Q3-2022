@@ -16,7 +16,8 @@ namespace ShipSelection.ShipBuilders
         {
             if (Instance != null)
             {
-                Instance.shipBuilders.Clear();
+                Instance._shipBuilders.Clear();
+                Instance._firstPlayerReady = null;
                 Destroy(gameObject);
                 return;
             }
@@ -33,9 +34,10 @@ namespace ShipSelection.ShipBuilders
         }
         #endregion
 
-        private List<ShipBuilder> shipBuilders = new List<ShipBuilder>();
+        private List<ShipBuilder> _shipBuilders = new List<ShipBuilder>();
 
-        private int amountOfPlayersJoined = 0;
+        private int _amountOfPlayersJoined = 0;
+        private ShipBuilder _firstPlayerReady;
 
         public override void Start() { }
 
@@ -49,25 +51,36 @@ namespace ShipSelection.ShipBuilders
             int index = GetIndexOfShipBuilderInList(shipBuilder);
 
             if (index != -1)
-                shipBuilders.RemoveAt(index);
+                _shipBuilders.RemoveAt(index);
 
-            shipBuilders.Add(shipBuilder);
+            _shipBuilders.Add(shipBuilder);
 
 #if UNITY_EDITOR
-            if (shipBuilders.Count == 1 && amountOfPlayersJoined == 1)
+            if (_shipBuilders.Count == 1 && _amountOfPlayersJoined == 1)
             {
                 PlayerJoinManager FakeJoiner = FindObjectOfType<PlayerJoinManager>();
                 InputDevice fakeDevice = InputSystem.AddDevice("Gamepad");
                 PlayerInput fakeInput = PlayerInput.Instantiate(FakeJoiner.PrefabPlayerShipSelection, pairWithDevice: fakeDevice);
                 FakeJoiner?.OnPlayerJoin(fakeInput, true);
-                Channels.OnEveryPlayerReady?.Invoke(amountOfPlayersJoined);
+                SetPlayerOne();
+                Channels.OnEveryPlayerReady?.Invoke(_amountOfPlayersJoined);
                 return;
             }
+
 #endif
-            if (shipBuilders.Count < 2)
+            if (_shipBuilders.Count < 2)
             { return; }
-            if (shipBuilders.Count == amountOfPlayersJoined)
-                Channels.OnEveryPlayerReady?.Invoke(amountOfPlayersJoined);
+            if (_shipBuilders.Count == _amountOfPlayersJoined)
+            {
+                SetPlayerOne();
+                Channels.OnEveryPlayerReady?.Invoke(_amountOfPlayersJoined);
+            }
+            void SetPlayerOne()
+            {
+                if (_firstPlayerReady != null)
+                { return; }
+                _firstPlayerReady = _shipBuilders[0];
+            }
         }
 
         private void OnDisable()
@@ -79,17 +92,17 @@ namespace ShipSelection.ShipBuilders
 
         private int GetIndexOfShipBuilderInList(ShipBuilder shipBuilder)
         {
-            return shipBuilders.FindIndex(sb => sb.PlayerNumber == shipBuilder.PlayerNumber);
+            return _shipBuilders.FindIndex(sb => sb.PlayerNumber == shipBuilder.PlayerNumber);
         }
 
         private void OnPlayerJoined(int playerNumber, InputDevice inputDevice)
         {
-            amountOfPlayersJoined = playerNumber + 1;
+            _amountOfPlayersJoined = playerNumber + 1;
         }
 
         public ShipBuilder GetShipBuilder(int playerIndex)
         {
-            foreach (ShipBuilder shipBuilder in shipBuilders)
+            foreach (ShipBuilder shipBuilder in _shipBuilders)
             {
                 if (shipBuilder.PlayerNumber == playerIndex)
                 {
@@ -99,8 +112,10 @@ namespace ShipSelection.ShipBuilders
             return null;
         }
 
-        public List<ShipBuilder> ShipBuilders => shipBuilders;
+        public List<ShipBuilder> ShipBuilders => _shipBuilders;
 
-        public int AmountOfPlayersJoined => amountOfPlayersJoined;
+        public int AmountOfPlayersJoined => _amountOfPlayersJoined;
+
+        public ShipBuilder FirstPlayerReady => _firstPlayerReady;
     }
 }

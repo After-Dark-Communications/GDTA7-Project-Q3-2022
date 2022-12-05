@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Util
@@ -46,6 +42,11 @@ namespace Util
                 Z = Mathf.Clamp(Z, min, max);
             }
             return new Vector3(X, Y, Z);
+        }
+
+        public static int RoundToPropper(float f)
+        {
+            return (int)Math.Round(f, 0, MidpointRounding.AwayFromZero);
         }
     }
 }
