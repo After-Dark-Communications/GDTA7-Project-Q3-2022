@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -14,15 +15,33 @@ namespace UI
         private TMP_Text tmpTextField;
         private ShipInfo shipInfo;
 
+        [SerializeField] private Image border;
+
         private void Awake()
         {
             shipInfo = GetComponentInParent<ShipInfo>();
             tmpTextField = GetComponentInChildren<TMP_Text>();
             cam = Camera.main;
 
-            tmpTextField.SetText($"Player {shipInfo.PlayerNumber + 1}");
-
             Channels.OnControllerShemeHidden += ShowIndicator;
+
+            switch (shipInfo.PlayerNumber)
+            {
+                case 0:
+                    border.color = new Color(1f, 0.247f, 0.2f);
+                    break;
+                case 1:
+                    border.color = Color.green;
+                    break;
+                case 2:
+                    border.color = new Color(1f, 0.968f, 0.2f);
+                    break;
+                default:
+                    border.color = new Color(0f, 1f, 1f);
+                    break;
+            }
+
+            tmpTextField.SetText($"Player {shipInfo.PlayerNumber + 1}");
         }
 
         private void OnDestroy()
