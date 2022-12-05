@@ -75,7 +75,8 @@ namespace ShipSelection.Stats
             float statPercent = (value - minValue) / (maxValue - minValue);
 
             float divisionPercent = 1f / statBarDivisions;
-            int barsToFill = (int)(statPercent / divisionPercent) + 1;
+            float barsToFill = statPercent / divisionPercent;
+            barsToFill = ExtensionMethods.RoundToPropper(barsToFill) + 1;
 
             return divisionPercent * barsToFill;
         }
