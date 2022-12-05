@@ -1,12 +1,11 @@
-using Managers;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+using EventSystem;
 using MapSelection;
-using UnityEngine.SceneManagement;
-using Random = UnityEngine.Random;
+using ShipParts.Ship;
+using ShipSelection.ShipBuilders;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Managers
 {
@@ -14,12 +13,21 @@ namespace Managers
     {
         [SerializeField]
         private MapCollectionManager mapCollectionManager;
+        [SerializeField]
+        private TextMeshProUGUI titleText;
 
-        private List<MapSelectable> mapSelectables = new List<MapSelectable>();
+        private const string _selectionPrefix = "Player", _selectionSuffix = "choose a map";
+
+        private MapSelectable[] mapSelectables;
+
+        private void Awake()
+        {
+            SetChoosablePlayer();
+        }
 
         private void Start()
         {
-            mapSelectables = GetComponentsInChildren<MapSelectable>().ToList();
+            mapSelectables = GetComponentsInChildren<MapSelectable>();//.ToList();
             SetupSelectables();
 
         }
@@ -27,7 +35,7 @@ namespace Managers
         void SetupSelectables()
         {
             List<MapData> allMaps = mapCollectionManager.AllMaps;
-            for (int i = 0; i < mapSelectables.Count; i++)
+            for (int i = 0; i < mapSelectables.Length; i++)
             {
                 MapData mapDataForLoop = allMaps[i];
 
@@ -37,10 +45,10 @@ namespace Managers
 
         public void SelectMap(int indexFromList)
         {
-            int lastIndex = mapSelectables.Count - 1;
+            int lastIndex = mapSelectables.Length - 1;
             int selectedMapIndex;
 
-            if(indexFromList == lastIndex) //The last index should always be the random map.
+            if (indexFromList == lastIndex) //The last index should always be the random map.
             {
                 int randomSelectedMap = Random.Range(0, lastIndex);
                 MapSelectable selectedRandomMapSelectable = mapSelectables[randomSelectedMap];
@@ -53,6 +61,26 @@ namespace Managers
             }
 
             SceneSwitchManager.SwitchToSceneWithIndex(selectedMapIndex);
+        }
+
+        private void SetChoosablePlayer()
+        {
+            if (ShipBuildManager.Instance.FirstPlayerReady == null)
+            { return; }
+            ShipBuilder controllingPlayer = ShipBuildManager.Instance.FirstPlayerReady;//.PlayerDevice;
+            for (int i = 0; i < InputSystem.devices.Count; i++)
+            {
+                if (InputSystem.devices[i] != controllingPlayer.PlayerDevice)
+                {
+                    InputSystem.DisableDevice(InputSystem.devices[i]);
+                }
+                else
+                {
+                    InputSystem.EnableDevice(InputSystem.devices[i]);
+                }
+            }
+
+            titleText.text = $"{_selectionPrefix} {controllingPlayer.PlayerNumber + 1}, {_selectionSuffix}";
         }
     }
 }
