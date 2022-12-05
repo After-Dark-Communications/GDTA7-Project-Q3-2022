@@ -15,10 +15,17 @@ public class CrownShower : MonoBehaviour
     private void Awake()
     {
         Channels.OnRoundOver += OnRoundOver;
+    }
 
+    private void OnEnable()
+    {
         crownImage = GetComponent<Image>();
     }
 
+    private void OnDisable()
+    {
+        Channels.OnRoundOver -= OnRoundOver;
+    }
     private void OnRoundOver(int roundIndex, int winnerIndex)
     {
         crownImage.enabled = false;
