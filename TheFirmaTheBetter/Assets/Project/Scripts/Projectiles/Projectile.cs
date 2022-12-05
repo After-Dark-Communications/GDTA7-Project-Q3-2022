@@ -17,7 +17,6 @@ namespace Projectiles
         private ProjectileData projectileData;
 
         private int projectileDamage;
-        private int amountToSpawn;
 
         private float armingTime;
         private float projectileSpeed;
@@ -40,7 +39,6 @@ namespace Projectiles
             projectileDamage = projectileData.Damage;
             projectileSpeed = projectileData.ProjectileSpeed;
             armingTime = projectileData.ArmingTime;
-            amountToSpawn = projectileData.AmountToSpawn;
             currentLifeTime = 0;
             impactSpawner = GetComponent<ImpactSpawner>();
         }
@@ -144,7 +142,6 @@ namespace Projectiles
         public int ProjectileDamage { get { return projectileDamage; } }
         public float ProjectileSpeed { get { return projectileSpeed; } }
         public float ArmingTime { get { return armingTime; } }
-        public int AmountToSpawn { get { return amountToSpawn; } }
         public int PlayerIndex { get { return playerIndex; } }
         public int FirerId { get { return firerId; } set { firerId = value; } }
         public ProjectileData ProjectileData => projectileData;

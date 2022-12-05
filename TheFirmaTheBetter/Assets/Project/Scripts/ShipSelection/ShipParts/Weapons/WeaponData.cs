@@ -51,7 +51,7 @@ namespace ShipParts.Weapons
         public int EnergyCost { get { return energyCost; } }
         public int AmountOfBullets { get { return amountOfBullets; } }
         public float DPS { get { return ProjectilePrefab.ProjectileData.Damage * FireRate * AmountOfBullets; } }
-        public float Damage { get { return ProjectilePrefab.ProjectileData.Damage * ProjectilePrefab.ProjectileData.AmountToSpawn; } }
+        public float Damage { get { return ProjectilePrefab.ProjectileData.Damage * AmountOfBullets; } }
 
         public FMODUnity.EventReference WeaponFireEvent => weaponFireEvent;
     }

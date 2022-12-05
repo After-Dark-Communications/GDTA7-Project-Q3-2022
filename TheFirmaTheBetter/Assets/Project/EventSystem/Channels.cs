@@ -57,8 +57,8 @@ namespace EventSystem
         public delegate void EnabledStatGameObject(int statGameObjectNumber, int playerNumber);
         public delegate void WeaponFired(FMODUnity.EventReference weaponEventToPlay);
         public delegate void SelectedCategoryChanged(SelectableCollection currentSelectedCollection, int playerNumber);
-        public delegate void NavigateUp();
-        public delegate void NavigateDown();
+        public delegate void NavigateUp(int playerNumber);
+        public delegate void NavigateDown(int playerNumber);
         public delegate void GameOver();
         public delegate void RoundOver(int roundIndex, int winnerIndex);
         public delegate void RoundStarted(int roundIndex, int numberOfRounds);
