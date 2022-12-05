@@ -23,15 +23,15 @@ namespace ShipSelection
             {
                 selectionBar.OnNavigate_Up();
             }
-            if (moveVector == Vector2.down)
+            else if (moveVector == Vector2.down)
             {
                 selectionBar.OnNavigate_Down();
             }
-            if (moveVector == Vector2.left)
+            else if (moveVector == Vector2.left)
             {
                 selectionBar.OnNavigate_Left();
             }
-            if (moveVector == Vector2.right)
+            else if (moveVector == Vector2.right)
             {
                 selectionBar.OnNavigate_Right();
             }

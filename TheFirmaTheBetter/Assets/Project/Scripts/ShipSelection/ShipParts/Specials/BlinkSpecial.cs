@@ -1,5 +1,6 @@
 ﻿using ShipParts;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,12 +43,19 @@ namespace  ShipParts.Specials
                 GameObject spawned = Instantiate(dashParticleToSpawn);
                 spawned.transform.position = transform.position;
                 spawned.transform.rotation = transform.rotation;
+                StartCoroutine(DeleteParticles(spawned));
             }
 
             void ResetCooldowns(Vector3 newPosition)
             {
                 currentCooldown = 0;
                 CanDoSpecial = false;
+            }
+
+            IEnumerator DeleteParticles(GameObject obj)
+            {
+                yield return new WaitForSecondsRealtime(.5f);
+                Destroy(obj);
             }
         }
     }
