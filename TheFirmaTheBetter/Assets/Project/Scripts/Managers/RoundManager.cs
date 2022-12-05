@@ -23,7 +23,7 @@ public class RoundManager : MonoBehaviour
     private void Start()
     {
 #if UNITY_EDITOR
-        DebugNumberOfRounds = 1;
+        DebugNumberOfRounds = 2;
 #endif
         SetRounds(DebugNumberOfRounds);
         Channels.OnRoundOver += RoundOver;
