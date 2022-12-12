@@ -15,6 +15,6 @@ MonoBehaviour:
   partName: Heat-o-meter
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 30
-  speed: 100
-  handling: 550
+  speed: 125
+  handling: 600
   fuelUsage: 0
