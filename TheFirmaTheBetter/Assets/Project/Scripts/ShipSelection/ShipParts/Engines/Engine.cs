@@ -26,9 +26,9 @@ namespace ShipParts.Engines
         private bool _changingHeight;
         private float _maxSpeed = 1f;
         private bool _canMove = true;
+        private ShipBuilder _shipBuilder;
 
         private Vector3 _lastPosition;
-
         protected override void Setup()
         {
             //set the evenets
@@ -47,6 +47,7 @@ namespace ShipParts.Engines
             _lastPosition = shipRigidBody.position;
 
             CalculateHighestAndLowest();
+            _shipBuilder = transform.GetComponentInParent<ShipBuilder>();
         }
 
         protected virtual void Update()
@@ -83,12 +84,11 @@ namespace ShipParts.Engines
             if (_canMove == true)
             {
                 _throttle = new Vector3(move.x, 0, move.y).magnitude;
-                ShipBuilder shipBuilder = transform.GetComponentInParent<ShipBuilder>();
 
-                if (shipBuilder == null)
+                if (_shipBuilder == null)
                     return;
 
-                Channels.Movement.OnShipMove?.Invoke(move, shipBuilder.PlayerNumber);
+                Channels.Movement.OnShipMove?.Invoke(move, _shipBuilder.PlayerNumber);
             }
         }
 
@@ -204,5 +204,6 @@ namespace ShipParts.Engines
 
         protected Vector2 MoveValue { get => _moveValue; }
         protected bool CanMove { get => _canMove; set => _canMove = value; }
+        public ShipBuilder ShipBuilder { get => _shipBuilder;}
     }
 }
