@@ -25,6 +25,7 @@ namespace ShipParts.Engines
         private Vector2 _moveValue;
         private bool _changingHeight;
         private float _maxSpeed = 1f;
+        private bool _canMove = true;
 
         private Vector3 _lastPosition;
 
@@ -55,8 +56,11 @@ namespace ShipParts.Engines
 
             if (_moveValue != Vector2.zero)
             {
-                Quaternion toRotation = Quaternion.LookRotation(new Vector3(_moveValue.x, 0, _moveValue.y), GlobalUp.UP.up);
-                shipRoot.rotation = Quaternion.RotateTowards(shipRoot.rotation, toRotation, Stats.Handling * Time.deltaTime);
+                if (_canMove)
+                {
+                    Quaternion toRotation = Quaternion.LookRotation(new Vector3(_moveValue.x, 0, _moveValue.y), GlobalUp.UP.up);
+                    shipRoot.rotation = Quaternion.RotateTowards(shipRoot.rotation, toRotation, Stats.Handling * Time.deltaTime);
+                }
 
                 GetComponentInParent<PlayerResult>().DistanceTravelled += shipRigidBody.velocity.magnitude * Time.deltaTime;
             }
@@ -72,17 +76,20 @@ namespace ShipParts.Engines
             shipRigidBody.AddForce(forward.normalized * _throttle * (Stats.Speed * Time.fixedDeltaTime), ForceMode.Impulse);
         }
 
-        public void MoveShip(Vector2 move)
+        public virtual void MoveShip(Vector2 move)
         {//when starting to move, increase T and lerp towards top speed
          //when stopping, decrease T and lerp towards 0 speed
-            _throttle = new Vector3(move.x, 0, move.y).magnitude;
             _moveValue = move;
-            ShipBuilder shipBuilder = transform.GetComponentInParent<ShipBuilder>();
+            if (_canMove == true)
+            {
+                _throttle = new Vector3(move.x, 0, move.y).magnitude;
+                ShipBuilder shipBuilder = transform.GetComponentInParent<ShipBuilder>();
 
-            if (shipBuilder == null)
-                return;
+                if (shipBuilder == null)
+                    return;
 
-            Channels.Movement.OnShipMove?.Invoke(move, shipBuilder.PlayerNumber);
+                Channels.Movement.OnShipMove?.Invoke(move, shipBuilder.PlayerNumber);
+            }
         }
 
         private void MoveUp(ButtonStates arg0)
@@ -194,5 +201,8 @@ namespace ShipParts.Engines
         public override string PartCategoryName => "Engine";
 
         public EngineData EngineData => engineData;
+
+        protected Vector2 MoveValue { get => _moveValue; }
+        protected bool CanMove { get => _canMove; set => _canMove = value; }
     }
 }
