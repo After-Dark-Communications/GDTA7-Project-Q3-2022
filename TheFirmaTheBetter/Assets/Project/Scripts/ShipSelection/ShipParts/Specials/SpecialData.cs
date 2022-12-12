@@ -11,14 +11,14 @@ namespace ShipParts.Specials
 
         [SerializeField]
         [TextArea(2, 5)]
-        private string description;
+        private string specialDescription;
 
         [SerializeField]
         [Range(0, 20)]
         [Tooltip("Seconds between usage")]
         private int abilityCooldown;
 
-        public string Description => description;
+        public string SpecialDescription => specialDescription;
 
         public int AbilityCooldown => abilityCooldown;
     }

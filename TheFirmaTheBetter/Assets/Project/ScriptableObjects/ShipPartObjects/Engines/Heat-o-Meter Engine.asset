@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Heat-o-Meter Engine
   m_EditorClassIdentifier: 
   partName: Heat-o-meter
+  partDescription: Overheats
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 30
   speed: 100
