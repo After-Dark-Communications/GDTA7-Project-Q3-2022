@@ -195,7 +195,7 @@ namespace ShipParts.Engines
         private void SetMovement(bool value)
         {
             _canMove = value;
-            Channels.Movement.OnShipEngineActiveChanged(shipBuilder.PlayerNumber);
+            Channels.Movement.OnShipEngineActiveChanged(_shipBuilder.PlayerNumber,value);
         }
 
         protected override void CalculateHighestAndLowest()
@@ -211,5 +211,6 @@ namespace ShipParts.Engines
 
         protected Vector2 MoveValue { get => _moveValue; }
         protected bool CanMove { get => _canMove; set => SetMovement(value); }
+        public ShipBuilder ShipBuilder { get => _shipBuilder; }
     }
 }
