@@ -40,6 +40,7 @@ namespace UI
 
             statPanel.SpecialCooldownShower.PlayerIndex = playerIndex;
             statPanel.CrownShower.PlayerIndex = playerIndex;
+            statPanel.IndicatorShower.PlayerIndex = playerIndex;
 
             // Assign the player index to all stat bars
             foreach (ShipStatBar statBar in statPanel.StatBars)

@@ -13,6 +13,8 @@ namespace UI
         private CrownShower crownShower;
         [SerializeField]
         private SpecialCooldownShower specialCooldownShower;
+        [SerializeField]
+        private IndicatorShower indicatorShower;
         [Header("Objects")]
         [SerializeField]
         private GameObject objectToFollow;
@@ -57,5 +59,6 @@ namespace UI
 
         public CrownShower CrownShower { get => crownShower; set => crownShower = value; }
         public SpecialCooldownShower SpecialCooldownShower { get => specialCooldownShower; set => specialCooldownShower = value; }
+        public IndicatorShower IndicatorShower { get => indicatorShower; set => indicatorShower = value; }
     }
 }
