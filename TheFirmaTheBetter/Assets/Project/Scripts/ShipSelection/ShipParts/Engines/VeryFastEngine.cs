@@ -27,10 +27,15 @@ namespace ShipParts.Engines
             base.Update();
 
             currentTime += Time.deltaTime;
-
-            NeedToFaloutLoop();
-            IsInFaloutLoop();
-
+            
+            if (CanMove)
+            {
+                NeedToFaloutLoop();
+            }
+            else
+            {
+                IsInFaloutLoop();
+            }
         }
 
         private void IsInFaloutLoop()
@@ -39,16 +44,17 @@ namespace ShipParts.Engines
                 return;
 
             currentTime = 0;
-
+            CanMove = true;
         }
 
         private void NeedToFaloutLoop()
         {
-            if (currentTime > currentFaloutTime)
+            if (currentTime < currentFaloutTime)
                 return;
 
             currentTime = 0;
             SetRandomFaloutTime();
+            CanMove = false;
         }
     }
 }
