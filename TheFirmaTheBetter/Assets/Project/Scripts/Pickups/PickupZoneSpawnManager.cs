@@ -64,8 +64,11 @@ public class PickupZoneSpawnManager: MonoBehaviour
         {
             return;
         }
-        while (!CanSpawnAtPosition(randomSpawnPosition))
+        for(int i = 0; i < 1000; i++)
         {
+            if (!CanSpawnAtPosition(randomSpawnPosition))
+                continue;
+
             randomSpawnPosition = center + new Vector3(Random.Range(-spawnAreaSize.x / 2, spawnAreaSize.x / 2), Random.Range(-spawnAreaSize.y / 2, spawnAreaSize.y / 2), Random.Range(-spawnAreaSize.z / 2, spawnAreaSize.z / 2));
         }
         var instantiatedObject = Instantiate(pickups[randomIndex], randomSpawnPosition, Quaternion.identity);
