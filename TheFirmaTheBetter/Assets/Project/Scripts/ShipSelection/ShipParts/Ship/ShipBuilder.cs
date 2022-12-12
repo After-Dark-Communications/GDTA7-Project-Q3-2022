@@ -24,6 +24,11 @@ namespace ShipParts.Ship
 
         private List<Part> selectedParts = new List<Part>();
 
+        public bool IsTypeCore<T>()
+        {
+            return selectedCore is T;
+        }
+
         private void Awake()
         {
             Channels.OnPlayerJoined += OnPlayerJoined;

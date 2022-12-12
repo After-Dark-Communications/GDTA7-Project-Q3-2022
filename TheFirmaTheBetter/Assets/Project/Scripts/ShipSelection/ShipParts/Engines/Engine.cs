@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Util;
 
 namespace ShipParts.Engines
@@ -191,6 +192,12 @@ namespace ShipParts.Engines
             gamepad.SetMotorSpeeds(0, 0);
         }
 
+        private void SetMovement(bool value)
+        {
+            _canMove = value;
+            Channels.Movement.OnShipEngineActiveChanged(_shipBuilder.PlayerNumber,value);
+        }
+
         protected override void CalculateHighestAndLowest()
         {
             base.CalculateHighestAndLowest();
@@ -203,7 +210,7 @@ namespace ShipParts.Engines
         public EngineData EngineData => engineData;
 
         protected Vector2 MoveValue { get => _moveValue; }
-        protected bool CanMove { get => _canMove; set => _canMove = value; }
-        public ShipBuilder ShipBuilder { get => _shipBuilder;}
+        protected bool CanMove { get => _canMove; set => SetMovement(value); }
+        public ShipBuilder ShipBuilder { get => _shipBuilder; }
     }
 }
