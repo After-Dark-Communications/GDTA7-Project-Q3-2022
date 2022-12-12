@@ -10,15 +10,20 @@ namespace ShipSelection
     public class ElementsManagerShipSelection : MonoBehaviour
     {
         [SerializeField]
+        private ShipSelectionAnimatorManager animationManager;
+        [SerializeField]
         private List<GameObject> elementsToHide = new List<GameObject>();
 
         [SerializeField]
         private List<GameObject> elementsToDisplay = new List<GameObject>();
 
         private int playerNumber;
+
         private void Awake()
         {
+            
             Channels.OnShipCompleted += ShipCompletedScreenManagement;
+      
         }
 
         //Managing what elements to be hidden and waht elements to be displayed
@@ -28,6 +33,8 @@ namespace ShipSelection
             playerNumber = GetComponentInParent<PlayerSelectionScreen>().PlayerNumber;
             HideElements(elementsToHide, completedShipBuilder);
             ShowElements(elementsToDisplay, completedShipBuilder);
+
+            PlayAnimation(completedShipBuilder);
         }
 
         private void OnDestroy()
@@ -60,16 +67,11 @@ namespace ShipSelection
             }
         }
 
-        // Start is called before the first frame update
-        void Start()
+        private void PlayAnimation(ShipBuilder completedBuilder)
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            if (completedBuilder.PlayerNumber != playerNumber)
+                return;
+            animationManager.PlayShipCompletedAnimation();
         }
     }
 }
