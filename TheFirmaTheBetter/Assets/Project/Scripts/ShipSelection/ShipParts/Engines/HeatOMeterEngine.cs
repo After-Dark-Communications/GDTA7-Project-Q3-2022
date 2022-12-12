@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using EventSystem;
+using UnityEngine;
 
 namespace ShipParts.Engines
 {
     internal class HeatOMeterEngine : Engine
     {
+        //TODO: add event calling for heat change so that UI can be added and adjusted
         private const float _maxHeat = 10, _heatThreshold = 7.5f;
         private float _currentHeat = 0f;
 
@@ -12,6 +14,7 @@ namespace ShipParts.Engines
             if (CanMove == true && MoveValue != Vector2.zero)
             {
                 _currentHeat += Time.deltaTime;
+                Channels.Movement.OnHeatChanged.Invoke(_currentHeat,ShipBuilder.PlayerNumber);
                 if (_currentHeat >= _maxHeat)
                 {
                     CanMove = false;
