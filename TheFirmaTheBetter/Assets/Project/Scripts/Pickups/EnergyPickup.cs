@@ -1,5 +1,6 @@
 using EventSystem;
 using ShipParts;
+using ShipParts.Cores;
 using ShipParts.Ship;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,9 @@ public class EnergyPickup : Pickup
     private int energyIncreaseAmount;
     public override void PickUpAction(ShipBuilder shipBuilder)
     {
+        if (shipBuilder.IsTypeCore<BatteryCore>())
+            return ;
+
         ShipResources resources = shipBuilder.GetComponent<ShipResources>();
 
         float amount =  (float)resources.ShipStats.EnergyCapacity / 100 * energyIncreaseAmount;
