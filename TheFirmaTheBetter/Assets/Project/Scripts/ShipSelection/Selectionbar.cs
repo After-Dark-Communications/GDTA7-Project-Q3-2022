@@ -88,31 +88,42 @@ namespace ShipSelection
         private void Start()
         {
             playerNumber = GetComponentInParent<PlayerSelectionScreen>().PlayerNumber;
-
         }
 
         public void OnNavigate_Up()
         {
+            // Change the category
             currentSelectedCollectionIndex = ListLooper.SelectPrevious(selectionCollections, currentSelectedCollectionIndex);
             UpdateLabelTexts();
             buttonSelectionManager.ResetButtons();
             buttonSelectionManager.UpdateButtons(this);
-
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
-            Channels.OnNavigateUp?.Invoke();
+
+            // Update the hovered button
+            buttonSelectionManager.UpdateHoverEffectAt(currentHoveredIndex, false);
+            currentHoveredIndex = CurrentSelectedCollection.CurrentSelectedIndex;
+            buttonSelectionManager.UpdateHoverEffectAt(currentHoveredIndex, true);
             Channels.OnShipPartHovered?.Invoke(GetCurrentHoveredPart(), playerNumber);
+
+            Channels.OnNavigateUp?.Invoke(playerNumber);
         }
 
         public void OnNavigate_Down()
         {
+            // Change the category
             currentSelectedCollectionIndex = ListLooper.SelectNext(selectionCollections, currentSelectedCollectionIndex);
             UpdateLabelTexts();
             buttonSelectionManager.ResetButtons();
             buttonSelectionManager.UpdateButtons(this);
-
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
-            Channels.OnNavigateDown?.Invoke();
+
+            // Update the hovered button
+            buttonSelectionManager.UpdateHoverEffectAt(currentHoveredIndex, false);
+            currentHoveredIndex = CurrentSelectedCollection.CurrentSelectedIndex;
+            buttonSelectionManager.UpdateHoverEffectAt(currentHoveredIndex, true);
             Channels.OnShipPartHovered?.Invoke(GetCurrentHoveredPart(), playerNumber);
+
+            Channels.OnNavigateDown?.Invoke(playerNumber);
         }
 
         public void OnNavigate_Right()
@@ -152,7 +163,6 @@ namespace ShipSelection
 
         public void SetSelectedOptionIndex(int index)
         {
-
             // Error check if the index in the function is different than the current Hovered index
             if (index != currentHoveredIndex)
             {

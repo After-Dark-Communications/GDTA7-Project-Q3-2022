@@ -87,8 +87,8 @@ GameObject:
   - component: {fileID: 1102604614979169724}
   - component: {fileID: 5406132183161206392}
   - component: {fileID: 351987206726334610}
-  - component: {fileID: 7339185973477433479}
   - component: {fileID: 1198253648705635785}
+  - component: {fileID: 7339185973477433479}
   m_Layer: 5
   m_Name: ArrowDown
   m_TagString: Untagged
@@ -154,18 +154,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7339185973477433479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 382708598180069786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 459debb60f1c4f04c80e1e7b827bb612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &1198253648705635785
 Animator:
   serializedVersion: 4
@@ -186,6 +174,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7339185973477433479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382708598180069786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 459debb60f1c4f04c80e1e7b827bb612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1401305239965242107
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,6 +1231,7 @@ GameObject:
   - component: {fileID: 6516961579411017797}
   - component: {fileID: 5303443440158110954}
   - component: {fileID: 1538509215019947905}
+  - component: {fileID: 1400693964763616906}
   m_Layer: 5
   m_Name: ArrowSection
   m_TagString: Untagged
@@ -1320,6 +1321,21 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1400693964763616906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7387872041710565354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32cae835f30210f43bfbb456896eb36a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upArrow: {fileID: 214586297130455203}
+  downArrow: {fileID: 7339185973477433479}
+  playerSelectionScreen: {fileID: 6067200469892466830}
 --- !u!1 &7433380330098203170
 GameObject:
   m_ObjectHideFlags: 0
