@@ -6,7 +6,7 @@ namespace ShipParts.Engines
     internal class HeatOMeterEngine : Engine
     {
         //TODO: add event calling for heat change so that UI can be added and adjusted
-        private const float _maxHeat = 10, _heatThreshold = 7.5f;
+        private const float _maxHeat = 10, _minHeat = 0f, _heatThreshold = 6f, _cooldownMultiplier = 2;
         private float _currentHeat = 0f;
 
         public override void MoveShip(Vector2 move)
@@ -14,7 +14,7 @@ namespace ShipParts.Engines
             if (CanMove == true && MoveValue != Vector2.zero)
             {
                 _currentHeat += Time.deltaTime;
-                Channels.Movement.OnHeatChanged.Invoke(_currentHeat,ShipBuilder.PlayerNumber);
+                Channels.Movement.OnHeatChanged?.Invoke(_currentHeat, _minHeat, _maxHeat, ShipBuilder.PlayerNumber);
                 if (_currentHeat >= _maxHeat)
                 {
                     CanMove = false;
@@ -26,18 +26,18 @@ namespace ShipParts.Engines
 
         protected override void Update()
         {
-            Debug.Log("Can Move: " + CanMove);
             if (CanMove == false || MoveValue == Vector2.zero)
             {
-                _currentHeat -= Time.deltaTime;
-                if (_currentHeat < 0)
+                _currentHeat -= (Time.deltaTime * _cooldownMultiplier);
+                if (_currentHeat < _minHeat)
                 {
-                    _currentHeat = 0;
+                    _currentHeat = _minHeat;
                 }
                 if (CanMove == false && _currentHeat <= _heatThreshold)
                 {
                     CanMove = true;
                 }
+                Channels.Movement.OnHeatChanged?.Invoke(_currentHeat, _minHeat, _maxHeat, ShipBuilder.PlayerNumber);
             }
             base.Update();
         }

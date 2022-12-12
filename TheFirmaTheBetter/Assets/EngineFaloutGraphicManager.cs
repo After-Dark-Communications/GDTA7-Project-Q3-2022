@@ -1,5 +1,6 @@
 using EventSystem;
 using ShipParts.Engines;
+using ShipParts.Ship;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,19 +14,24 @@ public class EngineFaloutGraphicManager : MonoBehaviour
 
     private int playerNumber;
 
-    private void Start()
-    {
-        playerNumber = GetComponent<Engine>().ShipBuilder.PlayerNumber;
-    }
-
     private void OnEnable()
     {
         Channels.Movement.OnShipEngineActiveChanged += OnShipEngineActiveChanged;
+        Channels.OnEveryPlayerReady += Setup;
     }
+
 
     private void OnDisable()
     {
         Channels.Movement.OnShipEngineActiveChanged -= OnShipEngineActiveChanged;
+        Channels.OnEveryPlayerReady -= Setup;
+    }
+    private void Setup(int playersInGameCount)
+    {
+        if (gameObject.activeSelf == true)
+        {
+            playerNumber = transform.parent.GetComponent<ShipBuilder>().PlayerNumber;
+        }
     }
 
     private void OnShipEngineActiveChanged(int playerNumber, bool canMove)

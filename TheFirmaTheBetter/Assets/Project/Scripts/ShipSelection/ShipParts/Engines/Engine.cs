@@ -30,6 +30,24 @@ namespace ShipParts.Engines
         private ShipBuilder _shipBuilder;
 
         private Vector3 _lastPosition;
+
+        private void OnEnable()
+        {
+            Channels.OnEveryPlayerReady += SetShipBuilder;
+        }
+
+        private void OnDisable()
+        {
+            Channels.OnEveryPlayerReady -= SetShipBuilder;
+
+            UnityEngine.InputSystem.Gamepad gamepad = myInputDevice as UnityEngine.InputSystem.Gamepad;
+
+            if (gamepad == null)
+                return;
+
+            gamepad.SetMotorSpeeds(0, 0);
+        }
+
         protected override void Setup()
         {
             //set the evenets
@@ -48,7 +66,13 @@ namespace ShipParts.Engines
             _lastPosition = shipRigidBody.position;
 
             CalculateHighestAndLowest();
-            _shipBuilder = transform.GetComponentInParent<ShipBuilder>();
+        }
+        private void SetShipBuilder(int playersInGameCount)
+        {
+            if (gameObject.activeSelf == true)
+            {
+                _shipBuilder = transform.GetComponentInParent<ShipBuilder>();
+            }
         }
 
         protected virtual void Update()
@@ -182,20 +206,12 @@ namespace ShipParts.Engines
             }
         }
 
-        private void OnDisable()
-        {
-            UnityEngine.InputSystem.Gamepad gamepad = myInputDevice as UnityEngine.InputSystem.Gamepad;
-
-            if (gamepad == null)
-                return;
-
-            gamepad.SetMotorSpeeds(0, 0);
-        }
-
         private void SetMovement(bool value)
         {
+            if (_shipBuilder == null)
+            { return; }
             _canMove = value;
-            Channels.Movement.OnShipEngineActiveChanged(_shipBuilder.PlayerNumber,value);
+            Channels.Movement.OnShipEngineActiveChanged?.Invoke(_shipBuilder.PlayerNumber, value);
         }
 
         protected override void CalculateHighestAndLowest()
