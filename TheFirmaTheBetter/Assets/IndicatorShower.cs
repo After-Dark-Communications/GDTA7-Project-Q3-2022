@@ -22,7 +22,7 @@ public class IndicatorShower : MonoBehaviour
     {
         Channels.OnControllerShemeHidden += ShowIndicator;
         animator = GetComponent<Animator>();
-        animator.Play("PlayerIndicatorStart");
+        animator.Play(0);
     }
 
     private void OnDestroy()
@@ -35,7 +35,6 @@ public class IndicatorShower : MonoBehaviour
         animator.SetBool("indicatorReady", true);
 
         tmpTextField = GetComponentInChildren<TMP_Text>();
-        Debug.Log(playerIndex);
 
         switch (playerIndex)
         {
