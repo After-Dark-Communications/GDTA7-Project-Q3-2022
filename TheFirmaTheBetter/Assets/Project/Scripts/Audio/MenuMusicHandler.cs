@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 using ShipParts.Ship;
+using Managers;
 using System;
 
 namespace Audio
@@ -25,7 +26,7 @@ namespace Audio
                 Destroy(gameObject);
                 return;
             }
-            Channels.OnEveryPlayerReady += LoadBattleScene;
+            Channels.OnEveryPlayerReady += LoadMapScene;
             Channels.OnPlayerBecomesDeath += PlayerDeath;
             Channels.OnGameOver += EndGame;
             Channels.OnReturnToTitleScreen += Replay;
@@ -33,6 +34,8 @@ namespace Audio
             Channels.OnRoundStarted += RestartRound;
             Channels.KingOfTheHill.OnKingOfTheHillStart += StartKingOfTheHill;
             Channels.KingOfTheHill.OnKingOfTheHilldAlmostOver += StartKingOfTheHillFinale;
+            Channels.OnStartDeathMatch += StartDeathMatch;
+            
         }
         #endregion
         [SerializeField]
@@ -67,7 +70,7 @@ namespace Audio
         }
         private void OnDisable()
         {
-            Channels.OnEveryPlayerReady -= LoadBattleScene;
+            Channels.OnEveryPlayerReady -= LoadMapScene;
             Channels.OnPlayerBecomesDeath -= PlayerDeath;
             Channels.OnGameOver -= EndGame;
             Channels.OnReturnToTitleScreen -= Replay;
@@ -75,19 +78,24 @@ namespace Audio
             Channels.OnRoundStarted -= RestartRound;
             Channels.KingOfTheHill.OnKingOfTheHillStart -= StartKingOfTheHill;
             Channels.KingOfTheHill.OnKingOfTheHilldAlmostOver -= StartKingOfTheHillFinale;
+            Channels.OnStartDeathMatch -= StartDeathMatch;
         }
 
         public void LoadBuildingScene()
         {
-            FMOD.RESULT res = titleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            Debug.Log(res);
+            titleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             buildingTheme.start();
+        }
+
+        public void LoadMapScene(int playerCount)
+        {
+            playersInGame = playerCount;
+            buildingTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         }
 
         public void LoadBattleScene(int playerCount)
         {
             playersLeft = playerCount;
-            playersInGame = playerCount;
             if (playersLeft <= 2)
             {
                 battleTheme.setParameterByName("Players_Left", float.MaxValue);
@@ -139,6 +147,21 @@ namespace Audio
                     battleTheme.setParameterByName("Players_Left", playersLeft);
                 }
                 battleTheme.setParameterByName("Rounds", maxRounds - currentRound + 1);
+            }
+        }
+
+        public void StartDeathMatch()
+        {
+            battleTheme.start();
+            playersLeft = playersInGame;
+            if (playersLeft <= 2)
+            {
+                battleTheme.setParameterByName("Players_Left", float.MaxValue);
+
+            }
+            else
+            {
+                battleTheme.setParameterByName("Players_Left", playersLeft);
             }
         }
 

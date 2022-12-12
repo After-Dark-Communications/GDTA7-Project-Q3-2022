@@ -27,6 +27,10 @@ public class RoundManager : MonoBehaviour
 #endif
         SetRounds(DebugNumberOfRounds);
         Channels.OnRoundOver += RoundOver;
+        if (DebugNumberOfRounds > 1)
+        {
+            Channels.OnStartDeathMatch?.Invoke();
+        }
     }
 
     public void SetRounds(int numberOfRounds)
