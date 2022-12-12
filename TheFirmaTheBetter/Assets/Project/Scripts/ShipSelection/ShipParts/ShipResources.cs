@@ -26,8 +26,8 @@ namespace ShipParts
         private void Awake()
         {
             shipBuilder = GetComponent<ShipBuilder>();
-            shipStats = new ShipStats();
-            hoveredStats = new ShipStats();
+            shipStats = new ShipStats(shipBuilder);
+            hoveredStats = new ShipStats(shipBuilder);
             shipHealth = new ShipHealth(shipBuilder.PlayerNumber, shipStats);
             shipEnergy = new ShipEnergy(shipBuilder.PlayerNumber, shipStats);
 

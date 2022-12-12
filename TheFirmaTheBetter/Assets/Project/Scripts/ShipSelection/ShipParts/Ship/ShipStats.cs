@@ -51,7 +51,9 @@ namespace ShipParts.Ship
         private readonly List<float> _fuelUsageModifier;
         private readonly List<int> _totalWeightModifier;
 
-        public ShipStats()//, SpecialData specialData, WeaponData weaponData)
+        private readonly int playerNumber;
+
+        public ShipStats(ShipBuilder shipBuilder)//, SpecialData specialData, WeaponData weaponData)
         {
             //set fixed values
             //engine
@@ -89,6 +91,7 @@ namespace ShipParts.Ship
             _fuelUsageModifier = new List<float>();
             _totalWeightModifier = new List<int>();
 
+            playerNumber = shipBuilder.PlayerNumber;
         }
 
         /// <summary>Updates the <see cref="EngineData"/> related stats</summary>
@@ -199,5 +202,7 @@ namespace ShipParts.Ship
         public float SumFuelCapacityModifier => _fuelCapacityModifier.Sum();
         public float SumFuelUsageModifier => _fuelUsageModifier.Sum();
         public int SumTotalWeightModifier => _totalWeightModifier.Sum();
+
+        public int PlayerNumber => playerNumber;
     }
 }

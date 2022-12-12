@@ -13,15 +13,13 @@ namespace Collisions
     {
         public void DestroySelf() { }
 
-        public void HandleCollision<T1>(T1 objectThatHit, ShipStats shipStats) where T1 : ICollidable
+        public virtual void HandleCollision<T1>(T1 objectThatHit, ShipStats shipStats) where T1 : ICollidable
         {
             if (objectThatHit is Projectile)
             {
                 objectThatHit.DestroySelf();
                 return;
             }
-
-
         }
     }
 }
