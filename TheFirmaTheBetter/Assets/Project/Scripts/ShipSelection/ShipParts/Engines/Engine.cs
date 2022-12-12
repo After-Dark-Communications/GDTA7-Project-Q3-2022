@@ -48,7 +48,7 @@ namespace ShipParts.Engines
             CalculateHighestAndLowest();
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (rootInputHandler == null)
                 return;
