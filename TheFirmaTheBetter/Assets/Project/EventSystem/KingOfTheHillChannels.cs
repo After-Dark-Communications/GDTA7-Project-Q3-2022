@@ -35,6 +35,7 @@ namespace EventSystem
 
         public delegate void KingOfTheHillPlayerDied(int playerNumber);
         public delegate void KingOfTheHillPlayerRespawn(ShipBuilder shipsThatNeedsToRespawn);
+        public delegate void KingOfTheHillAlmostOver();
 
         public KingOfTheHillScore OnKingOfTheHillScore;
         public KingOfTheHillStart OnKingOfTheHillStart;
@@ -43,7 +44,7 @@ namespace EventSystem
         public KingOfTheHillLeaveScoreZone OnKingOfTheHillLeaveZone;
         public KingOfTheHillPlayerRespawn OnKingOfTheHillPlayerRespawn;
         public KingOfTheHillPlayerDied OnKingOfTheHillPlayerDied;
-
+        public KingOfTheHillAlmostOver OnKingOfTheHilldAlmostOver;
     }
 }
 

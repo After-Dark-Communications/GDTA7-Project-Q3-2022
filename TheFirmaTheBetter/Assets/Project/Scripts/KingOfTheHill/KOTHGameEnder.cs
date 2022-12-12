@@ -8,6 +8,7 @@ using UnityEngine;
 public class KOTHGameEnder : MonoBehaviour
 {
     private const int _endGameAmountOfPoints = 30;
+    private const int _songAmountOfPoints = 20;
 
     private Dictionary<int,int> _points = new Dictionary<int,int>();
 
@@ -43,6 +44,10 @@ public class KOTHGameEnder : MonoBehaviour
             if (value >= _endGameAmountOfPoints)
             {
                 Channels.OnRoundOver?.Invoke(0, _points.Keys.ToArray()[i]) ;
+            }
+            else if (value >= _songAmountOfPoints)
+            {
+                Channels.KingOfTheHill.OnKingOfTheHilldAlmostOver?.Invoke();
             }
         }
     }

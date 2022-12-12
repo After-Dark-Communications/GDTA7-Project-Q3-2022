@@ -32,7 +32,7 @@ namespace Audio
             Channels.OnLoadBuildingScene += LoadBuildingScene;
             Channels.OnRoundStarted += RestartRound;
             Channels.KingOfTheHill.OnKingOfTheHillStart += StartKingOfTheHill;
-
+            Channels.KingOfTheHill.OnKingOfTheHilldAlmostOver += StartKingOfTheHillFinale;
         }
         #endregion
         [SerializeField]
@@ -41,6 +41,7 @@ namespace Audio
         private FMOD.Studio.EventInstance titleTheme;
         private FMOD.Studio.EventInstance buildingTheme;
         private FMOD.Studio.EventInstance battleTheme;
+        private FMOD.Studio.EventInstance kothTheme;
         private int playersInGame;
         private float playersLeft;
         // Start is called before the first frame update
@@ -51,6 +52,7 @@ namespace Audio
             titleTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_MainTheme");
             titleTheme.start();
             buildingTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_BuildTheme");
+            kothTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_KingOfTheHill");
             master = FMODUnity.RuntimeManager.GetBus("Bus:/");
         }
 
@@ -72,6 +74,7 @@ namespace Audio
             Channels.OnLoadBuildingScene -= LoadBuildingScene;
             Channels.OnRoundStarted -= RestartRound;
             Channels.KingOfTheHill.OnKingOfTheHillStart -= StartKingOfTheHill;
+            Channels.KingOfTheHill.OnKingOfTheHilldAlmostOver -= StartKingOfTheHillFinale;
         }
 
         public void LoadBuildingScene()
@@ -141,14 +144,15 @@ namespace Audio
 
         public void StartKingOfTheHill(List<int> playerNumbers)
         {
-            float rounds;
-            float players;
+            battleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            kothTheme.start();
             isKoth = true;
             battleTheme.setParameterByName("Rounds", float.MaxValue);
-            battleTheme.getParameterByName("Rounds", out rounds);
-            battleTheme.getParameterByName("Players_Left", out players);
-            Debug.Log(rounds);
-            Debug.Log(players);
+        }
+
+        public void StartKingOfTheHillFinale()
+        {
+            kothTheme.setParameterByName("PlayerAlmostWon", 1f);
         }
     }
 }
