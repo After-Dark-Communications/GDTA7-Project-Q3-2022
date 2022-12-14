@@ -18,7 +18,6 @@ namespace Collisions
             if (objectThatHit is Projectile)
             {
                 objectThatHit.DestroySelf();
-                return;
             }
         }
     }
