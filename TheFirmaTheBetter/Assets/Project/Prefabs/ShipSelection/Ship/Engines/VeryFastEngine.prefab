@@ -916,6 +916,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4206153139225395836, guid: fe99f3be1e3e6dd49beede9d2044b8bf,
+        type: 3}
+      propertyPath: engineTransforms.Array.data[0]
+      value: 
+      objectReference: {fileID: 7933136433448182884}
+    - target: {fileID: 4206153139225395836, guid: fe99f3be1e3e6dd49beede9d2044b8bf,
+        type: 3}
+      propertyPath: engineTransforms.Array.data[1]
+      value: 
+      objectReference: {fileID: 4850815333847281069}
     - target: {fileID: 5127617087217717202, guid: fe99f3be1e3e6dd49beede9d2044b8bf,
         type: 3}
       propertyPath: m_IsActive

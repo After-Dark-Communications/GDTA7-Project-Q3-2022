@@ -11,6 +11,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Util;
 using System;
+using ShipParts.Ship;
 
 namespace ShipSelection
 {
@@ -53,13 +54,27 @@ namespace ShipSelection
             // Animator should be loaded to handle the first buton to be selected
             Channels.OnShipAnimationManagerLoaded += SetUpSelectionBar;
             //Channels.OnPlayerJoined += SetUpSelectionBar;
+            Channels.OnShipCompleted += OnPlayerReady;
         }
 
+        /// <summary>
+        ///Gets called when a player is ready wih selecting their ship. 
+        ///Disables all buttons (puts them in normal state)
+        /// </summary>
+        /// <param name="completedShipBuilder"></param>
+        private void OnPlayerReady(ShipBuilder completedShipBuilder)
+        {
+            if (completedShipBuilder.PlayerNumber != this.playerNumber)
+                return;
+            buttonSelectionManager.DisableAllButtons();
+            Debug.Log("Buttons are reset");
+        }
 
         private void OnDestroy()
         {
             //Channels.OnPlayerJoined -= SetUpSelectionBar;
             Channels.OnShipAnimationManagerLoaded -= SetUpSelectionBar;
+            Channels.OnShipCompleted -= OnPlayerReady;
         }
         private void SetUpSelectionBar()
         {
@@ -73,31 +88,42 @@ namespace ShipSelection
         private void Start()
         {
             playerNumber = GetComponentInParent<PlayerSelectionScreen>().PlayerNumber;
-
         }
 
         public void OnNavigate_Up()
         {
+            // Change the category
             currentSelectedCollectionIndex = ListLooper.SelectPrevious(selectionCollections, currentSelectedCollectionIndex);
             UpdateLabelTexts();
             buttonSelectionManager.ResetButtons();
             buttonSelectionManager.UpdateButtons(this);
-
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
-            Channels.OnNavigateUp?.Invoke();
+
+            // Update the hovered button
+            buttonSelectionManager.UpdateHoverEffectAt(currentHoveredIndex, false);
+            currentHoveredIndex = CurrentSelectedCollection.CurrentSelectedIndex;
+            buttonSelectionManager.UpdateHoverEffectAt(currentHoveredIndex, true);
             Channels.OnShipPartHovered?.Invoke(GetCurrentHoveredPart(), playerNumber);
+
+            Channels.OnNavigateUp?.Invoke(playerNumber);
         }
 
         public void OnNavigate_Down()
         {
+            // Change the category
             currentSelectedCollectionIndex = ListLooper.SelectNext(selectionCollections, currentSelectedCollectionIndex);
             UpdateLabelTexts();
             buttonSelectionManager.ResetButtons();
             buttonSelectionManager.UpdateButtons(this);
-
             Channels.OnSelectedCategoryChanged?.Invoke(CurrentSelectedCollection, playerNumber);
-            Channels.OnNavigateDown?.Invoke();
+
+            // Update the hovered button
+            buttonSelectionManager.UpdateHoverEffectAt(currentHoveredIndex, false);
+            currentHoveredIndex = CurrentSelectedCollection.CurrentSelectedIndex;
+            buttonSelectionManager.UpdateHoverEffectAt(currentHoveredIndex, true);
             Channels.OnShipPartHovered?.Invoke(GetCurrentHoveredPart(), playerNumber);
+
+            Channels.OnNavigateDown?.Invoke(playerNumber);
         }
 
         public void OnNavigate_Right()
@@ -124,6 +150,7 @@ namespace ShipSelection
             Channels.OnShipPartHovered?.Invoke(GetCurrentHoveredPart(), playerNumber);
         }
 
+     
         private void UpdateLabelTexts()
         {
             for (int i = 0; i <= selectionCollections.Count; i++)
@@ -136,7 +163,6 @@ namespace ShipSelection
 
         public void SetSelectedOptionIndex(int index)
         {
-
             // Error check if the index in the function is different than the current Hovered index
             if (index != currentHoveredIndex)
             {

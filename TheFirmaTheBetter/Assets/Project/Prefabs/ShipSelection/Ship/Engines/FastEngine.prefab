@@ -680,6 +680,16 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4206153139225395836, guid: fe99f3be1e3e6dd49beede9d2044b8bf,
+        type: 3}
+      propertyPath: engineTransforms.Array.data[0]
+      value: 
+      objectReference: {fileID: 1067910410137745349}
+    - target: {fileID: 4206153139225395836, guid: fe99f3be1e3e6dd49beede9d2044b8bf,
+        type: 3}
+      propertyPath: engineTransforms.Array.data[1]
+      value: 
+      objectReference: {fileID: 6605885469698458786}
     - target: {fileID: 5129967839919947371, guid: fe99f3be1e3e6dd49beede9d2044b8bf,
         type: 3}
       propertyPath: m_IsActive
