@@ -67,6 +67,7 @@ namespace EventSystem
         public delegate void ControllerShemeShowing();
         public delegate void ReturnToTitleScreen();
         public delegate void LoadBuildingScene();
+        public delegate void StartDeathMath();
 
         public delegate void PlayerHealed(int healthIncreaseAmount, int playerNumber);
         public delegate void PickupDestroyed();
@@ -128,6 +129,7 @@ namespace EventSystem
         public static AudioSettingsChangedEvent OnMusicChangedEvent;
         public static AudioSettingsChangedEvent OnSFXChangedEvent;
         public static AudioSettingsChangedEvent OnVoiceChangedEvent;
+        public static StartDeathMath OnStartDeathMatch;
     }
 
 }
