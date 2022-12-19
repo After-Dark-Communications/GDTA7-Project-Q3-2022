@@ -44,10 +44,14 @@ namespace ShipSelection
 
         public void OnInputConfirmShip(InputAction.CallbackContext callbackContext)
         {
+            int playerNumber = playerSelectionScreen.PlayerNumber;
             if (callbackContext.started)
             {
-                int playerNumber = playerSelectionScreen.PlayerNumber;
-                Channels.Input.OnShipCompletedInput?.Invoke(playerNumber);
+                Channels.Input.OnShipCompletedInputStarted?.Invoke(playerNumber);
+            }
+            if (callbackContext.canceled)
+            {
+                Channels.Input.OnShipCompletedInputEnded?.Invoke(playerNumber);
             }
         }
     }

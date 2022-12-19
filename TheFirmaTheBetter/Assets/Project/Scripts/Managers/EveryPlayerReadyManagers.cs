@@ -2,9 +2,9 @@ using EventSystem;
 using Managers;
 using UnityEngine;
 
-namespace Util
+namespace Managers
 {
-    public class OnPlayerReadyManagers : MonoBehaviour
+    public class EveryPlayerReadyManagers : MonoBehaviour
     {
         private void OnEnable()
         {
@@ -20,5 +20,7 @@ namespace Util
         {
             SceneSwitchManager.SwitchToNextScene();
         }
+
+
     }
 }
