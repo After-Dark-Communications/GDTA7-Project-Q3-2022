@@ -27,13 +27,13 @@ namespace UI
 
             switch (shipInfo.PlayerNumber)
             {
-                case 0:
-                    border.color = new Color(1f, 0.247f, 0.2f);
-                    break;
                 case 1:
-                    border.color = Color.green;
+                    border.color = new Color(0.3607f, 0.8039f, 0.3921f);
                     break;
                 case 2:
+                    border.color = new Color(1f, 0f, 1f);
+                    break;
+                case 3:
                     border.color = new Color(1f, 0.968f, 0.2f);
                     break;
                 default:

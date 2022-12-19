@@ -21,6 +21,8 @@ public class IndicatorShower : MonoBehaviour
     private void Awake()
     {
         Channels.OnControllerShemeHidden += ShowIndicator;
+        Channels.OnRoundStarted += OnRoundStarted;
+
         animator = GetComponent<Animator>();
         animator.Play(0);
     }
@@ -28,6 +30,7 @@ public class IndicatorShower : MonoBehaviour
     private void OnDestroy()
     {
         Channels.OnControllerShemeHidden -= ShowIndicator;
+        Channels.OnRoundStarted -= OnRoundStarted;
     }
 
     private void ShowIndicator()
@@ -38,13 +41,13 @@ public class IndicatorShower : MonoBehaviour
 
         switch (playerIndex)
         {
-            case 0:
-                border.color = new Color(1f, 0.247f, 0.2f);
-                break;
             case 1:
-                border.color = Color.green;
+                border.color = new Color(0.3607f, 0.8039f, 0.3921f);
                 break;
             case 2:
+                border.color = new Color(1f, 0f, 1f);
+                break;
+            case 3:
                 border.color = new Color(1f, 0.968f, 0.2f);
                 break;
             default:
@@ -53,6 +56,13 @@ public class IndicatorShower : MonoBehaviour
         }
 
         tmpTextField.SetText($"Player {playerIndex + 1}");
+    }
+
+    private void OnRoundStarted(int roundIndex, int numberOfRounds)
+    {
+        Debug.Log("round started");
+        animator.Play(0);
+        animator.SetBool("indicatorReady", true);
     }
 
     public int PlayerIndex { get => playerIndex; set => playerIndex = value; }
