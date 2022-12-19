@@ -4,16 +4,19 @@ using ShipParts.Ship;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zones;
 
-public class EnergyDepletionWall : Wall
+public class EnergyDepletionWall : Zone
 {
-    public override void HandleCollision<T1>(T1 objectThatHit, ShipStats shipStats)
+    public override void OnTriggerEnter(Collider other)
     {
-        base.HandleCollision(objectThatHit, shipStats);
+        base.OnTriggerEnter(other);
 
-        if (objectThatHit is ShipCollision)
-        {
-            Channels.OnEnergyUsed?.Invoke(shipStats.PlayerNumber, shipStats.EnergyCapacity);
-        }
+        Destroy(gameObject);
+    }
+
+    public override void TriggerEffect(GameObject obj)
+    {
+
     }
 }

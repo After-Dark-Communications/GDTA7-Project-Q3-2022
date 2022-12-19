@@ -8,6 +8,7 @@ using UnityEngine;
 using ShipParts.Ship;
 using EventSystem;
 using ShipParts.Cores;
+using ShipSelection.Stats;
 
 namespace ShipParts
 {
@@ -37,6 +38,11 @@ namespace ShipParts
             if (enteredZone is EnergyZone)
             {
                 Channels.OnChangeFireMode?.Invoke(false, playerNumber);
+            }
+
+            if (enteredZone is EnergyDepletionWall)
+            {
+                Channels.OnEnergyUsed?.Invoke(playerNumber, Mathf.RoundToInt(shipResources.CurrentEnergyAmount + 0.5f));
             }
         }
 
