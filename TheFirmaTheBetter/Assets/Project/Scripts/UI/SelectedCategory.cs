@@ -11,26 +11,9 @@ public class SelectedCategory : MonoBehaviour
     private TMP_Text tmpTextField;
 
     private PlayerSelectionScreen playerSelectionScreen;
+    private const string BOOL_ENABLE_NAME = "Enabled";
 
-    private const string TRIGGER_ENABLE_NAME = "Enable";
-    private const string TRIGGER_DISABLE_NAME = "Disable";
     private Animator animator;
-
-    private void OnEnable()
-    {
-        Channels.OnNavigateUp += CategoryChangedListUP;
-        Channels.OnNavigateDown += CategoryChangedListDOWN;
-    }
-
-    private void CategoryChangedListDOWN(int playerNumber)
-    {
-       
-    }
-
-    private void CategoryChangedListUP(int playerNumber)
-    {
-        throw new NotImplementedException();
-    }
 
     private void Start()
     {
@@ -46,14 +29,19 @@ public class SelectedCategory : MonoBehaviour
     {
         Channels.OnSelectedCategoryChanged -= CategoryChangedList;
     }
+#
+    /// <summary>
+    /// Old solution
+    /// </summary>
+    /// <param name="currentSelectedCollection"></param>
+    /// <param name="playerNumber"></param>
+    //private void CategoryChanged(SelectableCollection currentSelectedCollection, int playerNumber)
+    //{
+    //    if (playerSelectionScreen.PlayerNumber != playerNumber)
+    //        return;
 
-    private void CategoryChanged(SelectableCollection currentSelectedCollection, int playerNumber)
-    {
-        if (playerSelectionScreen.PlayerNumber != playerNumber)
-            return;
-
-        tmpTextField.SetText(currentSelectedCollection.CategoryName);
-    }
+    //    tmpTextField.SetText(currentSelectedCollection.CategoryName);
+    //}
 
     private void CategoryChangedList (SelectableCollection currentSelectedCollection, int playerNumber)
     {
@@ -62,21 +50,17 @@ public class SelectedCategory : MonoBehaviour
 
         String current = currentSelectedCollection.CategoryName.ToLower();
         String field = tmpTextField.text.ToLower();
+
         if (String.Compare(current, field) == 0)
         {
-            Debug.Log($"equal: " + current + ' ' + field);
-            animator.SetTrigger(TRIGGER_ENABLE_NAME);
-            return;
+            animator.SetBool(BOOL_ENABLE_NAME, true);
+
         }
         else
         {
-            Debug.Log($"--not " + current + ' ' + field);
-            animator.SetTrigger(TRIGGER_DISABLE_NAME);
+
+           animator.SetBool(BOOL_ENABLE_NAME, false);
         }
     }
 
-    public void PlaySelectedAnimation()
-    {
-       //animator.SetTrigger(TRIGGER_NAME);
-    }
 }
