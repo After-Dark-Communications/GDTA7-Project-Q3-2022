@@ -15,5 +15,5 @@ MonoBehaviour:
   partName: Mine
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 0
-  description: Place a mine which will explode when a player approaches it.
+  specialDescription: Place a mine which will explode when a player approaches it.
   abilityCooldown: 2

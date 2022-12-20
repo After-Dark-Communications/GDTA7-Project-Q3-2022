@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Very fast Engine
   m_EditorClassIdentifier: 
   partName: Very fast engine
+  partDescription: Cuts out of control
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 40
   speed: 200

@@ -15,5 +15,5 @@ MonoBehaviour:
   partName: Blink
   connectionPoint: {x: 0, y: 0, z: 0}
   partWeight: 0
-  description: Instantly dash forward.
+  specialDescription: Instantly dash forward.
   abilityCooldown: 2

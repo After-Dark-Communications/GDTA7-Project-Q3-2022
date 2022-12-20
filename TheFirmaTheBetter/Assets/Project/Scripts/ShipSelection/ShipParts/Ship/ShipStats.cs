@@ -159,7 +159,7 @@ namespace ShipParts.Ship
         public void UpdateStats(SpecialData specialData)
         {
             _specialName = specialData.PartName;
-            _specialDescription = specialData.Description;
+            _specialDescription = specialData.SpecialDescription;
         }
 
         public float Speed { get => _speed * floatinessMultiplier; }
