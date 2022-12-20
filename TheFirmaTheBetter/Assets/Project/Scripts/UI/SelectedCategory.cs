@@ -29,7 +29,7 @@ public class SelectedCategory : MonoBehaviour
     {
         Channels.OnSelectedCategoryChanged -= CategoryChangedList;
     }
-#
+
     /// <summary>
     /// Old solution
     /// </summary>
