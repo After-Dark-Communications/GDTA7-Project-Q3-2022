@@ -13,6 +13,7 @@ namespace ShipSelection
     {
         private const string DisabledBooleanName = "Disabled";
         private const string IsHoveredBooleanName  = "IsHovered";
+        private const string ShipIsCompletedBooleanName = "ShipCompleted";
         private Color selectedColor;
         private Color normalColor;
 
@@ -37,6 +38,8 @@ namespace ShipSelection
             foreach (Animator buttonAnimator in buttonAnimators)
             {
                 buttonAnimator.SetBool(DisabledBooleanName, false);
+                // try to also disable the hover
+               // buttonAnimator.SetBool(IsHoveredBooleanName, false);
             }
         }
         public void UpdateButtonAt (int index)
@@ -68,6 +71,22 @@ namespace ShipSelection
         {
             Animator currentButtonAnimator = buttonAnimators[index];
             currentButtonAnimator.SetBool(IsHoveredBooleanName, state);
+        }
+
+        /// <summary>
+        /// Called when a Player is ready with their ship selection
+        /// Updates all button animators to be in "normal" state and sets the "iscopleted" boolean to be true.
+        /// </summary>
+        public void DisableAllButtons()
+        {
+            ///Animator animatorSelectedButton = buttonAnimators[selectionBar.CurrentSelectedCollection];
+            foreach (Animator buttonAnimator in buttonAnimators)
+            {
+                buttonAnimator.SetBool(DisabledBooleanName, false);
+                buttonAnimator.SetBool(IsHoveredBooleanName, false);
+                buttonAnimator.SetBool(ShipIsCompletedBooleanName, true);
+            }
+
         }
     }
 }

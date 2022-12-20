@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Util;
 
 namespace ShipParts.Engines
@@ -25,8 +26,27 @@ namespace ShipParts.Engines
         private Vector2 _moveValue;
         private bool _changingHeight;
         private float _maxSpeed = 1f;
+        private bool _canMove = true;
+        private ShipBuilder _shipBuilder;
 
         private Vector3 _lastPosition;
+
+        private void OnEnable()
+        {
+            Channels.OnEveryPlayerReady += SetShipBuilder;
+        }
+
+        private void OnDisable()
+        {
+            Channels.OnEveryPlayerReady -= SetShipBuilder;
+
+            UnityEngine.InputSystem.Gamepad gamepad = myInputDevice as UnityEngine.InputSystem.Gamepad;
+
+            if (gamepad == null)
+                return;
+
+            gamepad.SetMotorSpeeds(0, 0);
+        }
 
         protected override void Setup()
         {
@@ -47,16 +67,26 @@ namespace ShipParts.Engines
 
             CalculateHighestAndLowest();
         }
+        private void SetShipBuilder(int playersInGameCount)
+        {
+            if (gameObject.activeSelf == true)
+            {
+                _shipBuilder = transform.GetComponentInParent<ShipBuilder>();
+            }
+        }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (rootInputHandler == null)
                 return;
 
             if (_moveValue != Vector2.zero)
             {
-                Quaternion toRotation = Quaternion.LookRotation(new Vector3(_moveValue.x, 0, _moveValue.y), GlobalUp.UP.up);
-                shipRoot.rotation = Quaternion.RotateTowards(shipRoot.rotation, toRotation, Stats.Handling * Time.deltaTime);
+                if (_canMove)
+                {
+                    Quaternion toRotation = Quaternion.LookRotation(new Vector3(_moveValue.x, 0, _moveValue.y), GlobalUp.UP.up);
+                    shipRoot.rotation = Quaternion.RotateTowards(shipRoot.rotation, toRotation, Stats.Handling * Time.deltaTime);
+                }
 
                 GetComponentInParent<PlayerResult>().DistanceTravelled += shipRigidBody.velocity.magnitude * Time.deltaTime;
             }
@@ -72,17 +102,19 @@ namespace ShipParts.Engines
             shipRigidBody.AddForce(forward.normalized * _throttle * (Stats.Speed * Time.fixedDeltaTime), ForceMode.Impulse);
         }
 
-        public void MoveShip(Vector2 move)
+        public virtual void MoveShip(Vector2 move)
         {//when starting to move, increase T and lerp towards top speed
          //when stopping, decrease T and lerp towards 0 speed
-            _throttle = new Vector3(move.x, 0, move.y).magnitude;
             _moveValue = move;
-            ShipBuilder shipBuilder = transform.GetComponentInParent<ShipBuilder>();
+            if (_canMove == true)
+            {
+                _throttle = new Vector3(move.x, 0, move.y).magnitude;
 
-            if (shipBuilder == null)
-                return;
+                if (_shipBuilder == null)
+                    return;
 
-            Channels.Movement.OnShipMove?.Invoke(move, shipBuilder.PlayerNumber);
+                Channels.Movement.OnShipMove?.Invoke(move, _shipBuilder.PlayerNumber);
+            }
         }
 
         private void MoveUp(ButtonStates arg0)
@@ -174,14 +206,12 @@ namespace ShipParts.Engines
             }
         }
 
-        private void OnDisable()
+        private void SetMovement(bool value)
         {
-            UnityEngine.InputSystem.Gamepad gamepad = myInputDevice as UnityEngine.InputSystem.Gamepad;
-
-            if (gamepad == null)
-                return;
-
-            gamepad.SetMotorSpeeds(0, 0);
+            if (_shipBuilder == null)
+            { return; }
+            _canMove = value;
+            Channels.Movement.OnShipEngineActiveChanged?.Invoke(_shipBuilder.PlayerNumber, value);
         }
 
         protected override void CalculateHighestAndLowest()
@@ -194,5 +224,9 @@ namespace ShipParts.Engines
         public override string PartCategoryName => "Engine";
 
         public EngineData EngineData => engineData;
+
+        protected Vector2 MoveValue { get => _moveValue; }
+        protected bool CanMove { get => _canMove; set => SetMovement(value); }
+        public ShipBuilder ShipBuilder { get => _shipBuilder; }
     }
 }

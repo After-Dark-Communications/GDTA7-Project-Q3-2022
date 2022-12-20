@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using ShipParts.Ship;
 using EventSystem;
+using ShipParts.Cores;
 
 namespace ShipParts
 {
@@ -17,6 +18,9 @@ namespace ShipParts
 
         private int playerNumber;
         private ShipResources shipResources;
+        private ShipBuilder shipBuilder;
+        private Core selectedCore;
+
         private float currentZoneInterval = 0;
 
 
@@ -24,7 +28,7 @@ namespace ShipParts
         {
             shipResources = GetComponent<ShipResources>();
 
-            ShipBuilder shipBuilder = GetComponent<ShipBuilder>();
+            shipBuilder = GetComponent<ShipBuilder>();
             playerNumber = shipBuilder.PlayerNumber;
         }
 
@@ -47,8 +51,12 @@ namespace ShipParts
 
         public void HandleZoneStayInteraction(Zone enteredZone)
         {
+
             if (enteredZone is EnergyZone)
             {
+                if (shipBuilder.IsTypeCore<BatteryCore>())
+                    return;
+                
                 currentZoneInterval += Time.deltaTime;
 
                 if (currentZoneInterval < ZoneInterval)

@@ -11,6 +11,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Util;
 using System;
+using ShipParts.Ship;
 
 namespace ShipSelection
 {
@@ -53,13 +54,27 @@ namespace ShipSelection
             // Animator should be loaded to handle the first buton to be selected
             Channels.OnShipAnimationManagerLoaded += SetUpSelectionBar;
             //Channels.OnPlayerJoined += SetUpSelectionBar;
+            Channels.OnShipCompleted += OnPlayerReady;
         }
 
+        /// <summary>
+        ///Gets called when a player is ready wih selecting their ship. 
+        ///Disables all buttons (puts them in normal state)
+        /// </summary>
+        /// <param name="completedShipBuilder"></param>
+        private void OnPlayerReady(ShipBuilder completedShipBuilder)
+        {
+            if (completedShipBuilder.PlayerNumber != this.playerNumber)
+                return;
+            buttonSelectionManager.DisableAllButtons();
+            Debug.Log("Buttons are reset");
+        }
 
         private void OnDestroy()
         {
             //Channels.OnPlayerJoined -= SetUpSelectionBar;
             Channels.OnShipAnimationManagerLoaded -= SetUpSelectionBar;
+            Channels.OnShipCompleted -= OnPlayerReady;
         }
         private void SetUpSelectionBar()
         {
@@ -135,6 +150,7 @@ namespace ShipSelection
             Channels.OnShipPartHovered?.Invoke(GetCurrentHoveredPart(), playerNumber);
         }
 
+     
         private void UpdateLabelTexts()
         {
             for (int i = 0; i <= selectionCollections.Count; i++)

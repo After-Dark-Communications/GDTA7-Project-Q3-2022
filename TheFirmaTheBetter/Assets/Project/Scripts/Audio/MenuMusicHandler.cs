@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventSystem;
 using ShipParts.Ship;
+using Managers;
 using System;
 
 namespace Audio
@@ -25,13 +26,15 @@ namespace Audio
                 Destroy(gameObject);
                 return;
             }
-            Channels.OnEveryPlayerReady += LoadBattleScene;
+            Channels.OnEveryPlayerReady += LoadMapScene;
             Channels.OnPlayerBecomesDeath += PlayerDeath;
             Channels.OnGameOver += EndGame;
             Channels.OnReturnToTitleScreen += Replay;
             Channels.OnLoadBuildingScene += LoadBuildingScene;
             Channels.OnRoundStarted += RestartRound;
             Channels.KingOfTheHill.OnKingOfTheHillStart += StartKingOfTheHill;
+            Channels.KingOfTheHill.OnKingOfTheHilldAlmostOver += StartKingOfTheHillFinale;
+            Channels.OnStartDeathMatch += StartDeathMatch;
 
         }
         #endregion
@@ -41,6 +44,8 @@ namespace Audio
         private FMOD.Studio.EventInstance titleTheme;
         private FMOD.Studio.EventInstance buildingTheme;
         private FMOD.Studio.EventInstance battleTheme;
+        private FMOD.Studio.EventInstance kothTheme;
+        private FMOD.Studio.EventInstance mapTheme;
         private int playersInGame;
         private float playersLeft;
         // Start is called before the first frame update
@@ -51,6 +56,8 @@ namespace Audio
             titleTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_MainTheme");
             titleTheme.start();
             buildingTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_BuildTheme");
+            kothTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_KingOfTheHill");
+            mapTheme = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Mus_MapSelection");
             master = FMODUnity.RuntimeManager.GetBus("Bus:/");
         }
 
@@ -65,36 +72,28 @@ namespace Audio
         }
         private void OnDisable()
         {
-            Channels.OnEveryPlayerReady -= LoadBattleScene;
+            Channels.OnEveryPlayerReady -= LoadMapScene;
             Channels.OnPlayerBecomesDeath -= PlayerDeath;
             Channels.OnGameOver -= EndGame;
             Channels.OnReturnToTitleScreen -= Replay;
             Channels.OnLoadBuildingScene -= LoadBuildingScene;
             Channels.OnRoundStarted -= RestartRound;
             Channels.KingOfTheHill.OnKingOfTheHillStart -= StartKingOfTheHill;
+            Channels.KingOfTheHill.OnKingOfTheHilldAlmostOver -= StartKingOfTheHillFinale;
+            Channels.OnStartDeathMatch -= StartDeathMatch;
         }
 
         public void LoadBuildingScene()
         {
-            FMOD.RESULT res = titleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            Debug.Log(res);
+            titleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             buildingTheme.start();
         }
 
-        public void LoadBattleScene(int playerCount)
+        public void LoadMapScene(int playerCount)
         {
-            playersLeft = playerCount;
+            mapTheme.start();
             playersInGame = playerCount;
-            if (playersLeft <= 2)
-            {
-                battleTheme.setParameterByName("Players_Left", float.MaxValue);
-            }
-            else
-            {
-                battleTheme.setParameterByName("Players_Left", playersLeft);
-            }
             buildingTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            battleTheme.start();
         }
 
         public void EndGame()
@@ -116,7 +115,7 @@ namespace Audio
             if (!isKoth)
             {
                 playersLeft -= 1;
-                if (playersLeft !<= 1 && playercount < playersLeft)
+                if (playersLeft! <= 1 && playercount < playersLeft)
                     battleTheme.setParameterByName("Players_Left", playersLeft);
             }
         }
@@ -139,16 +138,39 @@ namespace Audio
             }
         }
 
+        public void StartDeathMatch()
+        {
+            FMOD.Studio.PLAYBACK_STATE state;
+            mapTheme.getPlaybackState(out state);
+            if (state == FMOD.Studio.PLAYBACK_STATE.PLAYING)
+                mapTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            battleTheme.start();
+            playersLeft = playersInGame;
+            if (playersLeft <= 2)
+            {
+                battleTheme.setParameterByName("Players_Left", float.MaxValue);
+
+            }
+            else
+            {
+                battleTheme.setParameterByName("Players_Left", playersLeft);
+            }
+        }
+
         public void StartKingOfTheHill(List<int> playerNumbers)
         {
-            float rounds;
-            float players;
+            battleTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            FMOD.Studio.PLAYBACK_STATE state;
+            mapTheme.getPlaybackState(out state);
+            if (state == FMOD.Studio.PLAYBACK_STATE.PLAYING)
+                mapTheme.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            kothTheme.start();
             isKoth = true;
-            battleTheme.setParameterByName("Rounds", float.MaxValue);
-            battleTheme.getParameterByName("Rounds", out rounds);
-            battleTheme.getParameterByName("Players_Left", out players);
-            Debug.Log(rounds);
-            Debug.Log(players);
+        }
+
+        public void StartKingOfTheHillFinale()
+        {
+            kothTheme.setParameterByName("PlayerAlmostWon", 1f);
         }
     }
 }
