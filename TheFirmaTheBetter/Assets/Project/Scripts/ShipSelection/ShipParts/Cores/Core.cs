@@ -1,7 +1,9 @@
 using Collisions;
 using ShipParts.Ship;
 using ShipSelection.ShipBuilders.ConnectionPoints;
+using ShipSelection.Stats;
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using Util;
 
@@ -40,7 +42,8 @@ namespace ShipParts.Cores
         {
             if (rootInputHandler != null)
             {
-                shipRoot.GetComponent<ShipBody>().OnPlayerCrash.AddListener(CrashShip);
+                ShipBody body = shipRoot.GetComponent<ShipBody>();
+                body.OnPlayerCrash.AddListener(CrashShip);
             }
 
             CalculateHighestAndLowest();

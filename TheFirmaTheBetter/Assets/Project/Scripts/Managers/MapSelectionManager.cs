@@ -48,17 +48,17 @@ namespace Managers
             int lastIndex = mapSelectables.Length - 1;
             int selectedMapIndex;
 
-            if (indexFromList == lastIndex) //The last index should always be the random map.
-            {
-                int randomSelectedMap = Random.Range(0, lastIndex);
-                MapSelectable selectedRandomMapSelectable = mapSelectables[randomSelectedMap];
-                selectedMapIndex = selectedRandomMapSelectable.MapSelectableIndex;
-            }
-            else
-            {
+            //if (indexFromList == lastIndex) //The last index should always be the random map.
+            //{
+            //    int randomSelectedMap = Random.Range(0, lastIndex);
+            //    MapSelectable selectedRandomMapSelectable = mapSelectables[randomSelectedMap];
+            //    selectedMapIndex = selectedRandomMapSelectable.MapSelectableIndex;
+            //}
+            //else
+            //{
                 MapSelectable selectedMapSelectable = mapSelectables[indexFromList];
                 selectedMapIndex = selectedMapSelectable.MapSelectableIndex;
-            }
+            //}
 
             SceneSwitchManager.SwitchToSceneWithIndex(selectedMapIndex);
         }

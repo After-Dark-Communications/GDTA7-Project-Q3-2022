@@ -1,4 +1,6 @@
-﻿using EventSystem;
+﻿using Collisions;
+using EventSystem;
+using ShipSelection.Stats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,7 @@ namespace ShipParts.Ship
     {
         public UnityCollisionEvent OnPlayerCrash = new UnityCollisionEvent();
         public UnityCollisionEvent OnPlayerLeaveCrash = new UnityCollisionEvent();
+
         public void OnCollisionEnter(UnityEngine.Collision collision)
         {
             OnPlayerCrash.Invoke(collision.impulse, collision.gameObject);
