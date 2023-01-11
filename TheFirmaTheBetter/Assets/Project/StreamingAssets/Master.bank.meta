@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:TheFirmaTheBetter/Assets/Project/StreamingAssets/Master.bank.meta
+guid: d03dc700adc6bbc40aec36e515a40aa6
+labels:
+- FMOD
+========
+guid: 337d4c6dfef26b4458d75d8cad54dacb
+folderAsset: yes
+>>>>>>>> bugFixing:TheFirmaTheBetter/Assets/Project/Animations/PlayerIndicator.meta
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

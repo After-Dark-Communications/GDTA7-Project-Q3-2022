@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4c6cfbd28a22af44a7461704b0bfe8b, type: 3}
+  m_Name: Shotgun
+  m_EditorClassIdentifier: 
+  partName: Shotgun
+  connectionPoint: {x: 0, y: 0, z: 0}
+  partWeight: 0
+  projectilePrefab: {fileID: 3994246806297512443, guid: d90a371098a4b3247a4f0d62f89d5c04,
+    type: 3}
+  fireRate: 1.5
+  amountOfBullets: 5
+  energyCost: 1
+  sideSpreadAngle: 30
+  range: 20
+  armingTime: 0
+  weaponFireEvent:
+    Guid:
+      Data1: -1523842194
+      Data2: 1084725929
+      Data3: -1189224023
+      Data4: -1307751479
+    Path: event:/Weapons/Weap_Shotgun

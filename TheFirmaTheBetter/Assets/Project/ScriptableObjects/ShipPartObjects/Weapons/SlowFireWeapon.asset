@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4c6cfbd28a22af44a7461704b0bfe8b, type: 3}
+  m_Name: SlowFireWeapon
+  m_EditorClassIdentifier: 
+  partName: Slow fire rate
+  connectionPoint: {x: 0, y: 0, z: 0}
+  partWeight: 0
+  projectilePrefab: {fileID: 3994246806297512443, guid: 995e68a81b3330c4693b73faf018f767,
+    type: 3}
+  fireRate: 3
+  amountOfBullets: 1
+  energyCost: 1
+  sideSpreadAngle: 6
+  range: 100
+  armingTime: 0
+  weaponFireEvent:
+    Guid:
+      Data1: -2125358925
+      Data2: 1324075078
+      Data3: 111648152
+      Data4: 794917210
+    Path: event:/Weapons/Weap_LowFireRate
